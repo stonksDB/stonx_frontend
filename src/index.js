@@ -26,10 +26,10 @@ ReactDOM.render(
               <Route path="/mystock">
                   <MyStocks />
               </Route>
-              <Route path="/singleNews/:id">
+              <Route path="/news/:id">
                   <SingleNews />
               </Route>
-              <Route path="/singleStock/:id">
+              <Route path="/stock/:id">
                   <SingleStock />
               </Route>
               <Route path="/">
