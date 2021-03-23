@@ -1,1 +1,1 @@
-# stonx_frontend
+# StonX Frontend
