@@ -1,7 +1,17 @@
 {
   "name": "stonx_frontend",
-  "version": "0.1.0",
   "private": true,
+  "description": "Frontend for StonX webapp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucaTaddeo/stonx_frontend.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LucaTaddeo/stonx_frontend/issues"
+  },
+  "version": "0.1.0",
   "dependencies": {
     "@devexpress/dx-react-chart": "^2.7.5",
     "@devexpress/dx-react-chart-material-ui": "^2.7.5",
@@ -16,6 +26,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
+  },
+  "devDependencies": {
+    "customize-cra": "^1.0.0",
+    "react-app-rewired": "^2.1.8"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -40,9 +54,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "customize-cra": "^1.0.0",
-    "react-app-rewired": "^2.1.8"
   }
 }
