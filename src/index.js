@@ -8,7 +8,8 @@ import News from "./screens/News";
 import MyStocks from "./screens/MyStocks";
 import SingleNews from "./screens/SingleNews";
 import SingleStock from "./screens/SingleStock";
-import { CssBaseline, MuiThemeProvider} from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
+import { MuiThemeProvider} from "@material-ui/core/styles";
 import lightTheme from "./theme";
 
 ReactDOM.render(
