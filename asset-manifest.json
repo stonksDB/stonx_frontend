@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/stonksDB/stonx_frontend/static/css/main.5bf5a04b.chunk.css",
-    "main.js": "/stonksDB/stonx_frontend/static/js/main.ab8a82c2.chunk.js",
-    "main.js.map": "/stonksDB/stonx_frontend/static/js/main.ab8a82c2.chunk.js.map",
+    "main.js": "/stonksDB/stonx_frontend/static/js/main.b5a4d47d.chunk.js",
+    "main.js.map": "/stonksDB/stonx_frontend/static/js/main.b5a4d47d.chunk.js.map",
     "runtime-main.js": "/stonksDB/stonx_frontend/static/js/runtime-main.f349f252.js",
     "runtime-main.js.map": "/stonksDB/stonx_frontend/static/js/runtime-main.f349f252.js.map",
     "static/js/2.089eecd6.chunk.js": "/stonksDB/stonx_frontend/static/js/2.089eecd6.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.f349f252.js",
     "static/js/2.089eecd6.chunk.js",
     "static/css/main.5bf5a04b.chunk.css",
-    "static/js/main.ab8a82c2.chunk.js"
+    "static/js/main.b5a4d47d.chunk.js"
   ]
 }
