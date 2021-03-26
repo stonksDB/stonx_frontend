@@ -6,6 +6,7 @@ import { MuiThemeProvider} from "@material-ui/core/styles";
 import './index.css';
 import routes from "./routes"
 import lightTheme from "./theme";
+import PageContainer from "./components/PageContainer";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,7 +16,7 @@ ReactDOM.render(
           <Switch>
               {routes().map(({path, page}) => (
                 <Route key={path} path={path}>
-                    {page}
+                    <PageContainer page={page} />
                 </Route>
               ))}
           </Switch>
