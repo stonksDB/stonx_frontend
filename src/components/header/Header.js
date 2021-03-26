@@ -11,7 +11,7 @@ export default function Header(props) {
   function SearchField() {
     return (
       <Grid container direction="row" spacing={2} alignItems={"flex-end"}
-            style={{background: "white", borderRadius: "15px"}}>
+            style={{background: "white", borderRadius: "15px", flex: 1}}>
         <Grid item> <Search/> </Grid>
         <Grid item xs> <InputBase placeholder="Search..." fullWidth={true}/> </Grid>
       </Grid>
