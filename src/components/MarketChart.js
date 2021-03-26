@@ -1,5 +1,3 @@
-import "../App.css";
-
 export default function MarketChart() {
   return (
     <div className="App">

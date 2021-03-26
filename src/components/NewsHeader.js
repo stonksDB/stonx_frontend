@@ -1,5 +1,3 @@
-import "../App.css";
-
 export default function NewsHeader() {
   return (
     <div className="App">

@@ -1,5 +1,3 @@
-import "../App.css";
-
 export default function News() {
   return (
     <div className="App">

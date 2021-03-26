@@ -1,4 +1,3 @@
-import "../../App.css";
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 import React from "react";

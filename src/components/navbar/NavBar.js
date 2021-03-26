@@ -1,4 +1,3 @@
-import "../../App.css";
 import {List, ListItem, ListItemIcon, ListItemText, Toolbar} from "@material-ui/core";
 import routes from "../../routes";
 import {Link} from "react-router-dom";

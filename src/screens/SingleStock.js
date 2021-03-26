@@ -1,5 +1,3 @@
-import "../App.css";
-
 export default function SingleStock() {
   return (
     <div className="App">

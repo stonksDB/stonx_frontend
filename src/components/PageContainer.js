@@ -1,7 +1,6 @@
 import React from "react";
 import {Hidden, Toolbar} from "@material-ui/core";
 import {withStyles} from "@material-ui/core/styles";
-import "../App.css";
 import NavBar from "./navbar/NavBar";
 import NavBarMobile from "./navbar/NavBarMobile";
 import Header from "./header/Header";
@@ -32,7 +31,10 @@ const useStyles = theme => ({
   },
   content: {
     flexGrow: 1,
-    paddingTop: theme.spacing(5),
+    paddingTop: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(35)
+    }
   },
 });
 

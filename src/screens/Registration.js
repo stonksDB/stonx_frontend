@@ -1,5 +1,3 @@
-import "../App.css";
-
 export default function Registration() {
   return (
     <div className="App">
