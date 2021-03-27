@@ -1,19 +1,19 @@
 import React from "react";
 import { Grid, Paper, Typography } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-const useStyles = (theme) => ({
-  pageTitle: {
-    paddingBottom: theme.spacing(3),
-    fontWeight: "bold",
-  },
-  card: theme.card,
-});
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    pageTitle: {
+      paddingBottom: theme.spacing(3),
+    },
+    card: theme.card,
+  })
+);
 
-class Home extends React.Component {
-  render() {
-    const { classes } = this.props;
-
+const Home = (props) => {
+    const classes = useStyles();
+    
     return (
       <>
         <Typography variant={"h4"} className={classes.pageTitle}>
@@ -48,6 +48,6 @@ class Home extends React.Component {
       </>
     );
   }
-}
 
-export default withStyles(useStyles, { withTheme: true })(Home);
+
+export default Home;

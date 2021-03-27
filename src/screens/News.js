@@ -1,18 +1,18 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 
-const useStyles = (theme) => ({
-  pageTitle: {
-    paddingBottom: theme.spacing(3),
-    fontWeight: "bold",
-  },
-  card: theme.card,
-});
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    pageTitle: {
+      paddingBottom: theme.spacing(3),
+    },
+    card: theme.card,
+  })
+);
 
-class News extends React.Component {
-  render() {
-    const { classes } = this.props;
+const News = (props) => {
+  const classes = useStyles();
 
     return (
       <>
@@ -22,6 +22,6 @@ class News extends React.Component {
       </>
     );
   }
-}
 
-export default withStyles(useStyles, { withTheme: true })(News);
+
+export default News;

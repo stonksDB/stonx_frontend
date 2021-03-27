@@ -11,18 +11,20 @@ import { Link, useLocation } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import React from "react";
 import logo_webp from "../../assets/logo_header/logo_header.webp";
-import lightTheme from "../../theme";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-const styles = {
-  active: {
-    color: lightTheme.palette.primary.main,
-    fontWeight: "bold",
-  },
-};
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    active: {
+      color: theme.palette.primary.main,
+      fontWeight: "bold",
+    },
+  })
+);
 
-function NavbarList(props) {
+const NavbarList = (props) => {
   const location = useLocation();
-  console.log(location);
+  const classes = useStyles();
   const navbarRoutes = routes()
     .filter(({ name }) => ["Home", "My Stocks", "News"].includes(name))
     .reverse();
@@ -33,13 +35,15 @@ function NavbarList(props) {
         <ListItem button key={name} component={Link} to={path}>
           <ListItemIcon
             children={icon}
-            style={location.pathname === path ? styles.active : styles.inactive}
+            className={
+              location.pathname === path ? classes.active : classes.inactive
+            }
           />
           <ListItemText
             primary={
               <Typography
-                style={
-                  location.pathname === path ? styles.active : styles.inactive
+                className={
+                  location.pathname === path ? classes.active : classes.inactive
                 }
               >
                 {name}
@@ -50,9 +54,10 @@ function NavbarList(props) {
       ))}
     </List>
   );
-}
+};
+export { NavbarList };
 
-export default function NavBar(props) {
+const NavBar = (props) => {
   const drawer = <NavbarList className={props.className} />;
 
   return (
@@ -71,4 +76,5 @@ export default function NavBar(props) {
       </Drawer>
     </>
   );
-}
+};
+export default NavBar;
