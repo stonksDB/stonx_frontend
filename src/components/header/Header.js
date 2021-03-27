@@ -28,7 +28,7 @@ export default function Header(props) {
           <InputBase
             placeholder="Search..."
             fullWidth={true}
-            style={{ padding: 5 }}
+            style={{ padding: 7 }}
           />
         </Grid>
       </Grid>
