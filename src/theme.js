@@ -16,10 +16,18 @@ const lightTheme = createMuiTheme({
       main: "#EB5757",
     },
   },
+
   mixins: {
     toolbar: {
       minHeight: 85,
     },
+  },
+
+  card: {
+    height: "100%",
+    backgroundColor: "white",
+    padding: 15,
+    borderRadius: 15,
   },
 });
 

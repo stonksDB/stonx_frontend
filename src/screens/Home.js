@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Paper, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 
 const useStyles = (theme) => ({
@@ -7,17 +7,13 @@ const useStyles = (theme) => ({
     paddingBottom: theme.spacing(3),
     fontWeight: "bold",
   },
-  card: {
-    height: "100%",
-    backgroundColor: "white",
-    padding: "15px",
-    borderRadius: "15px",
-  },
+  card: theme.card,
 });
 
 class Home extends React.Component {
   render() {
     const { classes } = this.props;
+
     return (
       <>
         <Typography variant={"h4"} className={classes.pageTitle}>
@@ -28,25 +24,25 @@ class Home extends React.Component {
           <Grid item xs={12} sm={9}>
             <Grid container direction="row" spacing={3}>
               <Grid item xs={12}>
-                <div className={classes.card}>
+                <Paper elevation={0} className={classes.card}>
                   Here go the small market charts
-                </div>
+                </Paper>
               </Grid>
               <Grid item xs={12}>
-                <div className={classes.card}>Here goes the xxl chart</div>
+                <Paper elevation={0} className={classes.card}>Here goes the xxl chart</Paper>
               </Grid>
               <Grid item xs={6}>
-                <div className={classes.card}>
+                <Paper elevation={0} className={classes.card}>
                   Here goes a small sector chart
-                </div>
+                </Paper>
               </Grid>
               <Grid item xs={6}>
-                <div className={classes.card}>Here goes yet one more chart</div>
+                <Paper elevation={0} className={classes.card}>Here goes yet one more chart</Paper>
               </Grid>
             </Grid>
           </Grid>
           <Grid item xs={12} sm={3}>
-            <div className={classes.card}>News for everyone</div>
+            <Paper elevation={0} className={classes.card}>News for everyone</Paper>
           </Grid>
         </Grid>
       </>
