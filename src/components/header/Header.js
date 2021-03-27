@@ -2,18 +2,35 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import React from "react";
-import {Grid, InputBase,} from "@material-ui/core";
-import {Search} from "@material-ui/icons";
-import logo_webp from "../../assets/logo_header/logo_header.webp";
+import { Grid, InputBase } from "@material-ui/core";
+import { Search } from "@material-ui/icons";
 import UserAvatar from "../UserAvatar";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import ButtonBase from "@material-ui/core/ButtonBase";
 
 export default function Header(props) {
   function SearchField() {
     return (
-      <Grid container direction="row" spacing={2} alignItems={"flex-end"}
-            style={{background: "white", borderRadius: "15px", flex: 1}}>
-        <Grid item> <Search/> </Grid>
-        <Grid item xs> <InputBase placeholder="Search..." fullWidth={true}/> </Grid>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        style={{
+          background: "white",
+          borderRadius: "15px",
+          flex: 1,
+        }}
+      >
+        <Grid item style={{ paddingLeft: 10, paddingTop: 3 }}>
+          <Search />
+        </Grid>
+        <Grid item xs>
+          <InputBase
+            placeholder="Search..."
+            fullWidth={true}
+            style={{ padding: 5 }}
+          />
+        </Grid>
       </Grid>
     );
   }
@@ -22,30 +39,45 @@ export default function Header(props) {
     const fullName = `${props.userData.firstName} ${props.userData.lastName}`;
 
     return (
-      <Grid container direction="row" spacing={2} justify={"flex-end"}>
-        <Grid item>
-          <UserAvatar userData={props.userData}/>
+      <ButtonBase style={{ width: "100%" }}>
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justify="space-between"
+          style={{paddingLeft: 5}}
+        >
+          <Grid item>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item>
+                <UserAvatar userData={props.userData} />
+              </Grid>
+              <Grid item direction="column">
+                <Typography align="left" variant={"h6"}>{fullName}</Typography>
+                <Typography align="left"
+                  variant={"body2"}
+                >{`Watching ${props.stocksData.length} stocks`}</Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item>
+            <KeyboardArrowDownIcon />
+          </Grid>
         </Grid>
-        <Grid item direction="column">
-          <Typography variant={"h6"}>{fullName}</Typography>
-          <Typography variant={"body2"}>{`Watching ${props.stocksData.length} stocks`}</Typography>
-        </Grid>
-      </Grid>
-    )
+      </ButtonBase>
+    );
   }
 
   return (
-    <AppBar position="fixed" color="transparent"
-            elevation={0} className={props.className}>
+    <AppBar color="transparent" elevation={0} className={props.className}>
       <Toolbar>
-        <Grid item xs={3} justify={"center"}>
-          <img src={logo_webp} alt="logo" style={{maxWidth: "40%"}}/>
-        </Grid>
-        <Grid item xs={8}>
-          <SearchField/>
-        </Grid>
-        <Grid item xs={3}>
-          <UserMenu/>
+        <Grid container spacing={2} alignItems="center">
+          <Grid item xs={9}>
+            <SearchField />
+          </Grid>
+          <Grid item xs={3}>
+            <UserMenu />
+          </Grid>
         </Grid>
       </Toolbar>
     </AppBar>

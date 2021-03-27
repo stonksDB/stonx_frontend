@@ -16,6 +16,11 @@ const lightTheme = createMuiTheme({
       main: "#EB5757",
     },
   },
+  mixins: {
+    toolbar: {
+      minHeight: 85,
+    },
+  },
 });
 
 export default lightTheme;
