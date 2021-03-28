@@ -79,11 +79,13 @@ const PageContainer = (props) => {
           handleDrawerToggle={handleDrawerToggle}
           userData={userData}
           stocksData={stocksData}
+          isLoggedIn={isLoggedIn}
         />
         <NavBarMobile
           className={classes.drawer}
           handleDrawerToggle={handleDrawerToggle}
           mobileOpen={mobileOpen}
+          isLoggedIn={isLoggedIn}
         />
       </Hidden>
 

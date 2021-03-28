@@ -25,10 +25,10 @@ const useStyles = makeStyles((theme) =>
 const NavbarList = (props) => {
   const location = useLocation();
   const classes = useStyles();
+  const routesArr = props.isLoggedIn ? ["Home", "My Stocks", "News"] : ["Home",  "News"];
   const navbarRoutes = routes()
-    .filter(({ name }) => ["Home", "My Stocks", "News"].includes(name))
+    .filter(({ name }) => routesArr.includes(name))
     .reverse();
-
   return (
     <List className={props.className}>
       {navbarRoutes.map(({ name, icon, path }) => (
@@ -58,7 +58,7 @@ const NavbarList = (props) => {
 export { NavbarList };
 
 const NavBar = (props) => {
-  const drawer = <NavbarList className={props.className} />;
+  const drawer = <NavbarList className={props.className} {...props} />;
 
   return (
     <>
