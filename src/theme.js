@@ -39,6 +39,13 @@ const lightTheme = createMuiTheme({
     backgroundColor: "white",
     width: "100%",
   },
+
+  button: {
+    width: "100%",
+    display: "block",
+    borderRadius: "15px",
+    padding: 7,
+  },
 });
 
 export default lightTheme;

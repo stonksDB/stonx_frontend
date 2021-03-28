@@ -2,18 +2,27 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import React from "react";
-import { Grid, InputBase, TextField, InputAdornment } from "@material-ui/core";
+import {
+  Grid,
+  InputBase,
+  TextField,
+  InputAdornment,
+  Button,
+} from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import UserAvatar from "../UserAvatar";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     input: theme.input,
+    button: { ...theme.button, marginLeft: 5, },
   })
 );
+
 const SearchField = (props) => {
   const classes = useStyles();
   return (
@@ -90,25 +99,52 @@ const UserMenu = (props) => {
 };
 
 const Header = (props) => {
+  const history = useHistory();
+  const classes = useStyles();
+  const goLogin = () => {
+    let path = "/login";
+    history.push(path);
+  };
+  const goRegister = () => {
+    let path = "/registration";
+    history.push(path);
+  };
   return (
     <AppBar color="transparent" elevation={0} className={props.className}>
       <Toolbar>
         <Grid container spacing={2} alignItems="center" justify="center">
-          {props.loginScreen ? (
-            <>
-              <Grid item xs={9}>
-                <SearchField {...props} />
-              </Grid>
-              <Grid item xs={3}>
+          <Grid item xs={9}>
+            <SearchField {...props} />
+          </Grid>
+          {props.loginScreen && (
+            <Grid item xs={3}>
+              {props.userData !== undefined && props.isLoggedIn ? (
                 <UserMenu {...props} />
-              </Grid>
-            </>
-          ) : (
-            <>
-              <Grid item xs={9}>
-                <SearchField {...props} />
-              </Grid>
-            </>
+              ) : (
+                <Grid container spacing={2}>
+                  <Grid item md={8}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      onClick={goLogin}
+                    >
+                      Login
+                    </Button>
+                  </Grid>
+                  <Grid item md={4}>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      className={classes.button}
+                      onClick={goRegister}
+                    >
+                      Register
+                    </Button>
+                  </Grid>
+                </Grid>
+              )}
+            </Grid>
           )}
         </Grid>
       </Toolbar>
