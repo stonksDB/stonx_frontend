@@ -1,7 +1,7 @@
 import {
   CreditCard as MyStockIcon,
   Equalizer as StockIcon,
-  Home as HomeIcon,
+  HomeOutlined as HomeIcon,
   ImportContacts as NewsIcon
 } from "@material-ui/icons";
 import Login from "./screens/Login";
