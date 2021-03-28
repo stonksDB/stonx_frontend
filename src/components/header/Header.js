@@ -2,25 +2,32 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import React from "react";
-import { Grid, InputBase } from "@material-ui/core";
+import { Grid, InputBase, TextField, InputAdornment } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import UserAvatar from "../UserAvatar";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    input: theme.input,
+  })
+);
 const SearchField = (props) => {
+  const classes = useStyles();
   return (
     <Grid
       container
       direction="row"
       alignItems="center"
-      style={{
-        background: "white",
-        borderRadius: "15px",
-        flex: 1,
-      }}
+      // style={{
+      //   background: "white",
+      //   borderRadius: "15px",
+      //   flex: 1,
+      // }}
     >
-      <Grid item style={{ paddingLeft: 10, paddingTop: 3 }}>
+      {/* <Grid item style={{ paddingLeft: 10, paddingTop: 3 }}>
         <Search />
       </Grid>
       <Grid item xs>
@@ -29,7 +36,19 @@ const SearchField = (props) => {
           fullWidth={true}
           style={{ padding: 7 }}
         />
-      </Grid>
+      </Grid> */}
+      <TextField
+        label="Search..."
+        variant="outlined"
+        className={classes.input}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="start">
+              <Search />
+            </InputAdornment>
+          ),
+        }}
+      />
     </Grid>
   );
 };
@@ -86,10 +105,10 @@ const Header = (props) => {
             </>
           ) : (
             <>
-            <Grid item xs={9}>
-              <SearchField {...props} />
-            </Grid>
-          </>
+              <Grid item xs={9}>
+                <SearchField {...props} />
+              </Grid>
+            </>
           )}
         </Grid>
       </Toolbar>

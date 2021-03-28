@@ -65,7 +65,7 @@ const PageContainer = (props) => {
     setMobileOpen(!mobileOpen);
   };
 
-  const onLoginScreen = ["/login", "/register"].indexOf(location.pathname) === -1;
+  const onLoginScreen = ["/login", "/registration"].indexOf(location.pathname) === -1;
 
   const classes = useStyles();
 

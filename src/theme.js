@@ -29,6 +29,16 @@ const lightTheme = createMuiTheme({
     padding: 15,
     borderRadius: 15,
   },
+
+  input: {
+    [`& fieldset`]: {
+      borderRadius: "15px",
+      borderColor: "white",
+    },
+    borderRadius: "15px",
+    backgroundColor: "white",
+    width: "100%",
+  },
 });
 
 export default lightTheme;
