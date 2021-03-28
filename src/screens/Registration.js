@@ -1,24 +1,32 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Button, Grid, TextField, Typography } from "@material-ui/core";
-import logo_webp from "../assets/logo_header/logo_header.webp";
+import { Button, Grid, TextField, Typography, Link } from "@material-ui/core";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    pageTitle: {},
     card: theme.card,
-    button: {
-      width: "100%",
-      display: "block",
-      borderRadius: "15px",
-      padding: 7,
+    button: theme.button,
+    link: {
+      color: theme.palette.primary.main,
+      fontWeight: "bold",
+      textDecoration: "underline",
     },
     input: theme.input,
   })
 );
 
 const Registration = (props) => {
+  const history = useHistory();
   const classes = useStyles();
+  const goHome = () => {
+    let path = "/";
+    history.push(path);
+  };
+  const goLogin = () => {
+    let path = "/login";
+    history.push(path);
+  };
   return (
     <Grid
       container
@@ -29,7 +37,7 @@ const Registration = (props) => {
       spacing={2}
     >
       <Grid item>
-        <Typography variant={"h4"} className={classes.pageTitle}>
+        <Typography variant={"h4"}>
           Create a new account
         </Typography>
       </Grid>
@@ -65,7 +73,8 @@ const Registration = (props) => {
               variant="outlined"
               className={classes.input}
               size="small"
-            />{/*TODO: implement date picker using @material-ui/pickers */}
+            />
+            {/*TODO: implement date picker using @material-ui/pickers */}
           </Grid>
           <Grid item xs={6}>
             <TextField
@@ -121,9 +130,14 @@ const Registration = (props) => {
           </Grid>
         </Grid>
       </Grid>
-{/*TODO: add section for selecting interests */}
+      {/*TODO: add section for selecting interests */}
       <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
-        <Typography>Already have an account? Click here to login!</Typography>
+        <Typography>
+          Already have an account? Click here to{" "}
+          <Link href="" onClick={goLogin} className={classes.link}>
+            login!
+          </Link>
+        </Typography>
       </Grid>
       <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
         <Button variant="contained" color="primary" className={classes.button}>
@@ -131,7 +145,12 @@ const Registration = (props) => {
         </Button>
       </Grid>
       <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
-        <Button variant="outlined" color="primary" className={classes.button} ì>
+        <Button
+          variant="outlined"
+          color="primary"
+          className={classes.button}
+          onClick={goHome}
+        >
           Cancel
         </Button>
       </Grid>

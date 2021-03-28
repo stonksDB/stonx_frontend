@@ -13,6 +13,7 @@ const userData = {
   email: "mario@rossi.it",
   picture: "/broken-image.jpg",
 };
+const isLoggedIn = !true;
 const stocksData = [
   { name: "Stock 1" },
   { name: "Stock 2" },
@@ -65,7 +66,8 @@ const PageContainer = (props) => {
     setMobileOpen(!mobileOpen);
   };
 
-  const onLoginScreen = ["/login", "/registration"].indexOf(location.pathname) === -1;
+  const onLoginScreen =
+    ["/login", "/registration"].indexOf(location.pathname) === -1;
 
   const classes = useStyles();
 
@@ -78,29 +80,30 @@ const PageContainer = (props) => {
           userData={userData}
           stocksData={stocksData}
         />
-          <NavBarMobile
-            className={classes.drawer}
-            handleDrawerToggle={handleDrawerToggle}
-            mobileOpen={mobileOpen}
-          />
-
+        <NavBarMobile
+          className={classes.drawer}
+          handleDrawerToggle={handleDrawerToggle}
+          mobileOpen={mobileOpen}
+        />
       </Hidden>
 
       <Hidden xsDown>
         <Header
-          className={onLoginScreen? classes.appBar : classes.appBarWithoutMenu}
+          className={onLoginScreen ? classes.appBar : classes.appBarWithoutMenu}
           handleDrawerToggle={handleDrawerToggle}
           userData={userData}
           stocksData={stocksData}
           loginScreen={onLoginScreen}
+          isLoggedIn={isLoggedIn}
         />
-        { onLoginScreen ? (
+        {onLoginScreen ? (
           <NavBar
             className={classes.drawer}
             handleDrawerToggle={handleDrawerToggle}
             mobileOpen={mobileOpen}
             paper={classes.drawerPaper}
             toolbar={classes.toolbar}
+            isLoggedIn={isLoggedIn}
           />
         ) : (
           ""
