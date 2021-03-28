@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import MarketChart from "../components/MarketChart";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -24,8 +25,8 @@ const Home = (props) => {
           <Grid item xs={12} sm={9}>
             <Grid container direction="row" spacing={3}>
               <Grid item xs={12}>
-                <Paper elevation={0} className={classes.card}>
-                  Here go the small market charts
+                <Paper elevation={0} className={classes.card} style={{height: 500}}>
+                  <MarketChart/>
                 </Paper>
               </Grid>
               <Grid item xs={12}>
