@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Paper, Typography } from "@material-ui/core";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, useTheme } from "@material-ui/core/styles";
 import MarketChart from "../components/MarketChart";
 
 const useStyles = makeStyles((theme) =>
@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 const Home = (props) => {
+    const theme = useTheme();
     const classes = useStyles();
     
     return (
@@ -31,17 +32,17 @@ const Home = (props) => {
               </Grid>
               <Grid item xs={12}>
                 <Paper elevation={0} className={classes.card}>
-                  <MarketChart title="Most Performing" height="40vh" enableArea enablePoints={false}/>
+                  <MarketChart title="Most Performing" height="38vh" enableArea enablePoints={false}/>
                 </Paper>
               </Grid>
               <Grid item xs={6}>
                 <Paper elevation={0} className={classes.card}>
-                  <MarketChart title="Sector" height="25vh" />
+                  <MarketChart title="Sector" usePointsOf="first" enableLegend={false} />
                 </Paper>
               </Grid>
               <Grid item xs={6}>
                 <Paper elevation={0} className={classes.card}>
-                  <MarketChart title="My Stocks" height="25vh" />
+                  <MarketChart title="My Stocks" usePointsOf="second" enableLegend={false} />
                 </Paper>
               </Grid>
             </Grid>

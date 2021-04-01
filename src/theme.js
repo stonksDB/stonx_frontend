@@ -6,6 +6,13 @@ const lightTheme = createMuiTheme({
     primary: {
       main: "#336CFB",
     },
+    secondary: {
+      main: "#FAC032",
+    },
+    text: {
+      primary: "#414D55",
+      secondary: "#636D73",
+    },
     background: {
       default: "#F1F5F8",
     },
@@ -45,6 +52,17 @@ const lightTheme = createMuiTheme({
     display: "block",
     borderRadius: "15px",
     padding: 7,
+  },
+
+  grid: {
+    line: {
+      strokeDasharray: "6 6"
+    }
+  },
+  crosshair: {
+    line: {
+      stroke: "#7ba0fc",
+    },
   },
 });
 

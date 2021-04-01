@@ -3,6 +3,7 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Grid, Paper, Typography, IconButton, Chip } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import MarketChart from "../components/MarketChart";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -85,7 +86,7 @@ const SingleStock = (props) => {
                 </>
               )}
 
-              <Typography variant={"p"} style={{ display: "block" }}>
+              <Typography variant={"body2"} style={{ display: "block" }}>
                 &nbsp; NASDAQ, gg/mm/yyyy
               </Typography>
             </Grid>
@@ -94,7 +95,7 @@ const SingleStock = (props) => {
           <Grid container direction="row" spacing={3}>
             <Grid item xs={12}>
               <Paper elevation={0} className={classes.card}>
-                Here goes the big chart
+                <MarketChart height="40vh" points="first" enableGridX enableGridY enableLegend={false} />
               </Paper>
             </Grid>
             <Grid item xs={12}>
