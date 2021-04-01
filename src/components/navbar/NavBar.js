@@ -6,7 +6,6 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import routes from "../../routes";
 import { Link, useLocation } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import React from "react";
@@ -25,13 +24,10 @@ const useStyles = makeStyles((theme) =>
 const NavbarList = (props) => {
   const location = useLocation();
   const classes = useStyles();
-  const routesArr = props.isLoggedIn ? ["Home", "My Stocks", "News"] : ["Home",  "News"];
-  const navbarRoutes = routes()
-    .filter(({ name }) => routesArr.includes(name))
-    .reverse();
+
   return (
     <List className={props.className}>
-      {navbarRoutes.map(({ name, icon, path }) => (
+      {props.availableRoutes.map(({ name, icon, path }) => (
         <ListItem button key={name} component={Link} to={path}>
           <ListItemIcon
             children={icon}

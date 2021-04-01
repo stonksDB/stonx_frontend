@@ -6,6 +6,7 @@ import NavBarMobile from "./navbar/NavBarMobile";
 import Header from "./header/Header";
 import HeaderMobile from "./header/HeaderMobile";
 import { useLocation } from "react-router";
+import routes from "../routes";
 
 const userData = {
   firstName: "Mario",
@@ -14,6 +15,9 @@ const userData = {
   picture: "/broken-image.jpg",
 };
 const isLoggedIn = !true;
+const availableRoutes = routes()
+  .filter(({ name }) => (isLoggedIn ? ["Home", "My Stocks", "News"] : ["Home",  "News"]).includes(name))
+  .reverse();
 const stocksData = [
   { name: "Stock 1" },
   { name: "Stock 2" },
@@ -57,14 +61,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 const PageContainer = (props) => {
-  const [mobileOpen, setMobileOpen] = useState(false);
-
   const location = useLocation();
-  console.log(location);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
 
   const onLoginScreen =
     ["/login", "/registration"].indexOf(location.pathname) === -1;
@@ -76,23 +73,20 @@ const PageContainer = (props) => {
       <Hidden smUp>
         <HeaderMobile
           className={classes.appBar}
-          handleDrawerToggle={handleDrawerToggle}
           userData={userData}
           stocksData={stocksData}
           isLoggedIn={isLoggedIn}
         />
         <NavBarMobile
           className={classes.drawer}
-          handleDrawerToggle={handleDrawerToggle}
-          mobileOpen={mobileOpen}
           isLoggedIn={isLoggedIn}
+          availableRoutes={availableRoutes}
         />
       </Hidden>
 
       <Hidden xsDown>
         <Header
           className={onLoginScreen ? classes.appBar : classes.appBarWithoutMenu}
-          handleDrawerToggle={handleDrawerToggle}
           userData={userData}
           stocksData={stocksData}
           loginScreen={onLoginScreen}
@@ -101,11 +95,10 @@ const PageContainer = (props) => {
         {onLoginScreen ? (
           <NavBar
             className={classes.drawer}
-            handleDrawerToggle={handleDrawerToggle}
-            mobileOpen={mobileOpen}
             paper={classes.drawerPaper}
             toolbar={classes.toolbar}
             isLoggedIn={isLoggedIn}
+            availableRoutes={availableRoutes}
           />
         ) : (
           ""

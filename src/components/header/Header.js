@@ -4,7 +4,6 @@ import AppBar from "@material-ui/core/AppBar";
 import React from "react";
 import {
   Grid,
-  InputBase,
   TextField,
   InputAdornment,
   Button,

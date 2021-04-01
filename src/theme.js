@@ -54,6 +54,7 @@ const lightTheme = createMuiTheme({
     padding: 7,
   },
 
+  //Graph styles
   grid: {
     line: {
       strokeDasharray: "6 6"
