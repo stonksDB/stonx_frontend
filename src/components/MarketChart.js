@@ -1,101 +1,103 @@
-import { ResponsiveLineCanvas } from "@nivo/line";
+import { ResponsiveLine, ResponsiveLineCanvas } from "@nivo/line";
+import { linearGradientDef } from "@nivo/core";
+import { Typography } from "@material-ui/core";
+import Home from "../screens/Home";
 
-const data = [
-  {
-    "id": "germany", "color": "hsl(296, 70%, 50%)", "data": [
-      {
-        "x": "plane", "y": 6
-      }, {
-        "x": "helicopter", "y": 136
-      }, {
-        "x": "boat", "y": 43
-      }, {
-        "x": "train", "y": 240
-      }, {
-        "x": "subway", "y": 39
-      }, {
-        "x": "bus", "y": 256
-      }, {
-        "x": "car", "y": 235
-      }, {
-        "x": "moto", "y": 295
-      }, {
-        "x": "bicycle", "y": 190
-      }, {
-        "x": "horse", "y": 297
-      }, {
-        "x": "skateboard", "y": 173
-      }, {
-        "x": "others", "y": 73
-      }
-    ]
-  }, {
-    "id": "norway", "color": "hsl(315, 70%, 50%)", "data": [
-      {
-        "x": "plane", "y": 184
-      }, {
-        "x": "helicopter", "y": 172
-      }, {
-        "x": "boat", "y": 9
-      }, {
-        "x": "train", "y": 36
-      }, {
-        "x": "subway", "y": 105
-      }, {
-        "x": "bus", "y": 209
-      }, {
-        "x": "car", "y": 221
-      }, {
-        "x": "moto", "y": 250
-      }, {
-        "x": "bicycle", "y": 212
-      }, {
-        "x": "horse", "y": 167
-      }, {
-        "x": "skateboard", "y": 189
-      }, {
-        "x": "others", "y": 14
-      }
-    ]
-  }
-];
+const title = "Test title";
+const data = {
+  xTitle: "X Axis",
+  yTitle: "Y Axis",
+  points: [
+    {
+      id: 'Stock A',
+      data: [
+        { x: 0, y: 7 },
+        { x: 1, y: 5 },
+        { x: 2, y: 11 },
+        { x: 3, y: 9 },
+        { x: 4, y: 13 },
+        { x: 7, y: 16 },
+        { x: 9, y: 12 },
+      ],
+    },
+    {
+      id: 'Stock B',
+      data: [
+        { x: 0, y: 12 },
+        { x: 1, y: 23 },
+        { x: 2, y: 5 },
+        { x: 3, y: 9 },
+        { x: 4, y: 14 },
+        { x: 7, y: 2 },
+        { x: 9, y: 6 },
+      ],
+    }
+  ]
+}
 
 const MarketChart = (props) => {
-  const enablePoints = props.enablePoints != null;
-
-  return (
-    <ResponsiveLineCanvas
-      data={ data }
-      margin={ {top: 10, right: 20, bottom: 30, left: 30} }
-      xScale={ {type: "point"} }
-      yScale={ {type: "linear", min: "auto", max: "auto", stacked: true, reverse: false} }
+  return (<section style={ {height: props.height} }>
+    <Typography variant="h6" style={ {position: "absolute"} }>{ props.title }</Typography>
+    <ResponsiveLine
+      data={ data.points }
+      margin={ {top: 35, right: 20, bottom: 30, left: 30} }
+      colors={ {scheme: "paired"} }
       curve="cardinal"
-      axisTop={ null }
-      axisRight={ null }
+
+      xScale={ {type: "point", min: "auto", max: "auto"} }
+      yScale={ {type: "linear", min: "0", max: "25"} }
+
       axisBottom={ {
-        orient: "bottom", tickSize: 5, tickPadding: 5, tickRotation: 0, legend: "", legendOffset: 0,
-        legendPosition: "middle"
+        orient: "bottom", tickSize: 5, tickPadding: 5, legend: props.xTitle, legendOffset: 30, legendPosition: "middle"
       } }
       axisLeft={ {
-        orient: "left", tickSize: 5, tickPadding: 5, tickRotation: 0, legend: "", legendOffset: 0,
-        legendPosition: "middle"
+        orient: "left", tickSize: 5, tickPadding: 5, legend: props.yTitle, legendOffset: 30, legendPosition: "middle"
       } }
-      enableGridX={ false }
-      colors={ {scheme: "paired"} }
-      enablePoints={ enablePoints }
-      enableMesh={ true }
-      pointSize={ 10 }
-      pointColor={ {from: "color", modifiers: []} }
+
+      legends={ [ props.enableLegend ?
+        {
+          anchor: "top-right", direction: "row", itemWidth: 80, itemHeight: 0, translateY: -18, translateX: 18, symbolSize: 12, symbolShape: "circle"
+        } : ""
+      ] }
+
+      enableGridX={ props.enableGridX }
+      enableGridY={ props.enableGridY }
+
+
+      enableArea={ props.enableArea }
+      areaBlendMode="multiply"
+      defs={ [
+        linearGradientDef("gradient", [
+          {offset: 0, color: "inherit"}, {offset: 100, color: "inherit", opacity: 0},
+        ]),
+      ] }
+      fill={ [{match: "*", id: "gradient"}] }
+
+      enablePoints={ props.enablePoints }
       pointBorderWidth={ 2 }
       pointBorderColor={ {from: "color", modifiers: []} }
-      pointLabelYOffset={ -12 }
-      enableArea={ true }
-      areaBlendMode="multiply"
-      areaOpacity={ 0.2 }
-      enableSlices="x"
-      legends={ [] }
+
+      animate={ true }
       motionConfig="default"
+      isInteractive={ true }
+      enableSlices={ "x" }
     />
-  );
+  </section>);
 };
+
+
+MarketChart.defaultProps = {
+  title: "",
+  size: "mid",  //Can be small, mid, big
+  height: "20vh",
+  enableArea: false,
+  enablePoints: true,
+  enableLegend: true,
+  xTitle: "",
+  yTitle: "",
+  enableGridX: false,
+  enableGridY: true
+};
+
+
 export default MarketChart;

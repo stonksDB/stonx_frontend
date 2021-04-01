@@ -25,20 +25,24 @@ const Home = (props) => {
           <Grid item xs={12} sm={9}>
             <Grid container direction="row" spacing={3}>
               <Grid item xs={12}>
-                <Paper elevation={0} className={classes.card} style={{height: 500}}>
-                  <MarketChart/>
+                <Paper elevation={0} className={classes.card}>
+                  Here go the small charts
                 </Paper>
               </Grid>
               <Grid item xs={12}>
-                <Paper elevation={0} className={classes.card}>Here goes the xxl chart</Paper>
-              </Grid>
-              <Grid item xs={6}>
                 <Paper elevation={0} className={classes.card}>
-                  Here goes a small sector chart
+                  <MarketChart title="Most Performing" height="40vh" enableArea enablePoints={false}/>
                 </Paper>
               </Grid>
               <Grid item xs={6}>
-                <Paper elevation={0} className={classes.card}>Here goes yet one more chart</Paper>
+                <Paper elevation={0} className={classes.card}>
+                  <MarketChart title="Sector" height="25vh" />
+                </Paper>
+              </Grid>
+              <Grid item xs={6}>
+                <Paper elevation={0} className={classes.card}>
+                  <MarketChart title="My Stocks" height="25vh" />
+                </Paper>
               </Grid>
             </Grid>
           </Grid>
@@ -49,6 +53,5 @@ const Home = (props) => {
       </>
     );
   }
-
 
 export default Home;
