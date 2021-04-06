@@ -2,11 +2,11 @@ import {
   Link, Paper,
 } from "@material-ui/core";
 import React from "react";
-import nodejs from "../assets/technologies/node.png";
-import sequelize from "../assets/technologies/sequelize.png";
-import postgresql from "../assets/technologies/postgresql.png";
-import react from "../assets/technologies/react.png";
-import materialUi from "../assets/technologies/materialUi.png";
+import nodejs from "../assets/technologies/Node.png";
+import sequelize from "../assets/technologies/Sequelize.png";
+import postgresql from "../assets/technologies/Postgresql.png";
+import react from "../assets/technologies/React.png";
+import materialUi from "../assets/technologies/MaterialUi.png";
 import Carousel from "react-material-ui-carousel";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -30,7 +30,7 @@ const LogosCarousel = (props) => {
     {name: "Sequelize", logo: sequelize, url: "https://sequelize.org/"},
     {name: "PostgreSQL", logo: postgresql, url: "https://www.postgresql.org/"}
   ];
-  
+
   return (
     <Carousel
       autoPlay={true}
