@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/stonx_frontend/static/css/main.85867e5b.chunk.css",
-    "main.js": "/stonx_frontend/static/js/main.b575cc33.chunk.js",
-    "main.js.map": "/stonx_frontend/static/js/main.b575cc33.chunk.js.map",
+    "main.js": "/stonx_frontend/static/js/main.01d22ff1.chunk.js",
+    "main.js.map": "/stonx_frontend/static/js/main.01d22ff1.chunk.js.map",
     "runtime-main.js": "/stonx_frontend/static/js/runtime-main.1ea6bd92.js",
     "runtime-main.js.map": "/stonx_frontend/static/js/runtime-main.1ea6bd92.js.map",
     "static/js/2.cdc595f8.chunk.js": "/stonx_frontend/static/js/2.cdc595f8.chunk.js",
@@ -12,16 +12,16 @@
     "static/js/2.cdc595f8.chunk.js.LICENSE.txt": "/stonx_frontend/static/js/2.cdc595f8.chunk.js.LICENSE.txt",
     "static/media/logo.42618f26.webp": "/stonx_frontend/static/media/logo.42618f26.webp",
     "static/media/logo_header.95afdfcb.webp": "/stonx_frontend/static/media/logo_header.95afdfcb.webp",
-    "static/media/materialUi.058fe09b.png": "/stonx_frontend/static/media/materialUi.058fe09b.png",
-    "static/media/node.39155fb0.png": "/stonx_frontend/static/media/node.39155fb0.png",
+    "static/media/materialUi.0ebfbd36.png": "/stonx_frontend/static/media/materialUi.0ebfbd36.png",
+    "static/media/node.f09d257c.png": "/stonx_frontend/static/media/node.f09d257c.png",
     "static/media/postgresql.fe81e86a.png": "/stonx_frontend/static/media/postgresql.fe81e86a.png",
     "static/media/react.f153eb9f.png": "/stonx_frontend/static/media/react.f153eb9f.png",
-    "static/media/sequelize.bcfc1cae.png": "/stonx_frontend/static/media/sequelize.bcfc1cae.png"
+    "static/media/sequelize.63894952.png": "/stonx_frontend/static/media/sequelize.63894952.png"
   },
   "entrypoints": [
     "static/js/runtime-main.1ea6bd92.js",
     "static/js/2.cdc595f8.chunk.js",
     "static/css/main.85867e5b.chunk.css",
-    "static/js/main.b575cc33.chunk.js"
+    "static/js/main.01d22ff1.chunk.js"
   ]
 }
