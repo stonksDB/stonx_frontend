@@ -11,6 +11,7 @@ import Drawer from "@material-ui/core/Drawer";
 import React from "react";
 import logo_webp from "../../assets/logo_header/logo_header.webp";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { Info } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -48,6 +49,12 @@ const NavbarList = (props) => {
           />
         </ListItem>
       ))}
+      <ListItem button key="/about" component={Link} to="/about">
+        <ListItemIcon children={<Info />} className={classes.inactive} />
+        <ListItemText
+          primary={<Typography className={classes.inactive}>About</Typography>}
+        />
+      </ListItem>
     </List>
   );
 };
