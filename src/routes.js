@@ -21,7 +21,6 @@ export default function routes() {
     {name: "Registration", path: "/registration", icon: <HomeIcon/>, page: <Registration/>},
     {name: "Single Stock", path: "/stock/:id", icon: <StockIcon/>, page: <SingleStock/>},
     {name: "Single News", path: "/news/:id", icon: <NewsIcon/>, page: <SingleNews/>},
-    {name: "About", path: "/about", icon: <AboutIcon/>, page: <About/>},
     {name: "News", path: "/news", icon: <NewsIcon/>, page: <News/>},
     {name: "My Stocks", path: "/mystock", icon: <MyStockIcon/>, page: <MyStocks/>},
     {name: "Home", path: "/", icon: <HomeIcon/>, page: <Home/>},

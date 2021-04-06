@@ -16,7 +16,7 @@ const userData = {
 };
 const isLoggedIn = !true;
 const availableRoutes = routes()
-  .filter(({ name }) => (isLoggedIn ? ["Home", "My Stocks", "News", "About" ] : ["Home",  "News", "About"]).includes(name))
+  .filter(({ name }) => (isLoggedIn ? ["Home", "My Stocks", "News" ] : ["Home",  "News"]).includes(name))
   .reverse();
 const stocksData = [
   { name: "Stock 1" },

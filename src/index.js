@@ -15,6 +15,9 @@ ReactDOM.render(
       <CssBaseline />
       <Router>
         <Switch>
+          <Route key="/about" path="/about">
+            <About />
+          </Route>
           {routes().map(({ path, page }) => (
             <Route key={path} path={path}>
               <PageContainer page={page} />
