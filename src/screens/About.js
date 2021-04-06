@@ -9,6 +9,7 @@ import {
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import logo_webp from "../assets/logo_header/logo_header.webp";
+import LogosCarousel from "../components/Carousel";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -107,6 +108,7 @@ const About = (props) => {
             consequat, in commodo lacus mattis. Suspendisse eget urna mollis,
             varius leo non, sagittis orci.
           </Typography>
+          <LogosCarousel/>
         </div>
 
 
