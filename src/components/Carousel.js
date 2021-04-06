@@ -26,7 +26,7 @@ const CarouselItem = (props) => {
   return (
     <Paper elevation={0} style={{backgroundColor: theme.palette.background.default, textAlign: "center"}}>
       <Link href={props.item.url} title={props.item.name}>
-        <img style={{width: "25%", backgroundColor: "transparent"}} src={props.item.logo} alt={props.item.name}/>
+        <img style={{width: "70%", backgroundColor: "transparent"}} src={props.item.logo} alt={props.item.name} />
       </Link>
     </Paper>
   );
