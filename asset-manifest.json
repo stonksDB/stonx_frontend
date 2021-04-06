@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/stonx_frontend/static/css/main.85867e5b.chunk.css",
-    "main.js": "/stonx_frontend/static/js/main.6668c55a.chunk.js",
-    "main.js.map": "/stonx_frontend/static/js/main.6668c55a.chunk.js.map",
+    "main.js": "/stonx_frontend/static/js/main.f3367490.chunk.js",
+    "main.js.map": "/stonx_frontend/static/js/main.f3367490.chunk.js.map",
     "runtime-main.js": "/stonx_frontend/static/js/runtime-main.1ea6bd92.js",
     "runtime-main.js.map": "/stonx_frontend/static/js/runtime-main.1ea6bd92.js.map",
     "static/js/2.d7ea0f66.chunk.js": "/stonx_frontend/static/js/2.d7ea0f66.chunk.js",
@@ -10,19 +10,19 @@
     "index.html": "/stonx_frontend/index.html",
     "static/css/main.85867e5b.chunk.css.map": "/stonx_frontend/static/css/main.85867e5b.chunk.css.map",
     "static/js/2.d7ea0f66.chunk.js.LICENSE.txt": "/stonx_frontend/static/js/2.d7ea0f66.chunk.js.LICENSE.txt",
+    "static/media/MaterialUi.f0beee82.png": "/stonx_frontend/static/media/MaterialUi.f0beee82.png",
+    "static/media/Node.aa52ba78.png": "/stonx_frontend/static/media/Node.aa52ba78.png",
+    "static/media/Postgresql.42ff5812.png": "/stonx_frontend/static/media/Postgresql.42ff5812.png",
+    "static/media/React.9766c9cb.png": "/stonx_frontend/static/media/React.9766c9cb.png",
+    "static/media/Sequelize.0108619e.png": "/stonx_frontend/static/media/Sequelize.0108619e.png",
     "static/media/logo.42618f26.webp": "/stonx_frontend/static/media/logo.42618f26.webp",
     "static/media/logo_header.95afdfcb.webp": "/stonx_frontend/static/media/logo_header.95afdfcb.webp",
-    "static/media/luca.889755cf.jpeg": "/stonx_frontend/static/media/luca.889755cf.jpeg",
-    "static/media/materialUi.0ebfbd36.png": "/stonx_frontend/static/media/materialUi.0ebfbd36.png",
-    "static/media/node.f09d257c.png": "/stonx_frontend/static/media/node.f09d257c.png",
-    "static/media/postgresql.fe81e86a.png": "/stonx_frontend/static/media/postgresql.fe81e86a.png",
-    "static/media/react.f153eb9f.png": "/stonx_frontend/static/media/react.f153eb9f.png",
-    "static/media/sequelize.63894952.png": "/stonx_frontend/static/media/sequelize.63894952.png"
+    "static/media/luca.889755cf.jpeg": "/stonx_frontend/static/media/luca.889755cf.jpeg"
   },
   "entrypoints": [
     "static/js/runtime-main.1ea6bd92.js",
     "static/js/2.d7ea0f66.chunk.js",
     "static/css/main.85867e5b.chunk.css",
-    "static/js/main.6668c55a.chunk.js"
+    "static/js/main.f3367490.chunk.js"
   ]
 }
