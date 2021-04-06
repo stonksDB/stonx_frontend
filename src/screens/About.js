@@ -10,10 +10,10 @@ import {
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import logo_webp from "../assets/logo_header/logo_header.webp";
-// import sebastian from "../assets/team/sebastian.jpeg";
-// import alessandro from "../assets/team/alessandro.jpeg";
-// import riccardo from "../assets/team/riccardo.jpeg";
-import luca from "../assets/team/luca.jpeg";
+import sebastian from "../assets/team/Sebastian.jpeg";
+import alessandro from "../assets/team/Alessandro.jpeg";
+import riccardo from "../assets/team/Riccardo.jpeg";
+import luca from "../assets/team/Luca.jpeg";
 
 import LogosCarousel from "../components/Carousel";
 
@@ -22,19 +22,19 @@ const team = [
     name: "Sebastian Cavada",
     role: "Back End Developer",
     quote: "I like stocks",
-    image: "sebastian",
+    image: sebastian,
   },
   {
     name: "Alessandro Gottardi",
     role: "Front End Developer",
     quote: "This is a very smart quote",
-    image: "alessandro",
+    image: alessandro,
   },
   {
     name: "Riccardo Rigoni",
     role: "Back End Developer",
-    quote: "This is a very smart quote",
-    image: "riccardo",
+    quote: "It fascinates me the stock market and I would like to make accessible to everyone",
+    image: riccardo,
   },
   {
     name: "Luca Taddeo",
@@ -123,12 +123,12 @@ const About = (props) => {
           <Typography variant={"h5"} className={classes.title}>
             The Idea
           </Typography>
-          <Typography style={{ marginBottom: 7 }}>
+          <Typography paragraph>
             The four most dangerous words in investing are "This time it's
             different". From John Templeton's caution, we created StonX, a web
             application to easily access the world of trading.
           </Typography>
-          <Typography style={{ marginBottom: 7 }}>
+          <Typography paragraph>
             For all the people who don't want endless tables, cluttered
             information and terrible User Experiences, StonX provides all the
             necessary information to be up-to-date with the latest market
@@ -176,13 +176,35 @@ const About = (props) => {
           </Typography>
           <Grid container direction={"row"} alignItems="center">
             <Grid item xs={12} sm={9}>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tortor
-                justo, laoreet at congue vitae, ultricies ac purus. Proin rhoncus
-                cursus facilisis. Sed vitae elit mattis, dictum enim eu, auctor
-                ante. Phasellus sit amet dui nibh. Maecenas rhoncus augue in erat
-                consequat, in commodo lacus mattis. Suspendisse eget urna mollis,
-                varius leo non, sagittis orci.
+              <Typography variant={"subtitle1"} className={classes.title}>
+                Back-End
+              </Typography>
+              <Typography paragraph>
+                The backend is implemented with the well-known JavaScript runtime environment <a href="https://nodejs.org/en">NodeJS</a>.
+                As libraries we used the following:
+                <ul>
+                  <li><a href="https://expressjs.com/">Express.JS 4</a> is needed to handle API request and create the adequate endpoint routes.</li>
+                  <li><a href="https://sequelize.org/master/">Sequelize 6</a> is needed to make the server a real MVC architecture,
+                  implementing the business logic for the data. The ORM framework allows both to model JavaScript objects
+                  and automatically perform CRUD operations on top of the previously defined models.</li>
+                  <li><a href="https://www.npmjs.com/package/pg">Pg 8</a> is needed to connect to the PostgreSQL database.
+                    Since we aim to get a high number of requests per second it was fundamental for us to make some speedups,
+                    thus we leveraged the power of the "pool" connections offered by “pg”</li>
+                </ul>
+              </Typography>
+              <Typography variant={"subtitle1"} className={classes.title}>
+                Front-End
+              </Typography>
+              <Typography paragraph>
+                The frontend implementation is based on <a href="https://reactjs.org/">React</a>, a popular framework created by Facebook.
+                It allows writing so-called "components" that can be reused in different pages and even shared with different developers.
+              </Typography>
+              <Typography paragraph>
+                We strive to build an interface that is intuitive, essential, and easy to use. For this reason, Material Design was
+                immediately chosen as the reference design in our application. We started by designing detailed
+                mockups of each page using <a href="https://www.figma.com">Figma</a>, which have then been implemented
+                using <a href="https://www.material-ui.com">Material UI</a>, together with <a href="https://nivo.rocks">Nivo</a> for the
+                chart representations. This allowed to fulfil all the aforementioned objectives in a fast and productive way.
               </Typography>
             </Grid>
             <Grid item xs={12} sm={3}>
@@ -196,13 +218,19 @@ const About = (props) => {
           <Typography variant={"h5"} className={classes.title}>
             Future Implementations
           </Typography>
+          <Typography paragraph>
+            Lot of ideas and proposals are flooding around, and we would like to develop some of them in the future.
+            Our priority anyhow is to develop a portfolio management system, in which a user can keep track of
+            his/her investments and have an overview of the gains or losses. Another point to which we aim is to be able
+            to provide different type of assets: from crypto to bonds and securities. To achieve this, we must perform
+            some changes to the database to abstract the concept away from just stocks.
+          </Typography>
           <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tortor
-            justo, laoreet at congue vitae, ultricies ac purus. Proin rhoncus
-            cursus facilisis. Sed vitae elit mattis, dictum enim eu, auctor
-            ante. Phasellus sit amet dui nibh. Maecenas rhoncus augue in erat
-            consequat, in commodo lacus mattis. Suspendisse eget urna mollis,
-            varius leo non, sagittis orci.
+            If we still have time our goal is to build the FIRST EVER IN THE WORLD peer stock exchange open 24/7.
+            The idea is to give all our members the opportunity to sell their assets (potentially bought from another
+            market) to other registered users, through a peer market exchange. A feature that we would like to try out
+            is the microservices. Our target is to transform our monolithic architecture into microservices which is
+            used by most of the biggest companies now a days.
           </Typography>
         </div>
 
