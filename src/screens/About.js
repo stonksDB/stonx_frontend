@@ -67,17 +67,21 @@ const About = (props) => {
           <Typography variant={"h5"} className={classes.title}>
             The Idea
           </Typography>
-          <Typography style={{marginBottom: 7}}>
-            The four most dangerous words in investing are "This time it's different".
+          <Typography style={{ marginBottom: 7 }}>
+            The four most dangerous words in investing are "This time it's
+            different". From John Templeton's caution, we created StonX, a web
+            application to easily access the world of trading.
           </Typography>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tortor
-            justo, laoreet at congue vitae, ultricies ac purus. Proin rhoncus
-            cursus facilisis. Sed vitae elit mattis, dictum enim eu, auctor
-            ante. Phasellus sit amet dui nibh. Maecenas rhoncus augue in erat
-            consequat, in commodo lacus mattis. Suspendisse eget urna mollis,
-            varius leo non, sagittis orci.
+          <Typography style={{ marginBottom: 7 }}>
+            For all the people who don't want endless tables, cluttered
+            information and terrible User Experiences, StonX provides all the
+            necessary information to be up-to-date with the latest market
+            trends, with a fresh and intuitive Interface. No more compromising
+            between data completeness and ease of use: our platform contains
+            every information for your friendly neighbourhood trader, with a
+            modern and clean design.
           </Typography>
+          <Typography>StonX isn't just different: StonX is better.</Typography>
         </div>
         <Divider />
 
@@ -108,9 +112,23 @@ const About = (props) => {
             consequat, in commodo lacus mattis. Suspendisse eget urna mollis,
             varius leo non, sagittis orci.
           </Typography>
-          <LogosCarousel/>
+          <LogosCarousel />
         </div>
+        <Divider />
 
+        <div className={classes.sectionContainer}>
+          <Typography variant={"h5"} className={classes.title}>
+            Future Implementations
+          </Typography>
+          <Typography>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tortor
+            justo, laoreet at congue vitae, ultricies ac purus. Proin rhoncus
+            cursus facilisis. Sed vitae elit mattis, dictum enim eu, auctor
+            ante. Phasellus sit amet dui nibh. Maecenas rhoncus augue in erat
+            consequat, in commodo lacus mattis. Suspendisse eget urna mollis,
+            varius leo non, sagittis orci.
+          </Typography>
+        </div>
 
         <Button
           variant="contained"
