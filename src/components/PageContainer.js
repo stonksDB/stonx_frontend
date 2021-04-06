@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Hidden } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import NavBar from "./navbar/NavBar";
@@ -16,7 +16,7 @@ const userData = {
 };
 const isLoggedIn = !true;
 const availableRoutes = routes()
-  .filter(({ name }) => (isLoggedIn ? ["Home", "My Stocks", "News"] : ["Home",  "News"]).includes(name))
+  .filter(({ name }) => (isLoggedIn ? ["Home", "My Stocks", "News", "About" ] : ["Home",  "News", "About"]).includes(name))
   .reverse();
 const stocksData = [
   { name: "Stock 1" },

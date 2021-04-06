@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) =>
 );
 
 const NavBarMobile = (props) => {
-  const theme = useTheme();
   const classes = useStyles();
   const location = useLocation();
   const [value, setValue] = React.useState(location.pathname);

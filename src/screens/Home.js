@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Paper, Typography } from "@material-ui/core";
-import { makeStyles, createStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 import MarketChart from "../components/MarketChart";
 
 const useStyles = makeStyles((theme) =>
@@ -13,46 +13,60 @@ const useStyles = makeStyles((theme) =>
 );
 
 const Home = (props) => {
-    const theme = useTheme();
-    const classes = useStyles();
-    
-    return (
-      <>
-        <Typography variant={"h4"} className={classes.pageTitle}>
-          Home
-        </Typography>
+  const classes = useStyles();
 
-        <Grid container direction="row" spacing={3}>
-          <Grid item xs={12} sm={9}>
-            <Grid container direction="row" spacing={3}>
-              <Grid item xs={12}>
-                <Paper elevation={0} className={classes.card}>
-                  Here go the small charts
-                </Paper>
-              </Grid>
-              <Grid item xs={12}>
-                <Paper elevation={0} className={classes.card}>
-                  <MarketChart title="Most Performing" height="38vh" enableArea enablePoints={false}/>
-                </Paper>
-              </Grid>
-              <Grid item xs={6}>
-                <Paper elevation={0} className={classes.card}>
-                  <MarketChart title="Sector" usePointsOf="first" enableLegend={false} />
-                </Paper>
-              </Grid>
-              <Grid item xs={6}>
-                <Paper elevation={0} className={classes.card}>
-                  <MarketChart title="My Stocks" usePointsOf="second" enableLegend={false} />
-                </Paper>
-              </Grid>
+  return (
+    <>
+      <Typography variant={"h4"} className={classes.pageTitle}>
+        Home
+      </Typography>
+
+      <Grid container direction="row" spacing={3}>
+        <Grid item xs={12} sm={9}>
+          <Grid container direction="row" spacing={3}>
+            <Grid item xs={12}>
+              <Paper elevation={0} className={classes.card}>
+                Here go the small charts
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper elevation={0} className={classes.card}>
+                <MarketChart
+                  title="Most Performing"
+                  height="38vh"
+                  enableArea
+                  enablePoints={false}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={6}>
+              <Paper elevation={0} className={classes.card}>
+                <MarketChart
+                  title="Sector"
+                  usePointsOf="first"
+                  enableLegend={false}
+                />
+              </Paper>
+            </Grid>
+            <Grid item xs={6}>
+              <Paper elevation={0} className={classes.card}>
+                <MarketChart
+                  title="My Stocks"
+                  usePointsOf="second"
+                  enableLegend={false}
+                />
+              </Paper>
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={3}>
-            <Paper elevation={0} className={classes.card}>News for everyone</Paper>
-          </Grid>
         </Grid>
-      </>
-    );
-  }
+        <Grid item xs={12} sm={3}>
+          <Paper elevation={0} className={classes.card}>
+            News for everyone
+          </Paper>
+        </Grid>
+      </Grid>
+    </>
+  );
+};
 
 export default Home;
