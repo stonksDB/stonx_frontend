@@ -9,8 +9,6 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-
-import LogosCarousel from "../components/Carousel";
 import ImageWithFallback from "../utils/ImageWithFallback";
 import Markdown from "../utils/Markdown";
 import AboutSections from "./AboutContent";
@@ -19,26 +17,25 @@ const team = [
   {
     name: "Sebastian Cavada",
     role: "Back End Developer",
-    quote: "I like stocks",
+    quote: "I like the stocks",
     image: "assets/team/Sebastian",
   },
   {
     name: "Alessandro Gottardi",
     role: "Front End Developer",
-    quote: "This is a very smart quote",
+    quote: "Diamond hands 💎🙌",
     image: "assets/team/Alessandro",
   },
   {
     name: "Riccardo Rigoni",
     role: "Back End Developer",
-    quote:
-      "It fascinates me the stock market and I would like to make accessible to everyone",
+    quote: "I am fascinated by the stock market and would like to make it accessible to everyone",
     image: "assets/team/Riccardo",
   },
   {
     name: "Luca Taddeo",
     role: "Front End Developer",
-    quote: "This is a very smart quote",
+    quote: "Apes Together Strong",
     image: "assets/team/Luca",
   },
 ];
@@ -65,8 +62,8 @@ const useStyles = makeStyles((theme) =>
       marginBottom: theme.spacing(1),
     },
     sectionContainer: {
-      marginTop: theme.spacing(4),
-      marginBottom: theme.spacing(4),
+      marginTop: theme.spacing(5),
+      marginBottom: theme.spacing(5),
     },
     button: { ...theme.button, marginTop: theme.spacing(5) },
     memberImage: {
@@ -117,14 +114,16 @@ const About = (props) => {
           </Grid>
         </Grid>
 
-        <Markdown children={aboutSections.idea} />
+        <section className={classes.sectionContainer}>
+          <Markdown children={aboutSections.idea} />
+        </section>
         <Divider />
 
         <section className={classes.sectionContainer}>
           <Typography variant={"h5"} className={classes.title}>
             The Awesome Team
           </Typography>
-          <Grid container spacing={6} style={{ marginTop: 1 }}>
+          <Grid container spacing={6} style={{ marginTop: 1, marginBottom: 1 }}>
             {team.map((member) => (
               <Grid item xs={6} md={3} key={member.name}>
                 <Paper elevation={0} className={classes.card}>
@@ -149,7 +148,7 @@ const About = (props) => {
         </section>
         <Divider />
 
-        <section>
+        <section className={classes.sectionContainer}>
           <Grid container direction={"row"} alignItems="center" spacing={7}>
             <Grid item xs={12} sm={9}>
               <Markdown children={aboutSections.technologiesData} />
@@ -165,7 +164,7 @@ const About = (props) => {
                 <Grid item>
                   <ImageWithFallback
                     src="assets/technologies/yfinance"
-                    alt="Postgres"
+                    alt="Yahoo Finance"
                   />
                 </Grid>
                 <Grid item>
@@ -200,7 +199,9 @@ const About = (props) => {
         </section>
         <Divider />
 
-        <Markdown children={aboutSections.future} />
+        <section className={classes.sectionContainer}>
+          <Markdown children={aboutSections.future} />
+        </section>
 
         <Button
           variant="contained"

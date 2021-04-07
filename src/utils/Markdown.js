@@ -22,10 +22,6 @@ const useStyles = makeStyles((theme) =>
       color: theme.palette.primary.main,
       marginBottom: theme.spacing(1),
     },
-    sectionContainer: {
-      marginTop: theme.spacing(4),
-      marginBottom: theme.spacing(4),
-    },
     listItem: {
       marginTop: theme.spacing(1),
     },
@@ -129,7 +125,6 @@ const Markdown = (props) => {
 
   return (
     <ReactMarkdown
-      className={classes.sectionContainer}
       renderers={renderers}
       {...props}
     />
