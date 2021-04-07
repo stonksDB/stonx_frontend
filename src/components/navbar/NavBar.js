@@ -10,7 +10,6 @@ import { Link, useLocation } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Info } from "@material-ui/icons";
 import ImageWithFallback from "../../utils/ImageWithFallback";
 
 const useStyles = makeStyles((theme) =>

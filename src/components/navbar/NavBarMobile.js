@@ -2,7 +2,6 @@ import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Link, useLocation } from "react-router-dom";
-import { Info } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

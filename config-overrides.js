@@ -7,7 +7,7 @@ module.exports = function override(config, env) {
   config.module.rules.push({
       test: /react-spring/,
       sideEffects: true,
-    })
+  });
 
   return config;
 }
