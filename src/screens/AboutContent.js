@@ -19,55 +19,55 @@ StonX isn't just different: **StonX is better**.
 const technologiesData = `
 # Technologies
 
-### Data
+## Data
 
-#### Data Retrieval
+### Data Retrieval
 
-Massive amount of data is generated from stock market, spanning from the date of the last split to the telephone number
- of a certain company and diverse APIs made this information available. Despite the great availability, quality and
-consistency of the data is not always preserved by some access points. Therefore, to guarantee a high-level service,
-we spent quite a lot of time in doing an in-depth analysis of the existent APIs, to find the most reliable.
+The stock market generates massive amount of data, from the date of the last split to the telephone number
+of a certain company, and different APIs make this information available. Despite having great availability, quality and
+consistency, the data isn't always preserved by every access point. Therefore, to guarantee a high-end service,
+we spent quite a long time doing an in-depth analysis of the existent APIs, to find the most reliable one.
 
-We selected Yahoo Finance and Finnhub. The [Yahoo Finance API](https://pypi.org/project/yfinance/ ) is used to retrieve most
-of the information about the stocks and their associated companies. It provides data both about the current and
+To retrieve data, we use both Yahoo Finance and Finnhub. The [Yahoo Finance API](https://pypi.org/project/yfinance/ ) is used to retrieve most
+of the information about stocks and companies. It provides data both about the current and
 past values of a security and about the market news related to it. [Finnhub](https://finnhub.io) has been mainly used to
 retrieve a complete list of all the securities traded in the most relevant markets.
 
-#### Data Maintenance
+### Data Maintenance
 
-To keep the information stored up to date, a python program periodically interacts with the above-mentioned APIs.
-It retrieves data for all the companies and updates values whenever it found new ones.
+To keep the stored information up to date, a python script periodically interacts with the above-mentioned APIs.
+It retrieves data for all the companies and updates it in the Database whenever a change is detected.
 
-#### Data Storage
+### Data Storage
 
 Companies and stocks data are kept in a PostgreSQL database. Even though the schema is very simple and straightforward,
-it has been structured to support both data analysis and predicting search techniques.
+the database has been structured to support both data analysis and predicting search techniques.
 
-A remark should be done to better clarify how data about the past values are managed within the application,
-since the amount of memory needed to store past values of all securities accessible through the application would be enormous.
-To save memory space, still preserving performances, we decided to store database only the current price. Whenever the
-full history of values is needed for a certain security, a request to Yahoo Finance API is done. Prior making this
-memory-saving design decision, some tests have been conducted to verify whether good user experience is still preserved
-even with such request forwarding, and it seemed to be the case.
+A remark should be done to better clarify how data about the past values is managed within the application.
+The amount of memory needed to store past values for all securities accessible through the application would be enormous, therefore,
+to save memory space, we decided to store in the database only the current price for each security. Whenever the
+full history of values is needed for a certain security, a request to Yahoo Finance API is done. Before adopting this
+memory-saving design, some tests have been conducted to verify whether good user experience is still preserved
+even with a request forwarding approach, and it seemed to be the case.
 `;
 
 const technologiesBackend = `
-### Back-End
+## Back-End
 
-The backend is implemented with the well-known JavaScript runtime environment [NodeJS](https://nodejs.org/en).
-As libraries we used the following:
+The backend is implemented with [NodeJS](https://nodejs.org/en), the well-known JavaScript runtime environment.
+Following libraries were used:
 
-- [Express.JS 4](https://expressjs.com) is needed to handle API request and create the adequate endpoint routes.
-- [Sequelize 6](https://sequelize.org/master) is needed to make the server a real MVC architecture,
+- [Express.JS 4](https://expressjs.com) to handle API request and create the adequate endpoint routes.
+- [Sequelize 6](https://sequelize.org/master) to make the server a real MVC architecture,
   implementing the business logic for the data. The ORM framework allows both to model JavaScript objects
   and automatically perform CRUD operations on top of the previously defined models.
-- [Pg 8](https://www.npmjs.com/package/pg") is needed to connect to the PostgreSQL database.
-    Since we aim to get a high number of requests per second it was fundamental for us to make some speedups,
+- [Pg 8](https://www.npmjs.com/package/pg") to connect to the PostgreSQL database.
+    Since we aim at handling a high number of requests per second it was fundamental for us to make some speedups,
     thus we leveraged the power of the "pool" connections offered by “pg”
     `;
 
 const technologiesFrontend = `
-### Front-End
+## Front-End
 
 The frontend implementation is based on [React](https://reactjs.org/), a popular framework created by Facebook.
 It allows writing so-called "components" that can be reused in different pages and even shared with different developers.
