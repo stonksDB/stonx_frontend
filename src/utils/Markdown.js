@@ -10,7 +10,8 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  makeStyles, createStyles
+  makeStyles,
+  createStyles, Link
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/core/styles";
 
@@ -27,6 +28,11 @@ const useStyles = makeStyles((theme) =>
     },
     listItem: {
       marginTop: theme.spacing(1),
+    },
+    link: {
+      color: theme.palette.primary.main,
+      fontWeight: "bold",
+      textDecoration: "underline",
     },
   })
 );
@@ -97,14 +103,23 @@ const MarkdownTableHead = (props) => {
   return <TableHead>{props.children}</TableHead>
 }
 
-
+const MarkdownLink = (props) => {
+  const classes = useStyles();
+  return <Link
+    className={classes.link}
+    target="_blank"
+    {...props}
+  >
+    {props.children}
+  </Link>
+}
 
 const Markdown = (props) => {
   const classes = useStyles();
   const renderers = {
     heading: MarkdownHeading,
     paragraph: MarkdownParagraph,
-    //link: Link,
+    link: MarkdownLink,
     listItem: MarkdownListItem,
     table: MarkdownTable,
     tableHead: MarkdownTableHead,
