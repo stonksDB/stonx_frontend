@@ -150,16 +150,38 @@ const About = (props) => {
         <Divider />
 
         <section>
-          <Grid container direction={"row"} alignItems="center">
+          <Grid container direction={"row"} alignItems="center" spacing={7}>
             <Grid item xs={12} sm={9}>
               <Markdown children={aboutSections.technologiesData} />
             </Grid>
             <Grid item xs={12} sm={3}>
-              <LogosCarousel />
+              <Grid container direction={"column"} alignItems="center" justify="center" spacing={10}>
+                <Grid item>
+                  <ImageWithFallback
+                    src="assets/technologies/Postgresql"
+                    alt="Postgres"
+                  />
+                </Grid>
+                <Grid item>
+                  <ImageWithFallback
+                    src="assets/technologies/yfinance"
+                    alt="Postgres"
+                  />
+                </Grid>
+                <Grid item>
+                  <ImageWithFallback
+                    src="assets/technologies/finnhub"
+                    alt="Finnhub"
+                  />
+                </Grid>
+              </Grid>
             </Grid>
 
             <Grid item xs={12} sm={3}>
-              <LogosCarousel />
+              <ImageWithFallback
+                src="assets/technologies/Node"
+                alt="Node Js"
+              />
             </Grid>
             <Grid item xs={12} sm={9}>
               <Markdown children={aboutSections.technologiesBackend} />
@@ -169,7 +191,10 @@ const About = (props) => {
               <Markdown children={aboutSections.technologiesFrontend} />
             </Grid>
             <Grid item xs={12} sm={3}>
-              <LogosCarousel />
+              <ImageWithFallback
+                src="assets/technologies/React"
+                alt="React"
+              />
             </Grid>
           </Grid>
         </section>
