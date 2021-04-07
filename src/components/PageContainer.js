@@ -5,7 +5,6 @@ import NavBar from "./navbar/NavBar";
 import NavBarMobile from "./navbar/NavBarMobile";
 import Header from "./header/Header";
 import HeaderMobile from "./header/HeaderMobile";
-import { useLocation } from "react-router";
 import routes from "../routes";
 
 const userData = {
@@ -14,9 +13,9 @@ const userData = {
   email: "mario@rossi.it",
   picture: "/broken-image.jpg",
 };
-const isLoggedIn = !true;
-const availableRoutes = routes()
-  .filter(({ name }) => (isLoggedIn ? ["Home", "My Stocks", "News" ] : ["Home",  "News"]).includes(name))
+const isLoggedIn = false;
+const navbarRoutes = routes()
+  .filter(({ name }) => (isLoggedIn ? ["Home", "My Stocks", "News", "About" ] : ["Home", "News", "About"]).includes(name))
   .reverse();
 const stocksData = [
   { name: "Stock 1" },
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme) =>
         marginLeft: drawerWidth,
       },
     },
-    appBarWithoutMenu: {
+    appBarWithoutNavbar: {
       [theme.breakpoints.up("sm")]: {
         width: "100%",
       },
@@ -61,51 +60,51 @@ const useStyles = makeStyles((theme) =>
 );
 
 const PageContainer = (props) => {
-  const location = useLocation();
-
-  const onLoginScreen =
-    ["/login", "/registration"].indexOf(location.pathname) === -1;
-
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Hidden smUp>
-        <HeaderMobile
-          className={classes.appBar}
-          userData={userData}
-          stocksData={stocksData}
-          isLoggedIn={isLoggedIn}
-        />
-        <NavBarMobile
-          className={classes.drawer}
-          isLoggedIn={isLoggedIn}
-          availableRoutes={availableRoutes}
-        />
+        {props.renderHeader ? (
+          <HeaderMobile
+            className={classes.appBar}
+            userData={userData}
+            stocksData={stocksData}
+            isLoggedIn={isLoggedIn}
+          />
+        ) : ("")}
+        {props.renderNavbar ? (
+          <NavBarMobile
+            className={classes.drawer}
+            isLoggedIn={isLoggedIn}
+            availableRoutes={navbarRoutes}
+          />
+        ) : ("")}
       </Hidden>
 
       <Hidden xsDown>
-        <Header
-          className={onLoginScreen ? classes.appBar : classes.appBarWithoutMenu}
-          userData={userData}
-          stocksData={stocksData}
-          loginScreen={onLoginScreen}
-          isLoggedIn={isLoggedIn}
-        />
-        {onLoginScreen ? (
+        {props.renderHeader ? (
+          <Header
+            className={props.renderNavbar ? classes.appBar : classes.appBarWithoutNavbar}
+            userData={userData}
+            stocksData={stocksData}
+            renderHeader={props.renderHeader}
+            isLoggedIn={isLoggedIn}
+          />
+        ) : ("")}
+        {props.renderNavbar ? (
           <NavBar
             className={classes.drawer}
             paper={classes.drawerPaper}
             toolbar={classes.toolbar}
             isLoggedIn={isLoggedIn}
-            availableRoutes={availableRoutes}
+            availableRoutes={navbarRoutes}
           />
-        ) : (
-          ""
-        )}
+        ) : ("")}
       </Hidden>
+
       <main className={classes.content}>
-        <div className={classes.toolbar} />
+        {props.renderHeader ? <div className={classes.toolbar} /> : ""}
         {props.page}
       </main>
     </div>

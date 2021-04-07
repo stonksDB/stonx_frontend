@@ -3,7 +3,7 @@ import AppBar from "@material-ui/core/AppBar";
 import React from "react";
 import { Grid, IconButton, InputBase } from "@material-ui/core";
 import UserAvatar from "../UserAvatar";
-import logo_webp from "../../assets/logo/logo.webp";
+import ImageWithFallback from "../../utils/ImageWithFallback";
 
 const SearchField = (props) => {
   return (
@@ -15,7 +15,7 @@ const SearchField = (props) => {
       style={{ background: "white", borderRadius: "20px" }}
     >
       <Grid item>
-        <img src={logo_webp} alt="logo" style={{width: 40}} />
+        <ImageWithFallback src="assets/logo/logo" alt="logo" width="40" />
       </Grid>
       <Grid item xs>
         <InputBase placeholder="Search..." fullWidth={true} />

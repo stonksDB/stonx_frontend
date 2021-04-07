@@ -1,9 +1,7 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Button, Grid, TextField, Typography, Link } from "@material-ui/core";
-import logo_webp from "../assets/logo_header/logo_header.webp";
 import { useHistory } from "react-router";
-import { BlockRounded } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

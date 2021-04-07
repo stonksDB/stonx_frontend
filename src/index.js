@@ -3,11 +3,9 @@ import ReactDOM from "react-dom";
 import { Switch, Route, HashRouter } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import "./index.css";
 import routes from "./routes";
 import lightTheme from "./theme";
 import PageContainer from "./components/PageContainer";
-import About from "./screens/About";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,12 +13,9 @@ ReactDOM.render(
       <CssBaseline />
       <HashRouter>
         <Switch>
-          <Route key="/about" path="/about">
-            <About />
-          </Route>
-          {routes().map(({ path, page }) => (
+          {routes().map(({ path, page, renderHeader, renderNavbar }) => (
             <Route key={path} path={path}>
-              <PageContainer page={page} />
+              <PageContainer page={page} renderHeader={renderHeader} renderNavbar={renderNavbar}/>
             </Route>
           ))}
         </Switch>

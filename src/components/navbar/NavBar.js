@@ -9,9 +9,9 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import React from "react";
-import logo_webp from "../../assets/logo_header/logo_header.webp";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Info } from "@material-ui/icons";
+import ImageWithFallback from "../../utils/ImageWithFallback";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -49,12 +49,6 @@ const NavbarList = (props) => {
           />
         </ListItem>
       ))}
-      <ListItem button key="/about" component={Link} to="/about">
-        <ListItemIcon children={<Info />} className={classes.inactive} />
-        <ListItemText
-          primary={<Typography className={classes.inactive}>About</Typography>}
-        />
-      </ListItem>
     </List>
   );
 };
@@ -73,7 +67,7 @@ const NavBar = (props) => {
         PaperProps={{ style: { background: "transparent", borderRight: "0" } }}
       >
         <Toolbar>
-          <img src={logo_webp} alt="logo" style={{ width: "100%" }} />
+          <ImageWithFallback src="assets/logo_header/logo_header" alt="logo" />
         </Toolbar>
         {drawer}
       </Drawer>

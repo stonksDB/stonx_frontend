@@ -17,12 +17,13 @@ import About from "./screens/About";
 
 export default function routes() {
   return [
-    {name: "Login", path: "/login", icon: <HomeIcon/>, page: <Login/>},
-    {name: "Registration", path: "/registration", icon: <HomeIcon/>, page: <Registration/>},
-    {name: "Single Stock", path: "/stock/:id", icon: <StockIcon/>, page: <SingleStock/>},
-    {name: "Single News", path: "/news/:id", icon: <NewsIcon/>, page: <SingleNews/>},
-    {name: "News", path: "/news", icon: <NewsIcon/>, page: <News/>},
-    {name: "My Stocks", path: "/mystock", icon: <MyStockIcon/>, page: <MyStocks/>},
-    {name: "Home", path: "/", icon: <HomeIcon/>, page: <Home/>},
+    {name: "About", path: "/about", icon: <AboutIcon/>, page: <About/>, renderHeader: false, renderNavbar: false},
+    {name: "Login", path: "/login", icon: <HomeIcon/>, page: <Login/>, renderHeader: "reduced", renderNavbar: false},
+    {name: "Registration", path: "/registration", icon: <HomeIcon/>, page: <Registration/>, renderHeader: "reduced", renderNavbar: true},
+    {name: "Single Stock", path: "/stock/:id", icon: <StockIcon/>, page: <SingleStock/>, renderHeader: true, renderNavbar: true},
+    {name: "Single News", path: "/news/:id", icon: <NewsIcon/>, page: <SingleNews/>, renderHeader: true, renderNavbar: true},
+    {name: "News", path: "/news", icon: <NewsIcon/>, page: <News/>, renderHeader: true, renderNavbar: true},
+    {name: "My Stocks", path: "/mystock", icon: <MyStockIcon/>, page: <MyStocks/>, renderHeader: true, renderNavbar: true},
+    {name: "Home", path: "/", icon: <HomeIcon/>, page: <Home/>, renderHeader: true, renderNavbar: true},
   ];
 }

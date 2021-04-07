@@ -7,6 +7,6 @@ export default function UserAvatar(props) {
   const avatarColor = generateColor(fullName);
 
   return (
-    <Avatar alt={fullName} src={props.userData.picture} style={{backgroundColor: avatarColor}}/>
+    <Avatar alt={fullName} src={props.userData.picture} style={{backgroundColor: avatarColor}} />
   )
 }

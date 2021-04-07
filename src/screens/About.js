@@ -9,38 +9,34 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import { Link, useHistory } from "react-router-dom";
-import logo_webp from "../assets/logo_header/logo_header.webp";
-import sebastian from "../assets/team/Sebastian.jpeg";
-import alessandro from "../assets/team/Alessandro.jpeg";
-import riccardo from "../assets/team/Riccardo.jpeg";
-import luca from "../assets/team/Luca.jpeg";
 
 import LogosCarousel from "../components/Carousel";
+import ImageWithFallback from "../utils/ImageWithFallback";
 
 const team = [
   {
     name: "Sebastian Cavada",
     role: "Back End Developer",
     quote: "I like stocks",
-    image: sebastian,
+    image: "assets/team/Sebastian",
   },
   {
     name: "Alessandro Gottardi",
     role: "Front End Developer",
     quote: "This is a very smart quote",
-    image: alessandro,
+    image: "assets/team/Alessandro",
   },
   {
     name: "Riccardo Rigoni",
     role: "Back End Developer",
     quote: "It fascinates me the stock market and I would like to make accessible to everyone",
-    image: riccardo,
+    image: "assets/team/Riccardo",
   },
   {
     name: "Luca Taddeo",
     role: "Front End Developer",
     quote: "This is a very smart quote",
-    image: luca,
+    image: "assets/team/Luca",
   },
 ];
 
@@ -109,12 +105,9 @@ const About = (props) => {
             xs={5}
             md={4}
             lg={3}
-            justify="center"
-            alignContent="center"
-            alignItems="center"
           >
             <Link to="/">
-              <img src={logo_webp} alt="logo" style={{ width: "100%" }} />
+              <ImageWithFallback src="assets/logo_header/logo_header" alt="logo" />
             </Link>
           </Grid>
         </Grid>
@@ -147,9 +140,9 @@ const About = (props) => {
           </Typography>
           <Grid container spacing={6} style={{marginTop: 1}}>
             {team.map((member) => (
-              <Grid item xs={6} md={3}>
+              <Grid item xs={6} md={3} key={member.name}>
                 <Paper elevation={0} className={classes.card}>
-                  <img
+                  <ImageWithFallback
                     src={member.image}
                     className={classes.memberImage}
                     alt={member.name}

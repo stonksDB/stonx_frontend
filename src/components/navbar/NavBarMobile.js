@@ -1,4 +1,3 @@
-import { useTheme } from "@material-ui/core/styles";
 import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -39,13 +38,6 @@ const NavBarMobile = (props) => {
           to={path}
         />
       ))}
-      <BottomNavigationAction
-        label="About"
-        icon={<Info />}
-        value="/about"
-        component={Link}
-        to="/about"
-      />
     </BottomNavigation>
   );
 };

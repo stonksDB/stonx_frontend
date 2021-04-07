@@ -115,7 +115,7 @@ const Header = (props) => {
           <Grid item xs={9}>
             <SearchField {...props} />
           </Grid>
-          {props.loginScreen && (
+          {props.renderHeader===true && (
             <Grid item xs={3}>
               {props.userData !== undefined && props.isLoggedIn ? (
                 <UserMenu {...props} />
