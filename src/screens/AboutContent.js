@@ -16,7 +16,7 @@ modern and clean design.
 StonX isn't just different: **StonX is better**.
 `;
 
-const technologiesSection = `
+const technologiesData = `
 # Technologies
 
 ### Data
@@ -49,7 +49,9 @@ To save memory space, still preserving performances, we decided to store databas
 full history of values is needed for a certain security, a request to Yahoo Finance API is done. Prior making this
 memory-saving design decision, some tests have been conducted to verify whether good user experience is still preserved
 even with such request forwarding, and it seemed to be the case.
+`;
 
+const technologiesBackend = `
 ### Back-End
 
 The backend is implemented with the well-known JavaScript runtime environment [NodeJS](https://nodejs.org/en).
@@ -62,7 +64,9 @@ As libraries we used the following:
 - [Pg 8](https://www.npmjs.com/package/pg") is needed to connect to the PostgreSQL database.
     Since we aim to get a high number of requests per second it was fundamental for us to make some speedups,
     thus we leveraged the power of the "pool" connections offered by “pg”
+    `;
 
+const technologiesFrontend = `
 ### Front-End
 
 The frontend implementation is based on [React](https://reactjs.org/), a popular framework created by Facebook.
@@ -94,7 +98,9 @@ used by most of the biggest companies now a days.
 
 const AboutSections = {};
 AboutSections.idea = ideaSection;
-AboutSections.technologies = technologiesSection;
+AboutSections.technologiesData = technologiesData;
+AboutSections.technologiesFrontend = technologiesFrontend;
+AboutSections.technologiesBackend = technologiesBackend;
 AboutSections.future = futureSection;
 
 export default AboutSections;

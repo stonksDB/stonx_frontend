@@ -31,7 +31,8 @@ const team = [
   {
     name: "Riccardo Rigoni",
     role: "Back End Developer",
-    quote: "It fascinates me the stock market and I would like to make accessible to everyone",
+    quote:
+      "It fascinates me the stock market and I would like to make accessible to everyone",
     image: "assets/team/Riccardo",
   },
   {
@@ -106,14 +107,12 @@ const About = (props) => {
     <Grid container justify="center">
       <Grid item xs={12} sm={10} lg={8} className={classes.container}>
         <Grid container justify="center">
-          <Grid
-            item
-            xs={5}
-            md={4}
-            lg={3}
-          >
+          <Grid item xs={5} md={4} lg={3}>
             <Link to="/">
-              <ImageWithFallback src="assets/logo_header/logo_header" alt="logo" />
+              <ImageWithFallback
+                src="assets/logo_header/logo_header"
+                alt="logo"
+              />
             </Link>
           </Grid>
         </Grid>
@@ -125,7 +124,7 @@ const About = (props) => {
           <Typography variant={"h5"} className={classes.title}>
             The Awesome Team
           </Typography>
-          <Grid container spacing={6} style={{marginTop: 1}}>
+          <Grid container spacing={6} style={{ marginTop: 1 }}>
             {team.map((member) => (
               <Grid item xs={6} md={3} key={member.name}>
                 <Paper elevation={0} className={classes.card}>
@@ -153,10 +152,24 @@ const About = (props) => {
         <section>
           <Grid container direction={"row"} alignItems="center">
             <Grid item xs={12} sm={9}>
-              <Markdown children={aboutSections.technologies} />
+              <Markdown children={aboutSections.technologiesData} />
             </Grid>
             <Grid item xs={12} sm={3}>
-              <LogosCarousel/>
+              <LogosCarousel />
+            </Grid>
+
+            <Grid item xs={12} sm={3}>
+              <LogosCarousel />
+            </Grid>
+            <Grid item xs={12} sm={9}>
+              <Markdown children={aboutSections.technologiesBackend} />
+            </Grid>
+
+            <Grid item xs={12} sm={9}>
+              <Markdown children={aboutSections.technologiesFrontend} />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <LogosCarousel />
             </Grid>
           </Grid>
         </section>
