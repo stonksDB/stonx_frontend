@@ -30,6 +30,7 @@ const NavBarMobile = (props) => {
     >
       {props.availableRoutes.map(({ name, icon, path }) => (
         <BottomNavigationAction
+          key={path}
           label={name}
           icon={icon}
           value={path}

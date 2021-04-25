@@ -19,7 +19,7 @@ export default function routes() {
   return [
     {name: "About", path: "/about", icon: <AboutIcon/>, page: <About/>, renderHeader: false, renderNavbar: false},
     {name: "Login", path: "/login", icon: <HomeIcon/>, page: <Login/>, renderHeader: "reduced", renderNavbar: false},
-    {name: "Registration", path: "/registration", icon: <HomeIcon/>, page: <Registration/>, renderHeader: "reduced", renderNavbar: true},
+    {name: "Registration", path: "/registration", icon: <HomeIcon/>, page: <Registration/>, renderHeader: "reduced", renderNavbar: false},
     {name: "Single Stock", path: "/stock/:id", icon: <StockIcon/>, page: <SingleStock/>, renderHeader: true, renderNavbar: true},
     {name: "Single News", path: "/news/:id", icon: <NewsIcon/>, page: <SingleNews/>, renderHeader: true, renderNavbar: true},
     {name: "News", path: "/news", icon: <NewsIcon/>, page: <News/>, renderHeader: true, renderNavbar: true},

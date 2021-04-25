@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import MarketChart from "../components/MarketChart";
+import NewsList from "../components/NewsList";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -61,7 +62,7 @@ const Home = (props) => {
         </Grid>
         <Grid item xs={12} sm={3}>
           <Paper elevation={0} className={classes.card}>
-            News for everyone
+            <NewsList/>
           </Paper>
         </Grid>
       </Grid>

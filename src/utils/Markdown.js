@@ -110,7 +110,6 @@ const MarkdownLink = (props) => {
 }
 
 const Markdown = (props) => {
-  const classes = useStyles();
   const renderers = {
     heading: MarkdownHeading,
     paragraph: MarkdownParagraph,
