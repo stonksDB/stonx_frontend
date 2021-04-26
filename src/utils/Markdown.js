@@ -110,21 +110,27 @@ const MarkdownLink = (props) => {
 }
 
 const Markdown = (props) => {
-  const renderers = {
-    heading: MarkdownHeading,
-    paragraph: MarkdownParagraph,
-    link: MarkdownLink,
-    listItem: MarkdownListItem,
+  const components = {
+    h1: MarkdownHeading,
+    h2: MarkdownHeading,
+    h3: MarkdownHeading,
+    h4: MarkdownHeading,
+    h5: MarkdownHeading,
+    h6: MarkdownHeading,
+    p: MarkdownParagraph,
+    a: MarkdownLink,
+    li: MarkdownListItem,
     table: MarkdownTable,
-    tableHead: MarkdownTableHead,
-    tableBody: MarkdownTableBody,
-    tableRow: MarkdownTableRow,
-    tableCell: MarkdownTableCell,
+    thead: MarkdownTableHead,
+    tbody: MarkdownTableBody,
+    tr: MarkdownTableRow,
+    td: MarkdownTableCell,
+    th: MarkdownTableCell,
   };
 
   return (
     <ReactMarkdown
-      renderers={renderers}
+      components={components}
       {...props}
     />
   );
