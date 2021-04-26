@@ -4,17 +4,15 @@ import AppBar from "@material-ui/core/AppBar";
 import React from "react";
 import {
   Grid,
-  TextField,
-  InputAdornment,
   Button,
 } from "@material-ui/core";
-import { Search } from "@material-ui/icons";
 import UserAvatar from "../UserAvatar";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
 import { getRoute, PAGES } from "../../routes";
+import TextAutocomplete from "../TextAutocomplete";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -46,18 +44,7 @@ const SearchField = (props) => {
           style={{ padding: 7 }}
         />
       </Grid> */}
-      <TextField
-        label="Search..."
-        variant="outlined"
-        className={classes.input}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="start">
-              <Search />
-            </InputAdornment>
-          ),
-        }}
-      />
+      <TextAutocomplete />
     </Grid>
   );
 };
