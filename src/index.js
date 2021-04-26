@@ -13,7 +13,7 @@ ReactDOM.render(
       <CssBaseline />
       <HashRouter>
         <Switch>
-          {routes().map(({ path, page, renderHeader, renderNavbar }) => (
+          {routes.map(({ path, page, renderHeader, renderNavbar }) => (
             <Route key={path} path={path}>
               <PageContainer page={page} renderHeader={renderHeader} renderNavbar={renderNavbar}/>
             </Route>

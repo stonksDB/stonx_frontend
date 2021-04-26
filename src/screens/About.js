@@ -12,6 +12,7 @@ import { Link, useHistory } from "react-router-dom";
 import ImageWithFallback from "../utils/ImageWithFallback";
 import Markdown from "../utils/Markdown";
 import AboutSections from "./AboutContent";
+import { getRoute, PAGES } from "../routes";
 
 const team = [
   {
@@ -94,11 +95,6 @@ const About = (props) => {
   const aboutSections = AboutSections;
   const classes = useStyles();
   const history = useHistory();
-
-  const goHome = () => {
-    let path = "/";
-    history.push(path);
-  };
 
   return (
     <Grid container justify="center">
@@ -207,7 +203,7 @@ const About = (props) => {
           variant="contained"
           color="primary"
           className={classes.button}
-          onClick={goHome}
+          onClick={() => history.push(getRoute(PAGES.HOME).path)}
         >
           To The Moon!
         </Button>

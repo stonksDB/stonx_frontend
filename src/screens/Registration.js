@@ -1,7 +1,9 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Button, Grid, TextField, Typography, Link } from "@material-ui/core";
+import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import { useHistory } from "react-router";
+import { getRoute, PAGES } from "../routes";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -19,14 +21,7 @@ const useStyles = makeStyles((theme) =>
 const Registration = (props) => {
   const history = useHistory();
   const classes = useStyles();
-  const goHome = () => {
-    let path = "/";
-    history.push(path);
-  };
-  const goLogin = () => {
-    let path = "/login";
-    history.push(path);
-  };
+
   return (
     <Grid
       container
@@ -42,7 +37,7 @@ const Registration = (props) => {
         </Typography>
       </Grid>
       <Grid item style={{ paddingBottom: 30 }}>
-        <Typography variant={"p"}>* field is mandatory!</Typography>
+        <Typography variant={"body2"}>* field is mandatory!</Typography>
       </Grid>
 
       <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
@@ -134,7 +129,7 @@ const Registration = (props) => {
       <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
         <Typography>
           Already have an account? Click here to{" "}
-          <Link href="" onClick={goLogin} className={classes.link}>
+          <Link to={getRoute(PAGES.LOGIN).path} className={classes.link}>
             login!
           </Link>
         </Typography>
@@ -149,7 +144,7 @@ const Registration = (props) => {
           variant="outlined"
           color="primary"
           className={classes.button}
-          onClick={goHome}
+          onClick={() => history.push(getRoute(PAGES.HOME).path)}
         >
           Cancel
         </Button>

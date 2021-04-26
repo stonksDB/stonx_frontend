@@ -5,7 +5,7 @@ import NavBar from "./navbar/NavBar";
 import NavBarMobile from "./navbar/NavBarMobile";
 import Header from "./header/Header";
 import HeaderMobile from "./header/HeaderMobile";
-import routes from "../routes";
+import routes, { PAGES } from "../routes";
 
 const userData = {
   firstName: "Mario",
@@ -14,8 +14,9 @@ const userData = {
   picture: "/broken-image.jpg",
 };
 const isLoggedIn = false;
-const navbarRoutes = routes()
-  .filter(({ name }) => (isLoggedIn ? ["Home", "My Stocks", "News", "About" ] : ["Home", "News", "About"]).includes(name))
+const navbarRoutes = routes
+  .filter(({ name }) =>
+    (isLoggedIn ? [PAGES.HOME, PAGES.MY_STOCKS, PAGES.NEWS, PAGES.ABOUT] : [PAGES.HOME, PAGES.NEWS, PAGES.ABOUT]).includes(name))
   .reverse();
 const stocksData = [
   { name: "Stock 1" },

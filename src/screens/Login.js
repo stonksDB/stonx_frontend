@@ -1,7 +1,9 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Button, Grid, TextField, Typography, Link } from "@material-ui/core";
+import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import { useHistory } from "react-router";
+import { getRoute, PAGES } from "../routes";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -22,14 +24,7 @@ const useStyles = makeStyles((theme) =>
 const Login = (props) => {
   const history = useHistory();
   const classes = useStyles();
-  const goHome = () => {
-    let path = "/";
-    history.push(path);
-  };
-  const goRegister = () => {
-    let path = "/registration";
-    history.push(path);
-  };
+
   return (
     <Grid
       container
@@ -66,7 +61,7 @@ const Login = (props) => {
       <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
         <Typography>
           Don't have an account? Click here to{" "}
-          <Link href="" onClick={goRegister} className={classes.link}>
+          <Link to={getRoute(PAGES.REGISTRATION).path} className={classes.link}>
             register!
           </Link>
         </Typography>
@@ -81,7 +76,7 @@ const Login = (props) => {
           variant="outlined"
           color="primary"
           className={classes.button}
-          onClick={goHome}
+          onClick={() => history.push(getRoute(PAGES.HOME).path)}
         >
           Cancel
         </Button>

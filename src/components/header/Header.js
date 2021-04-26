@@ -14,6 +14,7 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
+import { getRoute, PAGES } from "../../routes";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -100,14 +101,7 @@ const UserMenu = (props) => {
 const Header = (props) => {
   const history = useHistory();
   const classes = useStyles();
-  const goLogin = () => {
-    let path = "/login";
-    history.push(path);
-  };
-  const goRegister = () => {
-    let path = "/registration";
-    history.push(path);
-  };
+
   return (
     <AppBar color="transparent" elevation={0} className={props.className}>
       <Toolbar>
@@ -126,7 +120,7 @@ const Header = (props) => {
                       variant="contained"
                       color="primary"
                       className={classes.button}
-                      onClick={goLogin}
+                      onClick={() => history.push(getRoute(PAGES.LOGIN).path)}
                     >
                       Login
                     </Button>
@@ -136,7 +130,7 @@ const Header = (props) => {
                       variant="outlined"
                       color="primary"
                       className={classes.button}
-                      onClick={goRegister}
+                      onClick={() => history.push(getRoute(PAGES.REGISTRATION).path)}
                     >
                       Register
                     </Button>
