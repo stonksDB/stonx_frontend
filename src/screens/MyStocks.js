@@ -1,6 +1,9 @@
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Grid, Paper, Typography } from "@material-ui/core";
+import NewsList from "../components/NewsList";
+import FollowedTicker from "../components/FollowedTicker";
+import LikedStocksList from "../components/LikedStocksList";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -14,6 +17,8 @@ const useStyles = makeStyles((theme) =>
 const MyStocks = (props) => {
   const classes = useStyles();
 
+
+
   return (
     <>
       <Typography variant={"h4"} className={classes.pageTitle}>
@@ -25,7 +30,7 @@ const MyStocks = (props) => {
           <Grid container direction="row" spacing={3}>
             <Grid item xs={12}>
               <Paper elevation={0} className={classes.card}>
-                Here go the followed tickers
+                <LikedStocksList />
               </Paper>
             </Grid>
             <Grid item xs={12}>
@@ -47,7 +52,7 @@ const MyStocks = (props) => {
         </Grid>
         <Grid item xs={12} sm={3}>
           <Paper elevation={0} className={classes.card}>
-            Custom news
+            <NewsList />
           </Paper>
         </Grid>
       </Grid>

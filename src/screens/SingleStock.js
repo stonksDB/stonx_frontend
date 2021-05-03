@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Grid, Paper, Typography, IconButton, Chip } from "@material-ui/core";
+import {
+  Grid,
+  Paper,
+  Typography,
+  IconButton,
+  Chip,
+  Box,
+} from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MarketChart from "../components/MarketChart";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    pageTitle: {
-    },
+    pageTitle: {},
     card: theme.card,
     positive: {
       color: theme.palette.success.main,
@@ -24,7 +30,6 @@ const useStyles = makeStyles((theme) =>
       marginRight: 15,
       fontSize: 17,
       fontWeight: "normal",
-      marginBottom: 7,
     },
   })
 );
@@ -41,14 +46,17 @@ const SingleStock = (props) => {
         <Grid item xs={12} sm={9}>
           <Grid container direction="row" style={{ paddingBottom: 25 }}>
             <Grid item xs={12}>
-              <Typography variant={"h4"} className={classes.pageTitle}>
-                <Chip
-                  color="primary"
-                  label="TSLA.MI"
-                  className={classes.chip}
-                />
-                {/*TODO:find better way to align chip */}
-                Stock Title
+              <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between">
+                <Box display="flex" flexDirection="row" alignItems="center">
+                  <Chip
+                    color="primary"
+                    label="TSLA.MI"
+                    className={classes.chip}
+                  />
+                  <Typography variant={"h4"} className={classes.pageTitle}>
+                    Stock Title
+                  </Typography>
+                </Box>
                 <IconButton
                   aria-label="delete"
                   color="primary"
@@ -57,7 +65,7 @@ const SingleStock = (props) => {
                 >
                   {likedStock ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                 </IconButton>
-              </Typography>
+              </Box>
             </Grid>
             <Grid item xs={12}>
               <Typography variant={"h4"} style={{ display: "inline-block" }}>
@@ -73,7 +81,7 @@ const SingleStock = (props) => {
               {value > 0 ? (
                 <>
                   <Typography variant={"h6"} className={classes.positive}>
-                    + {Math.abs(value)} (0.5%){" "}
+                    + {Math.abs(value)} (0.5%)
                     {/*TODO: implement icon (alignment will be shitty)*/}
                   </Typography>
                 </>
@@ -95,7 +103,13 @@ const SingleStock = (props) => {
           <Grid container direction="row" spacing={3}>
             <Grid item xs={12}>
               <Paper elevation={0} className={classes.card}>
-                <MarketChart height="40vh" points="first" enableGridX enableGridY enableLegend={false} />
+                <MarketChart
+                  height="40vh"
+                  points="first"
+                  enableGridX
+                  enableGridY
+                  enableLegend={false}
+                />
               </Paper>
             </Grid>
             <Grid item xs={12}>

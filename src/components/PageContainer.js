@@ -13,7 +13,7 @@ const userData = {
   email: "mario@rossi.it",
   picture: "/broken-image.jpg",
 };
-const isLoggedIn = false;
+const isLoggedIn = true;
 const navbarRoutes = routes
   .filter(({ name }) =>
     (isLoggedIn ? [PAGES.HOME, PAGES.MY_STOCKS, PAGES.NEWS, PAGES.ABOUT] : [PAGES.HOME, PAGES.NEWS, PAGES.ABOUT]).includes(name))
