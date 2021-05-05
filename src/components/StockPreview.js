@@ -19,18 +19,20 @@ const StockPreview = (props) => {
 
   return (
     <Grid container direction="row" alignItems="center" justify="center">
-      <Grid item xs={5} container direction="column" alignItems="flex-end" justify="center">
-        <Grid item>
-          <Typography variant="button">{props.stockData.name}</Typography>
-        </Grid>
-        <Grid item>
-          <Typography variant="h6" className={props.stockData.value < 0 ? classes.redStyle : classes.greenStyle}>{props.stockData.percent}</Typography>
-        </Grid>
-        <Grid item>
-          <Typography variant="body1" className={props.stockData.value < 0 ? classes.redStyle : classes.greenStyle}>
-            {props.stockData.value}
-            {props.stockData.value < 0 ? " ▼" : " ▲"}
-          </Typography>
+      <Grid item xs={5}>
+        <Grid container direction="column" alignItems="flex-end" justify="center">
+          <Grid item>
+            <Typography variant="button">{props.stockData.name}</Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h6" className={props.stockData.value < 0 ? classes.redStyle : classes.greenStyle}>{props.stockData.percent}</Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="body1" className={props.stockData.value < 0 ? classes.redStyle : classes.greenStyle}>
+              {props.stockData.value}
+              {props.stockData.value < 0 ? " ▼" : " ▲"}
+            </Typography>
+          </Grid>
         </Grid>
       </Grid>
       <Grid item xs={7}>

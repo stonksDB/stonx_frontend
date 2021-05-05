@@ -23,28 +23,12 @@ const useStyles = makeStyles((theme) =>
 );
 
 const SearchField = (props) => {
-  const classes = useStyles();
   return (
     <Grid
       container
       direction="row"
       alignItems="center"
-      // style={{
-      //   background: "white",
-      //   borderRadius: "15px",
-      //   flex: 1,
-      // }}
     >
-      {/* <Grid item style={{ paddingLeft: 10, paddingTop: 3 }}>
-        <Search />
-      </Grid>
-      <Grid item xs>
-        <InputBase
-          placeholder="Search..."
-          fullWidth={true}
-          style={{ padding: 7 }}
-        />
-      </Grid> */}
       <TextAutocomplete />
     </Grid>
   );
@@ -84,7 +68,7 @@ const UserBanner = (props) => {
               <Grid item>
                 <UserAvatar userData={props.userData} />
               </Grid>
-              <Grid item direction="column">
+              <Grid item>
                 <Typography align="left" variant={"h6"}>
                   {fullName}
                 </Typography>

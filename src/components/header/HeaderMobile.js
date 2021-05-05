@@ -1,10 +1,11 @@
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 import React from "react";
-import { Grid, IconButton, InputBase } from "@material-ui/core";
+import { Grid, IconButton } from "@material-ui/core";
 import UserAvatar from "../user/UserAvatar";
 import ImageWithFallback from "../../utils/ImageWithFallback";
 import UserMenu from "../user/UserMenu";
+import TextAutocomplete from "../TextAutocomplete";
 
 const SearchField = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -30,7 +31,7 @@ const SearchField = (props) => {
         <ImageWithFallback src="assets/logo/logo" alt="logo" width="40" />
       </Grid>
       <Grid item xs>
-        <InputBase placeholder="Search..." fullWidth={true} />
+        <TextAutocomplete />
       </Grid>
       <Grid item>
         <IconButton

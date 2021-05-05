@@ -31,7 +31,7 @@ const UserMenu = (props) => {
       }}
     >
       <Paper style={{width: 400}} className={classes.card}>         {/*TODO: Adapt to parent*/}
-        <Grid container direction="column" spacing="2">
+        <Grid container direction="column" spacing={2}>
           <Grid item>
             <ListItem button>
               <ListItemIcon> <Brightness4/> </ListItemIcon>
