@@ -1,8 +1,8 @@
-import generateColor from "../utils/ColorGenerator";
+import generateColor from "../../utils/ColorGenerator";
 import {Avatar} from "@material-ui/core";
 import React from "react";
 
-export default function UserAvatar(props) {
+const UserAvatar = (props) => {
   const fullName = `${props.userData.firstName} ${props.userData.lastName}`;
   const avatarColor = generateColor(fullName);
 
@@ -10,3 +10,5 @@ export default function UserAvatar(props) {
     <Avatar alt={fullName} src={props.userData.picture} style={{backgroundColor: avatarColor}} />
   )
 }
+
+export default UserAvatar;

@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme) =>
       color: theme.palette.primary.main,
       fontWeight: "bold",
     },
+    inactive: {
+    },
   })
 );
 

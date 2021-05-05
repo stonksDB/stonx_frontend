@@ -6,13 +6,14 @@ import {
   Grid,
   Button,
 } from "@material-ui/core";
-import UserAvatar from "../UserAvatar";
+import UserAvatar from "../user/UserAvatar";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router";
 import { getRoute, PAGES } from "../../routes";
 import TextAutocomplete from "../TextAutocomplete";
+import UserMenu from "../user/UserMenu";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -49,39 +50,58 @@ const SearchField = (props) => {
   );
 };
 
-const UserMenu = (props) => {
+const UserBanner = (props) => {
   const fullName = `${props.userData.firstName} ${props.userData.lastName}`;
 
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   return (
-    <ButtonBase style={{ width: "100%" }}>
-      <Grid
-        container
-        direction="row"
-        alignItems="center"
-        justify="space-between"
-        style={{ paddingLeft: 5 }}
+    <section style={{width: "100%"}}>
+      <ButtonBase
+        style={{ width: "100%" }}
+        onClick={handleMenuClick}
+        aria-controls={open ? 'menu-list-grow' : undefined}
+        aria-haspopup="true"
       >
-        <Grid item>
-          <Grid container spacing={2} alignItems="center">
-            <Grid item>
-              <UserAvatar userData={props.userData} />
-            </Grid>
-            <Grid item direction="column">
-              <Typography align="left" variant={"h6"}>
-                {fullName}
-              </Typography>
-              <Typography
-                align="left"
-                variant={"body2"}
-              >{`Watching ${props.stocksData.length} stocks`}</Typography>
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justify="space-between"
+          style={{ paddingLeft: 5 }}
+        >
+          <Grid item>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item>
+                <UserAvatar userData={props.userData} />
+              </Grid>
+              <Grid item direction="column">
+                <Typography align="left" variant={"h6"}>
+                  {fullName}
+                </Typography>
+                <Typography
+                  align="left"
+                  variant={"body2"}
+                >{`Watching ${props.stocksData.length} stocks`}</Typography>
+              </Grid>
             </Grid>
           </Grid>
+          <Grid item>
+            <KeyboardArrowDownIcon />
+          </Grid>
         </Grid>
-        <Grid item>
-          <KeyboardArrowDownIcon />
-        </Grid>
-      </Grid>
-    </ButtonBase>
+      </ButtonBase>
+      <UserMenu id={id} open={open} anchorEl={anchorEl} handleClose={handleClose} />
+    </section>
   );
 };
 
@@ -99,7 +119,7 @@ const Header = (props) => {
           {props.renderHeader===true && (
             <Grid item xs={3}>
               {props.userData !== undefined && props.isLoggedIn ? (
-                <UserMenu {...props} />
+                <UserBanner {...props} />
               ) : (
                 <Grid container spacing={2}>
                   <Grid item md={8}>

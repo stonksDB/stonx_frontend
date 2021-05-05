@@ -2,10 +2,22 @@ import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 import React from "react";
 import { Grid, IconButton, InputBase } from "@material-ui/core";
-import UserAvatar from "../UserAvatar";
+import UserAvatar from "../user/UserAvatar";
 import ImageWithFallback from "../../utils/ImageWithFallback";
+import UserMenu from "../user/UserMenu";
 
 const SearchField = (props) => {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
   return (
     <Grid
       container
@@ -21,9 +33,15 @@ const SearchField = (props) => {
         <InputBase placeholder="Search..." fullWidth={true} />
       </Grid>
       <Grid item>
-        <IconButton style={{ padding: 2 }}>
+        <IconButton
+          style={{ padding: 2 }}
+          onClick={handleMenuClick}
+          aria-controls={open ? 'menu-list-grow' : undefined}
+          aria-haspopup="true"
+        >
           <UserAvatar userData={props.userData} />
         </IconButton>
+        <UserMenu id={id} open={open} anchorEl={anchorEl} handleClose={handleClose} />
       </Grid>
     </Grid>
   );
