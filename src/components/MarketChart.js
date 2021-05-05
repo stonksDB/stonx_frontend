@@ -23,29 +23,28 @@ const MarketChart = (props) => {
   const dataPoints = props.usePointsOf==="both" ? data.points : props.usePointsOf==="first" ? [data.points[0]] : [data.points[1]];
 
   return (
-    <section style={ {height: props.height} }>
-      <Typography variant="h6" style={ {position: "absolute"} }>{ props.title }</Typography>
+    <section style={{height: props.height}}>
+      <Typography variant="h6" style={{position: "absolute"}}>{ props.title }</Typography>
       <ResponsiveLine
         data={ dataPoints }
-        margin={ {top: 35, right: 20, bottom: 30, left: 30} }
+        margin={{top: 35, right: 20, bottom: 30, left: 30} }
         theme={ theme }
-        colors={ (data) => {
+        colors={(data) => {
           return data.color!=null ? data.color :
             props.colorSchema==null ? theme.palette.primary.main : props.colorSchema;
-          }
-        }
+        }}
         curve="cardinal"
 
-        xScale={ {type: "point", min: "auto", max: "auto"} }
-        yScale={ {type: "linear", min: "auto", max: "auto"} }  //TODO: sometimes points go outside boundaries
+        xScale={{type: "point", min: "auto", max: "auto"}}
+        yScale={{type: "linear", min: "auto", max: "auto"}}  //TODO: sometimes points go outside boundaries
 
-        axisBottom={ {
+        axisBottom={ props.enableAxisX ? {
           orient: "bottom", tickSize: 7, tickPadding: 5, legend: props.xTitle, legendOffset: 30,
           legendPosition: "middle"
-        } }
-        axisLeft={ {
+        } : null }
+        axisLeft={ props.enableAxisY ? {
           orient: "left", tickSize: 0, tickPadding: 10, legend: props.yTitle, legendOffset: 30, legendPosition: "middle"
-        } }
+        } : null }
 
         legends={ props.enableLegend ? [
           {
@@ -61,15 +60,15 @@ const MarketChart = (props) => {
 
         enableArea={ props.enableArea }
         areaBlendMode="multiply"
-        defs={ [
+        defs={[
           linearGradientDef("gradient", [
             {offset: 0, color: "inherit"}, {offset: 100, color: "inherit", opacity: 0}
           ]),
-        ] }
-        fill={ [{match: "*", id: "gradient"}] }
+        ]}
+        fill={[{match: "*", id: "gradient"}]}
 
         enablePoints={ props.enablePoints }
-        pointBorderWidth={ 2 }
+        pointBorderWidth={2}
         pointSize={5}
         pointBorderColor={{ from: 'serieColor', modifiers: [] }}
         pointColor="#ffffff"
@@ -93,6 +92,8 @@ MarketChart.defaultProps = {
   enableLegend: true,
   xTitle: "",
   yTitle: "",
+  enableAxisX: true,
+  enableAxisY: true,
   enableGridX: false,
   enableGridY: true
 };

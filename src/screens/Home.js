@@ -3,6 +3,20 @@ import { Grid, Paper, Typography } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import MarketChart from "../components/MarketChart";
 import NewsList from "../components/NewsList";
+import StockPreview from "../components/StockPreview";
+
+const stockData1 = {
+  name: "Dow Jones",
+  percent: "-0.82%",
+  value: "-2.68",
+  usePointsOf: "first",
+};
+const stockData2 = {
+  name: "NASDAQ",
+  percent: "0.35%",
+  value: "1.10",
+  usePointsOf: "second",
+};
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -27,7 +41,13 @@ const Home = (props) => {
           <Grid container direction="row" spacing={3}>
             <Grid item xs={12}>
               <Paper elevation={0} className={classes.card}>
-                Here go the small charts
+                <Grid container direction="row" spacing="1" justify="space-between">
+                  <Grid item xs><StockPreview stockData={stockData1}/></Grid>
+                  <Grid item xs><StockPreview stockData={stockData1}/></Grid>
+                  <Grid item xs><StockPreview stockData={stockData1}/></Grid>
+                  <Grid item xs><StockPreview stockData={stockData2}/></Grid>
+                  <Grid item xs><StockPreview stockData={stockData2}/></Grid>
+                </Grid>
               </Paper>
             </Grid>
             <Grid item xs={12}>
