@@ -1,6 +1,8 @@
 import React from "react";
 import { Avatar, Button, Grid, Typography } from "@material-ui/core";
 import generateColor from "../utils/ColorGenerator";
+import { getRoute, PAGES } from "../routes";
+import { useHistory } from "react-router-dom";
 
 const NewsHeader = (props) => {
   const avatarColor = generateColor(props.news.content);
@@ -29,6 +31,8 @@ const NewsHeader = (props) => {
 };
 
 const NewsList = (props) => {   //TODO: Fetch from server + Adjust number based on height
+  const history = useHistory();
+
   let news = [
     {title: "News 1", site: "Site 1", image: "", content: "1 News content"},
     {title: "News 2", site: "Site 2", image: "", content: "2 News content"},
@@ -48,7 +52,7 @@ const NewsList = (props) => {   //TODO: Fetch from server + Adjust number based 
       ))}
       <Grid item style={{flexGrow: 1, padding: 0}}/>
       <Grid item style={{alignSelf: "center"}}>
-        <Button role={"link"} href="/#news" color="primary">See more</Button>
+        <Button role={"link"} onClick={() => history.push(getRoute(PAGES.NEWS).path)} color="primary">See more</Button>
       </Grid>
     </Grid>
   );
