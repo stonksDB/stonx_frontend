@@ -19,9 +19,13 @@ const useStyles = makeStyles((theme) =>
       fontWeight: "normal",
     },
     chip: {
-      marginRight: 15,
+      marginRight: theme.spacing(2),
       fontSize: 12,
       fontWeight: "normal",
+    },
+    outerContainer: {
+      paddingRight: theme.spacing(4),
+      paddingLeft: theme.spacing(4),
     },
   })
 );
@@ -37,6 +41,7 @@ const FollowedTicker = (props) => {
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
+      className={classes.outerContainer}
     >
       <Box display="flex" flexDirection="row" alignItems="center">
         <Chip
@@ -51,15 +56,13 @@ const FollowedTicker = (props) => {
       {ticker.percentage > 0 ? (
         <>
           <Typography variant={"h6"} className={classes.positive}>
-            + {Math.abs(ticker.percentage)}%
-            {/*TODO: implement icon (alignment will be shitty)*/}
+            ▲{Math.abs(ticker.percentage)}
           </Typography>
         </>
       ) : (
         <>
           <Typography variant={"h6"} className={classes.negative}>
-            - {Math.abs(ticker.percentage)}%
-            {/*TODO: implement icon (alignment will be shitty)*/}
+            ▼{Math.abs(ticker.percentage)}
           </Typography>
         </>
       )}

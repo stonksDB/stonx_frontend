@@ -7,7 +7,7 @@ const LikedStocksList = (props) => {
   const ticker = {
     name: "Tesla Inc.",
     short: "TSLA.MI",
-    percentage: +12.2,
+    percentage: -12.2,
     id: 1,
   };
 
@@ -18,13 +18,18 @@ const LikedStocksList = (props) => {
   }
 
   return (
-    <Grid container spacing={0} direction="row">
+    <Grid
+      container
+      spacing={0}
+      alignItems="center"
+      justify="center"
+      direction="row"
+    >
       {ticks.map((t) => (
-        <Grid item xs={4} style={{ paddingLeft: 40, paddingRight: 40 }}>
+        <Grid item sm={12} md={6} lg={4}>
           <FollowedTicker ticker={t} />
         </Grid>
       ))}
-      {/*TODO: find way to align grid with only vertical spacing: spacing is a shitty strategy */}
     </Grid>
   );
 };
