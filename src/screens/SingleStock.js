@@ -11,11 +11,16 @@ import {
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MarketChart from "../components/MarketChart";
-
+import StockSummary from "../components/StockSummary";
 const useStyles = makeStyles((theme) =>
   createStyles({
     pageTitle: {},
     card: theme.card,
+    paddedCard: {
+      ...theme.card,
+      paddingRight: theme.spacing(3),
+      paddingLeft: theme.spacing(3),
+    },
     positive: {
       color: theme.palette.success.main,
       display: "inline-flex",
@@ -35,10 +40,32 @@ const useStyles = makeStyles((theme) =>
 );
 
 const SingleStock = (props) => {
-  const [likedStock, likeStock] = useState(false);
-  const [value, setValue] = useState(100);
+  const stock = {
+    id: "TSLA.MI",
+    name: "Tesla, Inc.",
+    currentCost: 629.7,
+    percentage: 0.75, // TODO: check if this is absolute value or if it is positive/negative
+    variation: +25.7,
+    liked: true,
+    market: {
+      name: "NASDAQ" ,
+      lastUpdate: "gg/mm/yyyy",
+    },
+    summary: {
+      sector: "Consumer Cyclicals",
+      industry: "Electric (Alternative) Vehicles",
+      marketCap: "$606.89B",
+      netDebtPref: "$6.27B",
+      entValue: "$600.62B",
+      beta: "1.99x",
+      borrowCost: "0.25%",
+    }
+  }
 
+  const [likedStock, likeStock] = useState(stock.liked);
   const classes = useStyles();
+
+
 
   return (
     <>
@@ -46,15 +73,20 @@ const SingleStock = (props) => {
         <Grid item xs={12} sm={9}>
           <Grid container direction="row" style={{ paddingBottom: 25 }}>
             <Grid item xs={12}>
-              <Box display="flex" flexDirection="row" alignItems="center" justifyContent="space-between">
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="space-between"
+              >
                 <Box display="flex" flexDirection="row" alignItems="center">
                   <Chip
                     color="primary"
-                    label="TSLA.MI"
+                    label={stock.id}
                     className={classes.chip}
                   />
                   <Typography variant={"h4"} className={classes.pageTitle}>
-                    Stock Title
+                    {stock.name}
                   </Typography>
                 </Box>
                 <IconButton
@@ -69,7 +101,7 @@ const SingleStock = (props) => {
             </Grid>
             <Grid item xs={12}>
               <Typography variant={"h4"} style={{ display: "inline-block" }}>
-                800
+                {stock.currentCost}
               </Typography>
               <Typography
                 variant={"h6"}
@@ -78,24 +110,22 @@ const SingleStock = (props) => {
                 &nbsp;USD
               </Typography>
 
-              {value > 0 ? (
+              {stock.variation > 0 ? (
                 <>
                   <Typography variant={"h6"} className={classes.positive}>
-                    + {Math.abs(value)} (0.5%)
-                    {/*TODO: implement icon (alignment will be shitty)*/}
+                    ▲{Math.abs(stock.variation)} ({stock.percentage}%)
                   </Typography>
                 </>
               ) : (
                 <>
                   <Typography variant={"h6"} className={classes.negative}>
-                    - {Math.abs(value)} (0.5%)
-                    {/*TODO: implement icon (alignment will be shitty)*/}
+                    ▼{Math.abs(stock.variation)} ({stock.percentage}%)
                   </Typography>
                 </>
               )}
 
               <Typography variant={"body2"} style={{ display: "block" }}>
-                &nbsp; NASDAQ, gg/mm/yyyy
+                {stock.market.name}, {stock.market.lastUpdate}
               </Typography>
             </Grid>
           </Grid>
@@ -113,15 +143,8 @@ const SingleStock = (props) => {
               </Paper>
             </Grid>
             <Grid item xs={12}>
-              <Paper elevation={0} className={classes.card}>
-                <Grid container>
-                  <Grid item xs={6}>
-                    Here go data (col 1)
-                  </Grid>
-                  <Grid item xs={6}>
-                    Here go data (col 2)
-                  </Grid>
-                </Grid>
+              <Paper elevation={0} className={classes.paddedCard}>
+                <StockSummary data={stock.summary} />
               </Paper>
             </Grid>
           </Grid>
