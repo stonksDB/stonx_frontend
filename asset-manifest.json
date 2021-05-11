@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/stonx_frontend/static/js/main.c040eac7.chunk.js",
-    "main.js.map": "/stonx_frontend/static/js/main.c040eac7.chunk.js.map",
+    "main.js": "/stonx_frontend/static/js/main.c6892001.chunk.js",
+    "main.js.map": "/stonx_frontend/static/js/main.c6892001.chunk.js.map",
     "runtime-main.js": "/stonx_frontend/static/js/runtime-main.1ea6bd92.js",
     "runtime-main.js.map": "/stonx_frontend/static/js/runtime-main.1ea6bd92.js.map",
-    "static/js/2.c3688dae.chunk.js": "/stonx_frontend/static/js/2.c3688dae.chunk.js",
-    "static/js/2.c3688dae.chunk.js.map": "/stonx_frontend/static/js/2.c3688dae.chunk.js.map",
+    "static/js/2.76e4e91c.chunk.js": "/stonx_frontend/static/js/2.76e4e91c.chunk.js",
+    "static/js/2.76e4e91c.chunk.js.map": "/stonx_frontend/static/js/2.76e4e91c.chunk.js.map",
     "index.html": "/stonx_frontend/index.html",
-    "static/js/2.c3688dae.chunk.js.LICENSE.txt": "/stonx_frontend/static/js/2.c3688dae.chunk.js.LICENSE.txt"
+    "static/js/2.76e4e91c.chunk.js.LICENSE.txt": "/stonx_frontend/static/js/2.76e4e91c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1ea6bd92.js",
-    "static/js/2.c3688dae.chunk.js",
-    "static/js/main.c040eac7.chunk.js"
+    "static/js/2.76e4e91c.chunk.js",
+    "static/js/main.c6892001.chunk.js"
   ]
 }
