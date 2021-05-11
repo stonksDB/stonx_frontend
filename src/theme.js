@@ -1,4 +1,8 @@
-import { createMuiTheme, responsiveFontSizes  } from "@material-ui/core/styles";
+import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
+import { lato, latoThin, latoLight } from "./fonts.js";
+
+// TODO: check how to implement different font weights
+// FIXME: currently font weights are implemented but not working
 
 const lightTheme = createMuiTheme({
   palette: {
@@ -21,6 +25,21 @@ const lightTheme = createMuiTheme({
     },
     error: {
       main: "#EB5757",
+    },
+  },
+
+  typography: {
+    fontFamily: "'Lato', sans-serif",
+    fontWeightLight: 100,
+    fontWeightRegular: 400,
+    fontWeightMedium: 700,
+  },
+
+  overrides: {
+    MuiCssBaseline: {
+      "@global": {
+        "@font-face": [lato, latoLight, latoThin],
+      },
     },
   },
 
@@ -57,8 +76,8 @@ const lightTheme = createMuiTheme({
   //Graph styles
   grid: {
     line: {
-      strokeDasharray: "6 6"
-    }
+      strokeDasharray: "6 6",
+    },
   },
   crosshair: {
     line: {

@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     data: {
       textAlign: "right",
+      fontWeight: "lighter"
     },
     label: {
       fontWeight: "normal",
