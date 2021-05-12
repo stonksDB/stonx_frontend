@@ -54,7 +54,6 @@ const HeaderMobile = (props) => {
       position="fixed"
       color="transparent"
       elevation={0}
-      className={props.className}
     >
       <Toolbar>
         <SearchField

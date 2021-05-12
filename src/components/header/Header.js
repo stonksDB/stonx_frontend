@@ -3,8 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import React from "react";
 import {
-  Grid,
-  Button,
+  Grid, Button, Box,
 } from "@material-ui/core";
 import UserAvatar from "../user/UserAvatar";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
@@ -28,6 +27,7 @@ const SearchField = (props) => {
       container
       direction="row"
       alignItems="center"
+      xs
     >
       <TextAutocomplete />
     </Grid>
@@ -49,9 +49,9 @@ const UserBanner = (props) => {
   };
 
   return (
-    <section style={{width: "100%"}}>
+    <section>
       <ButtonBase
-        style={{ width: "100%" }}
+        style={{width: "100%"}}
         onClick={handleMenuClick}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
@@ -60,26 +60,26 @@ const UserBanner = (props) => {
           container
           direction="row"
           alignItems="center"
-          justify="space-between"
-          style={{ paddingLeft: 5 }}
+          justify="center"
+          spacing={3}
         >
-          <Grid item>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item>
-                <UserAvatar userData={props.userData} />
-              </Grid>
-              <Grid item>
-                <Typography align="left" variant={"h6"}>
-                  {fullName}
-                </Typography>
-                <Typography
-                  align="left"
-                  variant={"body2"}
-                >{`Watching ${props.stocksData.length} stocks`}</Typography>
-              </Grid>
-            </Grid>
+          <Grid item lg={2} xs={3}>
+            <UserAvatar userData={props.userData} />
           </Grid>
-          <Grid item>
+          <Grid item lg={8} xs={7}>
+              <Typography align="left" variant={"h6"}>
+                {fullName}
+              </Typography>
+            <Box display={{ xs: 'none', lg: 'block'}}>
+              <Typography
+                align="left"
+                variant={"body2"}
+              >{`Watching ${props.stocksData.length} stocks`}</Typography>
+            </Box>
+          </Grid>
+          <Grid item style={{flexGrow: 1, padding: 0}} lg xs={0}>
+          </Grid>
+          <Grid item lg={1} xs={1}>
             <KeyboardArrowDownIcon />
           </Grid>
         </Grid>
@@ -94,7 +94,7 @@ const Header = (props) => {
   const classes = useStyles();
 
   return (
-    <AppBar color="transparent" elevation={0} className={props.className}>
+    <AppBar elevation={0} color="inherit" className={props.className}>
       <Toolbar>
         <Grid container spacing={2} alignItems="center" justify="center">
           <Grid item xs={9}>

@@ -19,9 +19,9 @@ const StockPreview = (props) => {
 
   return (
     <Grid container direction="row" alignItems="center" justify="center">
-      <Grid item xs={5}>
-        <Grid container direction="column" alignItems="flex-end" justify="center">
-          <Grid item>
+      <Grid item lg={5} xs>
+        <Grid container direction="column" alignItems="center" justify="center">
+          <Grid item style={{textAlign: "center"}}>
             <Typography variant="button">{props.stockData.name}</Typography>
           </Grid>
           <Grid item>
@@ -35,8 +35,8 @@ const StockPreview = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={7}>
-        <Box display={{ xs: 'none', md: 'block' }}>
+      <Grid item lg={7}>
+        <Box display={{ xs: 'none', lg: 'block'}}>
           <MarketChart usePointsOf={props.stockData.usePointsOf} height="11vh" enablePoints={false} enableGridY={false} enableLegend={false} enableAxisX={false} enableAxisY={false} enableArea/>
         </Box>
       </Grid>

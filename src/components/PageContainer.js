@@ -1,5 +1,5 @@
 import React from "react";
-import { Hidden } from "@material-ui/core";
+import { Container, Hidden } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import NavBar from "./navbar/NavBar";
 import NavBarMobile from "./navbar/NavBarMobile";
@@ -42,11 +42,13 @@ const useStyles = makeStyles((theme) =>
       [theme.breakpoints.up("sm")]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
+        backgroundColor: theme.palette.background.default,
       },
     },
     appBarWithoutNavbar: {
       [theme.breakpoints.up("sm")]: {
         width: "100%",
+        backgroundColor: theme.palette.background.default,
       },
     },
     toolbar: theme.mixins.toolbar,
@@ -65,10 +67,9 @@ const PageContainer = (props) => {
 
   return (
     <div className={classes.root}>
-      <Hidden smUp>
+      <Hidden mdUp>
         {props.renderHeader ? (
           <HeaderMobile
-            className={classes.appBar}
             userData={userData}
             stocksData={stocksData}
             isLoggedIn={isLoggedIn}
@@ -83,7 +84,7 @@ const PageContainer = (props) => {
         ) : ("")}
       </Hidden>
 
-      <Hidden xsDown>
+      <Hidden smDown>
         {props.renderHeader ? (
           <Header
             className={props.renderNavbar ? classes.appBar : classes.appBarWithoutNavbar}
@@ -104,10 +105,10 @@ const PageContainer = (props) => {
         ) : ("")}
       </Hidden>
 
-      <main className={classes.content}>
+      <Container className={classes.content}>
         {props.renderHeader ? <div className={classes.toolbar} /> : ""}
         {props.page}
-      </main>
+      </Container>
     </div>
   );
 };
