@@ -25,12 +25,12 @@ const SearchField = (props) => {
       direction="row"
       spacing={2}
       alignItems={"center"}
-      style={{ background: "white", borderRadius: "20px" }}
+      style={{ background: "white", borderRadius: "20px"}}
     >
       <Grid item>
         <ImageWithFallback src="assets/logo/logo" alt="logo" width="40" />
       </Grid>
-      <Grid item xs>
+      <Grid item xs style={{padding: "4px"}}>
         <TextAutocomplete />
       </Grid>
       <Grid item>

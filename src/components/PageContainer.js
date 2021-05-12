@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Hidden } from "@material-ui/core";
+import { Hidden } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import NavBar from "./navbar/NavBar";
 import NavBarMobile from "./navbar/NavBarMobile";
@@ -105,10 +105,10 @@ const PageContainer = (props) => {
         ) : ("")}
       </Hidden>
 
-      <Container className={classes.content}>
+      <main className={classes.content}>
         {props.renderHeader ? <div className={classes.toolbar} /> : ""}
         {props.page}
-      </Container>
+      </main>
     </div>
   );
 };
