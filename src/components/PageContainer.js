@@ -54,8 +54,8 @@ const useStyles = makeStyles((theme) =>
       width: drawerWidth,
     },
     content: {
-      display: "flex",
-      height: "100vh",
+      //display: "flex",
+      //height: "100vh",
       padding: theme.spacing(3),
     },
   })
