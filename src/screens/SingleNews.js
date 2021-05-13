@@ -63,7 +63,7 @@ const SingleNews = (props) => {
           </Typography>
         </Paper>
       </Grid>
-      <Grid item style={{flex: 1}}/> {//TODO: Make this work (need to set parent height)}
+      <Grid item style={{flex: 1}}/> {/*TODO: Make this work (need to set parent height)*/}
       <Grid item>
         <Typography variant="h6">Related News</Typography>
       </Grid>
