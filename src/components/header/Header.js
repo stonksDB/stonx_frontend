@@ -3,7 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import React from "react";
 import {
-  Grid, Button, Box,
+  Grid, Button, Box, useTheme,
 } from "@material-ui/core";
 import UserAvatar from "../user/UserAvatar";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
@@ -27,7 +27,6 @@ const SearchField = (props) => {
       container
       direction="row"
       alignItems="center"
-      xs
     >
       <TextAutocomplete />
     </Grid>
@@ -77,7 +76,7 @@ const UserBanner = (props) => {
               >{`Watching ${props.stocksData.length} stocks`}</Typography>
             </Box>
           </Grid>
-          <Grid item style={{flexGrow: 1, padding: 0}} lg xs={0}>
+          <Grid item style={{flexGrow: 1, padding: 0}} lg xs={false}>
           </Grid>
           <Grid item lg={1} xs={1}>
             <KeyboardArrowDownIcon />
@@ -92,9 +91,10 @@ const UserBanner = (props) => {
 const Header = (props) => {
   const history = useHistory();
   const classes = useStyles();
+  const theme = useTheme();
 
   return (
-    <AppBar elevation={0} color="inherit" className={props.className}>
+    <AppBar elevation={0} className={props.className} style={{backgroundColor: theme.palette.background.default}}>
       <Toolbar>
         <Grid container spacing={2} alignItems="center" justify="center">
           <Grid item xs={9}>

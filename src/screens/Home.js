@@ -41,7 +41,7 @@ const Home = (props) => {
           <Grid container direction="row" spacing={3}>
             <Grid item xs={12}>
               <Paper elevation={0} className={classes.card}>
-                <Grid container direction="row" spacing="1" justify="space-between">
+                <Grid container direction="row" spacing={1} justify="space-between">
                   <Grid item xs><StockPreview stockData={stockData1}/></Grid>
                   <Grid item xs><StockPreview stockData={stockData1}/></Grid>
                   <Grid item xs><StockPreview stockData={stockData1}/></Grid>

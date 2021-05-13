@@ -53,7 +53,7 @@ const Registration = (props) => {
   const clickCheckBox = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
     interests.map((interest) => {
-      if (interest.id == event.target.name) {
+      if (interest.id === event.target.name) {
         interest.checked = event.target.checked;
       }
     });

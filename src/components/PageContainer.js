@@ -42,13 +42,11 @@ const useStyles = makeStyles((theme) =>
       [theme.breakpoints.up("sm")]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
-        backgroundColor: theme.palette.background.default,
       },
     },
     appBarWithoutNavbar: {
       [theme.breakpoints.up("sm")]: {
         width: "100%",
-        backgroundColor: theme.palette.background.default,
       },
     },
     toolbar: theme.mixins.toolbar,
@@ -108,6 +106,9 @@ const PageContainer = (props) => {
       <main className={classes.content}>
         {props.renderHeader ? <div className={classes.toolbar} /> : ""}
         {props.page}
+        <Hidden mdUp>
+          {props.renderHeader ? <div className={classes.toolbar} /> : ""}
+        </Hidden>
       </main>
     </div>
   );

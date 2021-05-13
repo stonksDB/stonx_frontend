@@ -1,7 +1,7 @@
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 import React from "react";
-import { Grid, IconButton } from "@material-ui/core";
+import { Grid, IconButton, useTheme } from "@material-ui/core";
 import UserAvatar from "../user/UserAvatar";
 import ImageWithFallback from "../../utils/ImageWithFallback";
 import UserMenu from "../user/UserMenu";
@@ -49,11 +49,13 @@ const SearchField = (props) => {
 }
 
 const HeaderMobile = (props) => {
+  const theme = useTheme();
+
   return (
     <AppBar
       position="fixed"
-      color="transparent"
       elevation={0}
+      style={{backgroundColor: theme.palette.background.default}}
     >
       <Toolbar>
         <SearchField
