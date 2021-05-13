@@ -1,8 +1,9 @@
-import { Box, Chip, Typography, IconButton } from "@material-ui/core";
+import { Box, Typography, IconButton } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import React, { useState } from "react";
+import TickerChip from "./TickerChip";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -16,11 +17,6 @@ const useStyles = makeStyles((theme) =>
     negative: {
       color: theme.palette.error.main,
       display: "inline-block",
-      fontWeight: "normal",
-    },
-    chip: {
-      marginRight: theme.spacing(2),
-      fontSize: 12,
       fontWeight: "normal",
     },
     outerContainer: {
@@ -43,15 +39,7 @@ const FollowedTicker = (props) => {
       justifyContent="space-between"
       className={classes.outerContainer}
     >
-      <Box display="flex" flexDirection="row" alignItems="center">
-        <Chip
-          size="small"
-          color="primary"
-          label={ticker.short}
-          className={classes.chip}
-        />
-        <Typography>{ticker.name}</Typography>
-      </Box>
+      <TickerChip ticker={ticker}/>
 
       {ticker.percentage > 0 ? (
         <>

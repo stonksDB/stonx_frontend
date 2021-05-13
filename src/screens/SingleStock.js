@@ -5,13 +5,13 @@ import {
   Paper,
   Typography,
   IconButton,
-  Chip,
   Box,
 } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MarketChart from "../components/MarketChart";
 import StockSummary from "../components/StockSummary";
+import TickerChip from "../components/TickerChip";
 const useStyles = makeStyles((theme) =>
   createStyles({
     pageTitle: {},
@@ -31,17 +31,12 @@ const useStyles = makeStyles((theme) =>
       display: "inline-block",
       fontWeight: "normal",
     },
-    chip: {
-      marginRight: 15,
-      fontSize: 17,
-      fontWeight: "normal",
-    },
   })
 );
 
 const SingleStock = (props) => {
   const stock = {
-    id: "TSLA.MI",
+    short: "TSLA.MI",
     name: "Tesla, Inc.",
     currentCost: 629.7,
     percentage: 0.75, // TODO: check if this is absolute value or if it is positive/negative
@@ -79,16 +74,7 @@ const SingleStock = (props) => {
                 alignItems="center"
                 justifyContent="space-between"
               >
-                <Box display="flex" flexDirection="row" alignItems="center">
-                  <Chip
-                    color="primary"
-                    label={stock.id}
-                    className={classes.chip}
-                  />
-                  <Typography variant={"h4"} className={classes.pageTitle}>
-                    {stock.name}
-                  </Typography>
-                </Box>
+                <TickerChip ticker={stock} big/>
                 <IconButton
                   aria-label="delete"
                   color="primary"
