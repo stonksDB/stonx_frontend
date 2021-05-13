@@ -4,6 +4,7 @@ import { Grid, Paper, Typography, Box } from "@material-ui/core";
 import NewsList from "../components/NewsList";
 import LikedStocksList from "../components/LikedStocksList";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
+import ChartsCarousel from "../components/ChartsCarousel";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -47,7 +48,7 @@ const MyStocks = (props) => {
             </Grid>
             <Grid item xs={12}>
               <Paper elevation={0} className={classes.card}>
-                Here goes the stocks' carousel
+                <ChartsCarousel />
               </Paper>
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
