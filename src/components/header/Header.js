@@ -66,20 +66,21 @@ const UserBanner = (props) => {
             <UserAvatar userData={props.userData} />
           </Grid>
           <Grid item lg={8} xs={7}>
-              <Typography align="left" variant={"h6"}>
+              <Typography align="left" variant="h6" color="textPrimary">
                 {fullName}
               </Typography>
             <Box display={{ xs: 'none', lg: 'block'}}>
               <Typography
                 align="left"
-                variant={"body2"}
+                variant="body2"
+                color="textPrimary"
               >{`Watching ${props.stocksData.length} stocks`}</Typography>
             </Box>
           </Grid>
           <Grid item style={{flexGrow: 1, padding: 0}} lg xs={false}>
           </Grid>
           <Grid item lg={1} xs={1}>
-            <KeyboardArrowDownIcon />
+            <KeyboardArrowDownIcon color="action" />
           </Grid>
         </Grid>
       </ButtonBase>
