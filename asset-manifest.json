@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/stonx_frontend/static/js/main.89db319d.chunk.js",
-    "main.js.map": "/stonx_frontend/static/js/main.89db319d.chunk.js.map",
+    "main.js": "/stonx_frontend/static/js/main.ca53247d.chunk.js",
+    "main.js.map": "/stonx_frontend/static/js/main.ca53247d.chunk.js.map",
     "runtime-main.js": "/stonx_frontend/static/js/runtime-main.7dc5a6e2.js",
     "runtime-main.js.map": "/stonx_frontend/static/js/runtime-main.7dc5a6e2.js.map",
     "static/css/2.6b560088.chunk.css": "/stonx_frontend/static/css/2.6b560088.chunk.css",
-    "static/js/2.564001ec.chunk.js": "/stonx_frontend/static/js/2.564001ec.chunk.js",
-    "static/js/2.564001ec.chunk.js.map": "/stonx_frontend/static/js/2.564001ec.chunk.js.map",
+    "static/js/2.018e4bce.chunk.js": "/stonx_frontend/static/js/2.018e4bce.chunk.js",
+    "static/js/2.018e4bce.chunk.js.map": "/stonx_frontend/static/js/2.018e4bce.chunk.js.map",
     "index.html": "/stonx_frontend/index.html",
     "static/css/2.6b560088.chunk.css.map": "/stonx_frontend/static/css/2.6b560088.chunk.css.map",
-    "static/js/2.564001ec.chunk.js.LICENSE.txt": "/stonx_frontend/static/js/2.564001ec.chunk.js.LICENSE.txt",
+    "static/js/2.018e4bce.chunk.js.LICENSE.txt": "/stonx_frontend/static/js/2.018e4bce.chunk.js.LICENSE.txt",
     "static/media/Lato-Light.bfc37ff1.ttf": "/stonx_frontend/static/media/Lato-Light.bfc37ff1.ttf",
     "static/media/Lato-Regular.9919edff.ttf": "/stonx_frontend/static/media/Lato-Regular.9919edff.ttf",
     "static/media/Lato-Thin.01923cbb.ttf": "/stonx_frontend/static/media/Lato-Thin.01923cbb.ttf"
@@ -17,7 +17,7 @@
   "entrypoints": [
     "static/js/runtime-main.7dc5a6e2.js",
     "static/css/2.6b560088.chunk.css",
-    "static/js/2.564001ec.chunk.js",
-    "static/js/main.89db319d.chunk.js"
+    "static/js/2.018e4bce.chunk.js",
+    "static/js/main.ca53247d.chunk.js"
   ]
 }
