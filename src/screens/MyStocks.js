@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) =>
     },
     data: {
       textAlign: "right",
+      fontWeight: "normal",
     },
     label: {
       fontWeight: "normal",
@@ -48,12 +49,12 @@ const MyStocks = (props) => {
             </Grid>
             <Grid item xs={12}>
               <Paper elevation={0} className={classes.card}>
-                <ChartsCarousel />
+                <ChartsCarousel stocks={[1,2,3]}/>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
               <Paper elevation={0} className={classes.card}>
-                <Grid container alignContent="space-between" spacing={3}>
+                <Grid container alignContent="space-between" spacing={2}>
                   <Grid item xs={6}>
                     <Typography variant="h6" className={classes.label}>
                       Name

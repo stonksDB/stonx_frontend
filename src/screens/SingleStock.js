@@ -12,6 +12,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MarketChart from "../components/MarketChart";
 import StockSummary from "../components/StockSummary";
 import TickerChip from "../components/TickerChip";
+import NewsList from "../components/NewsList";
 const useStyles = makeStyles((theme) =>
   createStyles({
     pageTitle: {},
@@ -137,7 +138,7 @@ const SingleStock = (props) => {
         </Grid>
         <Grid item xs={12} sm={3}>
           <Paper elevation={0} className={classes.card}>
-            Related news
+            <NewsList />
           </Paper>
         </Grid>
       </Grid>

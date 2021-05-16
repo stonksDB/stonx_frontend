@@ -1,29 +1,56 @@
+import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 import React from "react";
-import { Carousel } from "react-responsive-carousel";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+
+import Carousel from "react-material-ui-carousel";
+import MarketChart from "./MarketChart";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Box, Grid } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    
+  })
+);
 
 const ChartsCarousel = (props) => {
+  const classes = useStyles();
+  
+  const mappedStocks = props.stocks.reduce(function (rows, key, index) {
+    return (
+      (index % 2 === 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) &&
+      rows
+    );
+  }, []);
+
+  // TODO: find a way to make ChartsCarousel responsive
+
   return (
     <Carousel
-      showArrows
-      infiniteLoop
       autoPlay
-      interval={4000}
-      showIndicators={false}
-      showThumbs={false}
-      showStatus={false}
-      centerMode
-      centerSlidePercentage={80}
+      animation="slide"
+      swipe={false}
+      NextIcon={<ChevronRight />}
+      PrevIcon={<ChevronLeft />}
     >
-      <div style={{ backgroundColor: "red" }}>
-        <p>Chart 1</p>
-      </div>
-      <div style={{ backgroundColor: "green" }}>
-        <p>Chart 2</p>
-      </div>
-      <div style={{ backgroundColor: "blue" }}>
-        <p>Chart 3</p>
-      </div>
+      {mappedStocks.map((stocksCouple) => (
+        <Grid container>
+          {stocksCouple.map((stock) => (
+            <Grid item sm={6}>
+              <Box>
+                <MarketChart
+                  height="40vh"
+                  points="first"
+                  usePointsOf="first"
+                  enableGridX
+                  enableGridY
+                  enableLegend={false}
+                />
+              </Box>
+            </Grid>
+          ))}
+        </Grid>
+      ))}
     </Carousel>
   );
 };
