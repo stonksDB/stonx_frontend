@@ -43,17 +43,17 @@ const MyStocks = (props) => {
         <Grid item xs={12} sm={9}>
           <Grid container direction="row" spacing={3}>
             <Grid item xs={12}>
-              <Paper elevation={0} className={classes.card}>
+              <Paper elevation={1} className={classes.card}>
                 <LikedStocksList />
               </Paper>
             </Grid>
             <Grid item xs={12}>
-              <Paper elevation={0} className={classes.card}>
+              <Paper elevation={1} className={classes.card}>
                 <ChartsCarousel stocks={[1,2,3]}/>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
-              <Paper elevation={0} className={classes.card}>
+              <Paper elevation={1} className={classes.card}>
                 <Grid container alignContent="space-between" spacing={2}>
                   <Grid item xs={6}>
                     <Typography variant="h6" className={classes.label}>
@@ -89,7 +89,7 @@ const MyStocks = (props) => {
               </Paper>
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
-              <Paper elevation={0} className={classes.card}>
+              <Paper elevation={1} className={classes.card}>
                 <Box
                   display="flex"
                   flexDirection="column"
@@ -109,7 +109,7 @@ const MyStocks = (props) => {
           </Grid>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Paper elevation={0} className={classes.card}>
+          <Paper elevation={1} className={classes.card}>
             <NewsList />
           </Paper>
         </Grid>

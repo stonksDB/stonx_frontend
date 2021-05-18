@@ -119,7 +119,7 @@ const SingleStock = (props) => {
 
           <Grid container direction="row" spacing={3}>
             <Grid item xs={12}>
-              <Paper elevation={0} className={classes.card}>
+              <Paper elevation={1} className={classes.card}>
                 <MarketChart
                   height="40vh"
                   points="first"
@@ -130,14 +130,14 @@ const SingleStock = (props) => {
               </Paper>
             </Grid>
             <Grid item xs={12}>
-              <Paper elevation={0} className={classes.paddedCard}>
+              <Paper elevation={1} className={classes.paddedCard}>
                 <StockSummary data={stock.summary} />
               </Paper>
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Paper elevation={0} className={classes.card}>
+          <Paper elevation={1} className={classes.card}>
             <NewsList />
           </Paper>
         </Grid>

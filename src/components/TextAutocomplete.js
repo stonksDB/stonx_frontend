@@ -1,18 +1,31 @@
-import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import TextField from "@material-ui/core/TextField";
+import Autocomplete from "@material-ui/lab/Autocomplete";
+import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import API, { ENDPOINTS } from "../utils/API";
-import { InputAdornment } from "@material-ui/core";
+import { InputAdornment, Paper } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    input: theme.input,
-    button: { ...theme.button, marginLeft: 5, },
+    input: theme.search,
+    card: {...theme.card, padding: 0, marginTop: theme.spacing(0.5)},
+    button: { ...theme.button, marginLeft: 5 },
   })
 );
+
+const AutoCompletePaper = (props) => {
+  const classes = useStyles();
+  return (
+    <Paper
+      elevation={3}
+      style={{ borderTopLeftRadius: 5, borderTopRightRadius: 5 }}
+      {...props}
+      className={classes.card}
+    />
+  );
+};
 
 const TextAutocomplete = (props) => {
   const classes = useStyles();
@@ -28,20 +41,21 @@ const TextAutocomplete = (props) => {
       return undefined;
     }
 
-    API({method: "GET", url: ENDPOINTS.SEARCH, params: {key: inputValue} })
-      .then((results) => {
-        if (active) {
-          let newOptions = [];
+    API({
+      method: "GET",
+      url: ENDPOINTS.SEARCH,
+      params: { key: inputValue },
+    }).then((results) => {
+      if (active) {
+        let newOptions = [];
 
-          if (value)
-            newOptions = [value];
+        if (value) newOptions = [value];
 
-          if (results.data)
-            newOptions = [...newOptions, ...results.data];
+        if (results.data) newOptions = [...newOptions, ...results.data];
 
-          setOptions(newOptions);
-        }
-      });
+        setOptions(newOptions);
+      }
+    });
 
     return () => {
       active = false;
@@ -61,6 +75,7 @@ const TextAutocomplete = (props) => {
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
+      PaperComponent={AutoCompletePaper}
       renderInput={(params) => (
         <TextField
           label="Search..."
@@ -68,6 +83,7 @@ const TextAutocomplete = (props) => {
           fullWidth
           type={"search"}
           className={classes.input}
+          style={{borderBottomLeftRadius: 5, borderBottomRightRadius: 5}}
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
@@ -87,5 +103,5 @@ const TextAutocomplete = (props) => {
       }}
     />
   );
-}
+};
 export default TextAutocomplete;

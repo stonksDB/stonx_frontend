@@ -40,7 +40,7 @@ const Home = (props) => {
         <Grid item xs={12} sm={9}>
           <Grid container direction="row" spacing={3}>
             <Grid item xs={12}>
-              <Paper elevation={0} className={classes.card}>
+              <Paper elevation={1} className={classes.card}>
                 <Grid container direction="row" spacing={1} justify="space-between">
                   <Grid item xs><StockPreview stockData={stockData1}/></Grid>
                   <Grid item xs><StockPreview stockData={stockData1}/></Grid>
@@ -51,7 +51,7 @@ const Home = (props) => {
               </Paper>
             </Grid>
             <Grid item xs={12}>
-              <Paper elevation={0} className={classes.card}>
+              <Paper elevation={1} className={classes.card}>
                 <MarketChart
                   title="Most Performing"
                   height="38vh"
@@ -61,7 +61,7 @@ const Home = (props) => {
               </Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper elevation={0} className={classes.card}>
+              <Paper elevation={1} className={classes.card}>
                 <MarketChart
                   title="Sector"
                   usePointsOf="first"
@@ -70,7 +70,7 @@ const Home = (props) => {
               </Paper>
             </Grid>
             <Grid item xs={6}>
-              <Paper elevation={0} className={classes.card}>
+              <Paper elevation={1} className={classes.card}>
                 <MarketChart
                   title="My Stocks"
                   usePointsOf="second"
@@ -81,7 +81,7 @@ const Home = (props) => {
           </Grid>
         </Grid>
         <Grid item xs={12} sm={3}>
-          <Paper elevation={0} className={classes.card}>
+          <Paper elevation={1} className={classes.card}>
             <NewsList/>
           </Paper>
         </Grid>

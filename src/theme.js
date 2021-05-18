@@ -66,6 +66,16 @@ const lightTheme = createMuiTheme({
     width: "100%",
   },
 
+  search: {
+    [`& fieldset`]: {
+      borderRadius: "15px 15px 5px 5px",
+      borderColor: "white",
+    },
+    borderRadius: "15px 15px 5px 5px",
+    backgroundColor: "white",
+    width: "100%",
+  },
+
   button: {
     width: "100%",
     display: "block",
