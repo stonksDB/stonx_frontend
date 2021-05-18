@@ -1,13 +1,10 @@
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import AppBar from "@material-ui/core/AppBar";
 import React from "react";
 import {
-  Grid, Button, Box, useTheme,
+  AppBar, ButtonBase, Grid, Button, Box, useTheme,
+  Toolbar, Typography,
 } from "@material-ui/core";
 import UserAvatar from "../user/UserAvatar";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { getRoute, PAGES } from "../../routes";
 import TextAutocomplete from "../TextAutocomplete";

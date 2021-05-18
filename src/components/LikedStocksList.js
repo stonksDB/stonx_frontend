@@ -1,7 +1,6 @@
 import React from "react";
 import FollowedTicker from "../components/FollowedTicker";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Grid, Paper, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 const LikedStocksList = (props) => {
   const ticker = {

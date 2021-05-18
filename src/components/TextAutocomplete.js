@@ -1,10 +1,8 @@
 import React from "react";
-import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import API, { ENDPOINTS } from "../utils/API";
-import { InputAdornment, Paper } from "@material-ui/core";
+import { TextField, Typography, InputAdornment, Paper } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) =>

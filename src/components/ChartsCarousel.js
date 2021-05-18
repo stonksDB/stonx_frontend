@@ -1,7 +1,6 @@
 import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-
 import Carousel from "react-material-ui-carousel";
 import MarketChart from "./MarketChart";
 import { Box, Grid } from "@material-ui/core";

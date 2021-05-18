@@ -1,12 +1,12 @@
-import Toolbar from "@material-ui/core/Toolbar";
-import AppBar from "@material-ui/core/AppBar";
 import React from "react";
-import { Grid, IconButton } from "@material-ui/core";
+import { Toolbar, AppBar, Grid, IconButton } from "@material-ui/core";
 import UserAvatar from "../user/UserAvatar";
 import ImageWithFallback from "../../utils/ImageWithFallback";
 import UserMenu from "../user/UserMenu";
 import TextAutocomplete from "../TextAutocomplete";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { getRoute, PAGES } from "../../routes";
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -49,7 +49,9 @@ const HeaderMobile = (props) => {
           className={classes.bar}
           >
         <Grid item>
-          <ImageWithFallback src="assets/logo/logo" alt="logo" width="40" />
+          <RouterLink to={getRoute(PAGES.HOME).path}>
+            <ImageWithFallback src="assets/logo/logo" alt="logo" width="40" />
+          </RouterLink>
         </Grid>
         <Grid item xs style={{padding: 4}}>
           <TextAutocomplete />

@@ -1,4 +1,5 @@
 import {
+  Drawer,
   List,
   ListItem,
   ListItemIcon,
@@ -7,10 +8,10 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Link as RouterLink, useLocation } from "react-router-dom";
-import Drawer from "@material-ui/core/Drawer";
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import ImageWithFallback from "../../utils/ImageWithFallback";
+import { getRoute, PAGES } from "../../routes";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -68,7 +69,9 @@ const NavBar = (props) => {
         PaperProps={{ style: { background: "transparent", borderRight: "0" } }}
       >
         <Toolbar>
-          <ImageWithFallback src="assets/logo_header/logo_header" alt="logo" />
+          <RouterLink to={getRoute(PAGES.HOME).path}>
+            <ImageWithFallback src="assets/logo_header/logo_header" alt="logo"/>
+          </RouterLink>
         </Toolbar>
         {drawer}
       </Drawer>
