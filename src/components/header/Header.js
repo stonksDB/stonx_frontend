@@ -9,14 +9,13 @@ import UserAvatar from "../user/UserAvatar";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router";
 import { getRoute, PAGES } from "../../routes";
 import TextAutocomplete from "../TextAutocomplete";
 import UserMenu from "../user/UserMenu";
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    input: theme.input,
     button: { ...theme.button, marginLeft: 5, },
   })
 );
@@ -90,7 +89,6 @@ const UserBanner = (props) => {
 };
 
 const Header = (props) => {
-  const history = useHistory();
   const classes = useStyles();
   const theme = useTheme();
 
@@ -112,7 +110,8 @@ const Header = (props) => {
                       variant="contained"
                       color="primary"
                       className={classes.button}
-                      onClick={() => history.push(getRoute(PAGES.LOGIN).path)}
+                      component={RouterLink}
+                      to={getRoute(PAGES.LOGIN).path}
                     >
                       Login
                     </Button>
@@ -122,7 +121,8 @@ const Header = (props) => {
                       variant="outlined"
                       color="primary"
                       className={classes.button}
-                      onClick={() => history.push(getRoute(PAGES.REGISTRATION).path)}
+                      component={RouterLink}
+                      to={getRoute(PAGES.REGISTRATION).path}
                     >
                       Register
                     </Button>

@@ -13,6 +13,7 @@ import MarketChart from "../components/MarketChart";
 import StockSummary from "../components/StockSummary";
 import TickerChip from "../components/TickerChip";
 import NewsList from "../components/NewsList";
+
 const useStyles = makeStyles((theme) =>
   createStyles({
     pageTitle: {},

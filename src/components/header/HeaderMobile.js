@@ -1,13 +1,28 @@
 import Toolbar from "@material-ui/core/Toolbar";
 import AppBar from "@material-ui/core/AppBar";
 import React from "react";
-import { Grid, IconButton, useTheme } from "@material-ui/core";
+import { Grid, IconButton } from "@material-ui/core";
 import UserAvatar from "../user/UserAvatar";
 import ImageWithFallback from "../../utils/ImageWithFallback";
 import UserMenu from "../user/UserMenu";
 import TextAutocomplete from "../TextAutocomplete";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 
-const SearchField = (props) => {
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    header: {
+      background: theme.palette.background.default,
+    },
+    bar: {
+      background: "white",
+      borderRadius: "20px",
+    },
+  })
+);
+
+const HeaderMobile = (props) => {
+  const classes = useStyles();
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -20,47 +35,37 @@ const SearchField = (props) => {
   };
 
   return (
-    <Grid
-      container
-      direction="row"
-      spacing={2}
-      alignItems={"center"}
-      style={{ background: "white", borderRadius: "20px"}}
-    >
-      <Grid item>
-        <ImageWithFallback src="assets/logo/logo" alt="logo" width="40" />
-      </Grid>
-      <Grid item xs style={{padding: "4px"}}>
-        <TextAutocomplete />
-      </Grid>
-      <Grid item>
-        <IconButton
-          style={{ padding: 2 }}
-          onClick={handleMenuClick}
-          aria-controls={open ? 'menu-list-grow' : undefined}
-          aria-haspopup="true"
-        >
-          <UserAvatar userData={props.userData} />
-        </IconButton>
-        <UserMenu id={id} open={open} anchorEl={anchorEl} handleClose={handleClose} />
-      </Grid>
-    </Grid>
-  );
-}
-
-const HeaderMobile = (props) => {
-  const theme = useTheme();
-
-  return (
     <AppBar
       position="fixed"
       elevation={0}
-      style={{backgroundColor: theme.palette.background.default}}
+      className={classes.header}
     >
       <Toolbar>
-        <SearchField
-          handleDrawerToggle={props.handleDrawerToggle}
-          userData={props.userData}
+        <Grid
+          container
+          direction="row"
+          spacing={2}
+          alignItems={"center"}
+          className={classes.bar}
+          >
+        <Grid item>
+          <ImageWithFallback src="assets/logo/logo" alt="logo" width="40" />
+        </Grid>
+        <Grid item xs style={{padding: 4}}>
+          <TextAutocomplete />
+        </Grid>
+        <Grid item>
+          <IconButton
+            style={{ padding: 2 }}
+            onClick={handleMenuClick}
+            aria-controls={open ? 'menu-list-grow' : undefined}
+            aria-haspopup="true"
+          >
+            <UserAvatar userData={props.userData} />
+          </IconButton>
+          <UserMenu id={id} open={open} anchorEl={anchorEl} handleClose={handleClose} />
+        </Grid>
+      </Grid>
         />
       </Toolbar>
     </AppBar>

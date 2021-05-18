@@ -1,7 +1,7 @@
 import React from "react";
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Link, useLocation } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -35,7 +35,7 @@ const NavBarMobile = (props) => {
           label={name}
           icon={icon}
           value={path}
-          component={Link}
+          component={RouterLink}
           to={path}
         />
       ))}

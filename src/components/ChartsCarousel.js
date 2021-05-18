@@ -4,7 +4,6 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 import Carousel from "react-material-ui-carousel";
 import MarketChart from "./MarketChart";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Box, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) =>

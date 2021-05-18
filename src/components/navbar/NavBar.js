@@ -6,7 +6,7 @@ import {
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import { Link, useLocation } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import Drawer from "@material-ui/core/Drawer";
 import React from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
@@ -30,7 +30,7 @@ const NavbarList = (props) => {
   return (
     <List className={props.className}>
       {props.availableRoutes.map(({ name, icon, path }) => (
-        <ListItem button key={name} component={Link} to={path}>
+        <ListItem button key={name} component={RouterLink} to={path}>
           <ListItemIcon
             children={icon}
             className={

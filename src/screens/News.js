@@ -3,14 +3,15 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Grid, Link, Paper, Typography } from "@material-ui/core";
 import TickerChip from "../components/TickerChip";
 import { Link as RouterLink } from 'react-router-dom';
+import { PAGES } from "../routes";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     pageTitle: {
       paddingBottom: theme.spacing(3),
     },
-    card: theme.card,
-    cardHover: {
+    card: {
+      ...theme.card,
       '&:hover': {
         boxShadow: `0px 1px 0px 0px ${ theme.palette.primary.main }, 0px 1px 0px 0px ${ theme.palette.primary.main }, 
         0px 0px 3px 0px ${ theme.palette.primary.main }`,
@@ -80,11 +81,11 @@ const NewsCard = (props) => {
   const textColor = (props.news.read) ? "textSecondary" : "textPrimary";
 
   return (
-    <Paper elevation={1} className={classes.card} style={{paddingTop: 10}} classes={{elevation1: classes.cardHover}}>
+    <Paper elevation={1} className={classes.card} style={{paddingTop: 10}}>
       <Grid container direction="column" justify="center" alignItems="flex-start">
         <Grid container direction="row" justify="space-between" alignItems="center">
           <Grid item>
-            <Link component={RouterLink} to={`news/${props.news.id}`} variant="h5" color={textColor} className={classes.linkHover}>{props.news.title}</Link>
+            <Link component={RouterLink} to={`${PAGES.NEWS}/${props.news.id}`} variant="h5" color={textColor} className={classes.linkHover}>{props.news.title}</Link>
           </Grid>
           <Grid item>
             <Grid container direction="column" justify="center" alignItems="flex-end">

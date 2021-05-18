@@ -6,10 +6,10 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) =>
   createStyles({
     greenStyle: {
-      color: "#03af03",
+      color: theme.palette.success.main,
     },
     redStyle: {
-      color: "#bf0101",
+      color: theme.palette.error.main,
     }
   })
 );

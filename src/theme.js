@@ -81,6 +81,7 @@ const lightTheme = createMuiTheme({
     display: "block",
     borderRadius: "15px",
     padding: 7,
+    textAlign: "center",
   },
 
   //Graph styles

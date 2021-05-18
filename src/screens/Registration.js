@@ -10,9 +10,8 @@ import {
   FormControlLabel,
   FormGroup,
 } from "@material-ui/core";
-import { useHistory } from "react-router";
 import { getRoute, PAGES } from "../routes";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -45,7 +44,6 @@ const interests = [
 ];
 
 const Registration = (props) => {
-  const history = useHistory();
   const classes = useStyles();
 
   const [state, setState] = React.useState(interests);
@@ -175,6 +173,7 @@ const Registration = (props) => {
             >
               {interests.map((interest) => (
                 <Grid
+                  key={interest.id}
                   item
                   xs={12}
                   sm={6}
@@ -186,7 +185,7 @@ const Registration = (props) => {
                     control={
                       <Checkbox
                         color="primary"
-                        name={interest.id}
+                        name={interest.id.toString()}
                         onClick={clickCheckBox}
                       />
                     }
@@ -201,9 +200,9 @@ const Registration = (props) => {
       <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
         <Typography>
           Already have an account? Click here to{" "}
-          <Link to={getRoute(PAGES.LOGIN).path} className={classes.link}>
+          <RouterLink to={getRoute(PAGES.LOGIN).path} className={classes.link}>
             login!
-          </Link>
+          </RouterLink>
         </Typography>
       </Grid>
       <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
@@ -216,7 +215,8 @@ const Registration = (props) => {
           variant="outlined"
           color="primary"
           className={classes.button}
-          onClick={() => history.push(getRoute(PAGES.HOME).path)}
+          component={RouterLink}
+          to={getRoute(PAGES.HOME).path}
         >
           Cancel
         </Button>

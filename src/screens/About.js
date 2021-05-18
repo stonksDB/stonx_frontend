@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import ImageWithFallback from "../utils/ImageWithFallback";
 import Markdown from "../utils/Markdown";
 import AboutSections from "./AboutContent";
@@ -94,19 +94,18 @@ const useStyles = makeStyles((theme) =>
 const About = (props) => {
   const aboutSections = AboutSections;
   const classes = useStyles();
-  const history = useHistory();
 
   return (
     <Grid container justify="center">
       <Grid item xs={12} sm={10} lg={8} className={classes.container}>
         <Grid container justify="center">
           <Grid item xs={5} md={4} lg={3}>
-            <Link to="/">
+            <RouterLink to="/">
               <ImageWithFallback
                 src="assets/logo_header/logo_header"
                 alt="logo"
               />
-            </Link>
+            </RouterLink>
           </Grid>
         </Grid>
 
@@ -203,7 +202,8 @@ const About = (props) => {
           variant="contained"
           color="primary"
           className={classes.button}
-          onClick={() => history.push(getRoute(PAGES.HOME).path)}
+          component={RouterLink}
+          to={getRoute(PAGES.HOME).path}
         >
           To The Moon!
         </Button>

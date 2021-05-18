@@ -14,7 +14,10 @@ import { Brightness4, Share } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    card: theme.card,
+    card: {
+      ...theme.card,
+      borderRadius: "0px 0px 15px 15px",
+    },
     menuText: {
       fontWeight: "bold",
     },
@@ -38,7 +41,7 @@ const UserMenu = (props) => {
         vertical: "top",
         horizontal: "left",
       }}
-      style={{ background: "transparent", borderRadius: 15 }}
+      style={{ background: "transparent" }}
       PaperProps={{
         style: {
           borderBottomLeftRadius: 15,
@@ -48,8 +51,7 @@ const UserMenu = (props) => {
         elevation: 3,
       }}
     >
-      <Paper style={{ width: 400 }} className={classes.card}>
-        {/*TODO: Adapt to parent*/}
+      <Paper style={{ width: 400 }} className={classes.card}> {/*TODO: Adapt to parent*/}
         <Grid container direction="column" spacing={2}>
           <Grid item>
             <ListItem button>
