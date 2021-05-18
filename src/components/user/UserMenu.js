@@ -81,7 +81,6 @@ const UserMenu = (props) => {
           </Grid>
           <Grid item>
             <Button
-              onClick={console.log("Logout")}
               variant="outlined"
               color="primary"
               fullWidth

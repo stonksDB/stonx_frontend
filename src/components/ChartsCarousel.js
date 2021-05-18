@@ -34,9 +34,9 @@ const ChartsCarousel = (props) => {
       PrevIcon={<ChevronLeft />}
     >
       {mappedStocks.map((stocksCouple) => (
-        <Grid container>
+        <Grid container key={stocksCouple.key}>
           {stocksCouple.map((stock) => (
-            <Grid item sm={6}>
+            <Grid item sm={6} key={stock.key}>
               <Box>
                 <MarketChart
                   height="40vh"

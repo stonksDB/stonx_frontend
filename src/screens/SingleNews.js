@@ -37,12 +37,6 @@ const RelatedNews = (props) => {
 };
 
 const SingleNews = (props) => {
-  const ticker = {
-    name: "Tesla Inc.",
-    short: "TSLA.MI",
-    percentage: -12.2,
-    id: 1,
-  };
   const classes = useStyles();
 
   return (
@@ -53,7 +47,7 @@ const SingleNews = (props) => {
           <Typography variant="body1">By Author Name • Jan 12 2021</Typography>
         </Grid>
         <Grid item>
-          <TickerChip ticker={ticker} showFullName={false}/>
+          <TickerChip/>
         </Grid>
       </Grid>
       <Grid item>

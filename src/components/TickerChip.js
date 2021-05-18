@@ -1,30 +1,23 @@
-import { Box, Chip, Typography } from "@material-ui/core";
+import { Box, Chip, Typography, useTheme } from "@material-ui/core";
 import React from "react";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    chip: {
-      marginRight: theme.spacing(2),
-      fontWeight: "normal",
-    },
-  })
-);
 
 const TickerChip = (props) => {
-  const classes = useStyles();
+  const theme = useTheme();
+  const chipFontSize = (props.big) ? 17 : 12;
+  const fullNameVariant = (props.big) ? "h4" : "body1";
+  const color = (props.disabled) ? "default" : "primary";
+  const chipRightMargin = (props.showFullName) ? theme.spacing(2) : 0;
 
   return (
-    <Box display="flex" flexDirection="row" alignItems="center">
+    <Box display="flex" flexDirection="row">
       <Chip
         size={props.big ? "medium" : "small"}
-        color="primary"
+        color={color}
         label={props.ticker.short}
-        className={classes.chip}
-        style={props.big ? {fontSize: 17} : {fontSize: 12}}
+        style={{fontSize: chipFontSize, marginRight: chipRightMargin}}
       />
       {props.showFullName ? (
-        <Typography variant={props.big ? "h4" : "body1"}>{props.ticker.name}</Typography>
+        <Typography variant={fullNameVariant}>{props.ticker.name}</Typography>
         )
         : ("")
       }
@@ -33,8 +26,15 @@ const TickerChip = (props) => {
 };
 
 TickerChip.defaultProps = {
-  showFullName: true,
+  showFullName: false,
   big: false,
+  disabled: false,
+  ticker: {   //TODO: Remove this when we'll have real data
+    name: "Tesla Inc.",
+    short: "TSLA.MI",
+    percentage: -12.2,
+    id: 1,
+  },
 };
 
 export default TickerChip;

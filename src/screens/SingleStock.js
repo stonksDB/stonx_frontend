@@ -75,7 +75,7 @@ const SingleStock = (props) => {
                 alignItems="center"
                 justifyContent="space-between"
               >
-                <TickerChip ticker={stock} big/>
+                <TickerChip ticker={stock} big showFullName/>
                 <IconButton
                   aria-label="delete"
                   color="primary"

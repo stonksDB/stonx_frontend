@@ -49,7 +49,7 @@ const MyStocks = (props) => {
             </Grid>
             <Grid item xs={12}>
               <Paper elevation={1} className={classes.card}>
-                <ChartsCarousel stocks={[1,2,3]}/>
+                <ChartsCarousel stocks={[1,2,3,4]}/>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={12} md={6}>

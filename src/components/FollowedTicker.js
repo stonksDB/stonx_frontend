@@ -39,18 +39,18 @@ const FollowedTicker = (props) => {
       justifyContent="space-between"
       className={classes.outerContainer}
     >
-      <TickerChip ticker={ticker}/>
+      <TickerChip ticker={ticker} showFullName/>
 
       {ticker.percentage > 0 ? (
         <>
           <Typography variant={"h6"} className={classes.positive}>
-            ▲{Math.abs(ticker.percentage)}
+            ▲ {Math.abs(ticker.percentage)}
           </Typography>
         </>
       ) : (
         <>
           <Typography variant={"h6"} className={classes.negative}>
-            ▼{Math.abs(ticker.percentage)}
+            ▼ {Math.abs(ticker.percentage)}
           </Typography>
         </>
       )}
