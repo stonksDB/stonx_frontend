@@ -66,7 +66,6 @@ const Registration = (props) => {
       alignItems="center"
       justify="center"
       direction="column"
-      style={{ width: "100%" }}
       spacing={2}
     >
       <Grid item>

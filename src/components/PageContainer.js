@@ -56,7 +56,8 @@ const useStyles = makeStyles((theme) =>
     content: {
       //display: "flex",
       //height: "100vh",
-      padding: theme.spacing(3),
+      width: "100%",
+      padding: theme.spacing(3)
     },
   })
 );
