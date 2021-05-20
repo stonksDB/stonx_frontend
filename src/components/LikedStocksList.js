@@ -6,7 +6,7 @@ const LikedStocksList = (props) => {
   const ticker = {
     name: "Tesla Inc.",
     short: "TSLA.MI",
-    percentage: -12.2,
+    percentage: 12.2,
     id: 1,
   };
 

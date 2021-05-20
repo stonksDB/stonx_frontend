@@ -4,30 +4,7 @@ import { lato, latoThin, latoLight } from "./fonts.js";
 // TODO: check how to implement different font weights
 // FIXME: currently font weights are implemented but not working
 
-const lightTheme = createMuiTheme({
-  palette: {
-    type: "light",
-    primary: {
-      main: "#336CFB",
-    },
-    secondary: {
-      main: "#FAC032",
-    },
-    text: {
-      primary: "#414D55",
-      secondary: "#8e8e8e",
-    },
-    background: {
-      default: "#F1F5F8",
-    },
-    success: {
-      main: "#219653",
-    },
-    error: {
-      main: "#EB5757",
-    },
-  },
-
+const themeGeneral = {
   typography: {
     fontFamily: "'Lato', sans-serif",
     fontWeightLight: 100,
@@ -38,7 +15,7 @@ const lightTheme = createMuiTheme({
   overrides: {
     MuiCssBaseline: {
       "@global": {
-        "@font-face": [lato, latoLight, latoThin],
+        "@font-face": [lato],
       },
     },
   },
@@ -60,6 +37,7 @@ const lightTheme = createMuiTheme({
     [`& fieldset`]: {
       borderRadius: "15px",
       borderColor: "white",
+      transitionDuration: "100ms",
     },
     borderRadius: "15px",
     backgroundColor: "white",
@@ -70,6 +48,7 @@ const lightTheme = createMuiTheme({
     [`& fieldset`]: {
       borderRadius: "15px 15px 5px 5px",
       borderColor: "white",
+      transitionDuration: "100ms",
     },
     borderRadius: "15px 15px 5px 5px",
     backgroundColor: "white",
@@ -95,6 +74,65 @@ const lightTheme = createMuiTheme({
       stroke: "#7ba0fc",
     },
   },
+};
+
+export const lightTheme = createMuiTheme({
+  palette: {
+    type: "light",
+    primary: {
+      main: "#336CFB",
+    },
+    secondary: {
+      main: "#FAC032",
+    },
+    text: {
+      primary: "#414D55",
+      secondary: "#8e8e8e",
+    },
+    background: {
+      default: "#F1F5F8",
+    },
+    success: {
+      main: "#219653",
+    },
+    error: {
+      main: "#EB5757",
+    },
+  },
+  ...themeGeneral,
 });
 
-export default responsiveFontSizes(lightTheme);
+export const darkTheme = createMuiTheme({
+  palette: {
+    type: "dark",
+    primary: {
+      main: "#799aff",
+    },
+    background: {
+      default: "#121212",
+    },
+    text: {
+      primary: "#ffffffd6",
+    },
+    error: {
+      main: "#ba000d",
+    },
+    success: {
+      main: "#219653"
+    }
+  },
+  ...themeGeneral,
+  card: {
+    ...themeGeneral.card,
+    backgroundColor: "#1d1d1d",
+  },
+  search: {
+    ...themeGeneral.search,
+    backgroundColor: "#1d1d1d",
+    [`& fieldset`]: {
+      borderRadius: "15px 15px 5px 5px",
+      borderColor: "#ffffff3b",
+      transitionDuration: "100ms",
+    },
+  },
+});

@@ -4,7 +4,7 @@ import { Switch, Route, HashRouter } from "react-router-dom";
 import { CssBaseline } from "@material-ui/core";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import routes from "./routes";
-import lightTheme from "./theme";
+import {lightTheme, darkTheme} from "./theme";
 import PageContainer from "./components/PageContainer";
 
 ReactDOM.render(
