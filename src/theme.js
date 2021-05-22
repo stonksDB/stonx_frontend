@@ -39,8 +39,11 @@ const themeGeneral = {
       borderColor: "white",
       transitionDuration: "100ms",
     },
+    [`& input`]: {
+      backgroundColor: "white",
+      borderRadius: "15px",
+    },
     borderRadius: "15px",
-    backgroundColor: "white",
     width: "100%",
   },
 
@@ -49,9 +52,9 @@ const themeGeneral = {
       borderRadius: "15px 15px 5px 5px",
       borderColor: "white",
       transitionDuration: "100ms",
+      backgroundColor: "white",
     },
     borderRadius: "15px 15px 5px 5px",
-    backgroundColor: "white",
     width: "100%",
   },
 
@@ -118,8 +121,8 @@ export const darkTheme = createMuiTheme({
       main: "#ba000d",
     },
     success: {
-      main: "#219653"
-    }
+      main: "#219653",
+    },
   },
   ...themeGeneral,
   card: {

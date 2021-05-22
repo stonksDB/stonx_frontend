@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-
 import {
   Button,
   Checkbox,
@@ -14,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { getRoute, PAGES } from "../routes";
 import { Link as RouterLink } from "react-router-dom";
-import { Email } from "@material-ui/icons";
+import PasswordStrengthBar from "react-password-strength-bar";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -49,11 +48,89 @@ const interests = [
 const Registration = (props) => {
   const classes = useStyles();
 
-  const [state, setState] = React.useState(interests);
+  const [state, setState] = useState(interests);
 
-  const [email, setEmail] = React.useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
+  const [emailConfirm, setEmailConfirm] = useState();
+  const [dob, setDob] = useState();
+  const [country, setCountry] = useState();
+  const [password, setPassword] = useState();
+  const [passwordConfirm, setPasswordConfirm] = useState();
+  const [passwordScore, setPasswordScore] = useState();
 
-  const handleSubmit = () => {};
+  ValidatorForm.addValidationRule("isEmail", (value) => {
+    if (/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  ValidatorForm.addValidationRule("confirmEmail", (confirmEmail) => {
+    if (confirmEmail === email) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  ValidatorForm.addValidationRule("isNameOrCountry", (value) => {
+    if (/[a-zA-Z]{2,}/.test(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  ValidatorForm.addValidationRule("isDate", (value) => {
+    if (
+      /^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/.test(
+        value
+      )
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  ValidatorForm.addValidationRule("confirmPassword", (confirmPassword) => {
+    if (confirmPassword === password) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  ValidatorForm.addValidationRule("isStrongPassword", (value) => {
+    if (passwordScore > 1) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  ValidatorForm.addValidationRule("isPast", (value) => {
+    if (value !== undefined) {
+      var parts = value.split("/");
+      var inputDate = new Date(
+        parseInt(parts[2], 10),
+        parseInt(parts[1], 10) - 1,
+        parseInt(parts[0], 10)
+      );
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return inputDate < today;
+    } else {
+      return false;
+    }
+  });
+
+  const handleSubmit = () => {
+    alert("Submitting now");
+  };
 
   const clickCheckBox = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -64,14 +141,6 @@ const Registration = (props) => {
     });
     console.log(interests);
   };
-
-  ValidatorForm.addValidationRule("isEmail", (value) => {
-    if (value !== "test") {
-      return false;
-    } else {
-      return true;
-    }
-  });
 
   return (
     <ValidatorForm onSubmit={handleSubmit}>
@@ -91,40 +160,29 @@ const Registration = (props) => {
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <TextValidator
+                name="firstName"
                 label="First Name*"
                 variant="outlined"
                 className={classes.input}
                 size="small"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                validators={["required", "isNameOrCountry"]}
+                errorMessages={["Required", "Insert a valid First Name!"]}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <TextValidator
+                name="lastName"
                 label="Last Name*"
                 variant="outlined"
                 className={classes.input}
                 size="small"
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Date Of Birth*"
-                variant="outlined"
-                className={classes.input}
-                size="small"
-              />
-              {/*TODO: implement date picker using @material-ui/pickers */}
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Country*"
-                variant="outlined"
-                className={classes.input}
-                size="small"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                validators={["required", "isNameOrCountry"]}
+                errorMessages={["Required", "Insert a valid Last Name!"]}
               />
             </Grid>
           </Grid>
@@ -133,23 +191,33 @@ const Registration = (props) => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextValidator
-                label="Email Address*"
+                name="dob"
+                label="Date Of Birth*"
                 variant="outlined"
                 className={classes.input}
                 size="small"
-                validators={["required", "isEmail"]}
-                errorMessages={["Required", "Use a valid email!"]}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                name="email"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+                validators={["required", "isDate", "isPast"]}
+                errorMessages={[
+                  "Required",
+                  "Insert a valid date",
+                  "You can't be born in the future!",
+                ]}
               />
+              {/*TODO: implement date picker using @material-ui/pickers */}
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
-                label="Confirm Email Address*"
+              <TextValidator
+                name="country"
+                label="Country*"
                 variant="outlined"
                 className={classes.input}
                 size="small"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                validators={["required", "isNameOrCountry"]}
+                errorMessages={["Required", "Insert a valid Country!"]}
               />
             </Grid>
           </Grid>
@@ -157,23 +225,74 @@ const Registration = (props) => {
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <TextValidator
+                name="email"
+                label="Email Address*"
+                variant="outlined"
+                className={classes.input}
+                size="small"
+                validators={["required", "isEmail"]}
+                errorMessages={["Required", "Insert a valid email!"]}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextValidator
+                name="emailConfirmation"
+                label="Confirm Email Address*"
+                variant="outlined"
+                className={classes.input}
+                size="small"
+                validators={["required", "isEmail", "confirmEmail"]}
+                errorMessages={[
+                  "Required",
+                  "Insert a valid email!",
+                  "Mail addresses don't match!",
+                ]}
+                value={emailConfirm}
+                onChange={(e) => setEmailConfirm(e.target.value)}
+              />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <PasswordStrengthBar
+                password={password}
+                onChangeScore={(score) => setPasswordScore(score)}
+                minLength={8}
+                scoreWords={[]}
+                shortScoreWord={""}
+                style={{marginBottom: "0.5rem"}}
+              />
+              <TextValidator
                 label="Password*"
                 variant="outlined"
                 className={classes.input}
                 size="small"
                 type="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                validators={["required", "isStrongPassword"]}
+                errorMessages={["Required", "Password is too weak!"]}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <TextValidator
                 label="Confirm Password*"
                 variant="outlined"
                 className={classes.input}
                 size="small"
                 type="password"
                 autoComplete="current-password"
+                value={passwordConfirm}
+                onChange={(e) => setPasswordConfirm(e.target.value)}
+                validators={["required", "confirmPassword"]}
+                errorMessages={["Required", "Passwords don't match!"]}
+                style={{marginTop: "0.95rem"}} //TODO: find better way to align the two password input fields
               />
             </Grid>
           </Grid>
