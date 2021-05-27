@@ -4,6 +4,7 @@ import { Grid, Link, Paper, Typography } from "@material-ui/core";
 import TickerChip from "../components/TickerChip";
 import { Link as RouterLink } from 'react-router-dom';
 import { PAGES } from "../routes";
+import { parseDate } from "../utils/Dates";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -79,7 +80,6 @@ const news = [
 const NewsCard = (props) => {
   const classes = useStyles();
   const textColor = (props.news.read) ? "textSecondary" : "textPrimary";
-  const parsedDate = new Intl.DateTimeFormat("default", {dateStyle: "medium"}).format(new Date(props.news.published_at));
 
   return (
     <Paper elevation={1} className={classes.card} style={{paddingTop: 10}}>
@@ -94,7 +94,7 @@ const NewsCard = (props) => {
                 <TickerChip disabled={props.news.read}/>
               </Grid>
               <Grid item>
-                <Typography variant="body2" color={textColor}>By {props.news.provider} • {parsedDate}</Typography>
+                <Typography variant="body2" color={textColor}>By {props.news.provider} • {parseDate(props.news.published_at)}</Typography>
               </Grid>
             </Grid>
           </Grid>
