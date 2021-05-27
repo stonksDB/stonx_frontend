@@ -1,7 +1,7 @@
 import React from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import API, { ENDPOINTS } from "../utils/API";
+import API, { ENDPOINTS } from "../api/API";
 import { TextField, Typography, InputAdornment, Paper } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 

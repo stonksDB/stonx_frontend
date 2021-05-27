@@ -23,10 +23,10 @@ const RelatedNews = (props) => {
     <Paper elevation={1} className={classes.card}>
       <Grid container direction="column" alignItems="flex-start" justify="center" className={classes.relatedNews}>
         <Grid item>
-          <Typography variant="subtitle2">Title</Typography>
+          <Typography variant="subtitle2">{props.news.title}</Typography>
         </Grid>
         <Grid item>
-          <Typography>Summary</Typography>
+          <Typography>{props.news.content}</Typography>
         </Grid>
         <Grid item>
           <Typography>Full content at link</Typography>
@@ -43,8 +43,8 @@ const SingleNews = (props) => {
     <Grid container direction="column" spacing={3}>
       <Grid item container direction="row" justify="space-between" alignItems="flex-end">
         <Grid item>
-          <Typography variant="h4">News Title</Typography>
-          <Typography variant="body1">By Author Name • Jan 12 2021</Typography>
+          <Typography variant="h4">{props.news.title}</Typography>
+          <Typography variant="body1">By {props.news.provider} • {props.news.published_at}</Typography>
         </Grid>
         <Grid item>
           <TickerChip/>
@@ -53,7 +53,7 @@ const SingleNews = (props) => {
       <Grid item>
         <Paper elevation={1} className={classes.card}>
           <Typography variant="body1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in arcu nisi. Mauris sed nisl turpis. Cras porttitor dolor in arcu condimentum, vitae tempor erat auctor. Vestibulum cursus eu tellus a ultricies. In vitae dolor tortor. Duis pellentesque erat ex, in venenatis libero elementum id. Phasellus porta, tortor sed faucibus porttitor, diam eros tempor sem, a accumsan purus lorem vel augue. Sed tempor vel dolor faucibus efficitur. Phasellus hendrerit mi felis, ut tincidunt nunc laoreet eget. Etiam tristique velit scelerisque nisi pulvinar rutrum. Aliquam consequat erat eu augue porta, non faucibus mi sollicitudin. Vestibulum nunc augue, porttitor in ante sed, tincidunt pulvinar turpis. Nunc a enim faucibus, vehicula elit eget, dictum turpis. Nam at turpis sed justo egestas iaculis. Cras pharetra diam ligula, molestie egestas leo rutrum ac. Nam neque turpis, viverra non rhoncus sed, aliquet sed orci.
+            {props.news.content}
           </Typography>
         </Paper>
       </Grid>

@@ -1,14 +1,15 @@
 import axios from "axios";
 
 export const ENDPOINTS = {
-  SEARCH: "/search"
+  SEARCH: "/search",
+  NEWS: "/news"
 };
 
 const API = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
-  timeout: 1000,
+  timeout: 3000,
   responseType: "json",
-  headers: {"X-Requested-By": "stonX"},
+  //headers: {"X-Requested-By": "stonX"},
 });
 API.interceptors.request.use(function (response) {
   // eslint-disable-next-line

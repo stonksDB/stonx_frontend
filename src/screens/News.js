@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme) =>
 
 const news = [
   {
-    id: 1,
+    uuid: "1",
     title: "Unread News",
-    author: "Author Name",
-    timestamp: "Jan 12 2021",
+    provider: "Author Name",
+    published_at: "2021-05-14T13:23:11Z",
     read: false,
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in arcu nisi. Mauris sed nisl turpis. " +
       "Cras porttitor dolor in arcu condimentum, vitae tempor erat auctor. Vestibulum cursus eu tellus a ultricies. " +
@@ -43,10 +43,10 @@ const news = [
       "aliquet sed orci.",
   },
   {
-    id: 2,
+    uuid: "2",
     title: "Unread News",
-    author: "Author Name",
-    timestamp: "Jan 12 2021",
+    provider: "Author Name",
+    published_at: "2021-05-14T13:23:11Z",
     read: false,
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in arcu nisi. Mauris sed nisl turpis. " +
       "Cras porttitor dolor in arcu condimentum, vitae tempor erat auctor. Vestibulum cursus eu tellus a ultricies. " +
@@ -59,10 +59,10 @@ const news = [
       "aliquet sed orci.",
   },
   {
-    id: 3,
+    uuid: "3",
     title: "Read News",
-    author: "Author Name",
-    timestamp: "Jan 12 2021",
+    provider: "Author Name",
+    published_at: "2021-05-14T13:23:11Z",
     read: true,
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in arcu nisi. Mauris sed nisl turpis. " +
       "Cras porttitor dolor in arcu condimentum, vitae tempor erat auctor. Vestibulum cursus eu tellus a ultricies. " +
@@ -79,13 +79,14 @@ const news = [
 const NewsCard = (props) => {
   const classes = useStyles();
   const textColor = (props.news.read) ? "textSecondary" : "textPrimary";
+  const parsedDate = new Intl.DateTimeFormat("default", {dateStyle: "medium"}).format(new Date(props.news.published_at));
 
   return (
     <Paper elevation={1} className={classes.card} style={{paddingTop: 10}}>
       <Grid container direction="column" justify="center" alignItems="flex-start">
         <Grid container direction="row" justify="space-between" alignItems="center">
           <Grid item>
-            <Link component={RouterLink} to={`${PAGES.NEWS}/${props.news.id}`} variant="h5" color={textColor} className={classes.linkHover}>{props.news.title}</Link>
+            <Link component={RouterLink} to={`${PAGES.NEWS}/${props.news.uuid}`} variant="h5" color={textColor} className={classes.linkHover}>{props.news.title}</Link>
           </Grid>
           <Grid item>
             <Grid container direction="column" justify="center" alignItems="flex-end">
@@ -93,7 +94,7 @@ const NewsCard = (props) => {
                 <TickerChip disabled={props.news.read}/>
               </Grid>
               <Grid item>
-                <Typography variant="body2" color={textColor}>By {props.news.author} • {props.news.timestamp}</Typography> {/*TODO: Parse timestamp*/}
+                <Typography variant="body2" color={textColor}>By {props.news.provider} • {parsedDate}</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -116,7 +117,7 @@ const News = (props) => {
         </Typography>
         <Grid container spacing={4} direction="column">
           {news.map((news) => (
-            <Grid item key={news.id}>
+            <Grid item key={news.uuid}>
               <NewsCard news={news}/>
             </Grid>
           ))}
