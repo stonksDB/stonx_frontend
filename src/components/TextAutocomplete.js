@@ -1,7 +1,6 @@
 import React from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import Www  from "../api/Www";
 import { TextField, Typography, InputAdornment, Paper } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { search } from "../api/API";
@@ -45,10 +44,7 @@ const TextAutocomplete = (props) => {
       if (active) {
         let newOptions = [];
 
-        if (value) newOptions = [value];
-
         if (results) newOptions = [...newOptions, ...results];
-
         setOptions(newOptions);
       }
     });
@@ -63,7 +59,8 @@ const TextAutocomplete = (props) => {
       autoComplete
       fullWidth
       options={options}
-      value={value}
+      value={inputValue}
+      getOptionSelected={(option, value) => true}
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
@@ -79,7 +76,7 @@ const TextAutocomplete = (props) => {
           fullWidth
           type={"search"}
           className={classes.input}
-          style={{borderBottomLeftRadius: 5, borderBottomRightRadius: 5}}
+          style={{borderBottomLeftRadius: 5, borderBottomRightRadius: 5, backgroundColor: "white"}}
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">

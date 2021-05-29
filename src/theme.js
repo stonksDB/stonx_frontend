@@ -52,7 +52,7 @@ const themeGeneral = {
       borderRadius: "15px 15px 5px 5px",
       borderColor: "white",
       transitionDuration: "100ms",
-      backgroundColor: "white",
+      //backgroundColor: "white", TODO: Find why this also changes the input color
     },
     borderRadius: "15px 15px 5px 5px",
     width: "100%",

@@ -41,7 +41,8 @@ function getSingleNews(uuid) {
 function search(query) {
   return new Endpoint({
     path: "search",
-    queryParam: {key: query}
+    queryParam: {key: query},
+    responseFormat: ["element1", "element2"]
   }).getResponse();
 }
 
