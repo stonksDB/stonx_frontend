@@ -4,7 +4,7 @@ import generateColor from "../utils/ColorGenerator";
 import { getRoute, PAGES } from "../routes";
 import { Link as RouterLink } from "react-router-dom";
 import withLoading from "../api/withLoading";
-import API, { ENDPOINTS } from "../api/API";
+import { getNews } from "../api/API";
 
 const NewsHeader = (props) => {
   const avatarColor = generateColor(props.news.title);
@@ -12,7 +12,7 @@ const NewsHeader = (props) => {
   return (
     <Grid container alignItems="center" justify={"center"} direction="row" spacing={1}>
       <Grid item xs={4}>
-        <Avatar variant="rounded" src={props.news.img} alt={props.news.title} style={{backgroundColor: avatarColor, width: "75%"}}/>
+        <Avatar variant="rounded" src={props.news.img.url} alt={props.news.title} style={{backgroundColor: avatarColor, width: "75%"}}/>
       </Grid>
       <Grid item xs={8}>
         <Grid container direction="column" justify="center" wrap="nowrap">
@@ -40,13 +40,8 @@ const NewsList = (props) => {   //TODO: Adjust number based on height
 
   useEffect(() => {
     setState({loading: true});
-    API
-      .get(`${ENDPOINTS.NEWS}/TSLA.MI`)
-      .then((res) => {
-        const n = res.data === undefined ? [{uuid: 1, title: "No News", provider: "", published_at: ""}] : res.data;
-
-        setState({loading: false, news: n});
-      });
+    getNews("TSLA.MI")
+      .then((res) => setState({loading: false, news: res}));
   }, [setState]);
 
   const InnerComponent = withLoading((props) => {

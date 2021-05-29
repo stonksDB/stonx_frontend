@@ -1,9 +1,10 @@
 import React from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import API, { ENDPOINTS } from "../api/API";
+import Www  from "../api/Www";
 import { TextField, Typography, InputAdornment, Paper } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
+import { search } from "../api/API";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -39,17 +40,14 @@ const TextAutocomplete = (props) => {
       return undefined;
     }
 
-    API({
-      method: "GET",
-      url: ENDPOINTS.SEARCH,
-      params: { key: inputValue },
-    }).then((results) => {
+    search(inputValue)
+    .then((results) => {
       if (active) {
         let newOptions = [];
 
         if (value) newOptions = [value];
 
-        if (results.data) newOptions = [...newOptions, ...results.data];
+        if (results) newOptions = [...newOptions, ...results];
 
         setOptions(newOptions);
       }

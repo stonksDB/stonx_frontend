@@ -14,6 +14,7 @@ import {
 import { getRoute, PAGES } from "../routes";
 import { Link as RouterLink } from "react-router-dom";
 import PasswordStrengthBar from "react-password-strength-bar";
+import { register } from "../api/API";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -61,55 +62,27 @@ const Registration = (props) => {
   const [passwordScore, setPasswordScore] = useState();
 
   ValidatorForm.addValidationRule("isEmail", (value) => {
-    if (/^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(value)) {
-      return true;
-    } else {
-      return false;
-    }
+    return /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(value);
   });
 
   ValidatorForm.addValidationRule("confirmEmail", (confirmEmail) => {
-    if (confirmEmail === email) {
-      return true;
-    } else {
-      return false;
-    }
+    return confirmEmail === email;
   });
 
   ValidatorForm.addValidationRule("isNameOrCountry", (value) => {
-    if (/[a-zA-Z]{2,}/.test(value)) {
-      return true;
-    } else {
-      return false;
-    }
+    return /[a-zA-Z]{2,}/.test(value);
   });
 
   ValidatorForm.addValidationRule("isDate", (value) => {
-    if (
-      /^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/.test(
-        value
-      )
-    ) {
-      return true;
-    } else {
-      return false;
-    }
+    return /^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/.test(value);
   });
 
   ValidatorForm.addValidationRule("confirmPassword", (confirmPassword) => {
-    if (confirmPassword === password) {
-      return true;
-    } else {
-      return false;
-    }
+    return confirmPassword === password;
   });
 
   ValidatorForm.addValidationRule("isStrongPassword", (value) => {
-    if (passwordScore > 1) {
-      return true;
-    } else {
-      return false;
-    }
+    return passwordScore > 1;
   });
 
   ValidatorForm.addValidationRule("isPast", (value) => {
@@ -129,17 +102,29 @@ const Registration = (props) => {
   });
 
   const handleSubmit = () => {
-    alert("Submitting now");
+    register({
+      "firstName": firstName,
+      "lastName": lastName,
+      "dob": dob,
+      "country": country,
+      "email": email,
+      "confirmationEmail": emailConfirm,
+      "password": password,
+      "confirmationPassword": passwordConfirm,
+      "follows": interests
+        .filter((elem) => elem.checked===true)
+        .map((elem) => elem.id)
+    })
+      .then((data) => console.log("Register returned: ", data));
   };
 
   const clickCheckBox = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
-    interests.map((interest) => {
-      if (interest.id === event.target.name) {
+    interests.forEach((interest) => {
+      if (interest.id === Number(event.target.name)) {
         interest.checked = event.target.checked;
       }
     });
-    console.log(interests);
   };
 
   return (
