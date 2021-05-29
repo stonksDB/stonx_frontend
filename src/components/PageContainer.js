@@ -6,6 +6,7 @@ import NavBarMobile from "./navbar/NavBarMobile";
 import Header from "./header/Header";
 import HeaderMobile from "./header/HeaderMobile";
 import routes, { PAGES } from "../routes";
+import ReducedHeader from "./header/ReducedHeader";
 
 const userData = {
   firstName: "Mario",
@@ -67,15 +68,21 @@ const PageContainer = (props) => {
 
   return (
     <div className={classes.root}>
+      {props.renderHeader==="reduced" ? (
+        <ReducedHeader
+          className={props.renderNavbar ? classes.appBar : classes.appBarWithoutNavbar}
+        />
+      ): ("")}
+
       <Hidden mdUp>
-        {props.renderHeader ? (
+        {props.renderHeader===true ? (
           <HeaderMobile
             userData={userData}
             stocksData={stocksData}
             isLoggedIn={isLoggedIn}
           />
         ) : ("")}
-        {props.renderNavbar ? (
+        {props.renderNavbar===true ? (
           <NavBarMobile
             className={classes.drawer}
             isLoggedIn={isLoggedIn}
@@ -85,7 +92,7 @@ const PageContainer = (props) => {
       </Hidden>
 
       <Hidden smDown>
-        {props.renderHeader ? (
+        {props.renderHeader===true ? (
           <Header
             className={props.renderNavbar ? classes.appBar : classes.appBarWithoutNavbar}
             userData={userData}
@@ -94,7 +101,7 @@ const PageContainer = (props) => {
             isLoggedIn={isLoggedIn}
           />
         ) : ("")}
-        {props.renderNavbar ? (
+        {props.renderNavbar===true ? (
           <NavBar
             className={classes.drawer}
             paper={classes.drawerPaper}
