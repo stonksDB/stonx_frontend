@@ -3,7 +3,6 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Grid, Link, Paper, Typography } from "@material-ui/core";
 import TickerChip from "../components/TickerChip";
 import withLoading from "../api/withLoading";
-import Www  from "../api/Www";
 import { parseDate } from "../utils/Dates";
 import { getRoute, PAGES } from "../routes";
 import { Link as RouterLink } from "react-router-dom";

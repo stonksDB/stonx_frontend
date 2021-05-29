@@ -20,7 +20,7 @@ Www.defaults.raxConfig = {...Www.defaults.raxConfig, instance: Www};
 rax.attach(Www);
 
 Www.interceptors.request.use(function (request) {
-  console.log(process.env.REACT_APP_API_URL);
+
   if (process.env.REACT_APP_MOCK_API==="true")
     throw new axios.Cancel(`Simulated API call to ${request.url}, with body ${JSON.stringify(request.data)}`);
   else

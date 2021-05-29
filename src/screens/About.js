@@ -24,7 +24,7 @@ const team = [
   {
     name: "Alessandro Gottardi",
     role: "Front End Developer",
-    quote: "Diamond hands 💎🙌",
+    quote: "Diamond hands",
     image: "assets/team/Alessandro",
   },
   {
