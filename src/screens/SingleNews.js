@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-
 const RelatedNews = (props) => {
   const classes = useStyles();
 
@@ -51,7 +50,7 @@ const SingleNews = (props) => {
   const newsUuid = window.location.href.split("/").pop();
 
   const [state, setState] = useState({
-    loading: false,
+    loading: true,
     news: {},
   });
 
