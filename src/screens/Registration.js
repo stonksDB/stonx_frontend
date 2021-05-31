@@ -74,7 +74,9 @@ const Registration = (props) => {
   });
 
   ValidatorForm.addValidationRule("isDate", (value) => {
-    return /^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/.test(value);
+    return /^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/.test(
+      value
+    );
   });
 
   ValidatorForm.addValidationRule("confirmPassword", (confirmPassword) => {
@@ -103,19 +105,18 @@ const Registration = (props) => {
 
   const handleSubmit = () => {
     register({
-      "firstName": firstName,
-      "lastName": lastName,
-      "dob": dob,
-      "country": country,
-      "email": email,
-      "confirmationEmail": emailConfirm,
-      "password": password,
-      "confirmationPassword": passwordConfirm,
-      "follows": interests
-        .filter((elem) => elem.checked===true)
-        .map((elem) => elem.id)
-    })
-      .then((data) => console.log("Register returned: ", data));
+      firstName: firstName,
+      lastName: lastName,
+      dob: dob,
+      country: country,
+      email: email,
+      confirmationEmail: emailConfirm,
+      password: password,
+      confirmationPassword: passwordConfirm,
+      follows: interests
+        .filter((elem) => elem.checked === true)
+        .map((elem) => elem.id),
+    }).then((data) => console.log("Register returned: ", data));
   };
 
   const clickCheckBox = (event) => {
@@ -244,14 +245,6 @@ const Registration = (props) => {
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <PasswordStrengthBar
-                password={password}
-                onChangeScore={(score) => setPasswordScore(score)}
-                minLength={8}
-                scoreWords={[]}
-                shortScoreWord={""}
-                style={{marginBottom: "0.5rem"}}
-              />
               <TextValidator
                 label="Password*"
                 variant="outlined"
@@ -262,7 +255,15 @@ const Registration = (props) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 validators={["required", "isStrongPassword"]}
-                errorMessages={["Required", "Password is too weak!"]}
+                errorMessages={["Required", ""]}
+                
+              />
+              <PasswordStrengthBar
+                password={password}
+                onChangeScore={(score) => setPasswordScore(score)}
+                minLength={8}
+                scoreWords={["Too Weak", "Too Weak", "Just Ok", "Good", "Strong"]}
+                shortScoreWord="Too Short"
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -277,9 +278,9 @@ const Registration = (props) => {
                 onChange={(e) => setPasswordConfirm(e.target.value)}
                 validators={["required", "confirmPassword"]}
                 errorMessages={["Required", "Passwords don't match!"]}
-                style={{marginTop: "0.95rem"}} //TODO: find better way to align the two password input fields
               />
             </Grid>
+            <Grid item xs={12}></Grid>
           </Grid>
         </Grid>
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
