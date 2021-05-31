@@ -1,5 +1,8 @@
-import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
+import { createMuiTheme, MuiThemeProvider, responsiveFontSizes } from "@material-ui/core/styles";
 import { lato, latoThin, latoLight } from "./fonts.js";
+import { useState } from "react";
+import React from "react";
+import { CssBaseline } from "@material-ui/core";
 
 // TODO: check how to implement different font weights
 // FIXME: currently font weights are implemented but not working
@@ -136,6 +139,25 @@ export const darkTheme = createMuiTheme({
       borderRadius: "15px 15px 5px 5px",
       borderColor: "#ffffff3b",
       transitionDuration: "100ms",
+      //backgroundColor: "black",
     },
   },
 });
+
+export const ThemeVariantProvider = (props) => {    //TODO: Toggling light-dark-light gives color inconsistencies
+  const [theme, setTheme] = useState(lightTheme);
+  const toggleTheme = () => {
+    theme===lightTheme ? setTheme(darkTheme) : setTheme(lightTheme);
+  }
+
+  return (
+    <ThemeVariantContext.Provider value={toggleTheme}>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        {props.children}
+    </MuiThemeProvider>
+    </ThemeVariantContext.Provider>
+  );
+};
+
+export const ThemeVariantContext = React.createContext((theme) => {});

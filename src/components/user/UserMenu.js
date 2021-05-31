@@ -8,9 +8,10 @@ import {
   Popover,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useContext } from "react";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { Brightness4, Share } from "@material-ui/icons";
+import { darkTheme, ThemeVariantContext } from "../../theme";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) =>
 
 const UserMenu = (props) => {
   const classes = useStyles();
+  const toggleTheme = useContext(ThemeVariantContext);
 
   return (
     <Popover
@@ -60,7 +62,7 @@ const UserMenu = (props) => {
               </ListItemIcon>
               <ListItemText
                 primary={
-                  <Typography variant="body1" className={classes.menuText}>
+                  <Typography variant="body1" className={classes.menuText} onClick={() => toggleTheme()}>
                     Dark Mode
                   </Typography>
                 }
