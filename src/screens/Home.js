@@ -32,7 +32,7 @@ const Home = (props) => {
 
   return (
     <>
-      <Typography variant={"h4"} className={classes.pageTitle}>
+      <Typography variant="h4" component="h1" className={classes.pageTitle}>
         Home
       </Typography>
 

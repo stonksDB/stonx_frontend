@@ -77,21 +77,26 @@ function getSingleNews(uuid) {
   return new Endpoint({
     path: "news/single",
     responseFormat: {
-      uuid: "1",
-      title: "Test News",
-      provider: "Author Name",
-      published_at: "2021-05-14T13:23:11Z",
-      read: true,
-      content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in arcu nisi. Mauris sed nisl turpis. " +
-        "Cras porttitor dolor in arcu condimentum, vitae tempor erat auctor. Vestibulum cursus eu tellus a ultricies. " +
-        "In vitae dolor tortor. Duis pellentesque erat ex, in venenatis libero elementum id. Phasellus porta, tortor sed " +
-        "faucibus porttitor, diam eros tempor sem, a accumsan purus lorem vel augue. Sed tempor vel dolor faucibus efficitur. " +
-        "Phasellus hendrerit mi felis, ut tincidunt nunc laoreet eget. Etiam tristique velit scelerisque nisi pulvinar rutrum. " +
-        "Aliquam consequat erat eu augue porta, non faucibus mi sollicitudin. Vestibulum nunc augue, porttitor in ante sed, " +
-        "tincidunt pulvinar turpis. Nunc a enim faucibus, vehicula elit eget, dictum turpis. Nam at turpis sed justo egestas " +
-        "iaculis. Cras pharetra diam ligula, molestie egestas leo rutrum ac. Nam neque turpis, viverra non rhoncus sed, " +
-        "aliquet sed orci.",
-      img: {url: "broken-img.jpg"}
+      data: {
+        contents: [
+          {
+            content: {
+              id: "1",
+              canonicalUrl: {url: "https://finance.yahoo.com/news/why-tesla-stock-fell-lows-152448733.html"},
+              title: "Test News",
+              provider: {displayName: "Author Name"},
+              pubDate: "2021-05-14T13:23:11Z",
+              summary: "The stock made an attempt to settle below $550.",
+              read: true,
+              body: {
+                data: {
+                  cover: {image: {originalUrl: "https://s.yimg.com/uu/api/res/1.2/H.PSikQvBPYn7e9cHK.vVQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/fc838e4d2e3cc14aff8b0a50eae71254"}}
+                }
+              }
+            }
+          }
+        ]
+      }
     },
     pathParam: {uuid: uuid}
   }).getResponse();

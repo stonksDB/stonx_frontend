@@ -28,13 +28,13 @@ const RelatedNews = (props) => {
     <Paper elevation={1} className={classes.card}>
       <Grid container direction="column" alignItems="flex-start" justify="center" className={classes.relatedNews}>
         <Grid item>
-          <Typography variant="subtitle2">{props.news.provider}</Typography>
+          <Typography variant="subtitle2">{props.news.provider.displayName}</Typography>
         </Grid>
         <Grid item>
           <Link
             variant="body1"
             component={RouterLink}
-            to={`${getRoute(PAGES.NEWS).path}/${props.news.uuid}`}
+            to={`${getRoute(PAGES.NEWS).path}/${props.news.id}`}
             color="textPrimary"
           >
             {props.news.title}
@@ -58,15 +58,16 @@ const SingleNews = (props) => {
     setState({loading: true});
     getSingleNews(newsUuid)
       .then((res) => setState({loading: false, news: res}));
-  }, [newsUuid, setState]);
+  }, [setState, newsUuid]);
 
   const InnerComponent = withLoading((props) => {
+    let news = props.news.data.contents[0].content;
     return (
       <Grid container direction="column" spacing={3}>
         <Grid item container direction="row" justify="space-between" alignItems="flex-end">
           <Grid item>
-            <Typography variant="h4">{props.news.title}</Typography>
-            <Typography variant="body1">By {props.news.provider} • {parseDate(props.news.published_at)}</Typography>
+            <Typography variant="h4" component="h1">{news.title}</Typography>
+            <Typography variant="body1">By {news.provider.displayName} • {parseDate(news.pubDate)}</Typography>
           </Grid>
           <Grid item>
             <TickerChip/>
@@ -75,8 +76,9 @@ const SingleNews = (props) => {
         <Grid item>
           <Paper elevation={1} className={classes.card}>
             <Typography variant="body1">
-              {props.news.content}
+              {news.summary}
             </Typography>
+            <Link to={news.canonicalUrl.url} variant="body1">See more</Link>
           </Paper>
         </Grid>
         <Grid item style={{flex: 1}}/> {/*TODO: Make this work (need to set parent height)*/}
@@ -84,15 +86,15 @@ const SingleNews = (props) => {
           <Typography variant="h6">Related News</Typography>
         </Grid>
         <Grid item>
-          <Grid container direction="row" justify="center" alignItems="center" spacing={5} style={{height: "1vh"}}>
+          <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={5} style={{height: "1vh"}}>
             <Grid item sm={12} md={4}>
-              <RelatedNews news={props.news}/>
+              <RelatedNews news={news}/>
             </Grid>
             <Grid item sm={12} md={4}>
-              <RelatedNews news={props.news}/>
+              <RelatedNews news={news}/>
             </Grid>
             <Grid item sm={12} md={4}>
-              <RelatedNews news={props.news}/>
+              <RelatedNews news={news}/>
             </Grid>
           </Grid>
         </Grid>

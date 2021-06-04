@@ -24,14 +24,14 @@ const MarketChart = (props) => {
 
   return (
     <section style={{height: props.height}}>
-      <Typography variant="h6" style={{position: "absolute"}}>{ props.title }</Typography>
+      {props.title!==null && props.title!=="" && <Typography variant="h6" style={{position: "absolute"}}>{ props.title }</Typography>}
       <ResponsiveLine
         data={ dataPoints }
         margin={{top: 35, right: 20, bottom: 30, left: 30} }
         theme={ theme }
         colors={(data) => {
           return data.color!=null ? data.color :
-            props.colorSchema==null ? theme.palette.primary.main : props.colorSchema;
+            (props.colorSchema==null ? theme.palette.primary.main : props.colorSchema);
         }}
         curve="cardinal"
 
@@ -49,7 +49,8 @@ const MarketChart = (props) => {
         legends={ props.enableLegend ? [
           {
             anchor: "top-right", direction: "row", itemWidth: 80, itemHeight: 0, translateY: -18, translateX: 18,
-            symbolSize: 12, symbolShape: "circle"
+            symbolSize: 12, symbolShape: "circle",
+            itemTextColor: theme.palette.text.primary,
           }
         ]
           : []

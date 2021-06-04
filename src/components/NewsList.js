@@ -10,7 +10,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) =>
   createStyles({
     largeImg: {
-      width: theme.spacing(9),
+      width: "85%",
       height: theme.spacing(9),
     },
   })
