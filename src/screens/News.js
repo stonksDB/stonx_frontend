@@ -66,13 +66,13 @@ const News = (props) => {
   });
 
   useEffect(() => {
-    let isCancelled = false;
+    let isActive = false;
     setState({loading: true});
     getNews("TSLA.MI")
-      .then((res) => !isCancelled && setState({loading: false, news: res}));
+      .then((res) => isActive && setState({loading: false, news: res}));
 
     return () => {
-      isCancelled = true;
+      isActive = false;
     };
   }, [setState]);
 
@@ -90,7 +90,7 @@ const News = (props) => {
 
   return (
     <>
-      <Typography variant={"h4"} className={classes.pageTitle}>
+      <Typography variant="h4" component="h1" className={classes.pageTitle}>
         News
       </Typography>
       <InnerComponent isLoading={state.loading} news={state.news}/>

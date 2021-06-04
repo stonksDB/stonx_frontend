@@ -1,8 +1,6 @@
-import { createMuiTheme, MuiThemeProvider, responsiveFontSizes } from "@material-ui/core/styles";
+import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import { lato, latoThin, latoLight } from "./fonts.js";
 import { useState } from "react";
-import React from "react";
-import { CssBaseline } from "@material-ui/core";
 
 // TODO: check how to implement different font weights
 // FIXME: currently font weights are implemented but not working
@@ -31,7 +29,6 @@ const themeGeneral = {
 
   card: {
     height: "100%",
-    backgroundColor: "white",
     padding: 15,
     borderRadius: 15,
   },
@@ -55,10 +52,10 @@ const themeGeneral = {
       borderRadius: "15px 15px 5px 5px",
       borderColor: "white",
       transitionDuration: "100ms",
-      //backgroundColor: "white", TODO: Find why this also changes the input color
     },
     borderRadius: "15px 15px 5px 5px",
     width: "100%",
+    backgroundColor: "white",
   },
 
   button: {
@@ -67,18 +64,6 @@ const themeGeneral = {
     borderRadius: "15px",
     padding: 7,
     textAlign: "center",
-  },
-
-  //Graph styles
-  grid: {
-    line: {
-      strokeDasharray: "6 6",
-    },
-  },
-  crosshair: {
-    line: {
-      stroke: "#7ba0fc",
-    },
   },
 };
 
@@ -97,6 +82,7 @@ export const lightTheme = createMuiTheme({
     },
     background: {
       default: "#F1F5F8",
+      paper: "#FFFFFF",
     },
     success: {
       main: "#219653",
@@ -116,6 +102,7 @@ export const darkTheme = createMuiTheme({
     },
     background: {
       default: "#121212",
+      paper: "#1d1d1d",
     },
     text: {
       primary: "#ffffffd6",
@@ -128,10 +115,6 @@ export const darkTheme = createMuiTheme({
     },
   },
   ...themeGeneral,
-  card: {
-    ...themeGeneral.card,
-    backgroundColor: "#1d1d1d",
-  },
   search: {
     ...themeGeneral.search,
     backgroundColor: "#1d1d1d",
@@ -139,25 +122,6 @@ export const darkTheme = createMuiTheme({
       borderRadius: "15px 15px 5px 5px",
       borderColor: "#ffffff3b",
       transitionDuration: "100ms",
-      //backgroundColor: "black",
     },
   },
 });
-
-export const ThemeVariantProvider = (props) => {    //TODO: Toggling light-dark-light gives color inconsistencies
-  const [theme, setTheme] = useState(lightTheme);
-  const toggleTheme = () => {
-    theme===lightTheme ? setTheme(darkTheme) : setTheme(lightTheme);
-  }
-
-  return (
-    <ThemeVariantContext.Provider value={toggleTheme}>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        {props.children}
-    </MuiThemeProvider>
-    </ThemeVariantContext.Provider>
-  );
-};
-
-export const ThemeVariantContext = React.createContext((theme) => {});

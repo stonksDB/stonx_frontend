@@ -21,6 +21,19 @@ const data = {
 const MarketChart = (props) => {
   const theme = useTheme();
   const dataPoints = props.usePointsOf==="both" ? data.points : props.usePointsOf==="first" ? [data.points[0]] : [data.points[1]];
+  const chartTheme = {
+    textColor: theme.palette.text.primary,
+    grid: {
+      line: {
+        strokeDasharray: "6 6",
+      },
+    },
+    crosshair: {
+      line: {
+        stroke: "#7ba0fc",
+      },
+    },
+  };
 
   return (
     <section style={{height: props.height}}>
@@ -28,7 +41,7 @@ const MarketChart = (props) => {
       <ResponsiveLine
         data={ dataPoints }
         margin={{top: 35, right: 20, bottom: 30, left: 30} }
-        theme={ theme }
+        theme={ chartTheme }
         colors={(data) => {
           return data.color!=null ? data.color :
             (props.colorSchema==null ? theme.palette.primary.main : props.colorSchema);
@@ -40,17 +53,16 @@ const MarketChart = (props) => {
 
         axisBottom={ props.enableAxisX ? {
           orient: "bottom", tickSize: 7, tickPadding: 5, legend: props.xTitle, legendOffset: 30,
-          legendPosition: "middle"
+          legendPosition: "middle",
         } : null }
         axisLeft={ props.enableAxisY ? {
-          orient: "left", tickSize: 0, tickPadding: 10, legend: props.yTitle, legendOffset: 30, legendPosition: "middle"
+          orient: "left", tickSize: 0, tickPadding: 10, legend: props.yTitle, legendOffset: 30, legendPosition: "middle",
         } : null }
 
         legends={ props.enableLegend ? [
           {
             anchor: "top-right", direction: "row", itemWidth: 80, itemHeight: 0, translateY: -18, translateX: 18,
             symbolSize: 12, symbolShape: "circle",
-            itemTextColor: theme.palette.text.primary,
           }
         ]
           : []

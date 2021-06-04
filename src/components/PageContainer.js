@@ -1,32 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Hidden } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import NavBar from "./navbar/NavBar";
 import NavBarMobile from "./navbar/NavBarMobile";
 import Header from "./header/Header";
 import HeaderMobile from "./header/HeaderMobile";
-import routes, { PAGES } from "../routes";
+import routes, { PAGES, RENDER } from "../routes";
 import ReducedHeader from "./header/ReducedHeader";
-
-const userData = {
-  firstName: "Mario",
-  lastName: "Rossi",
-  email: "mario@rossi.it",
-  picture: "/broken-image.jpg",
-};
-const isLoggedIn = true;
-const navbarRoutes = routes
-  .filter(({ name }) =>
-    (isLoggedIn ? [PAGES.HOME, PAGES.MY_STOCKS, PAGES.NEWS, PAGES.ABOUT] : [PAGES.HOME, PAGES.NEWS, PAGES.ABOUT]).includes(name))
-  .reverse();
-const stocksData = [
-  { name: "Stock 1" },
-  { name: "Stock 2" },
-  { name: "Stock 3" },
-];
+import { UserStateContext } from "../context/UserStateContext";
 
 const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
@@ -39,13 +22,13 @@ const useStyles = makeStyles((theme) =>
       },
       marginTop: 10,
     },
-    appBar: {
+    header: {
       [theme.breakpoints.up("sm")]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
       },
     },
-    appBarWithoutNavbar: {
+    headerWithoutNavbar: {
       [theme.breakpoints.up("sm")]: {
         width: "100%",
       },
@@ -54,7 +37,7 @@ const useStyles = makeStyles((theme) =>
     drawerPaper: {
       width: drawerWidth,
     },
-    content: {
+    page: {
       //display: "flex",
       //height: "100vh",
       width: "100%",
@@ -64,59 +47,52 @@ const useStyles = makeStyles((theme) =>
 );
 
 const PageContainer = (props) => {
+  const {userState, isLoggedIn} = useContext(UserStateContext);
+  const navbarRoutes = routes
+    .filter(({ name }) =>
+      (isLoggedIn ? [PAGES.HOME, PAGES.MY_STOCKS, PAGES.NEWS, PAGES.ABOUT] : [PAGES.HOME, PAGES.NEWS, PAGES.ABOUT]).includes(name))
+    .reverse();
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      {props.renderHeader==="reduced" ? (
-        <ReducedHeader
-          className={props.renderNavbar ? classes.appBar : classes.appBarWithoutNavbar}
-        />
-      ): ("")}
+      {props.renderHeader===RENDER.REDUCED &&
+        <ReducedHeader className={props.renderNavbar===RENDER.FULL ? classes.header : classes.headerWithoutNavbar}/>
+      }
 
       <Hidden mdUp>
-        {props.renderHeader===true ? (
-          <HeaderMobile
-            userData={userData}
-            stocksData={stocksData}
-            isLoggedIn={isLoggedIn}
-          />
-        ) : ("")}
-        {props.renderNavbar===true ? (
-          <NavBarMobile
-            className={classes.drawer}
-            isLoggedIn={isLoggedIn}
-            availableRoutes={navbarRoutes}
-          />
-        ) : ("")}
+        {props.renderHeader===RENDER.FULL &&
+          <HeaderMobile userState={userState} isLoggedIn={isLoggedIn}/>
+        }
+        {props.renderNavbar===RENDER.FULL &&
+          <NavBarMobile className={classes.drawer} availableRoutes={navbarRoutes}/>
+        }
       </Hidden>
 
       <Hidden smDown>
-        {props.renderHeader===true ? (
+        {props.renderHeader===RENDER.FULL &&
           <Header
-            className={props.renderNavbar ? classes.appBar : classes.appBarWithoutNavbar}
-            userData={userData}
-            stocksData={stocksData}
-            renderHeader={props.renderHeader}
+            className={props.renderNavbar===RENDER.FULL ? classes.header : classes.headerWithoutNavbar}
+            userState={userState}
+            header={props.header}
             isLoggedIn={isLoggedIn}
           />
-        ) : ("")}
-        {props.renderNavbar===true ? (
+        }
+        {props.renderNavbar===RENDER.FULL &&
           <NavBar
             className={classes.drawer}
             paper={classes.drawerPaper}
             toolbar={classes.toolbar}
-            isLoggedIn={isLoggedIn}
             availableRoutes={navbarRoutes}
           />
-        ) : ("")}
+        }
       </Hidden>
 
-      <main className={classes.content}>
-        {props.renderHeader ? <div className={classes.toolbar} /> : ""}
+      <main className={classes.page}>
+        {(props.renderHeader===RENDER.FULL || props.renderHeader===RENDER.REDUCED) && <div className={classes.toolbar}/>}
         {props.page}
         <Hidden mdUp>
-          {props.renderHeader ? <div className={classes.toolbar} /> : ""}
+          {props.renderNavbar===RENDER.FULL && <div className={classes.toolbar}/>}
         </Hidden>
       </main>
     </div>

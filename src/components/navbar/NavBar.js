@@ -70,7 +70,7 @@ const NavBar = (props) => {
       >
         <Toolbar>
           <RouterLink to={getRoute(PAGES.HOME).path}>
-            <ImageWithFallback src="assets/logo_header/logo_header" alt="logo"/>
+            <ImageWithFallback src="assets/logo_header/logo_header" alt="stonx logo"/>
           </RouterLink>
         </Toolbar>
         {drawer}

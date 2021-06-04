@@ -15,6 +15,12 @@ import Home from "./screens/Home";
 import React from "react";
 import About from "./screens/About";
 
+export const RENDER = {
+  FULL: "full",
+  REDUCED: "reduced",
+  NONE: "none",
+}
+
 export const PAGES = {
   ABOUT: "About",
   LOGIN: "Login",
@@ -27,14 +33,14 @@ export const PAGES = {
 };
 
 const routes = [
-  {name: PAGES.ABOUT, path: "/about", icon: <AboutIcon/>, page: <About/>, renderHeader: false, renderNavbar: false},
-  {name: PAGES.LOGIN, path: "/login", icon: <HomeIcon/>, page: <Login/>, renderHeader: "reduced", renderNavbar: false},
-  {name: PAGES.REGISTRATION, path: "/registration", icon: <HomeIcon/>, page: <Registration/>, renderHeader: "reduced", renderNavbar: false},
-  {name: PAGES.SINGLE_STOCK, path: "/stock/:id", icon: <StockIcon/>, page: <SingleStock/>, renderHeader: true, renderNavbar: true},
-  {name: PAGES.SINGLE_NEWS, path: "/news/:id", icon: <NewsIcon/>, page: <SingleNews/>, renderHeader: true, renderNavbar: true},
-  {name: PAGES.NEWS, path: "/news", icon: <NewsIcon/>, page: <News/>, renderHeader: true, renderNavbar: true},
-  {name: PAGES.MY_STOCKS, path: "/mystock", icon: <MyStockIcon/>, page: <MyStocks/>, renderHeader: true, renderNavbar: true},
-  {name: PAGES.HOME, path: "/", icon: <HomeIcon/>, page: <Home/>, renderHeader: true, renderNavbar: true},
+  {name: PAGES.ABOUT, path: "/about", icon: <AboutIcon/>, page: <About/>, header: RENDER.NONE, navBar: RENDER.NONE},
+  {name: PAGES.LOGIN, path: "/login", icon: <HomeIcon/>, page: <Login/>, header: RENDER.REDUCED, navBar: RENDER.NONE},
+  {name: PAGES.REGISTRATION, path: "/registration", icon: <HomeIcon/>, page: <Registration/>, header: RENDER.REDUCED, navBar: RENDER.NONE},
+  {name: PAGES.SINGLE_STOCK, path: "/stock/:id", icon: <StockIcon/>, page: <SingleStock/>, header: RENDER.FULL, navBar: RENDER.FULL},
+  {name: PAGES.SINGLE_NEWS, path: "/news/:id", icon: <NewsIcon/>, page: <SingleNews/>, header: RENDER.FULL, navBar: RENDER.FULL},
+  {name: PAGES.NEWS, path: "/news", icon: <NewsIcon/>, page: <News/>, header: RENDER.FULL, navBar: RENDER.FULL},
+  {name: PAGES.MY_STOCKS, path: "/mystock", icon: <MyStockIcon/>, page: <MyStocks/>, header: RENDER.FULL, navBar: RENDER.FULL},
+  {name: PAGES.HOME, path: "/", icon: <HomeIcon/>, page: <Home/>, header: RENDER.FULL, navBar: RENDER.FULL},
 ];
 
 export const getRoute = (routeName) => {

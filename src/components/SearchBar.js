@@ -1,19 +1,19 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { TextField, Typography, InputAdornment, Paper } from "@material-ui/core";
+import { TextField, Typography, InputAdornment, Paper, useTheme } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { search } from "../api/API";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    input: theme.search,
+    input: {...theme.search },
     card: {...theme.card, padding: 0, marginTop: theme.spacing(0.5)},
     button: { ...theme.button, marginLeft: 5 },
   })
 );
 
-const AutoCompletePaper = (props) => {
+const SearchPaper = (props) => {
   const classes = useStyles();
   return (
     <Paper
@@ -25,14 +25,14 @@ const AutoCompletePaper = (props) => {
   );
 };
 
-const TextAutocomplete = (props) => {
+const SearchBar = (props) => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState("");
-  const [options, setOptions] = React.useState([]);
+  const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [options, setOptions] = useState([]);
 
-  React.useEffect(() => {
-    let active = true;
+  useEffect(() => {
+    let isActive = false;
 
     if (inputValue === "") {
       setOptions(value ? [value] : []);
@@ -41,7 +41,7 @@ const TextAutocomplete = (props) => {
 
     search(inputValue)
     .then((results) => {
-      if (active) {
+      if (isActive) {
         let newOptions = [];
 
         if (results) newOptions = [...newOptions, ...results];
@@ -50,7 +50,7 @@ const TextAutocomplete = (props) => {
     });
 
     return () => {
-      active = false;
+      isActive = false;
     };
   }, [value, inputValue]);
 
@@ -68,7 +68,7 @@ const TextAutocomplete = (props) => {
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
-      PaperComponent={AutoCompletePaper}
+      PaperComponent={SearchPaper}
       renderInput={(params) => (
         <TextField
           label="Search..."
@@ -76,10 +76,10 @@ const TextAutocomplete = (props) => {
           fullWidth
           type={"search"}
           className={classes.input}
-          style={{borderBottomLeftRadius: 5, borderBottomRightRadius: 5, backgroundColor: "white"}}
+          style={{borderBottomLeftRadius: 5, borderBottomRightRadius: 5}}
           InputProps={{
             endAdornment: (
-              <InputAdornment position="start">
+              <InputAdornment position="end">
                 <Search />
               </InputAdornment>
             ),
@@ -97,4 +97,4 @@ const TextAutocomplete = (props) => {
     />
   );
 };
-export default TextAutocomplete;
+export default SearchBar;

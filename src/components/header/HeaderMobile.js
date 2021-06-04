@@ -1,12 +1,11 @@
 import React from "react";
-import { Toolbar, AppBar, Grid, IconButton } from "@material-ui/core";
-import UserAvatar from "../user/UserAvatar";
+import { Toolbar, AppBar, Grid } from "@material-ui/core";
 import ImageWithFallback from "../../utils/ImageWithFallback";
-import UserMenu from "../user/UserMenu";
-import TextAutocomplete from "../TextAutocomplete";
+import SearchBar from "../SearchBar";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { getRoute, PAGES } from "../../routes";
 import { Link as RouterLink } from 'react-router-dom';
+import UserMenu from "../user/UserMenu";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -14,7 +13,7 @@ const useStyles = makeStyles((theme) =>
       background: theme.palette.background.default,
     },
     bar: {
-      background: "white",
+      background: theme.palette.background.paper,
       borderRadius: "20px",
     },
   })
@@ -22,17 +21,6 @@ const useStyles = makeStyles((theme) =>
 
 const HeaderMobile = (props) => {
   const classes = useStyles();
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleMenuClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   return (
     <AppBar
@@ -45,27 +33,19 @@ const HeaderMobile = (props) => {
           container
           direction="row"
           spacing={2}
-          alignItems={"center"}
+          alignItems="center"
           className={classes.bar}
           >
         <Grid item>
           <RouterLink to={getRoute(PAGES.HOME).path}>
-            <ImageWithFallback src="assets/logo/logo" alt="logo" width="40" />
+            <ImageWithFallback src="assets/logo/logo" alt="logo" width="40"/>
           </RouterLink>
         </Grid>
         <Grid item xs style={{padding: 4}}>
-          <TextAutocomplete />
+          <SearchBar />
         </Grid>
         <Grid item>
-          <IconButton
-            style={{ padding: 2 }}
-            onClick={handleMenuClick}
-            aria-controls={open ? 'menu-list-grow' : undefined}
-            aria-haspopup="true"
-          >
-            <UserAvatar userData={props.userData} />
-          </IconButton>
-          <UserMenu id={id} open={open} anchorEl={anchorEl} handleClose={handleClose} />
+          <UserMenu reduced userState={props.userState}/>
         </Grid>
       </Grid>
         />

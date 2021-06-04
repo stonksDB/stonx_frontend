@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Button, Grid, TextField, Typography } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 import { getRoute, PAGES } from "../routes";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import { login } from "../api/API";
+import { UserStateContext } from "../context/UserStateContext";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -28,6 +29,7 @@ const handleSubmit = () => {
 };
 
 const Login = (props) => {
+  const setUserData = useContext(UserStateContext);
   const classes = useStyles();
 
   return (

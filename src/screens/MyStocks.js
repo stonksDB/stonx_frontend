@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Grid, Paper, Typography, Box } from "@material-ui/core";
 import NewsList from "../components/NewsList";
 import LikedStocksList from "../components/LikedStocksList";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import ChartsCarousel from "../components/ChartsCarousel";
+import { UserStateContext } from "../context/UserStateContext";
+import { parseDate } from "../utils/Dates";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -32,10 +34,12 @@ const useStyles = makeStyles((theme) =>
 
 const MyStocks = (props) => {
   const classes = useStyles();
+  const {userState} = useContext(UserStateContext);
+  const userInfo = userState.share_holder_info;
 
   return (
     <>
-      <Typography variant={"h4"} className={classes.pageTitle}>
+      <Typography variant="h4" component="h1" className={classes.pageTitle}>
         My Area
       </Typography>
 
@@ -62,7 +66,7 @@ const MyStocks = (props) => {
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h6" className={classes.data}>
-                      Mario Rossi
+                      {userInfo.first_name} {userInfo.last_name}
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
@@ -72,7 +76,7 @@ const MyStocks = (props) => {
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h6" className={classes.data}>
-                      mariorossi@gmail.com
+                      {userInfo.email}
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
@@ -82,7 +86,7 @@ const MyStocks = (props) => {
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h6" className={classes.data}>
-                      March 3, 2000
+                      {parseDate(userInfo.dob)}
                     </Typography>
                   </Grid>
                 </Grid>

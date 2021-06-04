@@ -55,9 +55,15 @@ const SingleNews = (props) => {
   });
 
   useEffect(() => {
+    let isActive = true;
     setState({loading: true});
+
     getSingleNews(newsUuid)
-      .then((res) => setState({loading: false, news: res}));
+      .then((res) => isActive && setState({loading: false, news: res}));
+
+    return () => {
+      isActive = false;
+    }
   }, [setState, newsUuid]);
 
   const InnerComponent = withLoading((props) => {

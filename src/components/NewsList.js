@@ -50,9 +50,14 @@ const NewsList = (props) => {   //TODO: Adjust number based on height
   });
 
   useEffect(() => {
+    let isActive = true;
     setState({loading: true});
     getNews("TSLA.MI")
-      .then((res) => setState({loading: false, news: res}));
+      .then((res) => isActive && setState({loading: false, news: res}));
+
+    return () => {
+      isActive = false;
+    };
   }, [setState]);
 
   const InnerComponent = withLoading((props) => {
