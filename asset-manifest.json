@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/stonx_frontend/static/js/main.1374f84b.chunk.js",
-    "main.js.map": "/stonx_frontend/static/js/main.1374f84b.chunk.js.map",
+    "main.js": "/stonx_frontend/static/js/main.f8efdbca.chunk.js",
+    "main.js.map": "/stonx_frontend/static/js/main.f8efdbca.chunk.js.map",
     "runtime-main.js": "/stonx_frontend/static/js/runtime-main.7dc5a6e2.js",
     "runtime-main.js.map": "/stonx_frontend/static/js/runtime-main.7dc5a6e2.js.map",
     "static/js/2.72961ba8.chunk.js": "/stonx_frontend/static/js/2.72961ba8.chunk.js",
@@ -15,6 +15,6 @@
   "entrypoints": [
     "static/js/runtime-main.7dc5a6e2.js",
     "static/js/2.72961ba8.chunk.js",
-    "static/js/main.1374f84b.chunk.js"
+    "static/js/main.f8efdbca.chunk.js"
   ]
 }
