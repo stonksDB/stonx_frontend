@@ -50,7 +50,7 @@ const PageContainer = (props) => {
   const {userState, isLoggedIn} = useContext(UserStateContext);
   const navbarRoutes = routes
     .filter(({ name }) =>
-      (isLoggedIn ? [PAGES.HOME, PAGES.MY_STOCKS, PAGES.NEWS, PAGES.ABOUT] : [PAGES.HOME, PAGES.NEWS, PAGES.ABOUT]).includes(name))
+      (isLoggedIn() ? [PAGES.HOME, PAGES.MY_STOCKS, PAGES.NEWS, PAGES.ABOUT] : [PAGES.HOME, PAGES.NEWS, PAGES.ABOUT]).includes(name))
     .reverse();
   const classes = useStyles();
 
