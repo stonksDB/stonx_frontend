@@ -10,6 +10,8 @@ const Www = axios.create({
     return status < 303; // Resolve only if the status code is less than 303
   },
   raxConfig: {
+    retry: 2,
+    noResponseRetries: 1,
     onRetryAttempt: err => {
       const cfg = rax.getConfig(err);
       console.warn(`Retry attempt #${cfg.currentRetryAttempt}`);
@@ -33,7 +35,7 @@ Www.interceptors.response.use(function (response) {
 }, function (error) {
   if (error instanceof axios.Cancel)
     console.log(error.message);
-  else if (error.response && error.response.status>=405 && error.response.status<500)  // Client error: pass it to view component
+  else if (error.response && error.response.status>=400 && error.response.status<500)  // Client error: pass it to view component
     return Promise.reject(error);
   else if (error.response)  // Server error: cannot do anything (already retried three times)
     console.error(`Error ${error.response.status} on ${error.response.config.url}`, error.toJSON());

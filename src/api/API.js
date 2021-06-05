@@ -122,8 +122,26 @@ function login(data) {
   return new Endpoint({
     path: "auth/login",
     method: "get",
-    requestBody: data
+    requestBody: data,
+    responseFormat: {
+      "follows": [ 0, 1, 2 ],
+      "likes": [ 0, 1, 2 ],
+      "share_holder_info": {
+        "country": "England",
+        "dob": "01-01-1970",
+        "email": "winston@smith.com",
+        "first_name": "Winston",
+        "last_name": "Smith",
+      }
+    }
   }).getResponse();
 }
 
-export { getNews, getSingleNews, search, register, login };
+function logout() {
+  return new Endpoint({
+    path: "auth/logout",
+    method: "get",
+  }).getResponse();
+}
+
+export { getNews, getSingleNews, search, register, login, logout };

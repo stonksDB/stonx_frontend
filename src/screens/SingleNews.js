@@ -84,7 +84,14 @@ const SingleNews = (props) => {
             <Typography variant="body1">
               {news.summary}
             </Typography>
-            <Link to={news.canonicalUrl.url} variant="body1">See more</Link>
+            <Link
+              href={news.canonicalUrl.url}
+              variant="body1"
+              target="_blank"
+              rel="noopener"
+            >
+              See more
+            </Link>
           </Paper>
         </Grid>
         <Grid item style={{flex: 1}}/> {/*TODO: Make this work (need to set parent height)*/}

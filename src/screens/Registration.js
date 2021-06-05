@@ -12,9 +12,10 @@ import {
   FormGroup,
 } from "@material-ui/core";
 import { getRoute, PAGES } from "../routes";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { register } from "../api/API";
+import { useSnackbar } from "notistack";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -48,6 +49,8 @@ const interests = [
 
 const Registration = (props) => {
   const classes = useStyles();
+  const history = useHistory();
+  const {enqueueSnackbar} = useSnackbar();
 
   const [state, setState] = useState(interests);
 
@@ -116,7 +119,12 @@ const Registration = (props) => {
       follows: interests
         .filter((elem) => elem.checked === true)
         .map((elem) => elem.id),
-    }).then((data) => console.log("Register returned: ", data));
+    }).then((data) => {
+      enqueueSnackbar("Success!", {variant: "success"});
+      setTimeout(() => history.push(getRoute(PAGES.LOGIN).path), 300);
+    }).catch((error) => {
+      enqueueSnackbar(JSON.stringify(error.response.data), {variant: "error"});
+    });
   };
 
   const clickCheckBox = (event) => {
@@ -256,7 +264,7 @@ const Registration = (props) => {
                 onChange={(e) => setPassword(e.target.value)}
                 validators={["required", "isStrongPassword"]}
                 errorMessages={["Required", ""]}
-                
+
               />
               <PasswordStrengthBar
                 password={password}

@@ -38,8 +38,8 @@ const UserMenu = (props) => {
         aria-controls={open ? "menu-list-grow" : undefined}
         aria-haspopup="true"
       >
-        {props.isLoggedIn ? <UserAvatar userInfo={props.userState.share_holder_info}/> : <MoreVert/>}
-        <UserPopup id={id} open={open} anchorEl={anchorEl} handleClose={handleClose} userState={props.userState}/>
+        {props.isLoggedIn() ? <UserAvatar userInfo={props.userState.share_holder_info}/> : <MoreVert/>}
+        <UserPopup id={id} open={open} anchorEl={anchorEl} handleClose={handleClose} {...props}/>
       </IconButton>
     )
   else
@@ -79,7 +79,7 @@ const UserMenu = (props) => {
             <KeyboardArrowDownIcon color="action" />
           </Grid>
         </Grid>
-        <UserPopup id={id} open={open} anchorEl={anchorEl} handleClose={handleClose} userState={props.userState}/>
+        <UserPopup id={id} open={open} anchorEl={anchorEl} handleClose={handleClose} {...props}/>
       </ButtonBase>
     );
 };

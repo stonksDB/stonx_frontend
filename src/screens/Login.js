@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Button, Grid, TextField, Typography } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import { getRoute, PAGES } from "../routes";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import { login } from "../api/API";
 import { UserStateContext } from "../context/UserStateContext";
+import { useSnackbar } from "notistack";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -23,14 +24,27 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const handleSubmit = () => {
-  login({})
-    .then((data) => console.log("Login response: ", login));
-};
-
 const Login = (props) => {
-  const setUserData = useContext(UserStateContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const {setUserState} = useContext(UserStateContext);
+  const {enqueueSnackbar} = useSnackbar();
+  const history = useHistory();
   const classes = useStyles();
+
+  const handleSubmit = () => {
+    login({
+      "email": email,
+      "password": password
+    }).then((data) => {
+      setUserState(data);
+      enqueueSnackbar("Success!", {variant: "success"});
+      setTimeout(() => history.push(getRoute(PAGES.HOME).path), 300);
+    }).catch((error) => {
+      enqueueSnackbar(JSON.stringify(error.response.data), {variant: "error"});
+    });
+  };
 
   return (
     <ValidatorForm onSubmit={handleSubmit}> {/*TODO: Validation*/}
@@ -49,10 +63,11 @@ const Login = (props) => {
 
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
           <TextField
-            label="Username"
+            label="Email"
             variant="outlined"
             className={classes.input}
             size="small"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
@@ -63,6 +78,7 @@ const Login = (props) => {
             size="small"
             type="password"
             autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
@@ -74,7 +90,7 @@ const Login = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
-          <Button variant="contained" color="primary" className={classes.button}>
+          <Button variant="contained" color="primary" className={classes.button} type="submit">
             Login
           </Button>
         </Grid>

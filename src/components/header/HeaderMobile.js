@@ -44,9 +44,11 @@ const HeaderMobile = (props) => {
         <Grid item xs style={{padding: 4}}>
           <SearchBar />
         </Grid>
-        <Grid item>
-          <UserMenu reduced userState={props.userState}/>
-        </Grid>
+        { props.isLoggedIn() &&
+          <Grid item>
+            <UserMenu reduced {...props}/>
+          </Grid>
+        }
       </Grid>
         />
       </Toolbar>
