@@ -6,7 +6,8 @@ import LikedStocksList from "../components/LikedStocksList";
 import CreditCardIcon from "@material-ui/icons/CreditCard";
 import ChartsCarousel from "../components/ChartsCarousel";
 import { UserStateContext } from "../context/UserStateContext";
-import { parseDate } from "../utils/Dates";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -36,6 +37,7 @@ const MyStocks = (props) => {
   const classes = useStyles();
   const {userState} = useContext(UserStateContext);
   const userInfo = userState.share_holder_info;
+  dayjs.extend(customParseFormat);
 
   return (
     <>
@@ -86,7 +88,7 @@ const MyStocks = (props) => {
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h6" className={classes.data}>
-                      {parseDate(userInfo.dob)}
+                      {dayjs(userInfo.dob, "DD-MM-YYYY").format("DD MMM YYYY")}
                     </Typography>
                   </Grid>
                 </Grid>

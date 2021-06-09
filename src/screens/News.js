@@ -4,9 +4,9 @@ import { Grid, Link, Paper, Typography } from "@material-ui/core";
 import TickerChip from "../components/TickerChip";
 import { Link as RouterLink } from 'react-router-dom';
 import { PAGES } from "../routes";
-import { parseDate } from "../utils/Dates";
 import withLoading from "../api/withLoading";
 import { getNews } from "../api/API";
+import dayjs from "dayjs";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -45,7 +45,7 @@ const NewsCard = (props) => {
                 <TickerChip disabled={props.news.read}/>
               </Grid>
               <Grid item>
-                <Typography variant="body2" color={textColor}>By {props.news.provider} • {parseDate(props.news.published_at)}</Typography>
+                <Typography variant="body2" color={textColor}>By {props.news.provider} • {dayjs(props.news.published_at).parse("DD MMM YYYY")}</Typography>
               </Grid>
             </Grid>
           </Grid>

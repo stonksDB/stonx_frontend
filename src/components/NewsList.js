@@ -28,7 +28,7 @@ const NewsHeader = (props) => {
       <Grid item xs={8}>
         <Grid container direction="column" justify="center" wrap="nowrap">
           <Grid item>
-            <Link variant="overline" color="textPrimary" component={RouterLink} to={`${getRoute(PAGES.SINGLE_NEWS).path}/${props.news.uuid}`}>
+            <Link variant="overline" color="textPrimary" component={RouterLink} to={`${getRoute(PAGES.SINGLE_NEWS).path.slice(0,-4)}/${props.news.uuid}`}>
               {props.news.provider}
             </Link>
           </Grid>

@@ -62,8 +62,6 @@ const SingleStock = (props) => {
   const [likedStock, likeStock] = useState(stock.liked);
   const classes = useStyles();
 
-
-
   return (
     <>
       <Grid container direction="row" spacing={3}>

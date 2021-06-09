@@ -3,10 +3,10 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Grid, Link, Paper, Typography } from "@material-ui/core";
 import TickerChip from "../components/TickerChip";
 import withLoading from "../api/withLoading";
-import { parseDate } from "../utils/Dates";
 import { getRoute, PAGES } from "../routes";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import { getSingleNews } from "../api/API";
+import dayjs from "dayjs";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -47,7 +47,7 @@ const RelatedNews = (props) => {
 
 const SingleNews = (props) => {
   const classes = useStyles();
-  const newsUuid = window.location.href.split("/").pop();
+  const {id} = useParams();
 
   const [state, setState] = useState({
     loading: true,
@@ -58,13 +58,13 @@ const SingleNews = (props) => {
     let isActive = true;
     setState({loading: true});
 
-    getSingleNews(newsUuid)
+    getSingleNews(id)
       .then((res) => isActive && setState({loading: false, news: res}));
 
     return () => {
       isActive = false;
     }
-  }, [setState, newsUuid]);
+  }, [setState, id]);
 
   const InnerComponent = withLoading((props) => {
     let news = props.news.data.contents[0].content;
@@ -73,7 +73,7 @@ const SingleNews = (props) => {
         <Grid item container direction="row" justify="space-between" alignItems="flex-end">
           <Grid item>
             <Typography variant="h4" component="h1">{news.title}</Typography>
-            <Typography variant="body1">By {news.provider.displayName} • {parseDate(news.pubDate)}</Typography>
+            <Typography variant="body1">By {news.provider.displayName} • {dayjs(news.pubDate).format("D MMM YYYY")}</Typography>
           </Grid>
           <Grid item>
             <TickerChip/>
