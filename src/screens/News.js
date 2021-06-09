@@ -42,10 +42,10 @@ const NewsCard = (props) => {
           <Grid item>
             <Grid container direction="column" justify="center" alignItems="flex-end">
               <Grid item>
-                <TickerChip disabled={props.news.read}/>
+                <TickerChip disabled={props.news.read}/>  {/*TODO: Display the appropriate ticker symbol*/}
               </Grid>
               <Grid item>
-                <Typography variant="body2" color={textColor}>By {props.news.provider} • {dayjs(props.news.published_at).parse("DD MMM YYYY")}</Typography>
+                <Typography variant="body2" color={textColor}>By {props.news.provider} • {dayjs(props.news.published_at).format("DD MMM YYYY")}</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -66,7 +66,7 @@ const News = (props) => {
   });
 
   useEffect(() => {
-    let isActive = false;
+    let isActive = true;
     setState({loading: true});
     getNews("TSLA.MI")
       .then((res) => isActive && setState({loading: false, news: res}));

@@ -3,7 +3,7 @@ import React from "react";
 
 const TickerChip = (props) => {
   const theme = useTheme();
-  const chipFontSize = (props.big) ? 17 : 12;
+  const chipFontSize = (props.big) ? 17 : 13;
   const fullNameVariant = (props.big) ? "h4" : "body1";
   const color = (props.disabled) ? "default" : "primary";
   const chipRightMargin = (props.showFullName) ? theme.spacing(2) : 0;
@@ -32,8 +32,6 @@ TickerChip.defaultProps = {
   ticker: {   //TODO: Remove this when we'll have real data
     name: "Tesla Inc.",
     short: "TSLA.MI",
-    percentage: -12.2,
-    id: 1,
   },
 };
 

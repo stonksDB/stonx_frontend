@@ -77,16 +77,19 @@ function getSingleNews(uuid) {
         contents: [
           {
             content: {
-              id: "1",
-              canonicalUrl: {url: "https://finance.yahoo.com/news/why-tesla-stock-fell-lows-152448733.html"},
-              title: "Test News",
-              provider: {displayName: "Author Name"},
-              pubDate: "2021-05-14T13:23:11Z",
-              summary: "The stock made an attempt to settle below $550.",
+              id: "c8d618b8-0179-3e0d-afe5-bffb2bf753f2",
+              canonicalUrl: {url: "https://finance.yahoo.com/news/bitcoin-retreats-musk-tweets-broken-084403780.html" },
+              title: "Bitcoin Retreats As Musk Tweets Broken-Heart Emoji",
+              provider: {displayName: "FX Empire"},
+              pubDate: "2021-06-04T08:44:03Z",
+              summary: "Bitcoin failed to get above $40,000 and moved below the $37,000 level.",
+              finance: { stockTickers: [
+                { symbol: "TSLA" }
+              ]},
               read: true,
               body: {
                 data: {
-                  cover: {image: {originalUrl: "https://s.yimg.com/uu/api/res/1.2/H.PSikQvBPYn7e9cHK.vVQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/fc838e4d2e3cc14aff8b0a50eae71254"}}
+                  cover: {image: {originalUrl: "https://s.yimg.com/uu/api/res/1.2/uAXneyu5UnarczFcIVrHuQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/a3d19e486d8cd1a85ee615c70a5c8f13"}}
                 }
               }
             }
