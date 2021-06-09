@@ -11,7 +11,7 @@ import UserMenu from "../user/UserMenu";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    button: { ...theme.button, marginLeft: 5, },
+    button: { ...theme.button, marginLeft: 5, fontSize: "1.15em" },
   })
 );
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { TextField, Typography, InputAdornment, Paper, useTheme } from "@material-ui/core";
+import { TextField, Typography, InputAdornment, Paper } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { search } from "../api/API";
 

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { ValidatorForm } from "react-material-ui-form-validator";
 import {
   Button,
   Checkbox,
   Grid,
   Paper,
-  TextField,
   Typography,
   FormControlLabel,
   FormGroup,
@@ -16,6 +15,7 @@ import { Link as RouterLink, useHistory } from "react-router-dom";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { register } from "../api/API";
 import { useSnackbar } from "notistack";
+import TextValidatorWithLabel from "../components/TextValidatorWithLabel";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme) =>
       padding: 0,
     },
     input: theme.input,
+    strengthBar: {
+      [`& >p`]: {
+        color: `${theme.palette.text.secondary} !important`,
+      },
+    },
   })
 );
 
@@ -154,12 +159,13 @@ const Registration = (props) => {
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextValidator
+              <TextValidatorWithLabel
                 name="firstName"
                 label="First Name*"
                 variant="outlined"
                 className={classes.input}
                 size="small"
+                title={"firstName"}
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 validators={["required", "isNameOrCountry"]}
@@ -167,7 +173,7 @@ const Registration = (props) => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextValidator
+              <TextValidatorWithLabel
                 name="lastName"
                 label="Last Name*"
                 variant="outlined"
@@ -184,7 +190,7 @@ const Registration = (props) => {
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextValidator
+              <TextValidatorWithLabel
                 name="dob"
                 label="Date Of Birth*"
                 variant="outlined"
@@ -202,7 +208,7 @@ const Registration = (props) => {
               {/*TODO: implement date picker using @material-ui/pickers */}
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextValidator
+              <TextValidatorWithLabel
                 name="country"
                 label="Country*"
                 variant="outlined"
@@ -219,7 +225,7 @@ const Registration = (props) => {
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextValidator
+              <TextValidatorWithLabel
                 name="email"
                 label="Email Address*"
                 variant="outlined"
@@ -232,7 +238,7 @@ const Registration = (props) => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextValidator
+              <TextValidatorWithLabel
                 name="emailConfirmation"
                 label="Confirm Email Address*"
                 variant="outlined"
@@ -253,7 +259,7 @@ const Registration = (props) => {
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextValidator
+              <TextValidatorWithLabel
                 label="Password*"
                 variant="outlined"
                 className={classes.input}
@@ -272,10 +278,11 @@ const Registration = (props) => {
                 minLength={8}
                 scoreWords={["Too Weak", "Too Weak", "Just Ok", "Good", "Strong"]}
                 shortScoreWord="Too Short"
+                className={classes.strengthBar}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextValidator
+              <TextValidatorWithLabel
                 label="Confirm Password*"
                 variant="outlined"
                 className={classes.input}
@@ -288,7 +295,7 @@ const Registration = (props) => {
                 errorMessages={["Required", "Passwords don't match!"]}
               />
             </Grid>
-            <Grid item xs={12}></Grid>
+            <Grid item xs={12}/>
           </Grid>
         </Grid>
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>

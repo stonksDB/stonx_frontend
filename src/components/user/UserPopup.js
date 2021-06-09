@@ -1,14 +1,14 @@
 import {
   Button, Link, List, ListItem, ListItemIcon, ListItemText, Paper, Popover, Typography,
 } from "@material-ui/core";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { Brightness4, MeetingRoom, Share, VpnKey } from "@material-ui/icons";
 import { ThemeVariantContext } from "../../context/ThemeVariantContext";
 import { getRoute, PAGES } from "../../routes";
 import { Link as RouterLink } from 'react-router-dom';
 import { UserStateContext } from "../../context/UserStateContext";
-import { login, logout } from "../../api/API";
+import { logout } from "../../api/API";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

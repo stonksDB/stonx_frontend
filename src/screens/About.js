@@ -103,7 +103,7 @@ const About = (props) => {
             <RouterLink to="/">
               <ImageWithFallback
                 src="assets/logo_header/logo_header"
-                alt="logo"
+                alt="stonx logo"
               />
             </RouterLink>
           </Grid>

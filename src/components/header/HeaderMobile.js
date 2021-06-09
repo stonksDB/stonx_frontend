@@ -38,7 +38,7 @@ const HeaderMobile = (props) => {
           >
         <Grid item>
           <RouterLink to={getRoute(PAGES.HOME).path}>
-            <ImageWithFallback src="assets/logo/logo" alt="logo" width="40"/>
+            <ImageWithFallback src="assets/logo/logo" alt="stonx logo" width="40"/>
           </RouterLink>
         </Grid>
         <Grid item xs style={{padding: 4}}>

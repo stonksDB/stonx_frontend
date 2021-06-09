@@ -8,7 +8,7 @@ const ReducedHeader = (props) => {
   return (
     <AppBar elevation={0} className={props.className} style={{backgroundColor: theme.palette.background.default}}>
       <Toolbar style={{alignSelf: "center"}}>
-        <ImageWithFallback src={"assets/logo_header/logo_header"} width={200}/>
+        <ImageWithFallback src={"assets/logo_header/logo_header"} width={200} alt={"stonx logo"}/>
       </Toolbar>
     </AppBar>
   );

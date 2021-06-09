@@ -1,19 +1,10 @@
 import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 import React from "react";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
 import Carousel from "react-material-ui-carousel";
 import MarketChart from "./MarketChart";
 import { Box, Grid } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    
-  })
-);
-
 const ChartsCarousel = (props) => {
-  const classes = useStyles();
-  
   const mappedStocks = props.stocks.reduce(function (rows, key, index) {
     return (
       (index % 2 === 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) &&
