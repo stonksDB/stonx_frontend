@@ -4,7 +4,6 @@ import * as rax from 'retry-axios';
 const Www = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: 3000,
-  responseType: "json",
   //headers: {"X-Requested-By": "stonX"},
   validateStatus: function (status) {
     return status < 303; // Resolve only if the status code is less than 303
@@ -39,7 +38,7 @@ Www.interceptors.response.use(function (response) {
     return Promise.reject(error);
   else if (error.response)  // Server error: cannot do anything (already retried three times)
     console.error(`Error ${error.response.status} on ${error.response.config.url}`, error.toJSON());
-  else if (error.request)   // No response received: probable internet connection problem
+  else // No response received: probable internet connection problem
     console.error("Server unreachable");
 
   return null;

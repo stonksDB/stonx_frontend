@@ -128,7 +128,7 @@ const Registration = (props) => {
       enqueueSnackbar("Success!", {variant: "success"});
       setTimeout(() => history.push(getRoute(PAGES.LOGIN).path), 300);
     }).catch((error) => {
-      enqueueSnackbar(JSON.stringify(error.response.data), {variant: "error"});
+      enqueueSnackbar(error.response.data, {variant: "error"});
     });
   };
 

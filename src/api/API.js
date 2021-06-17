@@ -120,7 +120,7 @@ function register(data) {
 function login(data) {
   return new Endpoint({
     path: "auth/login",
-    method: "get",
+    method: "post",
     requestBody: data,
     responseFormat: {
       "follows": [ 0, 1, 2 ],
