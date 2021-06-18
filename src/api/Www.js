@@ -4,13 +4,16 @@ import * as rax from 'retry-axios';
 const Www = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: 3000,
-  //headers: {"X-Requested-By": "stonX"},
+  withCredentials: true,
+  headers: {"X-Requested-By": "stonX"},
   validateStatus: function (status) {
     return status < 303; // Resolve only if the status code is less than 303
   },
   raxConfig: {
     retry: 2,
-    noResponseRetries: 1,
+    noResponseRetries: 2,
+    retryDelay: 100,
+    backoffType: "linear",
     onRetryAttempt: err => {
       const cfg = rax.getConfig(err);
       console.warn(`Retry attempt #${cfg.currentRetryAttempt}`);

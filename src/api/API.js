@@ -113,7 +113,19 @@ function register(data) {
   return new Endpoint({
     path: "auth/register",
     method: "post",
-    requestBody: data
+    requestBody: data,
+    responseFormat: {
+      "follows": [ 0, 1, 2 ],
+      "likes": [ 0, 1, 2 ],
+      "share_holder_info": {
+      "share_holder_id": 9,
+        "country": "England",
+        "dob": "01-01-1970",
+        "email": "winston@smith.com",
+        "first_name": "Winston",
+        "last_name": "Smith",
+    }
+  }
   }).getResponse();
 }
 
@@ -126,6 +138,7 @@ function login(data) {
       "follows": [ 0, 1, 2 ],
       "likes": [ 0, 1, 2 ],
       "share_holder_info": {
+        "share_holder_id": 9,
         "country": "England",
         "dob": "01-01-1970",
         "email": "winston@smith.com",
@@ -139,7 +152,7 @@ function login(data) {
 function logout() {
   return new Endpoint({
     path: "auth/logout",
-    method: "get",
+    method: "post",
   }).getResponse();
 }
 
