@@ -4,8 +4,6 @@ import * as rax from 'retry-axios';
 const Www = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: 3000,
-  withCredentials: true,
-  headers: {"X-Requested-By": "stonX"},
   validateStatus: function (status) {
     return status < 303; // Resolve only if the status code is less than 303
   },
