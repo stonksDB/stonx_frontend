@@ -27,9 +27,6 @@ const UserMenu = (props) => {
     }
   };
 
-  const userInfo = props.userState.share_holder_info;
-  const userFullName = `${userInfo.first_name} ${userInfo.last_name}`;
-
   if (props.reduced)
     return (
       <IconButton
@@ -58,11 +55,11 @@ const UserMenu = (props) => {
           spacing={3}
         >
           <Grid item lg={2} xs={3}>
-            <UserAvatar userInfo={userInfo} />
+            <UserAvatar userInfo={props.userState.share_holder_info} />
           </Grid>
           <Grid item lg={8} xs={7}>
             <Typography align="left" variant="h6" color="textPrimary">
-              {userFullName}
+              {`${props.userState.share_holder_info.first_name} ${props.userState.share_holder_info.last_name}`}
             </Typography>
 
             <Box display={{ xs: 'none', lg: 'block'}}>
