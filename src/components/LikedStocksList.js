@@ -5,7 +5,7 @@ import { Grid } from "@material-ui/core";
 const LikedStocksList = (props) => {
   const ticker = {
     name: "Tesla Inc.",
-    short: "TSLA.MI",
+    ticker: "TSLA.MI",
     percentage: 12.2,
     id: 1,
   };

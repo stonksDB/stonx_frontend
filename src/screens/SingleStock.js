@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import {
   Grid,
@@ -13,6 +13,9 @@ import MarketChart from "../components/MarketChart";
 import StockSummary from "../components/StockSummary";
 import TickerChip from "../components/TickerChip";
 import NewsList from "../components/NewsList";
+import { getSingleTicker } from "../api/API";
+import { useParams } from "react-router-dom";
+import withLoading from "../api/withLoading";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme) =>
 
 const SingleStock = (props) => {
   const stock = {
-    short: "TSLA.MI",
+    ticker: "TSLA.MI",
     name: "Tesla, Inc.",
     currentCost: 629.7,
     percentage: 0.75, // TODO: check if this is absolute value or if it is positive/negative
@@ -61,88 +64,105 @@ const SingleStock = (props) => {
 
   const [likedStock, likeStock] = useState(stock.liked);
   const classes = useStyles();
+  const {id} = useParams();
 
-  return (
-    <>
-      <Grid container direction="row" spacing={3}>
-        <Grid item xs={12} sm={9}>
-          <Grid container direction="row" style={{ paddingBottom: 25 }}>
-            <Grid item xs={12}>
-              <Box
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <TickerChip ticker={stock} big showFullName/>
-                <IconButton
-                  aria-label="delete"
-                  color="primary"
-                  style={{ float: "right" }}
-                  onClick={() => likeStock(!likedStock)}
+  const [state, setState] = useState({
+    loading: true,
+    stock: {},
+  });
+
+  useEffect(() => {
+    let isActive = true;
+    setState({loading: true});
+
+    getSingleTicker(id)
+      .then((res) => isActive && setState({loading: false, stock: res}));
+
+    return () => {
+      isActive = false;
+    }
+  }, [setState, id]);
+
+  const InnerComponent = withLoading((props) => {
+    return (<>
+        <Grid container direction="row" spacing={3}>
+          <Grid item xs={12} sm={9}>
+            <Grid container direction="row" style={{paddingBottom: 25}}>
+              <Grid item xs={12}>
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  alignItems="center"
+                  justifyContent="space-between"
                 >
-                  {likedStock ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-                </IconButton>
-              </Box>
+                  <TickerChip ticker={props.stock} big showFullName/>
+                  <IconButton
+                    aria-label="delete"
+                    color="primary"
+                    style={{float: "right"}}
+                    onClick={() => likeStock(!likedStock)}
+                  >
+                    {likedStock ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
+                  </IconButton>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant={"h4"} style={{display: "inline-block"}}>
+                  {stock.currentCost}
+                </Typography>
+                <Typography
+                  variant={"h6"}
+                  style={{display: "inline-block", paddingRight: 20}}
+                >
+                  &nbsp;USD
+                </Typography>
+
+                {stock.variation > 0 ? (<>
+                    <Typography variant={"h6"} className={classes.positive}>
+                      ▲{Math.abs(stock.variation)} ({stock.percentage}%)
+                    </Typography>
+                  </>) : (<>
+                    <Typography variant={"h6"} className={classes.negative}>
+                      ▼{Math.abs(stock.variation)} ({stock.percentage}%)
+                    </Typography>
+                  </>)}
+
+                <Typography variant={"body2"} style={{display: "block"}}>
+                  {stock.market.name}, {stock.market.lastUpdate}
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <Typography variant={"h4"} style={{ display: "inline-block" }}>
-                {stock.currentCost}
-              </Typography>
-              <Typography
-                variant={"h6"}
-                style={{ display: "inline-block", paddingRight: 20 }}
-              >
-                &nbsp;USD
-              </Typography>
 
-              {stock.variation > 0 ? (
-                <>
-                  <Typography variant={"h6"} className={classes.positive}>
-                    ▲{Math.abs(stock.variation)} ({stock.percentage}%)
-                  </Typography>
-                </>
-              ) : (
-                <>
-                  <Typography variant={"h6"} className={classes.negative}>
-                    ▼{Math.abs(stock.variation)} ({stock.percentage}%)
-                  </Typography>
-                </>
-              )}
-
-              <Typography variant={"body2"} style={{ display: "block" }}>
-                {stock.market.name}, {stock.market.lastUpdate}
-              </Typography>
+            <Grid container direction="row" spacing={3}>
+              <Grid item xs={12}>
+                <Paper elevation={1} className={classes.card}>
+                  <MarketChart
+                    height="40vh"
+                    points="first"
+                    enableGridX
+                    enableGridY
+                    enableLegend={false}
+                  />
+                </Paper>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper elevation={1} className={classes.paddedCard}>
+                  <StockSummary data={stock.summary}/>
+                </Paper>
+              </Grid>
             </Grid>
           </Grid>
-
-          <Grid container direction="row" spacing={3}>
-            <Grid item xs={12}>
-              <Paper elevation={1} className={classes.card}>
-                <MarketChart
-                  height="40vh"
-                  points="first"
-                  enableGridX
-                  enableGridY
-                  enableLegend={false}
-                />
-              </Paper>
-            </Grid>
-            <Grid item xs={12}>
-              <Paper elevation={1} className={classes.paddedCard}>
-                <StockSummary data={stock.summary} />
-              </Paper>
-            </Grid>
+          <Grid item xs={12} sm={3}>
+            <Paper elevation={1} className={classes.card}>
+              <NewsList/>
+            </Paper>
           </Grid>
         </Grid>
-        <Grid item xs={12} sm={3}>
-          <Paper elevation={1} className={classes.card}>
-            <NewsList />
-          </Paper>
-        </Grid>
-      </Grid>
-    </>
-  );
+      </>
+    );
+  });
+
+  return <InnerComponent isLoading={state.loading} stock={state.stock}/>
 };
 
 export default SingleStock;

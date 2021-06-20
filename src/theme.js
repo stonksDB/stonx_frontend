@@ -1,6 +1,5 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import { lato, latoThin, latoLight } from "./fonts.js";
-import { useState } from "react";
 
 // TODO: check how to implement different font weights
 // FIXME: currently font weights are implemented but not working

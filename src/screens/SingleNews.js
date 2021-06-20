@@ -76,7 +76,7 @@ const SingleNews = (props) => {
             <Typography variant="body1">By {news.provider.displayName} • {dayjs(news.pubDate).format("D MMM YYYY")}</Typography>
           </Grid>
           <Grid item>
-            <TickerChip ticker={{name: news.finance.stockTickers[0].symbol, short: news.finance.stockTickers[0].symbol}}/>
+            <TickerChip ticker={{name: news.finance.stockTickers[0].symbol, ticker: news.finance.stockTickers[0].symbol}}/>
           </Grid>
         </Grid>
         <Grid item>

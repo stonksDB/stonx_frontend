@@ -1,28 +1,14 @@
 import axios from "axios";
-import * as rax from 'retry-axios';
 
 const Www = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: 3000,
   validateStatus: function (status) {
     return status < 303; // Resolve only if the status code is less than 303
-  },
-  raxConfig: {
-    retry: 2,
-    noResponseRetries: 2,
-    retryDelay: 100,
-    backoffType: "linear",
-    onRetryAttempt: err => {
-      const cfg = rax.getConfig(err);
-      console.warn(`Retry attempt #${cfg.currentRetryAttempt}`);
-    }
   }
 });
-Www.defaults.raxConfig = {...Www.defaults.raxConfig, instance: Www};
-rax.attach(Www);
 
 Www.interceptors.request.use(function (request) {
-
   if (process.env.REACT_APP_MOCK_API==="true")
     throw new axios.Cancel(`Simulated API call to ${request.url}, with body ${JSON.stringify(request.data)}`);
   else
@@ -30,6 +16,7 @@ Www.interceptors.request.use(function (request) {
 }, function (error) {
   return Promise.reject(error);
 });
+
 Www.interceptors.response.use(function (response) {
   return response;
 }, function (error) {

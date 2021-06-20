@@ -12,14 +12,16 @@ export default class Endpoint {
 
   getFullUrl() {
     let pathParams = "/" + Object.values(this.pathParam).join("/");
-    let queryParams = new URLSearchParams(this.queryParam).toString();
+    let queryParams = "?" + new URLSearchParams(this.queryParam).toString();
+
+    if (pathParams.length === 1)
+      pathParams = "";
+    if (queryParams.length === 1)
+      queryParams = "";
 
     let pathWithoutQuery = this.path + pathParams;
 
-    if (queryParams.length===0)
-      return pathWithoutQuery;
-    else
-      return `${pathWithoutQuery}?${queryParams}`;
+    return `${pathWithoutQuery}${queryParams}`;
   }
 
   async makeRequest() {

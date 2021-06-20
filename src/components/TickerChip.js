@@ -13,7 +13,7 @@ const TickerChip = (props) => {
       <Chip
         size={props.big ? "medium" : "small"}
         color={color}
-        label={props.ticker.short}
+        label={props.ticker.ticker}
         style={{fontSize: chipFontSize, marginRight: chipRightMargin}}
       />
       {props.showFullName ? (
@@ -31,7 +31,7 @@ TickerChip.defaultProps = {
   disabled: false,
   ticker: {   //TODO: Remove this when we'll have real data
     name: "Tesla Inc.",
-    short: "TSLA.MI",
+    ticker: "TSLA",
   },
 };
 

@@ -105,7 +105,34 @@ function search(query) {
   return new Endpoint({
     path: "search",
     queryParam: {key: query},
-    responseFormat: ["element1", "element2"]
+    responseFormat: {
+      names: [],
+      tickers: [
+        {
+          name: "TESLA INC",
+          ticker: "TSLA"
+        }
+      ]
+    }
+  }).getResponse();
+}
+
+function getSingleTicker(ticker) {
+  return new Endpoint({
+    path: "company/single",
+    method: "get",
+    queryParam: {"ticker": ticker},
+    responseFormat: {
+      ticker: "TSLA",
+      name: "Tesla Inc",
+      sector: 0,
+      logo_url: "https://www.example.com",
+      city: "New York",
+      website: "https://www.tesla.com",
+      phone: "+1 111 111 111",
+      state: "USA",
+      industry_id: 0
+    }
   }).getResponse();
 }
 
@@ -156,4 +183,4 @@ function logout() {
   }).getResponse();
 }
 
-export { getNews, getSingleNews, search, register, login, logout };
+export { getNews, getSingleNews, search, register, login, logout, getSingleTicker };

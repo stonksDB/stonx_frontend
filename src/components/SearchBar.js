@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { TextField, Typography, InputAdornment, Paper } from "@material-ui/core";
+import { TextField, InputAdornment, Paper, Link } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { search } from "../api/API";
+import TickerChip from "./TickerChip";
+import { Link as RouterLink } from "react-router-dom";
+import { getRoute, PAGES } from "../routes";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     input: {...theme.search },
     card: {...theme.card, padding: 0, marginTop: theme.spacing(0.5)},
     button: { ...theme.button, marginLeft: 5 },
+    links: { color: theme.palette.text.primary },
   })
 );
 
@@ -32,7 +36,7 @@ const SearchBar = (props) => {
   const [options, setOptions] = useState([]);
 
   useEffect(() => {
-    let isActive = false;
+    let isActive = true;
 
     if (inputValue === "") {
       setOptions(value ? [value] : []);
@@ -44,7 +48,7 @@ const SearchBar = (props) => {
       if (isActive) {
         let newOptions = [];
 
-        if (results) newOptions = [...newOptions, ...results];
+        if (results) newOptions = [...newOptions, ...results.tickers];
         setOptions(newOptions);
       }
     });
@@ -60,7 +64,7 @@ const SearchBar = (props) => {
       fullWidth
       options={options}
       value={inputValue}
-      getOptionSelected={(option, value) => true}
+      getOptionLabel={(option) => (option.ticker===undefined) ? option : option.ticker}
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
@@ -89,9 +93,15 @@ const SearchBar = (props) => {
       )}
       renderOption={(option) => {
         return (
-          <Typography variant="body2" color="textSecondary">
-            {option}
-          </Typography>
+          <RouterLink
+            component={Link}
+            to={`${getRoute(PAGES.SINGLE_STOCK).path.slice(0,-4)}/${option.ticker}`}
+            variant="body2"
+            color="textSecondary"
+            className="links"
+          >
+            <TickerChip showFullName ticker={option}/>
+          </RouterLink>
         );
       }}
     />
