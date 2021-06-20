@@ -31,8 +31,7 @@
     "react-material-ui-form-validator": "^2.1.4",
     "react-password-strength-bar": "^0.3.3",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "retry-axios": "^2.4.0"
+    "react-scripts": "4.0.3"
   },
   "devDependencies": {
     "babel-plugin-import": "^1.13.3",
