@@ -123,15 +123,15 @@ function getSingleTicker(ticker) {
     method: "get",
     queryParam: {"ticker": ticker},
     responseFormat: {
+      city: "Palo Alto",
+      industry_id: 47,
+      logo_url: "https://logo.clearbit.com/tesla.com",
+      name: "TESLA INC",
+      phone: "650-681-5000",
+      sector: "Consumer Cyclical",
+      state: "CA",
       ticker: "TSLA",
-      name: "Tesla Inc",
-      sector: 0,
-      logo_url: "https://www.example.com",
-      city: "New York",
-      website: "https://www.tesla.com",
-      phone: "+1 111 111 111",
-      state: "USA",
-      industry_id: 0
+      website: "http://www.tesla.com"
     }
   }).getResponse();
 }
