@@ -44,14 +44,7 @@ const SearchBar = (props) => {
     }
 
     search(inputValue)
-    .then((results) => {
-      if (isActive) {
-        let newOptions = [];
-
-        if (results) newOptions = [...newOptions, ...results.tickers];
-        setOptions(newOptions);
-      }
-    });
+    .then((results) => isActive && setOptions([...new Set(results.names.concat(results.tickers))]));
 
     return () => {
       isActive = false;

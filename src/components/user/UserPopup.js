@@ -94,23 +94,23 @@ const UserPopup = (props) => {
             </ListItem>
           ) : (
             <>
-              <ListItem button>
+              <ListItem button component={RouterLink} to={getRoute(PAGES.LOGIN).path}>
                 <ListItemIcon><VpnKey /></ListItemIcon>
                 <ListItemText
                   primary={
-                    <Link component={RouterLink} to={getRoute(PAGES.LOGIN).path} variant="body1" className={classes.menuText}>
+                    <Typography variant="body1" className={classes.menuText}>
                       Login
-                    </Link>
+                    </Typography>
                   }
                 />
               </ListItem>
-              <ListItem button>
+              <ListItem button component={RouterLink} to={getRoute(PAGES.LOGIN).path}>
               <ListItemIcon><MeetingRoom /></ListItemIcon>
               <ListItemText
                 primary={
-                  <Link component={RouterLink} to={getRoute(PAGES.LOGIN).path} variant="body1" className={classes.menuText}>
+                  <Typography variant="body1" className={classes.menuText}>
                   Register
-                  </Link>
+                  </Typography>
                 }
               />
               </ListItem>
