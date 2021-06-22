@@ -1,9 +1,8 @@
-import { Box, Typography, IconButton } from "@material-ui/core";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import React, { useState } from "react";
+import { Box, Typography } from "@material-ui/core";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
+import React from "react";
 import TickerChip from "./TickerChip";
+import TickerHeart from "./TickerHeart";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -27,8 +26,8 @@ const useStyles = makeStyles((theme) =>
 );
 
 const FollowedTicker = (props) => {
-  const [likedStock, likeStock] = useState(true);
   const ticker = props.ticker;
+  const percentage = 12.2;
   const classes = useStyles();
 
   return (
@@ -41,27 +40,20 @@ const FollowedTicker = (props) => {
     >
       <TickerChip ticker={ticker} showFullName/>
 
-      {ticker.percentage > 0 ? (
+      {percentage > 0 ? (
         <>
           <Typography variant={"h6"} className={classes.positive}>
-            ▲ {Math.abs(ticker.percentage)}
+            ▲ {Math.abs(percentage)}
           </Typography>
         </>
       ) : (
         <>
           <Typography variant={"h6"} className={classes.negative}>
-            ▼ {Math.abs(ticker.percentage)}
+            ▼ {Math.abs(percentage)}
           </Typography>
         </>
       )}
-      <IconButton
-        aria-label="delete"
-        color="primary"
-        style={{ float: "right" }}
-        onClick={() => likeStock(!likedStock)}
-      >
-        {likedStock ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-      </IconButton>
+      <TickerHeart ticker={props.ticker}/>
     </Box>
   );
 };

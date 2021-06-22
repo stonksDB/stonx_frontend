@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
-import {
-  Grid,
-  Paper,
-  Typography,
-  IconButton,
-  Box,
-} from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import React, { useContext, useEffect, useState } from "react";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { Box, Grid, Paper, Typography, } from "@material-ui/core";
 import MarketChart from "../components/MarketChart";
 import StockSummary from "../components/StockSummary";
 import TickerChip from "../components/TickerChip";
 import NewsList from "../components/NewsList";
-import { getSingleTicker } from "../api/API";
+import { getCompanyInfo } from "../api/API";
 import { useParams } from "react-router-dom";
 import withLoading from "../api/withLoading";
+import TickerHeart from "../components/TickerHeart";
+import { UserStateContext } from "../context/UserStateContext";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -39,14 +33,13 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const SingleStock = (props) => {
-  const stock = {
-    ticker: "TSLA.MI",
+const SingleTicker = (props) => {
+  const mockTicker = {
+    ticker: "TSLA",
     name: "Tesla, Inc.",
     currentCost: 629.7,
     percentage: 0.75, // TODO: check if this is absolute value or if it is positive/negative
     variation: +25.7,
-    liked: true,
     market: {
       name: "NASDAQ" ,
       lastUpdate: "gg/mm/yyyy",
@@ -62,21 +55,19 @@ const SingleStock = (props) => {
     }
   }
 
-  const [likedStock, likeStock] = useState(stock.liked);
   const classes = useStyles();
   const {id} = useParams();
-
+  const {isLoggedIn} = useContext(UserStateContext);
   const [state, setState] = useState({
     loading: true,
-    stock: {},
+    ticker: {},
   });
 
   useEffect(() => {
     let isActive = true;
-    setState({loading: true});
 
-    getSingleTicker(id)
-      .then((res) => isActive && setState({loading: false, stock: res}));
+    getCompanyInfo(id)
+      .then((res) => isActive && setState({loading: false, ticker: res}));
 
     return () => {
       isActive = false;
@@ -84,7 +75,8 @@ const SingleStock = (props) => {
   }, [setState, id]);
 
   const InnerComponent = withLoading((props) => {
-    return (<>
+    return (
+      <>
         <Grid container direction="row" spacing={3}>
           <Grid item xs={12} sm={9}>
             <Grid container direction="row" style={{paddingBottom: 25}}>
@@ -95,20 +87,13 @@ const SingleStock = (props) => {
                   alignItems="center"
                   justifyContent="space-between"
                 >
-                  <TickerChip ticker={props.stock} big showFullName/>
-                  <IconButton
-                    aria-label="delete"
-                    color="primary"
-                    style={{float: "right"}}
-                    onClick={() => likeStock(!likedStock)}
-                  >
-                    {likedStock ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
-                  </IconButton>
+                  <TickerChip ticker={props.ticker} big showFullName/>
+                  {isLoggedIn() && <TickerHeart ticker={props.ticker}/>}
                 </Box>
               </Grid>
               <Grid item xs={12}>
                 <Typography variant={"h4"} style={{display: "inline-block"}}>
-                  {stock.currentCost}
+                  {mockTicker.currentCost}
                 </Typography>
                 <Typography
                   variant={"h6"}
@@ -117,18 +102,18 @@ const SingleStock = (props) => {
                   &nbsp;USD
                 </Typography>
 
-                {stock.variation > 0 ? (<>
+                {mockTicker.variation > 0 ? (<>
                     <Typography variant={"h6"} className={classes.positive}>
-                      ▲{Math.abs(stock.variation)} ({stock.percentage}%)
+                      ▲{Math.abs(mockTicker.variation)} ({mockTicker.percentage}%)
                     </Typography>
                   </>) : (<>
                     <Typography variant={"h6"} className={classes.negative}>
-                      ▼{Math.abs(stock.variation)} ({stock.percentage}%)
+                      ▼{Math.abs(mockTicker.variation)} ({mockTicker.percentage}%)
                     </Typography>
                   </>)}
 
                 <Typography variant={"body2"} style={{display: "block"}}>
-                  {stock.market.name}, {stock.market.lastUpdate}
+                  {mockTicker.market.name}, {mockTicker.market.lastUpdate}
                 </Typography>
               </Grid>
             </Grid>
@@ -147,7 +132,7 @@ const SingleStock = (props) => {
               </Grid>
               <Grid item xs={12}>
                 <Paper elevation={1} className={classes.paddedCard}>
-                  <StockSummary data={stock.summary}/>
+                  <StockSummary data={mockTicker.summary}/>
                 </Paper>
               </Grid>
             </Grid>
@@ -162,7 +147,7 @@ const SingleStock = (props) => {
     );
   });
 
-  return <InnerComponent isLoading={state.loading} stock={state.stock}/>
+  return <InnerComponent isLoading={state.loading} ticker={state.ticker}/>
 };
 
-export default SingleStock;
+export default SingleTicker;

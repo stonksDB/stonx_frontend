@@ -117,11 +117,11 @@ function search(query) {
   }).getResponse();
 }
 
-function getSingleTicker(ticker) {
+function getCompanyInfo(ticker) {
   return new Endpoint({
-    path: "company/single",
+    path: "stocks/company/single",
     method: "get",
-    queryParam: {"ticker": ticker},
+    pathParam: {"ticker": ticker},
     responseFormat: {
       city: "Palo Alto",
       industry_id: 47,
@@ -143,7 +143,7 @@ function register(data) {
     requestBody: data,
     responseFormat: {
       "follows": [ 0, 1, 2 ],
-      "likes": [ 0, 1, 2 ],
+      "likes": [ "TSLA" ],
       "share_holder_info": {
       "share_holder_id": 9,
         "country": "England",
@@ -163,7 +163,7 @@ function login(data) {
     requestBody: data,
     responseFormat: {
       "follows": [ 0, 1, 2 ],
-      "likes": [ 0, 1, 2 ],
+      "likes": [ "TSLA" ],
       "share_holder_info": {
         "share_holder_id": 9,
         "country": "England",
@@ -183,4 +183,19 @@ function logout() {
   }).getResponse();
 }
 
-export { getNews, getSingleNews, search, register, login, logout, getSingleTicker };
+function toggleTickerPreference(ticker, action) {
+  let method="";
+  if (action==="add")
+    method = "post";
+  else
+    method = "delete";
+
+  return new Endpoint({
+    path: "user/like",
+    "method": method,
+    pathParam: {"ticker": ticker},
+    responseFormat: "",
+  }).getResponse();
+}
+
+export { getNews, getSingleNews, getCompanyInfo, search, register, login, logout, toggleTickerPreference };

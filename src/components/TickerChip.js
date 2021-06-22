@@ -16,11 +16,9 @@ const TickerChip = (props) => {
         label={props.ticker.ticker}
         style={{fontSize: chipFontSize, marginRight: chipRightMargin}}
       />
-      {props.showFullName ? (
-        <Typography variant={fullNameVariant}>{props.ticker.name}</Typography>
-        )
-        : ("")
-      }
+      { props.showFullName && <Typography variant={fullNameVariant}>
+        {props.big ? props.ticker.name : props.ticker.name.substring(0,9)}  {/*TODO: Fix alignment*/}
+      </Typography> }
     </Box>
   );
 };
