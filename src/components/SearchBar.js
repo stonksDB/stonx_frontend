@@ -88,7 +88,7 @@ const SearchBar = (props) => {
         return (
           <RouterLink
             component={Link}
-            to={`${getRoute(PAGES.SINGLE_STOCK).path.slice(0,-4)}/${option.ticker}`}
+            to={`${getRoute(PAGES.SINGLE_TICKER).path.slice(0,-4)}/${option.ticker}`}
             variant="body2"
             color="textSecondary"
             className="links"

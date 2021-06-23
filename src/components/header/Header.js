@@ -30,7 +30,7 @@ const Header = (props) => {
           </Grid>
           <Grid item xs={3}>
             {props.isLoggedIn() ? (
-              <UserMenu {...props}/>
+              <UserMenu/>
             ) : (
               <Grid container spacing={2}>
                 <Grid item md={8}>

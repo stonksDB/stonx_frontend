@@ -1,9 +1,10 @@
 import generateColor from "../../utils/ColorGenerator";
 import { Avatar, Box, ButtonBase, Grid, IconButton, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useContext } from "react";
 import { MoreVert } from "@material-ui/icons";
 import UserPopup from "./UserPopup";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import { UserStateContext } from "../../context/UserStateContext";
 
 const UserAvatar = (props) => {
   const fullName = `${props.userInfo.first_name} ${props.userInfo.last_name}`;
@@ -18,6 +19,7 @@ const UserMenu = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+  const {userState, isLoggedIn} = useContext(UserStateContext);
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -35,7 +37,7 @@ const UserMenu = (props) => {
         aria-controls={open ? "menu-list-grow" : undefined}
         aria-haspopup="true"
       >
-        {props.isLoggedIn() ? <UserAvatar userInfo={props.userState.share_holder_info}/> : <MoreVert/>}
+        {isLoggedIn() ? <UserAvatar userInfo={userState.share_holder_info}/> : <MoreVert/>}
         <UserPopup id={id} open={open} anchorEl={anchorEl} handleClose={handleClose} {...props}/>
       </IconButton>
     )
@@ -55,11 +57,11 @@ const UserMenu = (props) => {
           spacing={3}
         >
           <Grid item lg={2} xs={3}>
-            <UserAvatar userInfo={props.userState.share_holder_info} />
+            <UserAvatar userInfo={userState.share_holder_info} />
           </Grid>
           <Grid item lg={8} xs={7}>
             <Typography align="left" variant="h6" color="textPrimary">
-              {`${props.userState.share_holder_info.first_name} ${props.userState.share_holder_info.last_name}`}
+              {`${userState.share_holder_info.first_name} ${userState.share_holder_info.last_name}`}
             </Typography>
 
             <Box display={{ xs: 'none', lg: 'block'}}>
@@ -67,7 +69,7 @@ const UserMenu = (props) => {
                 align="left"
                 variant="body2"
                 color="textPrimary"
-              >{`Watching ${props.userState.likes.length} stocks`}</Typography>
+              >{`Watching ${userState.likes.length} stocks`}</Typography>
             </Box>
           </Grid>
           <Grid item style={{flexGrow: 1, padding: 0}} lg xs={false}>

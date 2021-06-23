@@ -1,5 +1,7 @@
 import { Box, Chip, Typography, useTheme } from "@material-ui/core";
 import React from "react";
+import { getRoute, PAGES } from "../routes";
+import { Link as RouterLink } from "react-router-dom";
 
 const TickerChip = (props) => {
   const theme = useTheme();
@@ -11,6 +13,8 @@ const TickerChip = (props) => {
   return (
     <Box display="flex" flexDirection="row">
       <Chip
+        component={RouterLink}
+        to={`${getRoute(PAGES.SINGLE_TICKER).path.slice(0, -4)}/${props.ticker.ticker}`}
         size={props.big ? "medium" : "small"}
         color={color}
         label={props.ticker.ticker}
@@ -27,7 +31,7 @@ TickerChip.defaultProps = {
   showFullName: false,
   big: false,
   disabled: false,
-  ticker: {   //TODO: Remove this when we'll have real data
+  ticker: {   //TODO: Remove this when News endpoint also gets tickers data
     name: "Tesla Inc.",
     ticker: "TSLA",
   },

@@ -45,7 +45,7 @@ const HeaderMobile = (props) => {
           <SearchBar />
         </Grid>
           <Grid item>
-            <UserMenu reduced {...props}/>
+            <UserMenu reduced/>
           </Grid>
       </Grid>
         />

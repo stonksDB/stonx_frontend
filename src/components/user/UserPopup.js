@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) =>
 const UserPopup = (props) => {
   const classes = useStyles();
   const toggleTheme = useContext(ThemeVariantContext);
-  const {setUserState} = useContext(UserStateContext);
+  const {isLoggedIn, setUserState} = useContext(UserStateContext);
 
   const handleLogout = () => {
     setUserState(null);
@@ -59,7 +59,7 @@ const UserPopup = (props) => {
         elevation: 3,
       }}
     >
-      <Paper className={classes.menu}> {/*TODO: Adapt to parent*/}
+      <Paper className={classes.menu}>
         <List spacing={2}>
           <ListItem button>
             <ListItemIcon><Brightness4 /></ListItemIcon>
@@ -81,7 +81,7 @@ const UserPopup = (props) => {
               }
             />
           </ListItem>
-          {props.isLoggedIn() ? (
+          {isLoggedIn() ? (
             <ListItem button>
               <Button
                 variant="outlined"

@@ -49,7 +49,7 @@ const MarketChart = (props) => {
         curve="cardinal"
 
         xScale={{type: "point", min: "auto", max: "auto"}}
-        yScale={{type: "linear", min: "auto", max: "auto"}}  //TODO: sometimes points go outside boundaries
+        yScale={{type: "linear", min: "auto", max: "auto"}}
 
         axisBottom={ props.enableAxisX ? {
           orient: "bottom", tickSize: 7, tickPadding: 5, legend: props.xTitle, legendOffset: 30,
