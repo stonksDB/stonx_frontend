@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
-import { Button, Grid, TextField, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import { Link as RouterLink, useHistory } from "react-router-dom";
 import { getRoute, PAGES } from "../routes";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import { login } from "../api/API";
 import { UserStateContext } from "../context/UserStateContext";
 import { useSnackbar } from "notistack";
+import TextValidatorWithLabel from "../components/TextValidatorWithLabel";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -27,6 +28,11 @@ const useStyles = makeStyles((theme) =>
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  ValidatorForm.addValidationRule("isEmail", (value) => {
+    return /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(value);
+  });
+
 
   const {setUserState} = useContext(UserStateContext);
   const {enqueueSnackbar} = useSnackbar();
@@ -62,23 +68,29 @@ const Login = (props) => {
         </Grid>
 
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
-          <TextField
+          <TextValidatorWithLabel
             label="Email"
             variant="outlined"
             className={classes.input}
             size="small"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
+            validators={["required", "isEmail"]}
+            errorMessages={["Required", "Insert a valid Email!"]}
           />
         </Grid>
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
-          <TextField
+          <TextValidatorWithLabel
             label="Password"
             variant="outlined"
             className={classes.input}
             size="small"
             type="password"
             autoComplete="current-password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
+            validators={["required"]}
+            errorMessages={["Required"]}
           />
         </Grid>
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
