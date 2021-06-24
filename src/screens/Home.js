@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import MarketChart from "../components/MarketChart";
 import NewsList from "../components/NewsList";
 import StockPreview from "../components/StockPreview";
+import { UserStateContext } from "../context/UserStateContext";
 
 const stockData1 = {
   name: "Dow Jones",
@@ -30,6 +31,8 @@ const useStyles = makeStyles((theme) =>
 const Home = (props) => {
   const classes = useStyles();
 
+  const { isLoggedIn } = useContext(UserStateContext);
+
   return (
     <>
       <Typography variant="h4" component="h1" className={classes.pageTitle}>
@@ -41,12 +44,27 @@ const Home = (props) => {
           <Grid container direction="row" spacing={3}>
             <Grid item xs={12}>
               <Paper elevation={1} className={classes.card}>
-                <Grid container direction="row" spacing={1} justify="space-between">
-                  <Grid item xs><StockPreview stockData={stockData1}/></Grid>
-                  <Grid item xs><StockPreview stockData={stockData1}/></Grid>
-                  <Grid item xs><StockPreview stockData={stockData1}/></Grid>
-                  <Grid item xs><StockPreview stockData={stockData2}/></Grid>
-                  <Grid item xs><StockPreview stockData={stockData2}/></Grid>
+                <Grid
+                  container
+                  direction="row"
+                  spacing={1}
+                  justify="space-between"
+                >
+                  <Grid item xs>
+                    <StockPreview stockData={stockData1} />
+                  </Grid>
+                  <Grid item xs>
+                    <StockPreview stockData={stockData1} />
+                  </Grid>
+                  <Grid item xs>
+                    <StockPreview stockData={stockData1} />
+                  </Grid>
+                  <Grid item xs>
+                    <StockPreview stockData={stockData2} />
+                  </Grid>
+                  <Grid item xs>
+                    <StockPreview stockData={stockData2} />
+                  </Grid>
                 </Grid>
               </Paper>
             </Grid>
@@ -57,10 +75,12 @@ const Home = (props) => {
                   height="38vh"
                   enableArea
                   enablePoints={false}
+                  specialType="mostperforming"
+                  
                 />
               </Paper>
             </Grid>
-            <Grid item xs={6}>
+            {/* <Grid item xs={6}>
               <Paper elevation={1} className={classes.card}>
                 <MarketChart
                   title="Sector"
@@ -68,21 +88,24 @@ const Home = (props) => {
                   enableLegend={false}
                 />
               </Paper>
-            </Grid>
-            <Grid item xs={6}>
+            </Grid> */}
+            <Grid item xs={12}>
               <Paper elevation={1} className={classes.card}>
-                <MarketChart
-                  title="My Stocks"
-                  usePointsOf="second"
-                  enableLegend={false}
-                />
+                {isLoggedIn ? (<Paper/>) : (
+                  <MarketChart
+                    title="My Stocks"
+                    height="30vh"
+                    usePointsOf="second"
+                    enableLegend={false}
+                  />
+                )}
               </Paper>
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={12} sm={3}>
           <Paper elevation={1} className={classes.card}>
-            <NewsList/>
+            <NewsList />
           </Paper>
         </Grid>
       </Grid>

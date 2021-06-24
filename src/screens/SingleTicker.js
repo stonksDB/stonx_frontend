@@ -34,6 +34,7 @@ const useStyles = makeStyles((theme) =>
 );
 
 const SingleTicker = (props) => {
+
   const mockTicker = {
     ticker: "TSLA",
     name: "Tesla, Inc.",
@@ -58,6 +59,7 @@ const SingleTicker = (props) => {
   const classes = useStyles();
   const {id} = useParams();
   const {isLoggedIn} = useContext(UserStateContext);
+  
   const [state, setState] = useState({
     loading: true,
     ticker: {},
