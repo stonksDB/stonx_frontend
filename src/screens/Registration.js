@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import {
@@ -16,6 +16,7 @@ import PasswordStrengthBar from "react-password-strength-bar";
 import { register } from "../api/API";
 import { useSnackbar } from "notistack";
 import TextValidatorWithLabel from "../components/TextValidatorWithLabel";
+import { UserStateContext } from "../context/UserStateContext";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -56,6 +57,7 @@ const Registration = (props) => {
   const classes = useStyles();
   const history = useHistory();
   const {enqueueSnackbar} = useSnackbar();
+  const {setUserState} = useContext(UserStateContext);
 
   const [state, setState] = useState(interests);
   const [firstName, setFirstName] = useState();
@@ -118,6 +120,7 @@ const Registration = (props) => {
         .filter((elem) => elem.checked === true)
         .map((elem) => elem.id),
     }).then((data) => {
+      setUserState(data);
       enqueueSnackbar("Success!", {variant: "success"});
       setTimeout(() => history.push(getRoute(PAGES.LOGIN).path), 300);
     }).catch((error) => {

@@ -32,7 +32,7 @@ const UserPopup = (props) => {
 
   const handleLogout = () => {
     setUserState(null);
-    logout().then();
+    logout().then().catch();
   };
 
   return (
