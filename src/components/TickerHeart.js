@@ -4,11 +4,15 @@ import { UserStateContext } from "../context/UserStateContext";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { IconButton } from "@material-ui/core";
+import { useSnackbar } from "notistack";
+import { getRoute, PAGES } from "../routes";
+import { useHistory } from "react-router-dom";
 
 const TickerHeart = (props) => {
   const {userState, setUserState} = useContext(UserStateContext);
   const [likedTicker, likeTicker] = useState(false);
-
+  const {enqueueSnackbar} = useSnackbar();
+  const history = useHistory();
 
   useEffect(() => {
     likeTicker(userState.likes.some((item) => item===props.ticker.ticker));
@@ -29,7 +33,13 @@ const TickerHeart = (props) => {
     let cloneObj = JSON.parse(JSON.stringify(userState));
     cloneObj.likes = newLikes;
     setUserState(cloneObj);
-    toggleTickerPreference(ticker.ticker, action).then();
+    toggleTickerPreference(ticker.ticker, action)
+      .then()
+      .catch(() => {
+        setUserState(null);
+        enqueueSnackbar("Authorization token expired! Please log in again", {variant: "error"});
+        setTimeout(() => history.push(getRoute(PAGES.LOGIN).path), 300);
+      });
   };
 
   return (
