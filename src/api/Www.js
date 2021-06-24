@@ -4,7 +4,7 @@ const Www = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
   timeout: 3000,
   validateStatus: function (status) {
-    return status < 303; // Resolve only if the status code is less than 303
+    return status < 303;
   }
 });
 
@@ -24,7 +24,7 @@ Www.interceptors.response.use(function (response) {
     console.log(error.message);
   else if (error.response && error.response.status>=400 && error.response.status<500)  // Client error: pass it to view component
     return Promise.reject(error);
-  else if (error.response)  // Server error: cannot do anything (already retried three times)
+  else if (error.response)  // Server error: cannot do anything
     console.error(`Error ${error.response.status} on ${error.response.config.url}`, error.toJSON());
   else // No response received: probable internet connection problem
     console.error("Server unreachable");

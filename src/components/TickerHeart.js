@@ -29,8 +29,7 @@ const TickerHeart = (props) => {
     let cloneObj = JSON.parse(JSON.stringify(userState));
     cloneObj.likes = newLikes;
     setUserState(cloneObj);
-    console.log(cloneObj);
-    toggleTickerPreference(ticker.id, action).then().catch((err) => console.log(err));
+    toggleTickerPreference(ticker.ticker, action).then();
   };
 
   return (

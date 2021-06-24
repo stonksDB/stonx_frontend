@@ -58,7 +58,6 @@ const Registration = (props) => {
   const {enqueueSnackbar} = useSnackbar();
 
   const [state, setState] = useState(interests);
-
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
@@ -72,29 +71,23 @@ const Registration = (props) => {
   ValidatorForm.addValidationRule("isEmail", (value) => {
     return /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(value);
   });
-
   ValidatorForm.addValidationRule("confirmEmail", (confirmEmail) => {
     return confirmEmail === email;
   });
-
   ValidatorForm.addValidationRule("isNameOrCountry", (value) => {
     return /[a-zA-Z]{2,}/.test(value);
   });
-
   ValidatorForm.addValidationRule("isDate", (value) => {
     return /^(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d$/.test(
       value
     );
   });
-
   ValidatorForm.addValidationRule("confirmPassword", (confirmPassword) => {
     return confirmPassword === password;
   });
-
   ValidatorForm.addValidationRule("isStrongPassword", (value) => {
     return passwordScore > 1;
   });
-
   ValidatorForm.addValidationRule("isPast", (value) => {
     if (value !== undefined) {
       var parts = value.split("/");

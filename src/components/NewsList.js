@@ -52,7 +52,7 @@ const NewsList = (props) => {   //TODO: Adjust number based on height
   useEffect(() => {
     let isActive = true;
     setState({loading: true, news: []});
-    getNews("TSLA")
+    getNews("")
       .then((res) => isActive && setState({loading: false, news: res}));
 
     return () => {
