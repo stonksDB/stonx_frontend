@@ -8,64 +8,68 @@ import {
   Button,
 } from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { getMostPerforming } from "../api/API";
+import { getMostPerforming, getHistory } from "../api/API";
 
-const data = {
-  xTitle: "X Axis",
-  yTitle: "Y Axis",
-  points: [
-    {
-      id: "Stock A",
-      data: [
-        { x: 0, y: 7 },
-        { x: 1, y: 5 },
-        { x: 2, y: 11 },
-        { x: 3, y: 9 },
-        { x: 4, y: 13 },
-        { x: 7, y: 16 },
-        { x: 9, y: 12 },
-      ],
-    },
-    {
-      id: "Stock B",
-      color: "#FAC032",
-      data: [
-        { x: 0, y: 12 },
-        { x: 1, y: 23 },
-        { x: 2, y: 5 },
-        { x: 3, y: 9 },
-        { x: 4, y: 14 },
-        { x: 7, y: 2 },
-        { x: 9, y: 6 },
-      ],
-    },
-    {
-      id: "Stock C",
-      color: "#FAC032",
-      data: [
-        { x: 0, y: 3 },
-        { x: 1, y: 4 },
-        { x: 2, y: 5 },
-        { x: 3, y: 19 },
-        { x: 4, y: 23 },
-        { x: 7, y: 4 },
-        { x: 9, y: 23 },
-      ],
-    },
-  ],
-};
+const colors = ["#2360FB", "#FAC032", "#6eff6e", "#d05dff"];
+
+// const data = {
+//   xTitle: "X Axis",
+//   yTitle: "Y Axis",
+//   points: [
+//     {
+//       id: "Stock A",
+//       data: [
+//         { x: 0, y: 7 },
+//         { x: 1, y: 5 },
+//         { x: 2, y: 11 },
+//         { x: 3, y: 9 },
+//         { x: 4, y: 13 },
+//         { x: 7, y: 16 },
+//         { x: 9, y: 12 },
+//       ],
+//     },
+//     {
+//       id: "Stock B",
+//       color: "#FAC032",
+//       data: [
+//         { x: 0, y: 12 },
+//         { x: 1, y: 23 },
+//         { x: 2, y: 5 },
+//         { x: 3, y: 9 },
+//         { x: 4, y: 14 },
+//         { x: 7, y: 2 },
+//         { x: 9, y: 6 },
+//       ],
+//     },
+//     {
+//       id: "Stock C",
+//       color: "#FAC032",
+//       data: [
+//         { x: 0, y: 3 },
+//         { x: 1, y: 4 },
+//         { x: 2, y: 5 },
+//         { x: 3, y: 19 },
+//         { x: 4, y: 23 },
+//         { x: 7, y: 4 },
+//         { x: 9, y: 23 },
+//       ],
+//     },
+//   ],
+// };
 
 const MarketChart = (props) => {
   const theme = useTheme();
   const [range, setRange] = useState("day");
+  const [dataPoints, setDataPoints] = useState([]);
+  const [ticks, setTicks] = useState([]);
 
-  const dataPoints =
-    props.usePointsOf === "both"
-      ? data.points
-      : props.usePointsOf === "first"
-      ? [data.points[0]]
-      : [data.points[1]];
-      
+  // const dataPoints =
+  //   props.usePointsOf === "both"
+  //     ? data.points
+  //     : props.usePointsOf === "first"
+  //     ? [data.points[0]]
+  //     : [data.points[1]];
+
   const chartTheme = {
     textColor: theme.palette.text.primary,
     grid: {
@@ -80,16 +84,65 @@ const MarketChart = (props) => {
     },
   };
 
+  const getDate = (dateString) => {
+    let date = new Date(dateString);
+    return (
+      date.getDate() +
+      "/" +
+      date.getMonth() +
+      " " +
+      date.getHours() +
+      ":" +
+      date.getMinutes()
+    );
+  };
+
+  const prettifyHistory = (history) => {
+    let newHistory = [];
+    history.forEach((entry, i) => {
+      newHistory[i] = {
+        x: getDate(entry.datetime),
+        y: (entry.Open + entry.Close) / 2.0,
+        date: new Date(entry.datetime),
+      };
+    });
+    return newHistory;
+  };
+
+  useEffect(() => {
+    let mostPerformingList = [];
+    if (props.specialType != null && props.specialType === "mostperforming") {
+      getMostPerforming().then((res) => {
+        res.forEach((t, i) => {
+          getHistory(t.ticker, "1d").then((res2) => {
+            mostPerformingList[i] = {
+              id: t.ticker,
+              color: colors[i],
+              data: prettifyHistory(res2),
+            };
+          });
+        });
+      });
+      setDataPoints(mostPerformingList);
+      console.log(mostPerformingList);
+
+      let t = []; // FIXME: this approach is not working
+      mostPerformingList[0] !== undefined &&
+        mostPerformingList[0].forEach((d, i) => {
+          console.log(d.data)
+          if (d.data.date.getMinutes() == 5) {
+            t.push(d.data.x);
+          }
+        });
+        setTicks(t);
+        console.log(t);
+    }
+  }, [setDataPoints]);
+
   // const changeRange = (r) => {
   //   console.log("Range set to " + r);
   //   setRange(r);
   // };
-
-  useEffect(() => {
-    if (props.specialType != null && props.specialType === "mostperforming") {
-      getMostPerforming().then((res) => console.log(res));
-    }
-  });
 
   return (
     <section style={{ height: props.height }}>
@@ -98,7 +151,7 @@ const MarketChart = (props) => {
           {props.title}
         </Typography>
       )}
-      
+
       {/* {props.showTimeSwitch && (
         <ButtonGroup
           style={{ float: "right", zIndex: 100 }}
@@ -128,86 +181,88 @@ const MarketChart = (props) => {
         // TODO: maybe implement a range selector?
       )} */}
 
-          <ResponsiveLine
-            data={dataPoints}
-            margin={{
-              top: 35,
-              right: 20,
-              bottom: props.showTimeSwitch ? 60 : 30,
-              left: 30,
-            }}
-            theme={chartTheme}
-            colors={(data) => {
-              return data.color != null
-                ? data.color
-                : props.colorSchema == null
-                ? theme.palette.primary.main
-                : props.colorSchema;
-            }}
-            curve="cardinal"
-            xScale={{ type: "point", min: "auto", max: "auto" }}
-            yScale={{ type: "linear", min: "auto", max: "auto" }}
-            axisBottom={
-              props.enableAxisX
-                ? {
-                    orient: "bottom",
-                    tickSize: 7,
-                    tickPadding: 5,
-                    legend: props.xTitle,
-                    legendOffset: 30,
-                    legendPosition: "middle",
-                  }
-                : null
-            }
-            axisLeft={
-              props.enableAxisY
-                ? {
-                    orient: "left",
-                    tickSize: 0,
-                    tickPadding: 10,
-                    legend: props.yTitle,
-                    legendOffset: 30,
-                    legendPosition: "middle",
-                  }
-                : null
-            }
-            legends={
-              props.enableLegend
-                ? [
-                    {
-                      anchor: "top-right",
-                      direction: "row",
-                      itemWidth: 80,
-                      itemHeight: 0,
-                      translateY: -18,
-                      translateX: 18,
-                      symbolSize: 12,
-                      symbolShape: "circle",
-                    },
-                  ]
-                : []
-            }
-            enableGridX={props.enableGridX}
-            enableGridY={props.enableGridY}
-            enableArea={props.enableArea}
-            areaBlendMode="multiply"
-            defs={[
-              linearGradientDef("gradient", [
-                { offset: 0, color: "inherit" },
-                { offset: 100, color: "inherit", opacity: 0 },
-              ]),
-            ]}
-            fill={[{ match: "*", id: "gradient" }]}
-            enablePoints={props.enablePoints}
-            pointBorderWidth={2}
-            pointSize={5}
-            pointBorderColor={{ from: "serieColor", modifiers: [] }}
-            pointColor="#ffffff"
-            animate={true}
-            motionConfig="default"
-            isInteractive={true}
-            enableSlices={"x"}
-          />
+      <ResponsiveLine
+        data={dataPoints}
+        margin={{
+          top: 35,
+          right: 20,
+          bottom: props.showTimeSwitch ? 100 : 100,
+          left: 30,
+        }}
+        theme={chartTheme}
+        colors={(data) => {
+          return data.color != null
+            ? data.color
+            : props.colorSchema == null
+            ? theme.palette.primary.main
+            : props.colorSchema;
+        }}
+        curve="cardinal"
+        xScale={{ type: "point", min: "auto", max: "auto" }}
+        yScale={{ type: "linear", min: "auto", max: "auto" }}
+        axisBottom={
+          props.enableAxisX
+            ? {
+                orient: "bottom",
+                tickSize: 7,
+                tickPadding: 5,
+                tickRotation: -90,
+                legend: props.xTitle,
+                legendOffset: 30,
+                legendPosition: "middle",
+                // TODO: find way to have less tickValues!
+              }
+            : null
+        }
+        axisLeft={
+          props.enableAxisY
+            ? {
+                orient: "left",
+                tickSize: 0,
+                tickPadding: 10,
+                legend: props.yTitle,
+                legendOffset: 30,
+                legendPosition: "middle",
+              }
+            : null
+        }
+        legends={
+          props.enableLegend
+            ? [
+                {
+                  anchor: "top-right",
+                  direction: "row",
+                  itemWidth: 80,
+                  itemHeight: 0,
+                  translateY: -18,
+                  translateX: 18,
+                  symbolSize: 12,
+                  symbolShape: "circle",
+                },
+              ]
+            : []
+        }
+        enableGridX={props.enableGridX}
+        enableGridY={props.enableGridY}
+        enableArea={props.enableArea}
+        areaBlendMode="multiply"
+        defs={[
+          linearGradientDef("gradient", [
+            { offset: 0, color: "inherit" },
+            { offset: 100, color: "inherit", opacity: 0 },
+          ]),
+        ]}
+        fill={[{ match: "*", id: "gradient" }]}
+        enablePoints={props.enablePoints}
+        pointBorderWidth={2}
+        pointSize={5}
+        pointBorderColor={{ from: "serieColor", modifiers: [] }}
+        pointColor="#ffffff"
+        animate={true}
+        motionConfig="default"
+        isInteractive={true}
+        enableSlices={"x"}
+      />
     </section>
   );
 };
