@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Grid, Paper, Typography } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import MarketChart from "../components/MarketChart";
 import NewsList from "../components/NewsList";
-import StockPreview from "../components/StockPreview";
+import IndexContainer from "../components/IndexContainer";
 import { UserStateContext } from "../context/UserStateContext";
+import { getHistory, getMostPerforming } from "../api/API";
 
 const stockData1 = {
   name: "Dow Jones",
@@ -12,6 +13,7 @@ const stockData1 = {
   value: "-2.68",
   usePointsOf: "first",
 };
+
 const stockData2 = {
   name: "NASDAQ",
   percent: "0.35%",
@@ -30,8 +32,36 @@ const useStyles = makeStyles((theme) =>
 
 const Home = (props) => {
   const classes = useStyles();
+  const [mostPerformingData, setMostPerformingData] = useState([]);
 
   const { isLoggedIn } = useContext(UserStateContext);
+
+  const mapHistory = (history) => {
+    let mappedHistory = [];
+    history.forEach((entry) => {
+      mappedHistory.push({
+        x: entry.datetime,
+        y: entry.Close,
+        top: entry.High,
+        bottom: entry.Low,
+      });
+    });
+    return mappedHistory;
+  };
+
+  useEffect(() => {
+    // Retrieve data for Most Performing chart:
+    getMostPerforming().then((tickers) => {
+      tickers.forEach((obj, index) => {
+        getHistory(obj.ticker, "1d").then((history) => {
+          setMostPerformingData((mostPerformingData) => [
+            ...mostPerformingData,
+            { points: mapHistory(history), ...obj },
+          ]);
+        });
+      });
+    });
+  }, [setMostPerformingData]);
 
   return (
     <>
@@ -51,19 +81,19 @@ const Home = (props) => {
                   justify="space-between"
                 >
                   <Grid item xs>
-                    <StockPreview stockData={stockData1} />
+                    <IndexContainer stockData={stockData1} />
                   </Grid>
                   <Grid item xs>
-                    <StockPreview stockData={stockData1} />
+                    <IndexContainer stockData={stockData1} />
                   </Grid>
                   <Grid item xs>
-                    <StockPreview stockData={stockData1} />
+                    <IndexContainer stockData={stockData1} />
                   </Grid>
                   <Grid item xs>
-                    <StockPreview stockData={stockData2} />
+                    <IndexContainer stockData={stockData2} />
                   </Grid>
                   <Grid item xs>
-                    <StockPreview stockData={stockData2} />
+                    <IndexContainer stockData={stockData2} />
                   </Grid>
                 </Grid>
               </Paper>
@@ -75,8 +105,8 @@ const Home = (props) => {
                   height="38vh"
                   enableArea
                   enablePoints={false}
-                  specialType="mostperforming"
-                  
+                  chartData={mostPerformingData}
+                  mostPerforming
                 />
               </Paper>
             </Grid>
@@ -91,11 +121,12 @@ const Home = (props) => {
             </Grid> */}
             <Grid item xs={12}>
               <Paper elevation={1} className={classes.card}>
-                {isLoggedIn ? (<Paper/>) : (
+                {isLoggedIn ? (
+                  <Paper />
+                ) : (
                   <MarketChart
                     title="My Stocks"
                     height="30vh"
-                    usePointsOf="second"
                     enableLegend={false}
                   />
                 )}

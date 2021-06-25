@@ -70,7 +70,7 @@ const SingleTicker = (props) => {
 
     getCompanyInfo(id)
       .then((res) => isActive && setState({loading: false, ticker: res}));
-
+    console.log(state.ticker);
     return () => {
       isActive = false;
     }
@@ -129,6 +129,8 @@ const SingleTicker = (props) => {
                     enableGridX
                     enableGridY
                     enableLegend={false}
+                    tickerChart
+                    ticker={state.ticker}
                   />
                 </Paper>
               </Grid>
