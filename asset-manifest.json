@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.js": "/stonx_frontend/static/js/main.ac530086.chunk.js",
-    "main.js.map": "/stonx_frontend/static/js/main.ac530086.chunk.js.map",
+    "main.js": "/stonx_frontend/static/js/main.ce0c7fe1.chunk.js",
+    "main.js.map": "/stonx_frontend/static/js/main.ce0c7fe1.chunk.js.map",
     "runtime-main.js": "/stonx_frontend/static/js/runtime-main.7dc5a6e2.js",
     "runtime-main.js.map": "/stonx_frontend/static/js/runtime-main.7dc5a6e2.js.map",
-    "static/js/2.57011967.chunk.js": "/stonx_frontend/static/js/2.57011967.chunk.js",
-    "static/js/2.57011967.chunk.js.map": "/stonx_frontend/static/js/2.57011967.chunk.js.map",
+    "static/js/2.ced9a189.chunk.js": "/stonx_frontend/static/js/2.ced9a189.chunk.js",
+    "static/js/2.ced9a189.chunk.js.map": "/stonx_frontend/static/js/2.ced9a189.chunk.js.map",
     "index.html": "/stonx_frontend/index.html",
-    "static/js/2.57011967.chunk.js.LICENSE.txt": "/stonx_frontend/static/js/2.57011967.chunk.js.LICENSE.txt",
+    "static/js/2.ced9a189.chunk.js.LICENSE.txt": "/stonx_frontend/static/js/2.ced9a189.chunk.js.LICENSE.txt",
     "static/media/Lato-Light.bfc37ff1.ttf": "/stonx_frontend/static/media/Lato-Light.bfc37ff1.ttf",
     "static/media/Lato-Regular.9919edff.ttf": "/stonx_frontend/static/media/Lato-Regular.9919edff.ttf",
     "static/media/Lato-Thin.01923cbb.ttf": "/stonx_frontend/static/media/Lato-Thin.01923cbb.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.7dc5a6e2.js",
-    "static/js/2.57011967.chunk.js",
-    "static/js/main.ac530086.chunk.js"
+    "static/js/2.ced9a189.chunk.js",
+    "static/js/main.ce0c7fe1.chunk.js"
   ]
 }
