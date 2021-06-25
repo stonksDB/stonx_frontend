@@ -17,36 +17,39 @@ const useStyles = makeStyles((theme) =>
 const IndexContainer = (props) => {
   const classes = useStyles();
 
+  console.log(props.indexData);
+  console.log("OOF");
+
   return (
     <Grid container direction="row" alignItems="center" justify="center">
       <Grid item lg={5} xs>
         <Grid container direction="column" alignItems="center" justify="center">
           <Grid item style={{ textAlign: "center" }}>
-            <Typography variant="button">{props.stockData.name}</Typography>
+            <Typography variant="button">{props.indexData.name}</Typography>
           </Grid>
           <Grid item>
             <Typography
               variant="h6"
               className={
-                props.stockData.value < 0
+                props.indexData.value < 0
                   ? classes.redStyle
                   : classes.greenStyle
               }
             >
-              {props.stockData.percent}
+              {props.indexData.percent}
             </Typography>
           </Grid>
           <Grid item>
             <Typography
               variant="body1"
               className={
-                props.stockData.value < 0
+                props.indexData.value < 0
                   ? classes.redStyle
                   : classes.greenStyle
               }
             >
-              {props.stockData.value}
-              {props.stockData.value < 0 ? " ▼" : " ▲"}
+              {props.indexData.value}
+              {props.indexData.value < 0 ? " ▼" : " ▲"}
             </Typography>
           </Grid>
         </Grid>
@@ -60,6 +63,7 @@ const IndexContainer = (props) => {
             enableLegend={false}
             enableAxisX={false}
             enableAxisY={false}
+            chartData={props.indexData.chartData}
             enableArea
             indexChart
           />

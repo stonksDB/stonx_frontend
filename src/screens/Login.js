@@ -28,8 +28,8 @@ const useStyles = makeStyles((theme) =>
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {setUserState} = useContext(UserStateContext);
-  const {enqueueSnackbar} = useSnackbar();
+  const { setUserState } = useContext(UserStateContext);
+  const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const classes = useStyles();
 
@@ -39,19 +39,23 @@ const Login = (props) => {
 
   const handleSubmit = () => {
     login({
-      "email": email,
-      "password": password
-    }).then((data) => {
-      setUserState(data);
-      enqueueSnackbar("Success!", {variant: "success"});
-      setTimeout(() => history.push(getRoute(PAGES.HOME).path), 300);
-    }).catch((error) => {
-      enqueueSnackbar(error.response.data, {variant: "error"});
-    });
+      email: email,
+      password: password,
+    })
+      .then((data) => {
+        setUserState(data);
+        enqueueSnackbar("Success!", { variant: "success" });
+        setTimeout(() => history.push(getRoute(PAGES.HOME).path), 300);
+      })
+      .catch((error) => {
+        enqueueSnackbar(error.response.data, { variant: "error" });
+      });
   };
 
   return (
-    <ValidatorForm onSubmit={handleSubmit}> {/*TODO: Validation*/}
+    <ValidatorForm onSubmit={handleSubmit}>
+      {" "}
+      {/*TODO: Validation*/}
       <Grid
         container
         alignItems="center"
@@ -94,13 +98,21 @@ const Login = (props) => {
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
           <Typography>
             Don't have an account? Click here to{" "}
-              <RouterLink to={getRoute(PAGES.REGISTRATION).path} className={classes.link}>
+            <RouterLink
+              to={getRoute(PAGES.REGISTRATION).path}
+              className={classes.link}
+            >
               register!
             </RouterLink>
           </Typography>
         </Grid>
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
-          <Button variant="contained" color="primary" className={classes.button} type="submit">
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            type="submit"
+          >
             Login
           </Button>
         </Grid>

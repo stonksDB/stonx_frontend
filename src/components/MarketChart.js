@@ -7,15 +7,11 @@ import {
   // ButtonGroup,
   // Button,
 } from "@material-ui/core";
-import { useEffect, useState } from "react";
-// import { getMostPerforming, getHistory } from "../api/API";
 
-// const colors = ["#2360FB", "#FAC032", "#6eff6e", "#d05dff"];
+const colors = ["#2360FB", "#FAC032", "#6eff6e", "#d05dff"];
 
 const MarketChart = (props) => {
   const theme = useTheme();
-  const [dataPoints, setDataPoints] = useState([]);
-
   const chartTheme = {
     textColor: theme.palette.text.primary,
     grid: {
@@ -30,36 +26,56 @@ const MarketChart = (props) => {
     },
   };
 
-  // setDataPoints(props.chartData.points); FIXME: this does an infinite rerender lol
+  const formatDate = (date) => {
+    let dateObject = new Date(date);
+    return (
+      dateObject.getDate() +
+      "/" +
+      dateObject.getMonth() +
+      " " +
+      dateObject.getHours() +
+      ":" +
+      dateObject.getMinutes()
+    );
+  };
 
-  console.log(props.chartData);
+  const prettifyHistory = (points) => {
+    let prettyHistory = [];
+    points.forEach((point, index) => {
+      let x = formatDate(point.x);
+      prettyHistory.push({
+        x: x,
+        y: point.y,
+      });
+    });
+    return prettyHistory;
+  };
 
-  // const getDate = (dateString) => {
-  //   let date = new Date(dateString);
-  //   return (
-  //     date.getDate() +
-  //     "/" +
-  //     date.getMonth() +
-  //     " " +
-  //     date.getHours() +
-  //     ":" +
-  //     date.getMinutes()
-  //   );
-  // };
+  const getPlottableData = (tickers) => {
+    let plottableData = [];
+    tickers.forEach((ticker, index) => {
+      plottableData.push({
+        id: ticker.ticker,
+        color: colors[index],
+        data: prettifyHistory(ticker.points),
+      });
+    });
+    return plottableData;
+  };
 
-  // const prettifyHistory = (history) => {
-  //   let newHistory = [];
-  //   history.forEach((entry, i) => {
-  //     newHistory[i] = {
-  //       x: getDate(entry.datetime),
-  //       y: (entry.Open + entry.Close) / 2.0,
-  //       date: new Date(entry.datetime),
-  //     };
-  //   });
-  //   return newHistory;
-  // };
+  const getTicks = (dataPoints) => {
+    let ticksArr = [];
+    dataPoints[0].data.forEach((entry, index) => {
+      if (index % 5 === 0) {
+        ticksArr.push(entry.x);
+      }
+    });
+    return ticksArr;
+  };
 
-  console.log(props.chartData);
+  let dataPoints = getPlottableData(props.chartData);
+  let ticks = dataPoints[0] !== undefined && getTicks(dataPoints);
+
 
   return (
     <section style={{ height: props.height }}>
@@ -74,7 +90,7 @@ const MarketChart = (props) => {
         margin={{
           top: 35,
           right: 20,
-          bottom: props.showTimeSwitch ? 100 : 100,
+          bottom: 30,
           left: 30,
         }}
         theme={chartTheme}
@@ -94,11 +110,10 @@ const MarketChart = (props) => {
                 orient: "bottom",
                 tickSize: 7,
                 tickPadding: 5,
-                tickRotation: -90,
                 legend: props.xTitle,
                 legendOffset: 30,
                 legendPosition: "middle",
-                // TODO: find way to have less tickValues!
+                tickValues: ticks,
               }
             : null
         }

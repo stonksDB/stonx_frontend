@@ -13,7 +13,7 @@ function withLoading(InnerComponent, LoadingComponent=null) {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          minHeight="100vh"
+          // minHeight="100vh" TODO: check if commenting this creates problems
         >
           <Lc/>
         </Box>
