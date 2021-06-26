@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
+
+
 const MyStocks = (props) => {
   const classes = useStyles();
   const {userState, isLoggedIn} = useContext(UserStateContext);
