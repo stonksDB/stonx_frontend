@@ -100,7 +100,8 @@ const Home = (props) => {
           });
         });
       });
-  }, [setMostPerformingData, setIndexesData]);
+      
+  }, [setMostPerformingData, setIndexesData, setLikedTickersData]);
 
   return (
     <>

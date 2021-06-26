@@ -187,6 +187,20 @@ function getLikedTickers() {
   }).getResponse();
 }
 
+function getTickerPrice(ticker) {
+  return new Endpoint({
+    path: "stocks/price",
+    pathParam: { ticker: ticker },
+    method: "get",
+    responseFormat: {
+      ticker: "MSFT",
+      regular_market_price: 264.760009765625,
+      price_last_update: "2021-06-23T11:11:08-04:00",
+      ratio: 0.007630701016358272,
+    },
+  }).getResponse();
+}
+
 export {
   getNews,
   getHistory,
@@ -200,4 +214,5 @@ export {
   getMostPerforming,
   getIndexes,
   getLikedTickers,
+  getTickerPrice,
 };

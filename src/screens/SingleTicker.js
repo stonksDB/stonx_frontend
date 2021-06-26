@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import withLoading from "../api/withLoading";
 import TickerHeart from "../components/TickerHeart";
 import { UserStateContext } from "../context/UserStateContext";
+import { mapHistory } from "../utils/TickerUtils";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -59,19 +60,6 @@ const SingleTicker = (props) => {
   const { id } = useParams();
   const { isLoggedIn } = useContext(UserStateContext);
 
-  const mapHistory = (history) => {
-    let mappedHistory = [];
-    history.forEach((entry) => {
-      mappedHistory.push({
-        x: entry.datetime,
-        y: entry.Close,
-        top: entry.High,
-        bottom: entry.Low,
-      });
-    });
-    return mappedHistory;
-  };
-
   const [state, setState] = useState({
     loading: true,
     ticker: {},
@@ -97,10 +85,12 @@ const SingleTicker = (props) => {
             ticker: { points: mapHistory(historyPrev), ...res },
           })
       );
+      // TODO: implement market last update and current cost with api stocks/price/:ticker
     return () => {
       isActive = false;
     };
   }, [setState, id]);
+  console.log(state.ticker);
 
   const InnerComponent = withLoading((props) => {
     return (
@@ -155,16 +145,18 @@ const SingleTicker = (props) => {
             <Grid container direction="row" spacing={3}>
               <Grid item xs={12}>
                 <Paper elevation={1} className={classes.card}>
-                  { <MarketChart
-                    height="40vh"
-                    points="first"
-                    enableGridX
-                    enableGridY
-                    enableLegend={false}
-                    tickerChart
-                    ticker={state.ticker}
-                    chartData={[state.ticker]}
-                  /> }
+                  {
+                    <MarketChart
+                      height="40vh"
+                      points="first"
+                      enableGridX
+                      enableGridY
+                      enableLegend={false}
+                      tickerChart
+                      ticker={state.ticker}
+                      chartData={[state.ticker]}
+                    />
+                  }
                 </Paper>
               </Grid>
               <Grid item xs={12}>

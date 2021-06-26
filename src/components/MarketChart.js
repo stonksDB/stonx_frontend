@@ -1,14 +1,13 @@
 import { ResponsiveLine } from "@nivo/line";
 import { linearGradientDef } from "@nivo/core";
 import {
-  // RadioGroup,
   Typography,
   useTheme,
-  // ButtonGroup,
-  // Button,
 } from "@material-ui/core";
+import { getPlottableData, getTicks } from "../utils/TickerUtils";
 
 const colors = ["#2360FB", "#FAC032", "#6eff6e", "#d05dff"];
+
 // TODO: implement loading!!!
 const MarketChart = (props) => {
   const theme = useTheme();
@@ -26,54 +25,7 @@ const MarketChart = (props) => {
     },
   };
 
-  const formatDate = (date) => {
-    let dateObject = new Date(date);
-    return (
-      dateObject.getDate() +
-      "/" +
-      dateObject.getMonth() +
-      " " +
-      dateObject.getHours() +
-      ":" +
-      dateObject.getMinutes()
-    );
-  };
-
-  const prettifyHistory = (points) => {
-    let prettyHistory = [];
-    points.forEach((point, index) => {
-      let x = formatDate(point.x);
-      prettyHistory.push({
-        x: x,
-        y: point.y,
-      });
-    });
-    return prettyHistory;
-  };
-
-  const getPlottableData = (tickers) => {
-    let plottableData = [];
-    tickers.forEach((ticker, index) => {
-      plottableData.push({
-        id: ticker.ticker,
-        color: colors[index],
-        data: prettifyHistory(ticker.points),
-      });
-    });
-    return plottableData;
-  };
-
-  const getTicks = (dataPoints) => {
-    let ticksArr = [];
-    dataPoints[0].data.forEach((entry, index) => {
-      if (index % 5 === 0) {
-        ticksArr.push(entry.x);
-      }
-    });
-    return ticksArr;
-  };
-
-  let dataPoints = getPlottableData(props.chartData);
+  let dataPoints = getPlottableData(props.chartData, colors);
   let ticks = dataPoints[0] !== undefined && getTicks(dataPoints);
 
   return (
