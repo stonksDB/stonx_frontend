@@ -10,7 +10,6 @@ import { getHistory, getMostPerforming, getIndexes } from "../api/API";
 import LockIcon from "@material-ui/icons/Lock";
 import { getRoute, PAGES } from "../routes";
 
-
 // const stockData1 = {
 //   name: "Dow Jones",
 //   percent: "-0.82%",
@@ -47,6 +46,7 @@ const Home = (props) => {
   const classes = useStyles();
   const [mostPerformingData, setMostPerformingData] = useState([]);
   const [indexesData, setIndexesData] = useState([]);
+  const [indexesNum, setIndexesNum] = useState(0);
 
   const { isLoggedIn } = useContext(UserStateContext);
 
@@ -63,7 +63,15 @@ const Home = (props) => {
     return mappedHistory;
   };
 
+
   useEffect(() => {
+    // Retrieve data for Indexes Charts:
+    getIndexes().then((indexes) => {
+      setIndexesNum(indexes.length);
+      setIndexesData(indexes);
+    });
+
+    // Retrieve data for Saved Stocks:
     // Retrieve data for Most Performing chart:
     getMostPerforming().then((tickers) => {
       tickers.forEach((ticker) => {
@@ -74,11 +82,6 @@ const Home = (props) => {
           ]);
         });
       });
-
-      // Retrieve data for Indexes Charts:
-      getIndexes().then((indexes) => setIndexesData(indexes));
-
-      // Retrieve data for Saved Stocks:
     });
   }, [setMostPerformingData, setIndexesData]);
 
@@ -100,10 +103,10 @@ const Home = (props) => {
                   justify="space-between"
                 >
                   {/* TODO: indexesData is empty when first read. Find way to wait for it to be filled  */}
-                  {indexesData !== undefined &&
-                    indexesData.length > 0 &&
+                  {
                     indexesData.forEach((singleIndex) => {
-                      <Grid item xs> 
+                      <Grid item xs>
+                        
                         <IndexContainer indexData={singleIndex} />
                       </Grid>;
                     })}

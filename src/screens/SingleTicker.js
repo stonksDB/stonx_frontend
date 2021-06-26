@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { Box, Grid, Paper, Typography, } from "@material-ui/core";
+import { Box, Grid, Paper, Typography } from "@material-ui/core";
 import MarketChart from "../components/MarketChart";
 import StockSummary from "../components/StockSummary";
 import TickerChip from "../components/TickerChip";
 import NewsList from "../components/NewsList";
-import { getCompanyInfo } from "../api/API";
+import { getCompanyInfo, getHistory } from "../api/API";
 import { useParams } from "react-router-dom";
 import withLoading from "../api/withLoading";
 import TickerHeart from "../components/TickerHeart";
@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme) =>
 );
 
 const SingleTicker = (props) => {
-
   const mockTicker = {
     ticker: "TSLA",
     name: "Tesla, Inc.",
@@ -42,7 +41,7 @@ const SingleTicker = (props) => {
     percentage: 0.75, // TODO: check if this is absolute value or if it is positive/negative
     variation: +25.7,
     market: {
-      name: "NASDAQ" ,
+      name: "NASDAQ",
       lastUpdate: "gg/mm/yyyy",
     },
     summary: {
@@ -53,27 +52,54 @@ const SingleTicker = (props) => {
       entValue: "$600.62B",
       beta: "1.99x",
       borrowCost: "0.25%",
-    }
-  }
+    },
+  };
 
   const classes = useStyles();
-  const {id} = useParams();
-  const {isLoggedIn} = useContext(UserStateContext);
-  
+  const { id } = useParams();
+  const { isLoggedIn } = useContext(UserStateContext);
+
+  const mapHistory = (history) => {
+    let mappedHistory = [];
+    history.forEach((entry) => {
+      mappedHistory.push({
+        x: entry.datetime,
+        y: entry.Close,
+        top: entry.High,
+        bottom: entry.Low,
+      });
+    });
+    return mappedHistory;
+  };
+
   const [state, setState] = useState({
     loading: true,
     ticker: {},
+    history: [],
   });
 
   useEffect(() => {
     let isActive = true;
-
+    let historyPrev = [];
     getCompanyInfo(id)
-      .then((res) => isActive && setState({loading: false, ticker: res}));
-    console.log(state.ticker);
+      .then(
+        getHistory(id, "1d").then((h) => {
+          historyPrev = h;
+        })
+      )
+      .then(
+        (res) =>
+          isActive &&
+          setState({
+            ...state,
+
+            loading: false,
+            ticker: { points: mapHistory(historyPrev), ...res },
+          })
+      );
     return () => {
       isActive = false;
-    }
+    };
   }, [setState, id]);
 
   const InnerComponent = withLoading((props) => {
@@ -81,7 +107,7 @@ const SingleTicker = (props) => {
       <>
         <Grid container direction="row" spacing={3}>
           <Grid item xs={12} sm={9}>
-            <Grid container direction="row" style={{paddingBottom: 25}}>
+            <Grid container direction="row" style={{ paddingBottom: 25 }}>
               <Grid item xs={12}>
                 <Box
                   display="flex"
@@ -89,32 +115,38 @@ const SingleTicker = (props) => {
                   alignItems="center"
                   justifyContent="space-between"
                 >
-                  <TickerChip ticker={props.ticker} big showFullName/>
-                  {isLoggedIn() && <TickerHeart ticker={props.ticker}/>}
+                  <TickerChip ticker={props.ticker} big showFullName />
+                  {isLoggedIn() && <TickerHeart ticker={props.ticker} />}
                 </Box>
               </Grid>
               <Grid item xs={12}>
-                <Typography variant={"h4"} style={{display: "inline-block"}}>
+                <Typography variant={"h4"} style={{ display: "inline-block" }}>
                   {mockTicker.currentCost}
                 </Typography>
                 <Typography
                   variant={"h6"}
-                  style={{display: "inline-block", paddingRight: 20}}
+                  style={{ display: "inline-block", paddingRight: 20 }}
                 >
                   &nbsp;USD
                 </Typography>
 
-                {mockTicker.variation > 0 ? (<>
+                {mockTicker.variation > 0 ? (
+                  <>
                     <Typography variant={"h6"} className={classes.positive}>
-                      ▲{Math.abs(mockTicker.variation)} ({mockTicker.percentage}%)
+                      ▲{Math.abs(mockTicker.variation)} ({mockTicker.percentage}
+                      %)
                     </Typography>
-                  </>) : (<>
+                  </>
+                ) : (
+                  <>
                     <Typography variant={"h6"} className={classes.negative}>
-                      ▼{Math.abs(mockTicker.variation)} ({mockTicker.percentage}%)
+                      ▼{Math.abs(mockTicker.variation)} ({mockTicker.percentage}
+                      %)
                     </Typography>
-                  </>)}
+                  </>
+                )}
 
-                <Typography variant={"body2"} style={{display: "block"}}>
+                <Typography variant={"body2"} style={{ display: "block" }}>
                   {mockTicker.market.name}, {mockTicker.market.lastUpdate}
                 </Typography>
               </Grid>
@@ -123,7 +155,7 @@ const SingleTicker = (props) => {
             <Grid container direction="row" spacing={3}>
               <Grid item xs={12}>
                 <Paper elevation={1} className={classes.card}>
-                  <MarketChart
+                  { <MarketChart
                     height="40vh"
                     points="first"
                     enableGridX
@@ -131,19 +163,20 @@ const SingleTicker = (props) => {
                     enableLegend={false}
                     tickerChart
                     ticker={state.ticker}
-                  />
+                    chartData={[state.ticker]}
+                  /> }
                 </Paper>
               </Grid>
               <Grid item xs={12}>
                 <Paper elevation={1} className={classes.paddedCard}>
-                  <StockSummary data={mockTicker.summary}/>
+                  <StockSummary data={mockTicker.summary} />
                 </Paper>
               </Grid>
             </Grid>
           </Grid>
           <Grid item xs={12} sm={3}>
             <Paper elevation={1} className={classes.card}>
-              <NewsList/>
+              <NewsList />
             </Paper>
           </Grid>
         </Grid>
@@ -151,7 +184,7 @@ const SingleTicker = (props) => {
     );
   });
 
-  return <InnerComponent isLoading={state.loading} ticker={state.ticker}/>
+  return <InnerComponent isLoading={state.loading} ticker={state.ticker} />;
 };
 
 export default SingleTicker;

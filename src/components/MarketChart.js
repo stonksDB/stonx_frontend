@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 
 const colors = ["#2360FB", "#FAC032", "#6eff6e", "#d05dff"];
-
+// TODO: implement loading!!!
 const MarketChart = (props) => {
   const theme = useTheme();
   const chartTheme = {
@@ -75,7 +75,6 @@ const MarketChart = (props) => {
 
   let dataPoints = getPlottableData(props.chartData);
   let ticks = dataPoints[0] !== undefined && getTicks(dataPoints);
-
 
   return (
     <section style={{ height: props.height }}>
