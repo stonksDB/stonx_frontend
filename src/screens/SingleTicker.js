@@ -5,7 +5,7 @@ import MarketChart from "../components/MarketChart";
 import StockSummary from "../components/StockSummary";
 import TickerChip from "../components/TickerChip";
 import NewsList from "../components/NewsList";
-import { getCompanyInfo, getHistory } from "../api/API";
+import { getCompanyInfo, getHistory, getTickerPrice } from "../api/API";
 import { useParams } from "react-router-dom";
 import withLoading from "../api/withLoading";
 import TickerHeart from "../components/TickerHeart";
@@ -45,6 +45,7 @@ const SingleTicker = (props) => {
       name: "NASDAQ",
       lastUpdate: "gg/mm/yyyy",
     },
+
     summary: {
       sector: "Consumer Cyclicals",
       industry: "Electric (Alternative) Vehicles",
@@ -68,28 +69,43 @@ const SingleTicker = (props) => {
 
   useEffect(() => {
     let isActive = true;
-    let historyPrev = [];
+    let history = [];
+    let currentPrice = {};
     getCompanyInfo(id)
       .then(
         getHistory(id, "1d").then((h) => {
-          historyPrev = h;
+          history = h;
         })
       )
       .then(
-        (res) =>
+        getTickerPrice(id).then((p) => {
+          currentPrice = p;
+        })
+      )
+      .then(
+        (companyInfo) =>
           isActive &&
           setState({
             ...state,
-
             loading: false,
-            ticker: { points: mapHistory(historyPrev), ...res },
+            ticker: {
+              points: mapHistory(history),
+              currentPrice: {
+                price: currentPrice.regular_market_price,
+                updated: new Date(currentPrice.price_last_update),
+                ratio: currentPrice.ratio,
+              },
+              ...companyInfo,
+            },
           })
       );
-      // TODO: implement market last update and current cost with api stocks/price/:ticker
+
+    // TODO: implement market last update and current cost with api stocks/price/:ticker
     return () => {
       isActive = false;
     };
   }, [setState, id]);
+
   console.log(state.ticker);
 
   const InnerComponent = withLoading((props) => {
@@ -111,7 +127,7 @@ const SingleTicker = (props) => {
               </Grid>
               <Grid item xs={12}>
                 <Typography variant={"h4"} style={{ display: "inline-block" }}>
-                  {mockTicker.currentCost}
+                  {state.ticker.currentPrice.price}
                 </Typography>
                 <Typography
                   variant={"h6"}
@@ -120,24 +136,24 @@ const SingleTicker = (props) => {
                   &nbsp;USD
                 </Typography>
 
-                {mockTicker.variation > 0 ? (
+                {state.ticker.currentPrice.ratio > 0 ? (
                   <>
                     <Typography variant={"h6"} className={classes.positive}>
-                      ▲{Math.abs(mockTicker.variation)} ({mockTicker.percentage}
+                      ▲{Math.abs(state.ticker.currentPrice.ratio)} ({mockTicker.percentage}
                       %)
                     </Typography>
                   </>
                 ) : (
                   <>
                     <Typography variant={"h6"} className={classes.negative}>
-                      ▼{Math.abs(mockTicker.variation)} ({mockTicker.percentage}
+                      ▼{Math.abs(state.ticker.currentPrice.ratio)} ({mockTicker.percentage}
                       %)
                     </Typography>
                   </>
                 )}
 
                 <Typography variant={"body2"} style={{ display: "block" }}>
-                  {mockTicker.market.name}, {mockTicker.market.lastUpdate}
+                  {mockTicker.market.name}, {state.ticker.currentPrice.updated.toString()}
                 </Typography>
               </Grid>
             </Grid>
