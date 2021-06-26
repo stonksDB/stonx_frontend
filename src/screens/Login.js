@@ -55,7 +55,6 @@ const Login = (props) => {
   return (
     <ValidatorForm onSubmit={handleSubmit}>
       {" "}
-      {/*TODO: Validation*/}
       <Grid
         container
         alignItems="center"

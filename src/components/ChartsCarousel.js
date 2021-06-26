@@ -5,11 +5,14 @@ import MarketChart from "./MarketChart";
 import { Box, Grid } from "@material-ui/core";
 
 const ChartsCarousel = (props) => {
+
   const mappedStocks = props.stocks.reduce(function (rows, key, index) {
+
     return (
       (index % 2 === 0 ? rows.push([key]) : rows[rows.length - 1].push(key)) &&
       rows
     );
+
   }, []);
 
   // TODO: find a way to make ChartsCarousel responsive
@@ -34,6 +37,7 @@ const ChartsCarousel = (props) => {
                   enableGridX
                   enableGridY
                   enableLegend={false}
+
                 />
               </Box>
             </Grid>

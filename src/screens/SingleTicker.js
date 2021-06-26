@@ -100,7 +100,6 @@ const SingleTicker = (props) => {
           })
       );
 
-    // TODO: implement market last update and current cost with api stocks/price/:ticker
     return () => {
       isActive = false;
     };
@@ -139,8 +138,9 @@ const SingleTicker = (props) => {
                 {state.ticker.currentPrice.ratio > 0 ? (
                   <>
                     <Typography variant={"h6"} className={classes.positive}>
-                      ▲{Math.abs(state.ticker.currentPrice.ratio)} ({mockTicker.percentage}
+                      ▲{Math.abs(state.ticker.currentPrice.ratio)} ({mockTicker.percentage} 
                       %)
+                      {/* TODO: find out meaning of currentPrice.ratio and compute percentage */}
                     </Typography>
                   </>
                 ) : (
@@ -178,6 +178,7 @@ const SingleTicker = (props) => {
               <Grid item xs={12}>
                 <Paper elevation={1} className={classes.paddedCard}>
                   <StockSummary data={mockTicker.summary} />
+                  {/* TODO: ask wether a full summary can be retrieved from db */}
                 </Paper>
               </Grid>
             </Grid>

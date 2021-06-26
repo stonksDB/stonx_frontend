@@ -4,16 +4,12 @@ import { Grid, Paper, Typography, Box } from "@material-ui/core";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import MarketChart from "../components/MarketChart";
 import NewsList from "../components/NewsList";
-import IndexContainer from "../components/IndexContainer";
 import { UserStateContext } from "../context/UserStateContext";
-import {
-  getHistory,
-  getMostPerforming,
-  getIndexes,
-  getLikedTickers,
-} from "../api/API";
+import { getHistory, getMostPerforming, getLikedTickers } from "../api/API";
 import LockIcon from "@material-ui/icons/Lock";
 import { getRoute, PAGES } from "../routes";
+import Indexes from "../components/Indexes";
+import { mapHistory } from "../utils/TickerUtils";
 
 // const stockData1 = {
 //   name: "Dow Jones",
@@ -50,31 +46,22 @@ const useStyles = makeStyles((theme) =>
 const Home = (props) => {
   const classes = useStyles();
   const [mostPerformingData, setMostPerformingData] = useState([]);
-  const [indexesData, setIndexesData] = useState([]);
+  // const [indexesData, setIndexesData] = useState([]);
   const [likedTickersData, setLikedTickersData] = useState([]);
-  const [indexesNum, setIndexesNum] = useState(0);
+  // const [indexesNum, setIndexesNum] = useState(0);
+  // const [indexesReady, setIndexesReady] = useState(false);
 
   const { isLoggedIn } = useContext(UserStateContext);
 
-  const mapHistory = (history) => {
-    let mappedHistory = [];
-    history.forEach((entry) => {
-      mappedHistory.push({
-        x: entry.datetime,
-        y: entry.Close,
-        top: entry.High,
-        bottom: entry.Low,
-      });
-    });
-    return mappedHistory;
-  };
-
   useEffect(() => {
     // Retrieve data for Indexes Charts:
-    getIndexes().then((indexes) => {
-      setIndexesNum(indexes.length);
-      setIndexesData(indexes);
-    });
+    // getIndexes()
+    //   .then((indexes) => {
+    //     setIndexesNum(indexes.length);
+    //     setIndexesData(indexes);
+    //     console.log(indexes);
+    //   })
+    //   .then(() => setIndexesReady(true));
 
     // Retrieve data for Most Performing chart:
     getMostPerforming().then((tickers) => {
@@ -100,8 +87,7 @@ const Home = (props) => {
           });
         });
       });
-      
-  }, [setMostPerformingData, setIndexesData, setLikedTickersData]);
+  }, [setMostPerformingData]);
 
   return (
     <>
@@ -114,19 +100,7 @@ const Home = (props) => {
           <Grid container direction="row" spacing={3}>
             <Grid item xs={12}>
               <Paper elevation={1} className={classes.card}>
-                <Grid
-                  container
-                  direction="row"
-                  spacing={1}
-                  justify="space-between"
-                >
-                  {/* TODO: indexesData is empty when first read. Find way to wait for it to be filled  */}
-                  {indexesData.forEach((singleIndex) => {
-                    <Grid item xs>
-                      <IndexContainer indexData={singleIndex} />
-                    </Grid>;
-                  })}
-                </Grid>
+                <Indexes />
               </Paper>
             </Grid>
             <Grid item xs={12}>

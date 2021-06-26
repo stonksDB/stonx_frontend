@@ -56,13 +56,13 @@ const MyStocks = (props) => {
                   <LikedStocksList/>
                 </Paper>
               </Grid>
-              {userState.likes.length>0 && (
+              {userState.likes.length > 0 ? (
                 <Grid item xs={12}>
                   <Paper elevation={1} className={classes.card}>
                      <ChartsCarousel stocks={[1, 2, 3, 4]}/>
                   </Paper>
                 </Grid>
-              )}
+              ) : (<Typography>{/*TODO: make a box to display a message if the user is not liking any stock! */ }</Typography>) }
               <Grid item xs={12} sm={12} md={6}>
                 <Paper elevation={1} className={classes.card}>
                   <Grid container alignContent="space-between" spacing={2}>

@@ -1,9 +1,6 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 import { lato } from "./fonts.js";
 
-// TODO: check how to implement different font weights
-// FIXME: currently font weights are implemented but not working
-
 const themeGeneral = {
   typography: {
     fontFamily: "'Lato', sans-serif",
