@@ -82,7 +82,7 @@ const UserPopup = (props) => {
             />
           </ListItem>
           {isLoggedIn() ? (
-            <ListItem button>
+            <ListItem>
               <Button
                 variant="outlined"
                 color="primary"

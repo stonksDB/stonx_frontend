@@ -172,6 +172,21 @@ function getIndexes() {
   }).getResponse();
 }
 
+function getLikedTickers() {
+  return new Endpoint({
+    path: "landpage/liked_tickers",
+    method: "get",
+    responseFormat: [
+      {
+        ticker: "TSLA",
+      },
+      {
+        ticker: "MSFT",
+      },
+    ],
+  }).getResponse();
+}
+
 export {
   getNews,
   getHistory,
@@ -183,5 +198,6 @@ export {
   logout,
   toggleTickerPreference,
   getMostPerforming,
-  getIndexes
+  getIndexes,
+  getLikedTickers,
 };

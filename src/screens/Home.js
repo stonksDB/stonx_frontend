@@ -6,7 +6,12 @@ import MarketChart from "../components/MarketChart";
 import NewsList from "../components/NewsList";
 import IndexContainer from "../components/IndexContainer";
 import { UserStateContext } from "../context/UserStateContext";
-import { getHistory, getMostPerforming, getIndexes } from "../api/API";
+import {
+  getHistory,
+  getMostPerforming,
+  getIndexes,
+  getLikedTickers,
+} from "../api/API";
 import LockIcon from "@material-ui/icons/Lock";
 import { getRoute, PAGES } from "../routes";
 
@@ -46,6 +51,7 @@ const Home = (props) => {
   const classes = useStyles();
   const [mostPerformingData, setMostPerformingData] = useState([]);
   const [indexesData, setIndexesData] = useState([]);
+  const [likedTickersData, setLikedTickersData] = useState([]);
   const [indexesNum, setIndexesNum] = useState(0);
 
   const { isLoggedIn } = useContext(UserStateContext);
@@ -63,7 +69,6 @@ const Home = (props) => {
     return mappedHistory;
   };
 
-
   useEffect(() => {
     // Retrieve data for Indexes Charts:
     getIndexes().then((indexes) => {
@@ -71,7 +76,6 @@ const Home = (props) => {
       setIndexesData(indexes);
     });
 
-    // Retrieve data for Saved Stocks:
     // Retrieve data for Most Performing chart:
     getMostPerforming().then((tickers) => {
       tickers.forEach((ticker) => {
@@ -83,6 +87,19 @@ const Home = (props) => {
         });
       });
     });
+
+    // Retrieve data for Saved Stocks if user is logged in:
+    isLoggedIn() &&
+      getLikedTickers().then((tickers) => {
+        tickers.forEach((ticker) => {
+          getHistory(ticker.ticker, "1d").then((history) => {
+            setLikedTickersData((likedTickersData) => [
+              ...likedTickersData,
+              { points: mapHistory(history), ...ticker },
+            ]);
+          });
+        });
+      });
   }, [setMostPerformingData, setIndexesData]);
 
   return (
@@ -103,13 +120,11 @@ const Home = (props) => {
                   justify="space-between"
                 >
                   {/* TODO: indexesData is empty when first read. Find way to wait for it to be filled  */}
-                  {
-                    indexesData.forEach((singleIndex) => {
-                      <Grid item xs>
-                        
-                        <IndexContainer indexData={singleIndex} />
-                      </Grid>;
-                    })}
+                  {indexesData.forEach((singleIndex) => {
+                    <Grid item xs>
+                      <IndexContainer indexData={singleIndex} />
+                    </Grid>;
+                  })}
                 </Grid>
               </Paper>
             </Grid>
@@ -125,7 +140,7 @@ const Home = (props) => {
             </Grid>
             <Grid item xs={12}>
               <Paper elevation={1} className={classes.card}>
-                {!isLoggedIn ? (
+                {!isLoggedIn() ? (
                   <Box
                     display="flex"
                     flexDirection="column"
@@ -154,7 +169,6 @@ const Home = (props) => {
                   <MarketChart
                     title="My Stocks"
                     height="30vh"
-                    enableLegend={false}
                     chartData={mostPerformingData}
                   />
                 )}
