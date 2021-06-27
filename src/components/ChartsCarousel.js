@@ -15,6 +15,7 @@ const ChartsCarousel = (props) => {
       rows
     );
   }, []);
+
   const [state, setState] = useState({
     isLoading: false,
     likedTickers: [],
@@ -25,28 +26,22 @@ const ChartsCarousel = (props) => {
     setState({ isLoading: true, likedTickers: [] });
 
     if (userState.likes.length > 0) {
-      console.log("Y");
-      async function getData() {
-        await Promise.allSettled(
-          userState.likes.map((item) => getCompanyInfo(item))
-        ).then(
-          (result) =>
-            isActive &&
-            console.log(result.map((pro) => pro.value)) &&
-            setState({
-              isLoading: false,
-              likedTickers: result.map((pro) => pro.value),
-            })
-        );
-        await Promise.allSettled(
-          state.likedTickers.map((item) => getHistory(item)) //FIXME: this returns an empty array. WHYYYY
-        ).then((result) => isActive && console.log(result));
-      }
-      getData().then(() => {
-        return () => {
-          isActive = false;
-        };
+      let t = [];
+      userState.likes.map((i) =>
+        getCompanyInfo(i).then((c) =>
+          getHistory(c).then((d) => {
+            t.push({ points: d, ...c });
+          })
+        )
+      );
+
+      setState({
+        isLoading: true,
+        likedTickers: t,
       });
+
+      console.log(state);
+
     } else {
       setState({ isLoading: false, likedTickers: [] });
       return () => {
@@ -71,14 +66,15 @@ const ChartsCarousel = (props) => {
             {stocksCouple.map((stock) => (
               <Grid item sm={6} key={stock.key}>
                 <Box>
-                  {/* <MarketChart
+                  <MarketChart
                     height="40vh"
                     points="first"
                     usePointsOf="first"
                     enableGridX
                     enableGridY
                     enableLegend={false}
-                  /> */}
+                    chartData={state.likedTickers}
+                  />
                 </Box>
               </Grid>
             ))}

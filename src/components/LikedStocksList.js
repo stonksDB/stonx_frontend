@@ -22,11 +22,13 @@ const LikedStocksList = (props) => {
           .allSettled(userState.likes.map(item => getCompanyInfo(item)))
           .then((result) => isActive && setState({isLoading: false, tickerDetails: result.map((pro) => pro.value)}));
       }
+
       getData().then(() => {
         return () => {
           isActive = false;
         };
       });
+      
     } else {
       setState({isLoading: false, tickerDetails: []});
       return () => {

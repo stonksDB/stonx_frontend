@@ -1,9 +1,6 @@
 import { ResponsiveLine } from "@nivo/line";
 import { linearGradientDef } from "@nivo/core";
-import {
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import { Typography, useTheme } from "@material-ui/core";
 import { getPlottableData, getTicks } from "../utils/TickerUtils";
 
 const colors = ["#2360FB", "#FAC032", "#6eff6e", "#d05dff"];
@@ -26,6 +23,7 @@ const MarketChart = (props) => {
   };
 
   let dataPoints = getPlottableData(props.chartData, colors);
+
   let ticks = dataPoints[0] !== undefined && getTicks(dataPoints);
 
   return (
