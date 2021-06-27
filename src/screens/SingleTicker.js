@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { Box, Grid, Paper, Typography } from "@material-ui/core";
-import MarketChart from "../components/MarketChart";
-import StockSummary from "../components/StockSummary";
-import TickerChip from "../components/TickerChip";
+import MarketChart from "../components/charts/MarketChart";
+import StockSummary from "../components/charts/StockSummary";
+import TickerChip from "../components/stocks/TickerChip";
 import NewsList from "../components/NewsList";
 import { getCompanyInfo, getHistory, getTickerPrice } from "../api/API";
 import { useParams } from "react-router-dom";
 import withLoading from "../api/withLoading";
-import TickerHeart from "../components/TickerHeart";
+import TickerHeart from "../components/stocks/TickerHeart";
 import { UserStateContext } from "../context/UserStateContext";
-import { mapHistory } from "../utils/TickerUtils";
+import dayjs from "dayjs";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -36,16 +36,9 @@ const useStyles = makeStyles((theme) =>
 
 const SingleTicker = (props) => {
   const mockTicker = {
-    ticker: "TSLA",
-    name: "Tesla, Inc.",
-    currentCost: 629.7,
-    percentage: 0.75, // TODO: check if this is absolute value or if it is positive/negative
-    variation: +25.7,
     market: {
       name: "NASDAQ",
-      lastUpdate: "gg/mm/yyyy",
     },
-
     summary: {
       sector: "Consumer Cyclicals",
       industry: "Electric (Alternative) Vehicles",
@@ -62,52 +55,37 @@ const SingleTicker = (props) => {
   const { isLoggedIn } = useContext(UserStateContext);
 
   const [state, setState] = useState({
-    loading: true,
-    ticker: {},
+    isLoading: true,
+    ticker: null,
     history: [],
+    currentPrice: null,
   });
 
   useEffect(() => {
     let isActive = true;
-    let history = [];
-    let currentPrice = {};
+
     getCompanyInfo(id)
-      .then(
-        getHistory(id, "1d").then((h) => {
-          history = h;
-        })
-      )
-      .then(
-        getTickerPrice(id).then((p) => {
-          currentPrice = p;
-        })
-      )
-      .then(
-        (companyInfo) =>
-          isActive &&
-          setState({
-            ...state,
-            loading: false,
-            ticker: {
-              points: mapHistory(history),
-              currentPrice: {
-                price: currentPrice.regular_market_price,
-                updated: new Date(currentPrice.price_last_update),
-                ratio: currentPrice.ratio,
-              },
-              ...companyInfo,
-            },
-          })
-      );
+      .then((companyData) => {
+        getTickerPrice(id)
+          .then((price) => {
+            mockTicker.summary.sector = companyData.sector; //TODO: Remove when StockSummary is finalized
+            getHistory(id, "1d")
+              .then((points) => {    //TODO: Eyes hurt in seeing this
+                const chartData = {...companyData, points};
+                isActive && setState({ isLoading: false, ticker: companyData, history: [chartData], currentPrice: price });
+              });
+          });
+      });
 
     return () => {
       isActive = false;
     };
   }, [setState, id]);
 
-  console.log(state.ticker);
-
   const InnerComponent = withLoading((props) => {
+    const roundedRatio = Math.abs(props.currentPrice.ratio).toFixed(2);
+    const roundedPrice = props.currentPrice.regular_market_price.toFixed(2);
+
     return (
       <>
         <Grid container direction="row" spacing={3}>
@@ -126,7 +104,7 @@ const SingleTicker = (props) => {
               </Grid>
               <Grid item xs={12}>
                 <Typography variant={"h4"} style={{ display: "inline-block" }}>
-                  {state.ticker.currentPrice.price}
+                  {roundedPrice}
                 </Typography>
                 <Typography
                   variant={"h6"}
@@ -135,25 +113,23 @@ const SingleTicker = (props) => {
                   &nbsp;USD
                 </Typography>
 
-                {state.ticker.currentPrice.ratio > 0 ? (
+                {roundedRatio > 0 ? (
                   <>
                     <Typography variant={"h6"} className={classes.positive}>
-                      ▲{Math.abs(state.ticker.currentPrice.ratio)} ({mockTicker.percentage} 
-                      %)
+                      ▲{roundedRatio}%
                       {/* TODO: find out meaning of currentPrice.ratio and compute percentage */}
                     </Typography>
                   </>
                 ) : (
                   <>
                     <Typography variant={"h6"} className={classes.negative}>
-                      ▼{Math.abs(state.ticker.currentPrice.ratio)} ({mockTicker.percentage}
-                      %)
+                      ▼{roundedRatio}%
                     </Typography>
                   </>
                 )}
 
                 <Typography variant={"body2"} style={{ display: "block" }}>
-                  {mockTicker.market.name}, {state.ticker.currentPrice.updated.toString()}
+                  {mockTicker.market.name}, updated {dayjs(props.currentPrice.price_last_update).format("MMMM DD YYYY HH:MM")}
                 </Typography>
               </Grid>
             </Grid>
@@ -164,13 +140,10 @@ const SingleTicker = (props) => {
                   {
                     <MarketChart
                       height="40vh"
-                      points="first"
-                      enableGridX
                       enableGridY
                       enableLegend={false}
                       tickerChart
-                      ticker={state.ticker}
-                      chartData={[state.ticker]}
+                      points={props.chartData}
                     />
                   }
                 </Paper>
@@ -193,7 +166,7 @@ const SingleTicker = (props) => {
     );
   });
 
-  return <InnerComponent isLoading={state.loading} ticker={state.ticker} />;
+  return <InnerComponent isLoading={state.isLoading} ticker={state.ticker} currentPrice={state.currentPrice} chartData={state.history} />;
 };
 
 export default SingleTicker;

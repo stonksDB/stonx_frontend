@@ -1,17 +1,20 @@
-const mapHistory = (history) => {
-  let mappedHistory = [];
-  history.forEach((entry) => {
-    mappedHistory.push({
-      x: entry.datetime,
-      y: entry.Close,
-      top: entry.High,
-      bottom: entry.Low,
-    });
-  });
-  return mappedHistory;
+const getPlottableData = (tickers, colors) => {
+  console.log("AAAAAAAAAAAAA", tickers);
+  return tickers.map((ticker, index)  => ({
+    id: ticker.ticker,
+    color: colors[index],
+    data: prettifyHistory(ticker.points),
+  }));
 };
 
-const formatDate = (date) => {
+const prettifyHistory = (history) => {
+  return history.map((point) => ({
+    x: prettifyDate(point.datetime),
+    y: point.Close.toFixed(2),
+  }));
+};
+
+const prettifyDate = (date) => {  //TODO: Not responsive
   let dateObject = new Date(date);
   return (
     dateObject.getDate() +
@@ -24,38 +27,10 @@ const formatDate = (date) => {
   );
 };
 
-const prettifyHistory = (points) => {
-  let prettyHistory = [];
-  points.forEach((point, index) => {
-    let x = formatDate(point.x);
-    prettyHistory.push({
-      x: x,
-      y: point.y,
-    });
-  });
-  return prettyHistory;
-};
-
-const getPlottableData = (tickers, colors) => {
-  let plottableData = [];
-  tickers.forEach((ticker, index) => {
-    plottableData.push({
-      id: ticker.ticker,
-      color: colors[index],
-      data: prettifyHistory(ticker.points),
-    });
-  });
-  return plottableData;
-};
-
 const getTicks = (dataPoints) => {
-  let ticksArr = [];
-  dataPoints[0].data.forEach((entry, index) => {
-    if (index % 5 === 0) {
-      ticksArr.push(entry.x);
-    }
-  });
-  return ticksArr;
+  return dataPoints[0].data
+    .filter((_,index) => index % 5 === 0)
+    .map((entry) => entry.x );
 };
 
-export { mapHistory, getPlottableData, getTicks };
+export { getPlottableData, getTicks };

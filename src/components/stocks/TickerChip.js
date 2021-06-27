@@ -1,6 +1,6 @@
 import { Box, Chip, Typography, useTheme } from "@material-ui/core";
 import React from "react";
-import { getRoute, PAGES } from "../routes";
+import { getRoute, PAGES } from "../../routes";
 import { Link as RouterLink } from "react-router-dom";
 
 const TickerChip = (props) => {

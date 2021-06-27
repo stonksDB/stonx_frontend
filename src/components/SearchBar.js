@@ -4,7 +4,7 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { TextField, InputAdornment, Paper, Link } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { search } from "../api/API";
-import TickerChip from "./TickerChip";
+import TickerChip from "./stocks/TickerChip";
 import { Link as RouterLink } from "react-router-dom";
 import { getRoute, PAGES } from "../routes";
 

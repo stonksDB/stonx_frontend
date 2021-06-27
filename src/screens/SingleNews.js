@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Grid, Link, Paper, Typography } from "@material-ui/core";
-import TickerChip from "../components/TickerChip";
+import TickerChip from "../components/stocks/TickerChip";
 import withLoading from "../api/withLoading";
 import { getRoute, PAGES } from "../routes";
 import { Link as RouterLink, useParams } from "react-router-dom";

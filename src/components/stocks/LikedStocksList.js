@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import FollowedTicker from "../components/FollowedTicker";
+import FollowedTicker from "./FollowedTicker";
 import { Grid, Typography } from "@material-ui/core";
-import { UserStateContext } from "../context/UserStateContext";
-import { getCompanyInfo } from "../api/API";
-import withLoading from "../api/withLoading";
+import { UserStateContext } from "../../context/UserStateContext";
+import { getCompanyInfo } from "../../api/API";
+import withLoading from "../../api/withLoading";
 
 const LikedStocksList = (props) => {
   const {userState} = useContext(UserStateContext);
@@ -28,7 +28,7 @@ const LikedStocksList = (props) => {
           isActive = false;
         };
       });
-      
+
     } else {
       setState({isLoading: false, tickerDetails: []});
       return () => {
@@ -55,8 +55,8 @@ const LikedStocksList = (props) => {
           )))
           : (
             <Grid container direction="column" alignItems="center" style={{padding: 175}}>
-              <Grid item><Typography variant="h5">You have no followed stocks :(</Typography></Grid>
-              <Grid item><Typography>Looking for some? Use the search bar, or explore the News!</Typography></Grid>
+              <Grid item><Typography variant="h5">Nothing to show here :(</Typography></Grid>
+              <Grid item><Typography>Want to add something? Use the Search Bar, or explore the News!</Typography></Grid>
             </Grid>
 
           )}

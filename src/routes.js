@@ -11,7 +11,7 @@ import SingleTicker from "./screens/SingleTicker";
 import SingleNews from "./screens/SingleNews";
 import News from "./screens/News";
 import MyStocks from "./screens/MyStocks";
-import Home from "./screens/Home";
+import Home from "./screens/home/Home";
 import React from "react";
 import About from "./screens/About";
 

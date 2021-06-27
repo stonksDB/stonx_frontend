@@ -159,7 +159,8 @@ function getHistory(ticker, range) {
   return new Endpoint({
     path: "stock/history",
     method: "get",
-    pathParam: { ticker: ticker, period: range, update_analytics: "false" },
+    pathParam: { ticker: ticker },
+    queryParam: { period: range, update_analytics: "false" },
     responseFormat: historyResult,
   }).getResponse();
 }
@@ -168,7 +169,7 @@ function getIndexes() {
   return new Endpoint({
     path: "landpage/indexes",
     method: "get",
-    responseFormat: indexesResult,
+    responseFormat: indexesResult,  //TODO: Double check if this is really what gets returned from server
   }).getResponse();
 }
 

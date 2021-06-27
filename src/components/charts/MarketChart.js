@@ -1,11 +1,10 @@
 import { ResponsiveLine } from "@nivo/line";
 import { linearGradientDef } from "@nivo/core";
 import { Typography, useTheme } from "@material-ui/core";
-import { getPlottableData, getTicks } from "../utils/TickerUtils";
+import { getPlottableData, getTicks } from "../../utils/TickerUtils";
 
-const colors = ["#2360FB", "#FAC032", "#6eff6e", "#d05dff"];
+const colors = ["#2360FB", "#FAC032", "#6eff6e", "#d05dff"];  //TODO: Palette
 
-// TODO: implement loading!!!
 const MarketChart = (props) => {
   const theme = useTheme();
   const chartTheme = {
@@ -22,9 +21,10 @@ const MarketChart = (props) => {
     },
   };
 
-  let dataPoints = getPlottableData(props.chartData, colors);
-
-  let ticks = dataPoints[0] !== undefined && getTicks(dataPoints);
+  console.log("Data", props.points);
+  let dataPoints = getPlottableData(props.points, colors);
+  console.log("Chart", dataPoints);
+  let ticks = dataPoints[0] !== undefined && getTicks(dataPoints);  //TODO: Better ticks distance
 
   return (
     <section style={{ height: props.height }}>
@@ -121,6 +121,7 @@ const MarketChart = (props) => {
 
 MarketChart.defaultProps = {
   title: "",
+  points: [[]],
   height: "26vh",
   colorSchema: null,
   enableArea: false,
@@ -132,6 +133,7 @@ MarketChart.defaultProps = {
   enableAxisY: true,
   enableGridX: false,
   enableGridY: true,
+  usePointsOf: "first",   //TODO
 };
 
 export default MarketChart;

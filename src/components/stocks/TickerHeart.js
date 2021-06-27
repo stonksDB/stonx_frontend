@@ -1,11 +1,11 @@
-import { toggleTickerPreference } from "../api/API";
+import { toggleTickerPreference } from "../../api/API";
 import React, { useContext, useEffect, useState } from "react";
-import { UserStateContext } from "../context/UserStateContext";
+import { UserStateContext } from "../../context/UserStateContext";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import { IconButton } from "@material-ui/core";
 import { useSnackbar } from "notistack";
-import { getRoute, PAGES } from "../routes";
+import { getRoute, PAGES } from "../../routes";
 import { useHistory } from "react-router-dom";
 
 const TickerHeart = (props) => {
