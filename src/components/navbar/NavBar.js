@@ -8,10 +8,12 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Link as RouterLink, useLocation } from "react-router-dom";
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import ImageWithFallback from "../../utils/ImageWithFallback";
 import { getRoute, PAGES } from "../../routes";
+import { ThemeVariantContext } from "../../context/ThemeVariantContext";
+import { lightTheme } from "../../theme";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -58,6 +60,8 @@ export { NavbarList };
 
 const NavBar = (props) => {
   const drawer = <NavbarList className={props.className} {...props} />;
+  const {theme} = useContext(ThemeVariantContext);
+  const logoPath = (theme===lightTheme) ? "assets/logo_header/light/logo_header" : "assets/logo_header/dark/logo_header";
 
   return (
     <>
@@ -70,7 +74,7 @@ const NavBar = (props) => {
       >
         <Toolbar>
           <RouterLink to={getRoute(PAGES.HOME).path}>
-            <ImageWithFallback src="assets/logo_header/logo_header" alt="stonx logo"/>
+            <ImageWithFallback src={logoPath} alt="stonx logo"/>
           </RouterLink>
         </Toolbar>
         {drawer}

@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) =>
 
 const UserPopup = (props) => {
   const classes = useStyles();
-  const toggleTheme = useContext(ThemeVariantContext);
+  const {toggleTheme} = useContext(ThemeVariantContext);
   const {isLoggedIn, setUserState} = useContext(UserStateContext);
 
   const handleLogout = () => {
@@ -71,16 +71,6 @@ const UserPopup = (props) => {
               }
             />
           </ListItem>
-          <ListItem button>
-            <ListItemIcon><Share /></ListItemIcon>
-            <ListItemText
-              primary={
-                <Typography variant="body1" className={classes.menuText}>
-                  Share
-                </Typography>
-              }
-            />
-          </ListItem>
           {isLoggedIn() ? (
             <ListItem>
               <Button
@@ -104,7 +94,7 @@ const UserPopup = (props) => {
                   }
                 />
               </ListItem>
-              <ListItem button component={RouterLink} to={getRoute(PAGES.LOGIN).path}>
+              <ListItem button component={RouterLink} to={getRoute(PAGES.REGISTRATION).path}>
               <ListItemIcon><MeetingRoom /></ListItemIcon>
               <ListItemText
                 primary={

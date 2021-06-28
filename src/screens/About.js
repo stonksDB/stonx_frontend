@@ -102,7 +102,7 @@ const About = (props) => {
           <Grid item xs={5} md={4} lg={3}>
             <RouterLink to="/">
               <ImageWithFallback
-                src="assets/logo_header/logo_header"
+                src="assets/logo_header/light/logo_header"
                 alt="stonx logo"
               />
             </RouterLink>

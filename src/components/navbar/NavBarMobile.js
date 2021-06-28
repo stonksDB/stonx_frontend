@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) =>
       position: "fixed",
       bottom: 0,
       zIndex: 4000,
-
+      background: theme.palette.background.default,
     },
   })
 );

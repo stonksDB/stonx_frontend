@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { Button, Grid, Typography } from "@material-ui/core";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { Link as RouterLink, Redirect, useHistory } from "react-router-dom";
 import { getRoute, PAGES } from "../routes";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import { login } from "../api/API";
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) =>
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { setUserState } = useContext(UserStateContext);
+  const { setUserState, isLoggedIn } = useContext(UserStateContext);
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const classes = useStyles();

@@ -3,7 +3,7 @@ import { linearGradientDef } from "@nivo/core";
 import { Typography, useTheme } from "@material-ui/core";
 import { getPlottableData } from "../../utils/TickerUtils";
 
-const colors = ["#2360FB", "#FAC032", "#8dfb23", "#a123fb", "#af8518", "#FB2360"];  //TODO: Palette
+const colors = ["#2360FB", "#FAC032", "#8dfb23", "#a123fb", "#af8518", "#FB2360"];
 
 const MarketChart = (props) => {
   const theme = useTheme();

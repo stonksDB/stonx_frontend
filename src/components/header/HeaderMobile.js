@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Toolbar, AppBar, Grid } from "@material-ui/core";
 import ImageWithFallback from "../../utils/ImageWithFallback";
 import SearchBar from "../SearchBar";
@@ -6,6 +6,8 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import { getRoute, PAGES } from "../../routes";
 import { Link as RouterLink } from 'react-router-dom';
 import UserMenu from "../user/UserMenu";
+import { ThemeVariantContext } from "../../context/ThemeVariantContext";
+import { lightTheme } from "../../theme";
 
 const useStyles = makeStyles((theme) =>
   createStyles({

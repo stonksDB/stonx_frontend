@@ -13,7 +13,7 @@ export const ThemeVariantProvider = (props) => {
   }
 
   return (
-    <ThemeVariantContext.Provider value={toggleTheme}>
+    <ThemeVariantContext.Provider value={{theme: theme, toggleTheme: toggleTheme}}>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <SnackbarProvider maxSnack={3}>
@@ -26,4 +26,7 @@ export const ThemeVariantProvider = (props) => {
   );
 };
 
-export const ThemeVariantContext = React.createContext((theme) => {});
+export const ThemeVariantContext = React.createContext({
+  theme: lightTheme,
+  toggleTheme: (theme) => {},
+});
