@@ -128,7 +128,7 @@ function getMostPerforming() {
 
 function getHistory(ticker, range) {
   return new Endpoint({
-    path: "stock/history",
+    path: "stocks/history",
     method: "get",
     pathParam: { ticker: ticker },
     queryParam: { period: range, update_analytics: "false" },
