@@ -115,7 +115,7 @@ const SingleTicker = (props) => {
                   variant={"h6"}
                   style={{ display: "inline-block", paddingRight: 20 }}
                 >
-                  &nbsp;USD
+                  {props.chartData.ticker.currency}
                 </Typography>
 
                 {roundedRatio > 0 ? (
@@ -133,7 +133,7 @@ const SingleTicker = (props) => {
                 )}
 
                 <Typography variant={"body2"} style={{ display: "block" }}>
-                  {mockTicker.market.name}, updated{" "}
+                  updated{" "}
                   {dayjs(props.currentPrice.price_last_update).format(
                     "MMMM DD YYYY HH:MM"
                   )}

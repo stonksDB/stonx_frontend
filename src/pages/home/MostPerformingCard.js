@@ -17,7 +17,7 @@ const MostPerformingCard = (props) => {
     async function getData() {
       const mostPerforming = await getMostPerforming();
       const history = await Promise
-                            .allSettled(mostPerforming.map((ticker) => Promise.resolve(getHistory(ticker.ticker, "1d"))));
+                            .allSettled(mostPerforming.map((ticker) => Promise.resolve(getHistory(ticker.ticker))));
 
       return mostPerforming.map((stock,index) => {
         const points = history[index].value;

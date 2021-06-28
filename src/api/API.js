@@ -42,6 +42,7 @@ function getCompanyInfo(ticker) {
     responseFormat: {
       city: "Palo Alto",
       industry_id: 47,
+      currenct: "USD",
       logo_url: "https://logo.clearbit.com/tesla.com",
       name: "TESLA INC",
       phone: "650-681-5000",
@@ -123,7 +124,7 @@ function getMostPerforming() {
   }).getResponse();
 }
 
-function getHistory(ticker, range="5d") {
+function getHistory(ticker, range="1d") {
   return new Endpoint({
     path: "stocks/history",
     method: "get",
