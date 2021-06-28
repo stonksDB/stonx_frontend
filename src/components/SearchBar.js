@@ -62,7 +62,8 @@ const SearchBar = (props) => {
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
-        history.push(`${getRoute(PAGES.SINGLE_TICKER).path.slice(0, -4)}/${newValue.ticker}`);
+        if (newValue !== null && newValue.ticker !== null)
+          history.push(`${getRoute(PAGES.SINGLE_TICKER).path.slice(0, -4)}/${newValue.ticker}`);
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
