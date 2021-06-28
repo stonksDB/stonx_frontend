@@ -21,9 +21,7 @@ const MarketChart = (props) => {
     },
   };
 
-  console.log("Data", props.points);
   let dataPoints = getPlottableData(props.points, colors);
-  console.log("Chart", dataPoints);
   let ticks = dataPoints[0] !== undefined && getTicks(dataPoints);  //TODO: Better ticks distance
 
   return (

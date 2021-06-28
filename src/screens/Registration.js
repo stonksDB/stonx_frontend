@@ -17,6 +17,8 @@ import { register } from "../api/API";
 import { useSnackbar } from "notistack";
 import TextValidatorWithLabel from "../components/TextValidatorWithLabel";
 import { UserStateContext } from "../context/UserStateContext";
+import ValidatorDatePicker from "../components/ValidatorDatePicker";
+import dayjs from "dayjs";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -34,6 +36,29 @@ const useStyles = makeStyles((theme) =>
     strengthBar: {
       [`& >p`]: {
         color: `${theme.palette.text.secondary} !important`,
+      },
+    },
+    datePicker: {
+      ...theme.input,
+      [`& >div`]: {
+        [`&::before`]: {
+          borderBottom: 0,
+          [`&:hover`]: {
+            border: 0,
+          }
+        },
+        [`& >input`]: {
+          paddingLeft: 10,
+          paddingTop: 15,
+        },
+
+        //height: 25,
+        marginTop: 0,
+        color: theme.palette.text.primary,
+      },
+      [`& >label`]: {
+        zIndex: 4000,
+        paddingLeft: 10,
       },
     },
   })
@@ -64,7 +89,7 @@ const Registration = (props) => {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
   const [emailConfirm, setEmailConfirm] = useState();
-  const [dob, setDob] = useState();
+  const [dob, setDob] = useState(dayjs());
   const [country, setCountry] = useState();
   const [password, setPassword] = useState();
   const [passwordConfirm, setPasswordConfirm] = useState();
@@ -91,26 +116,18 @@ const Registration = (props) => {
     return passwordScore > 1;
   });
   ValidatorForm.addValidationRule("isPast", (value) => {
-    if (value !== undefined) {
-      var parts = value.split("/");
-      var inputDate = new Date(
-        parseInt(parts[2], 10),
-        parseInt(parts[1], 10) - 1,
-        parseInt(parts[0], 10)
-      );
-      var today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return inputDate < today;
-    } else {
+    if (value !== undefined)
+      return value.isBefore(dayjs(new Date()));
+    else
       return false;
-    }
+
   });
 
   const handleSubmit = () => {
     register({
       firstName: firstName,
       lastName: lastName,
-      dob: dob,
+      dob: dob.format('DD-MM-YYYY'),
       country: country,
       email: email,
       confirmationEmail: emailConfirm,
@@ -121,7 +138,7 @@ const Registration = (props) => {
         .map((elem) => elem.id),
     }).then((data) => {
       setUserState(data);
-      enqueueSnackbar("Success!", {variant: "success"});
+      enqueueSnackbar("Success! Please now login", {variant: "success"});
       setTimeout(() => history.push(getRoute(PAGES.LOGIN).path), 300);
     }).catch((error) => {
       enqueueSnackbar(error.response.data, {variant: "error"});
@@ -186,22 +203,21 @@ const Registration = (props) => {
         <Grid item xs={12} sm={8} md={6} style={{ width: "100%" }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextValidatorWithLabel
+              <ValidatorDatePicker
                 name="dob"
                 label="Date Of Birth*"
                 variant="outlined"
-                className={classes.input}
+                className={classes.datePicker}
+                format="DD/MM/YYYY"
                 size="small"
                 value={dob}
-                onChange={(e) => setDob(e.target.value)}
-                validators={["required", "isDate", "isPast"]}
+                onChange={(value) => setDob(value)}
+                validators={["required", "isPast"]}
                 errorMessages={[
                   "Required",
-                  "Insert a valid date",
                   "You can't be born in the future!",
                 ]}
               />
-              {/*TODO: implement date picker using @material-ui/pickers */}
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextValidatorWithLabel

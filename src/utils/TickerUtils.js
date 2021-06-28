@@ -1,5 +1,4 @@
 const getPlottableData = (tickers, colors) => {
-  console.log("AAAAAAAAAAAAA", tickers);
   return tickers.map((ticker, index)  => ({
     id: ticker.ticker,
     color: colors[index],

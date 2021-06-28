@@ -3,6 +3,8 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
 import { darkTheme, lightTheme } from "../theme";
 import { SnackbarProvider } from "notistack";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DayjsUtils from '@date-io/dayjs';
 
 export const ThemeVariantProvider = (props) => {
   const [theme, setTheme] = useState(lightTheme);
@@ -15,7 +17,9 @@ export const ThemeVariantProvider = (props) => {
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <SnackbarProvider maxSnack={3}>
-          {props.children}
+          <MuiPickersUtilsProvider utils={DayjsUtils}>
+            {props.children}
+          </MuiPickersUtilsProvider>
         </SnackbarProvider>
       </MuiThemeProvider>
     </ThemeVariantContext.Provider>

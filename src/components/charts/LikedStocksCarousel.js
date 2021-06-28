@@ -41,8 +41,6 @@ const LikedStocksCarousel = (props) => {
   }, [userState, setState]);
 
   const InnerComponent = withLoading((props) => {
-    console.log(props.likedTickerPoints);
-    // TODO: find a way to make LikedStocksCarousel responsive
     return (
       <Carousel
         autoPlay
