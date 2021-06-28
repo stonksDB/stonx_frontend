@@ -38,7 +38,7 @@ const RelatedNews = (props) => {
           <Link
             variant="body1"
             component={RouterLink}
-            to={`${getRoute(PAGES.NEWS).path}/${props.news.id}`}
+            to={`${getRoute(PAGES.NEWS).path}/${props.news.uuid}`}
             color="textPrimary"
           >
             {props.news.title}
@@ -54,14 +54,14 @@ const SingleNews = (props) => {
   const {id} = useParams();
 
   const [state, setState] = useState({
-    loading: true,
+    isLoading: true,
     news: {},
     relatedNews: [],
   });
 
   useEffect(() => {
     let isActive = true;
-    setState({loading: true, news: {}, relatedNews: []});
+    setState({isLoading: true, news: {}, relatedNews: []});
 
     async function getData() {
       const singleNews = await getSingleNews(id);
@@ -72,7 +72,7 @@ const SingleNews = (props) => {
 
     getData(id)
       .then((data) => {
-        isActive && setState({loading: false, news: data.singleNews, relatedNews: data.relatedNews.slice(1,4)});
+        isActive && setState({isLoading: false, news: data.singleNews, relatedNews: data.relatedNews.slice(1,4)});
         return () => {
           isActive = false;
         };
@@ -80,6 +80,7 @@ const SingleNews = (props) => {
   }, [setState, id]);
 
   const InnerComponent = withLoading((props) => {
+    console.log(props.news);
     let news = props.news.data.contents[0].content;
     return (
       <Grid container direction="column" spacing={3} className={classes.externalGrid}>
@@ -129,7 +130,7 @@ const SingleNews = (props) => {
   });
 
   return (
-    <InnerComponent isLoading={state.loading} news={state.news} relatedNews={state.relatedNews}/>
+    <InnerComponent isLoading={state.isLoading} news={state.news} relatedNews={state.relatedNews}/>
   );
 };
 

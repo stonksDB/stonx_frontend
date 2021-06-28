@@ -2,6 +2,7 @@ import MarketChart from "../../components/charts/MarketChart";
 import React, { useEffect, useState } from "react";
 import { getHistory, getMostPerforming } from "../../api/API";
 import withLoading from "../../api/withLoading";
+import historyMock from "../../api/historyMock";
 
 const MostPerformingCard = (props) => {
   const [state, setState] = useState({

@@ -98,4 +98,4 @@ const singleNewsMock = {
   "status": "OK"
 };
 
-export default { singleNewsMock };
+export default singleNewsMock;

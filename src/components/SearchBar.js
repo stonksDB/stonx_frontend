@@ -5,7 +5,7 @@ import { TextField, InputAdornment, Paper, Link } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { search } from "../api/API";
 import TickerChip from "./stocks/TickerChip";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import { getRoute, PAGES } from "../routes";
 
 const useStyles = makeStyles((theme) =>
@@ -31,6 +31,7 @@ const SearchPaper = (props) => {
 
 const SearchBar = (props) => {
   const classes = useStyles();
+  const history = useHistory();
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState([]);
@@ -61,6 +62,7 @@ const SearchBar = (props) => {
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
+        history.push(`${getRoute(PAGES.SINGLE_TICKER).path.slice(0, -4)}/${newValue.ticker}`);
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);

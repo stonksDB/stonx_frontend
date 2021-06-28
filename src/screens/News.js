@@ -61,15 +61,15 @@ const NewsCard = (props) => {
 const News = (props) => {
   const classes = useStyles();
   const [state, setState] = useState({
-    loading: false,
+    isLoading: false,
     news: [],
   });
 
   useEffect(() => {
     let isActive = true;
-    setState({loading: true});
-    getNews("TSLA.MI")
-      .then((res) => isActive && setState({loading: false, news: res}));
+    setState({isLoading: true, news: []});
+    getNews("")
+      .then((res) => isActive && setState({isLoading: false, news: res}));
 
     return () => {
       isActive = false;

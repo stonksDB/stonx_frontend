@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from "@material-ui/core";
 import MarketChart from "./MarketChart";
 import React, { useEffect, useState } from "react";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { getHistory, getTickerPrice } from "../../api/API";
+import { getTickerPrice } from "../../api/API";
 import withLoading from "../../api/withLoading";
 
 const useStyles = makeStyles((theme) =>
