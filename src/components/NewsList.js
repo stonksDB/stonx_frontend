@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Avatar, Button, Grid, Link, Typography } from "@material-ui/core";
 import generateColor from "../utils/ColorGenerator";
 import { getRoute, PAGES } from "../routes";
@@ -6,6 +6,8 @@ import { Link as RouterLink } from "react-router-dom";
 import withLoading from "../api/withLoading";
 import { getNews } from "../api/API";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { useLocation } from 'react-router-dom';
+import { UserStateContext } from "../context/UserStateContext";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -44,6 +46,9 @@ const NewsHeader = (props) => {
 };
 
 const NewsList = (props) => {   //TODO: Adjust number based on height
+  const location = useLocation();
+  const {news, setNews} = useContext(UserStateContext);
+
   const [state, setState] = useState({
     loading: false,
     news: [],
@@ -51,14 +56,21 @@ const NewsList = (props) => {   //TODO: Adjust number based on height
 
   useEffect(() => {
     let isActive = true;
-    setState({loading: true, news: []});
-    getNews("")
-      .then((res) => isActive && setState({loading: false, news: res}));
+    if (location.pathname===getRoute(PAGES.HOME).path || news.length===0) { //Fetch news only when in home, or when cache is empty
+      setState({loading: true, news: []});
+      getNews("")
+        .then((res) => {
+          isActive && setState({loading: false, news: res});
+          setNews(state.news);
+        });
+    } else {
+      isActive && setState({loading: false, news: news});
+    }
 
     return () => {
       isActive = false;
     };
-  }, [setState]);
+  }, [location.pathname, setState]);
 
   const InnerComponent = withLoading((props) => {
     return (
