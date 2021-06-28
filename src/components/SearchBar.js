@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { TextField, InputAdornment, Paper, Link } from "@material-ui/core";
+import { TextField, InputAdornment, Paper, Link, Grid, Typography } from "@material-ui/core";
 import { Search } from "@material-ui/icons";
 import { search } from "../api/API";
 import TickerChip from "./stocks/TickerChip";
@@ -95,7 +95,10 @@ const SearchBar = (props) => {
             color="textSecondary"
             className="links"
           >
-            <TickerChip showFullName ticker={option}/>
+            <Grid container direction="row">
+              <Grid item><TickerChip ticker={option}/></Grid>
+              <Grid item><Typography>option.name</Typography></Grid>
+            </Grid>
           </RouterLink>
         );
       }}

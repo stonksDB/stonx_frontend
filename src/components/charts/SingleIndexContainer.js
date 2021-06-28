@@ -58,7 +58,7 @@ const SingleIndexContainer = (props) => {
                     : classes.greenStyle
                 }
               >
-                {roundedRatio}
+                {roundedRatio}%
               </Typography>
             </Grid>
             <Grid item>

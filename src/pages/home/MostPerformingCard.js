@@ -2,7 +2,8 @@ import MarketChart from "../../components/charts/MarketChart";
 import React, { useEffect, useState } from "react";
 import { getHistory, getMostPerforming } from "../../api/API";
 import withLoading from "../../api/withLoading";
-import historyMock from "../../api/historyMock";
+import Carousel from "react-material-ui-carousel";
+import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 
 const MostPerformingCard = (props) => {
   const [state, setState] = useState({
@@ -37,12 +38,23 @@ const MostPerformingCard = (props) => {
   }, [setState]);
 
   const InnerComponent = withLoading((props) => (
-    <MarketChart
-      title="Most Performing"
-      height="38vh"
-      enablePoints={false}
-      points={props.mostPerformingData}
-    />
+    <Carousel
+      autoPlay
+      animation="slide"
+      swipe={false}
+      NextIcon={<ChevronRight />}
+      PrevIcon={<ChevronLeft />}
+    >
+      {props.mostPerformingData.map((data, index) => (
+        <MarketChart
+          title="Most Performing"
+          height="38vh"
+          enablePoints={false}
+          points={[data]}
+        />
+      ))}
+    </Carousel>
+
   ));
 
   return <InnerComponent isLoading={state.isLoading} mostPerformingData={state.mostPerformingData}/>;
