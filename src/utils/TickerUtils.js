@@ -16,7 +16,7 @@ const getPlottableData = (tickers, colors) => {
 
 const prettifyHistory = (history) => {
   return history.map((point) => ({
-    x: point.datetime.substring(0, point.datetime.length-6),
+    x: prettifyDate(point.datetime),
     y: point.Close,
   }));
 };
@@ -34,6 +34,30 @@ const getStandardDeviation = (mean, array) => {
     Math.pow(x - mean, 2))
         .reduce((a, b) => a + b)
     / n)
+};
+
+const prettifyDate = (date) => {
+  let dateObject = new Date(date);
+  return (
+    dateObject.getDate() +
+    "/" +
+    dateObject.getMonth() +
+    " " +
+    dateObject.getHours() +
+    ":" +
+    dateObject.getMinutes()
+  );
+};
+
+const getTicks = (dataPoints, isMobile) => {
+  let ticksArr = [];
+  let validIndex = (isMobile) ? 20 : 5;
+  dataPoints[0].data.forEach((entry, index) => {
+    if (index % validIndex === 0) {
+      ticksArr.push(entry.x);
+    }
+  });
+  return ticksArr;
 };
 
 const calculateStandardizedValues = (points) => {
@@ -58,4 +82,4 @@ const calculateStandardizedValues = (points) => {
   return points;
 };
 
-export { getPlottableData };
+export { getPlottableData, getTicks };

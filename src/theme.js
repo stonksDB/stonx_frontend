@@ -1,5 +1,5 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import { lato } from "./fonts.js";
+import { lato } from "./fonts/fonts.js";
 
 const themeGeneral = {
   typography: {

@@ -1,7 +1,7 @@
 import { ResponsiveLine } from "@nivo/line";
 import { linearGradientDef } from "@nivo/core";
 import { Typography, useMediaQuery, useTheme } from "@material-ui/core";
-import { getPlottableData } from "../../utils/TickerUtils";
+import { getPlottableData, getTicks } from "../../utils/TickerUtils";
 
 const colors = ["#2360FB", "#FAC032", "#8dfb23", "#a123fb", "#af8518", "#FB2360"];
 
@@ -27,8 +27,9 @@ const MarketChart = (props) => {
     },
   };
 
-  const dataPoints = getPlottableData(props.points, colors);
   const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
+  const dataPoints = getPlottableData(props.points, colors);
+  const ticks = getTicks(dataPoints, isMobile);
 
   return (
     props.points.length===0 ? (
@@ -59,21 +60,22 @@ const MarketChart = (props) => {
           }}
           curve="cardinal"
           xScale={{
-            type: "time",
-            format: "%Y-%m-%eT%H:%M:%S",
-            useUTC: false,
-            precision: "minute",
+            type: "point",
             min: "auto",
             max: "auto"
           }}
-          xFormat="time:%Y-%m-%eT%H:%M:%S-%L"
           yScale={{ type: "linear", min: "auto", max: "auto" }}
           axisBottom={
             props.enableAxisX
               ? {
-                format: "%e/%m %H:%M",
-                tickValues: `every ${isMobile ? "30" : "60"} minutes`,  //Depends on getHistory period
-              }:
+                orient: "bottom",
+                tickSize: 7,
+                tickPadding: 5,
+                legend: props.xTitle,
+                legendOffset: 30,
+                legendPosition: "middle",
+                tickValues: ticks,
+              } :
               null
           }
           axisLeft={

@@ -42,7 +42,7 @@ const NewsCard = (props) => {
           <Grid item>
             <Grid container direction="column" justify="center" alignItems="flex-end">
               <Grid item>
-                <TickerChip disabled={props.news.read} />  {/*TODO: Display the appropriate ticker symbol*/}
+                <TickerChip disabled={props.news.read} ticker={{ticker: props.news.ticker}}/>
               </Grid>
               <Grid item>
                 <Typography variant="body2" color={textColor}>By {props.news.provider} • {dayjs(props.news.published_at).format("DD MMM YYYY")}</Typography>
