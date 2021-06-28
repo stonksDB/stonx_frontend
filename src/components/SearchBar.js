@@ -95,9 +95,9 @@ const SearchBar = (props) => {
             color="textSecondary"
             className="links"
           >
-            <Grid container direction="row">
+            <Grid container direction="row" spacing={3}>
               <Grid item><TickerChip ticker={option}/></Grid>
-              <Grid item><Typography>option.name</Typography></Grid>
+              <Grid item><Typography>{option.name}</Typography></Grid>
             </Grid>
           </RouterLink>
         );
