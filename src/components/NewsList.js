@@ -5,7 +5,6 @@ import {
   ButtonBase,
   Grid,
   Link,
-  Typography,
 } from "@material-ui/core";
 import generateColor from "../utils/ColorGenerator";
 import { getRoute, PAGES } from "../routes";

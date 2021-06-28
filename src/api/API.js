@@ -124,15 +124,17 @@ function getMostPerforming() {
   }).getResponse();
 }
 
-function getHistory(ticker, range="1d") {
+function getHistory(ticker, update_analytics="false", range="1d") {
   return new Endpoint({
     path: "stocks/history",
     method: "get",
     pathParam: { ticker: ticker },
-    queryParam: { period: range, update_analytics: "false" },
+    queryParam: { period: range, update_analytics: update_analytics },
     responseFormat: historyResult,
   }).getResponse();
 }
+
+
 
 function getIndexes() {
   return new Endpoint({

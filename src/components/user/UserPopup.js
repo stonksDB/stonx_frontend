@@ -3,7 +3,7 @@ import {
 } from "@material-ui/core";
 import React, { useContext } from "react";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { Brightness4, MeetingRoom, Share, VpnKey } from "@material-ui/icons";
+import { Brightness4, MeetingRoom, VpnKey } from "@material-ui/icons";
 import { ThemeVariantContext } from "../../context/ThemeVariantContext";
 import { getRoute, PAGES } from "../../routes";
 import { Link as RouterLink } from 'react-router-dom';

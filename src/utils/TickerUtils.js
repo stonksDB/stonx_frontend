@@ -15,7 +15,7 @@ const getPlottableData = (tickers, colors) => {
 };
 
 const getTickerName = (ticker) => {
-  console.log(ticker);
+  // console.log(ticker);
   if (ticker.ticker !== undefined)
     return ticker.ticker;
   else
@@ -74,8 +74,8 @@ const calculateStandardizedValues = (points) => {
   for(let i=1; i<points.length; i++)
     variationData.push((points[i].y - points[i-1].y) / points[i-1].y);
 
-  const minValue = Math.min(...variationData);
-  const maxValue = Math.max(...variationData);
+  // const minValue = Math.min(...variationData);
+  // const maxValue = Math.max(...variationData);
   const avgValue = variationData.reduce((a, b) => a + b) / variationData.length;
   const stdPopulation = getStandardDeviation(avgValue, variationData);
   //console.log(minValue, maxValue, avgValue, stdPopulation);

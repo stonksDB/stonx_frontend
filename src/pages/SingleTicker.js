@@ -35,21 +35,6 @@ const useStyles = makeStyles((theme) =>
 );
 
 const SingleTicker = (props) => {
-  const mockTicker = {
-    market: {
-      name: "NASDAQ",
-    },
-    summary: {
-      sector: "Consumer Cyclicals",
-      industry: "Electric (Alternative) Vehicles",
-      marketCap: "$606.89B",
-      netDebtPref: "$6.27B",
-      entValue: "$600.62B",
-      beta: "1.99x",
-      borrowCost: "0.25%",
-    },
-  };
-
   const classes = useStyles();
   const { id } = useParams();
   const { isLoggedIn } = useContext(UserStateContext);
@@ -65,7 +50,7 @@ const SingleTicker = (props) => {
     let isActive = true;
 
     async function getData() {
-      const chartData = await getHistory(id);
+      const chartData = await getHistory(id, "true");
       const companyData = await getCompanyInfo(id);
       const price = await getTickerPrice(id);
 
