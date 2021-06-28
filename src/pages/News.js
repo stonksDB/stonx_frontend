@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) =>
 const NewsCard = (props) => {
   const classes = useStyles();
   const textColor = (props.news.read) ? "textSecondary" : "textPrimary";
-
+  
   return (
     <Paper elevation={1} className={classes.card} style={{paddingTop: 10}}>
       <Grid container direction="column" justify="center" alignItems="flex-start">
