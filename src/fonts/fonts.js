@@ -1,6 +1,6 @@
-import Lato from "./fonts/Lato-Regular.ttf";
-import LatoThin from "./fonts/Lato-Thin.ttf";
-import LatoLight from "./fonts/Lato-Light.ttf";
+import Lato from "./Lato-Regular.ttf";
+import LatoThin from "./Lato-Thin.ttf";
+import LatoLight from "./Lato-Light.ttf";
 
 export const lato = {
   fontFamily: "Lato",

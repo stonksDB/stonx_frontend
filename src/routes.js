@@ -5,15 +5,15 @@ import {
   ImportContacts as NewsIcon,
   Info as AboutIcon,
 } from "@material-ui/icons";
-import Login from "./screens/Login";
-import Registration from "./screens/Registration";
-import SingleTicker from "./screens/SingleTicker";
-import SingleNews from "./screens/SingleNews";
-import News from "./screens/News";
-import MyStocks from "./screens/MyStocks";
-import Home from "./screens/home/Home";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
+import SingleTicker from "./pages/SingleTicker";
+import SingleNews from "./pages/SingleNews";
+import News from "./pages/News";
+import MyStocks from "./pages/MyStocks";
+import Home from "./pages/home/Home";
 import React from "react";
-import About from "./screens/About";
+import About from "./pages/About";
 
 export const RENDER = {
   FULL: "full",

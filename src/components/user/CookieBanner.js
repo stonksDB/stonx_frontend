@@ -37,7 +37,7 @@ const CookieBanner = (props) => {
       open={open}
       message="We use Cookies to improve your experience on our site. Your data will be treated with respect towards the current DPA and GDPR"
       className={classes.snackbar}
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       ContentProps={{
         className: classes.snackbar,
       }}

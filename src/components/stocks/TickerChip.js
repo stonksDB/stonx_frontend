@@ -31,10 +31,6 @@ TickerChip.defaultProps = {
   showFullName: false,
   big: false,
   disabled: false,
-  ticker: {   //TODO: Remove this when News endpoint also gets tickers data
-    name: "Tesla Inc.",
-    ticker: "TSLA",
-  },
 };
 
 export default TickerChip;

@@ -2076,67 +2076,109 @@ const historyResult = [
 
 const newsResult = [
   {
-    img: {
-      height: 410,
-      tag: "original",
-      url: "https://s.yimg.com/uu/api/res/1.2/My1vw094pkh4kZnhSEBrQg--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/apVB5hzTFtK0hsWeacDUsA--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/c755466a141ff678e36eb5c5f563a091",
-      width: 615,
+    "img": {
+      "height": 410,
+      "tag": "original",
+      "url": "https://s.yimg.com/uu/api/res/1.2/GJgyrHYRDWbIV2Zum03YJg--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/SpO3QdoU7b4RnUkWFWuH3w--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/63fea3c6d52353a56e167b061ea84d41",
+      "width": 615
     },
-    provider: "FX Empire",
-    published_at: "2021-06-07T13:41:09Z",
-    title: "DOGE Price Finds Green as Bitcoin Tide Lifts Crypto Boats",
-    uuid: "7691bc6c-6bd1-314e-9294-ad531fd93833",
+    "provider": "FX Empire",
+    "published_at": "2021-05-14T13:23:11Z",
+    "ticker": "AAPL",
+    "title": "Apple, Tesla, and Bitcoin Are in a Technical ‘Excess Phase Top”",
+    "uuid": "a99ce306-bd78-3863-a173-2039728d6d56"
   },
   {
-    img: {
-      height: 410,
-      tag: "original",
-      url: "https://s.yimg.com/uu/api/res/1.2/WwfU7l5m.8CSWlP7tGrXaQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/jYyhVfkk8m882fogz_cr3A--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/b857b2a3c4ced05d618e1cd87a694e91",
-      width: 615,
+    "img": {
+      "height": 410,
+      "tag": "original",
+      "url": "https://s.yimg.com/uu/api/res/1.2/ZR8ftY7HRsNsiFTMwgnvTw--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/7MUde5oXJaemnskFAMaA2Q--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/8d9639fcf89b7f0951baca5337f943bf",
+      "width": 615
     },
-    provider: "FX Empire",
-    published_at: "2021-06-04T15:51:34Z",
-    title: "Why Tesla Stock Rebounds After Yesterday’s Strong Sell-Off",
-    uuid: "941ad7cc-507b-3b5c-ab83-e9e0a4b6cae9",
+    "provider": "FX Empire",
+    "published_at": "2021-04-29T12:45:40Z",
+    "ticker": "AAPL",
+    "title": "Apple Trading Higher After Blowout Quarter",
+    "uuid": "5760dda6-20f0-3402-9554-9c17ca9d9fe8"
   },
   {
-    img: {
-      height: 410,
-      tag: "original",
-      url: "https://s.yimg.com/uu/api/res/1.2/5LBBETdcr2MFXUZV4c0Gfw--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/26pGze4QaQWa7B7Q1Vl.Fw--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/76cd3ab8ce6dfc27081b9a1f34300feb",
-      width: 615,
+    "img": {
+      "height": 410,
+      "tag": "original",
+      "url": "https://s.yimg.com/uu/api/res/1.2/u8X1MzPkBRoYuaDt._DtKQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/Pl8yIB7r0MX5McPrwYEtLA--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/b5ab0b2cb83608e8e8d27123483f7047",
+      "width": 615
     },
-    provider: "FX Empire",
-    published_at: "2021-06-04T14:43:25Z",
-    title:
-      "Dogecoin Falls in Sympathy With Broader Market Despite Crypto’s Miami Heat",
-    uuid: "72698c23-3899-37d0-ac33-adf90eb54db0",
+    "provider": "FX Empire",
+    "published_at": "2021-06-28T12:54:15Z",
+    "ticker": "MSFT",
+    "title": "Microsoft Overbought After Windows 11 Event",
+    "uuid": "bcf1d73c-1f35-3c40-b7c0-93969bd151de"
   },
   {
-    img: {
-      height: 410,
-      tag: "original",
-      url: "https://s.yimg.com/uu/api/res/1.2/AMrWj8I8HWl8NEGFhbQN5Q--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/uAXneyu5UnarczFcIVrHuQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/a3d19e486d8cd1a85ee615c70a5c8f13",
-      width: 615,
+    "img": {
+      "height": 410,
+      "tag": "original",
+      "url": "https://s.yimg.com/uu/api/res/1.2/mHsNWSNTr_ap828dNdA7jQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/PplryqC5VlPLezcV9xwv6w--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/fb2862e6ab2ba1ae4690e4869bb053b0",
+      "width": 615
     },
-    provider: "FX Empire",
-    published_at: "2021-06-04T08:44:03Z",
-    title: "Bitcoin Retreats As Musk Tweets Broken-Heart Emoji",
-    uuid: "c8d618b8-0179-3e0d-afe5-bffb2bf753f2",
+    "provider": "FX Empire",
+    "published_at": "2021-06-23T07:08:29Z",
+    "ticker": "MSFT",
+    "title": "Microsoft, Becomes the Second Company after Apple with $2 Trillion Valuation",
+    "uuid": "42c9fa58-04b3-310b-8409-0029c6b1d1b7"
   },
   {
-    img: {
-      height: 410,
-      tag: "original",
-      url: "https://s.yimg.com/uu/api/res/1.2/D6sCo82MnXOiIrT6JcTJVw--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/xEO9WJfYcRxbwu0a_7EXrQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/6b04c4dd122baf201256a6d6c05c545f",
-      width: 615,
+    "img": {
+      "height": 410,
+      "tag": "original",
+      "url": "https://s.yimg.com/uu/api/res/1.2/VwzvfLc8Ld5en0_c0IL3AQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/6cub8GGa2J_BYiPmbdIDhQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/cd18680115641df6b283b19cf636dfe9",
+      "width": 615
     },
-    provider: "FX Empire",
-    published_at: "2021-06-02T15:16:55Z",
-    title:
-      "Elon Musk at it Again, Tweet Sends Samsung Publishing’s Shares Soaring",
-    uuid: "ae317731-b62d-3dcb-b86f-86eb87fa06fe",
+    "provider": "FX Empire",
+    "published_at": "2021-03-03T14:14:16Z",
+    "ticker": "BYND",
+    "title": "Beyond Meat Could Sell Off into Double Digits",
+    "uuid": "e46fa97c-1ec6-3372-89a1-eb6739823518"
   },
+  {
+    "img": {
+      "height": 410,
+      "tag": "original",
+      "url": "https://s.yimg.com/uu/api/res/1.2/QYaPukcZx1RBrfcwkeZskw--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/iZ1BV7hHowEFJFV1ymh.dw--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/440e6663c1a0168850fe110733fbb394",
+      "width": 615
+    },
+    "provider": "FX Empire",
+    "published_at": "2020-11-10T08:13:10Z",
+    "ticker": "BYND",
+    "title": "Investors Lose Appetite for Beyond Meats After COVID-19 Eats Profits",
+    "uuid": "74addcae-f187-32ec-9f73-79528e4be4e1"
+  },
+  {
+    "img": {
+      "height": 410,
+      "tag": "original",
+      "url": "https://s.yimg.com/uu/api/res/1.2/u8X1MzPkBRoYuaDt._DtKQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/Pl8yIB7r0MX5McPrwYEtLA--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/b5ab0b2cb83608e8e8d27123483f7047",
+      "width": 615
+    },
+    "provider": "FX Empire",
+    "published_at": "2021-06-28T12:54:15Z",
+    "ticker": "msft",
+    "title": "Microsoft Overbought After Windows 11 Event",
+    "uuid": "bcf1d73c-1f35-3c40-b7c0-93969bd151de"
+  },
+  {
+    "img": {
+      "height": 410,
+      "tag": "original",
+      "url": "https://s.yimg.com/uu/api/res/1.2/mHsNWSNTr_ap828dNdA7jQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://s.yimg.com/uu/api/res/1.2/PplryqC5VlPLezcV9xwv6w--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/fb2862e6ab2ba1ae4690e4869bb053b0",
+      "width": 615
+    },
+    "provider": "FX Empire",
+    "published_at": "2021-06-23T07:08:29Z",
+    "ticker": "msft",
+    "title": "Microsoft, Becomes the Second Company after Apple with $2 Trillion Valuation",
+    "uuid": "42c9fa58-04b3-310b-8409-0029c6b1d1b7"
+  }
 ];
 
 export { indexesResult, historyResult, newsResult };
