@@ -28,7 +28,7 @@ const MarketChart = (props) => {
   };
 
   const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
-  const dataPoints = getPlottableData(props.points, colors);
+  const dataPoints = getPlottableData(props.points, colors, props.colorIndex);
   const ticks = getTicks(dataPoints, isMobile);
 
   return (
@@ -137,7 +137,7 @@ MarketChart.defaultProps = {
   points: [[]],
   height: "26vh",
   enableArea: false,
-  enablePoints: true,
+  enablePoints: false,
   enableLegend: true,
   xTitle: "",
   yTitle: "",
@@ -145,6 +145,7 @@ MarketChart.defaultProps = {
   enableAxisY: true,
   enableGridX: false,
   enableGridY: true,
+  colorIndex: 0,
 };
 
 export default MarketChart;

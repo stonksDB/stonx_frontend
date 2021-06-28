@@ -8,7 +8,7 @@ import LockIcon from "@material-ui/icons/Lock";
 import { getRoute, PAGES } from "../../routes";
 import IndexesCard from "./IndexesCard";
 import MostPerformingCard from "./MostPerformingCard";
-import UserStocksCard from "./UserStocksCard";
+import LikedStocksCarousel from "../../components/charts/LikedStocksCarousel";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -79,7 +79,7 @@ const Home = (props) => {
                     </Typography>
                   </Box>
                 ) : (
-                  <UserStocksCard/>
+                  <LikedStocksCarousel/>
                 )}
               </Paper>
             </Grid>

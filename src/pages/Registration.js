@@ -138,8 +138,8 @@ const Registration = (props) => {
         .map((elem) => elem.id),
     }).then((data) => {
       setUserState(data);
-      enqueueSnackbar("Success! Please now login", {variant: "success"});
-      setTimeout(() => history.push(getRoute(PAGES.LOGIN).path), 300);
+      enqueueSnackbar("Success!", {variant: "success"});
+      setTimeout(() => history.push(getRoute(PAGES.HOME).path), 300);
     }).catch((error) => {
       enqueueSnackbar(error.response.data, {variant: "error"});
     });

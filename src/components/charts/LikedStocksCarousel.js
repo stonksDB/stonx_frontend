@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 import React, { useContext, useEffect, useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import MarketChart from "./MarketChart";
-import { Box } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 import { UserStateContext } from "../../context/UserStateContext";
 import withLoading from "../../api/withLoading";
 import { getHistory } from "../../api/API";
@@ -42,25 +42,30 @@ const LikedStocksCarousel = (props) => {
 
   const InnerComponent = withLoading((props) => {
     return (
-      <Carousel
-        autoPlay
-        animation="slide"
-        swipe={false}
-        NextIcon={<ChevronRight />}
-        PrevIcon={<ChevronLeft />}
-      >
-        {props.likedTickerPoints.map((element, index) => (
-          <Box key={element.ticker}>
-            <MarketChart
-              title={element.ticker}
-              height="40vh"
-              enableGridY
-              enableLegend={false}
-              points={[props.likedTickerPoints[index]]}
-            />
-          </Box>
-        ))}
-      </Carousel>
+      props.likedTickerPoints.length > 0 ? (
+        <Carousel
+          autoPlay
+          animation="slide"
+          swipe={false}
+          NextIcon={<ChevronRight />}
+          PrevIcon={<ChevronLeft />}
+        >
+          {props.likedTickerPoints.map((element, index) => (
+            <Box key={element.ticker}>
+              <MarketChart
+                title={element.ticker}
+                height="40vh"
+                enableGridY
+                enableLegend={false}
+                points={[props.likedTickerPoints[index]]}
+                colorIndex={index}
+              />
+            </Box>
+          ))}
+        </Carousel>
+      ) : (
+        <Typography align="center">You have no followed stocks!</Typography>
+      )
     )});
 
   return (

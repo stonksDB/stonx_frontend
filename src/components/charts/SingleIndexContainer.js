@@ -80,7 +80,6 @@ const SingleIndexContainer = (props) => {
           <Box display={{ xs: "none", lg: "block" }}>
             <MarketChart
               height="11vh"
-              enablePoints={false}
               enableGridY={false}
               enableLegend={false}
               enableAxisX={false}

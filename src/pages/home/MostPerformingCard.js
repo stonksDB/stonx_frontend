@@ -49,12 +49,10 @@ const MostPerformingCard = (props) => {
         <MarketChart
           title="Most Performing"
           height="38vh"
-          enablePoints={false}
           points={[data]}
         />
       ))}
     </Carousel>
-
   ));
 
   return <InnerComponent isLoading={state.isLoading} mostPerformingData={state.mostPerformingData}/>;
