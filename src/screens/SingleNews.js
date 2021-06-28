@@ -5,7 +5,7 @@ import TickerChip from "../components/stocks/TickerChip";
 import withLoading from "../api/withLoading";
 import { getRoute, PAGES } from "../routes";
 import { Link as RouterLink, useParams } from "react-router-dom";
-import { getSingleNews } from "../api/API";
+import { getNews, getSingleNews } from "../api/API";
 import dayjs from "dayjs";
 
 const useStyles = makeStyles((theme) =>
@@ -18,6 +18,10 @@ const useStyles = makeStyles((theme) =>
       opacity: "0.7",
     },
     card: theme.card,
+    externalGrid: {
+      height: "100%",
+      paddingBottom: 300,
+    },
   })
 );
 
@@ -28,7 +32,7 @@ const RelatedNews = (props) => {
     <Paper elevation={1} className={classes.card}>
       <Grid container direction="column" alignItems="flex-start" justify="center" className={classes.relatedNews}>
         <Grid item>
-          <Typography variant="subtitle2">{props.news.provider.displayName}</Typography>
+          <Typography variant="subtitle2">{props.news.provider}</Typography>
         </Grid>
         <Grid item>
           <Link
@@ -52,24 +56,33 @@ const SingleNews = (props) => {
   const [state, setState] = useState({
     loading: true,
     news: {},
+    relatedNews: [],
   });
 
   useEffect(() => {
     let isActive = true;
-    setState({loading: true});
+    setState({loading: true, news: {}, relatedNews: []});
 
-    getSingleNews(id)
-      .then((res) => isActive && setState({loading: false, news: res}));
+    async function getData() {
+      const singleNews = await getSingleNews(id);
+      const relatedNews = await getNews(id);
 
-    return () => {
-      isActive = false;
+      return {singleNews: singleNews, relatedNews: relatedNews};
     }
+
+    getData(id)
+      .then((data) => {
+        isActive && setState({loading: false, news: data.singleNews, relatedNews: data.relatedNews.slice(1,4)});
+        return () => {
+          isActive = false;
+        };
+      });
   }, [setState, id]);
 
   const InnerComponent = withLoading((props) => {
     let news = props.news.data.contents[0].content;
     return (
-      <Grid container direction="column" spacing={3}>
+      <Grid container direction="column" spacing={3} className={classes.externalGrid}>
         <Grid item container direction="row" justify="space-between" alignItems="flex-end">
           <Grid item>
             <Typography variant="h4" component="h1">{news.title}</Typography>
@@ -81,8 +94,12 @@ const SingleNews = (props) => {
         </Grid>
         <Grid item>
           <Paper elevation={1} className={classes.card}>
-            <Typography variant="body1">
+            <Typography variant="subtitle2">
               {news.summary}
+            </Typography>
+            <Typography variant="body1" style={{paddingTop: 10}}>
+              {new DOMParser().parseFromString(news.body.markup, "text/html").body.textContent.substring(210, 750)}
+              {"..."}
             </Typography>
             <Link
               href={news.canonicalUrl.url}
@@ -100,15 +117,11 @@ const SingleNews = (props) => {
         </Grid>
         <Grid item>
           <Grid container direction="row" justify="space-evenly" alignItems="center" spacing={5} style={{height: "1vh"}}>
-            <Grid item sm={12} md={4}>
-              <RelatedNews news={news}/>
-            </Grid>
-            <Grid item sm={12} md={4}>
-              <RelatedNews news={news}/>
-            </Grid>
-            <Grid item sm={12} md={4}>
-              <RelatedNews news={news}/>
-            </Grid>
+            {props.relatedNews.map((related) =>
+              <Grid item sm={12} md={4} key={related.uuid}>
+                <RelatedNews news={related}/>
+              </Grid>
+            )}
           </Grid>
         </Grid>
       </Grid>
@@ -116,7 +129,7 @@ const SingleNews = (props) => {
   });
 
   return (
-    <InnerComponent isLoading={state.loading} news={state.news}/>
+    <InnerComponent isLoading={state.loading} news={state.news} relatedNews={state.relatedNews}/>
   );
 };
 

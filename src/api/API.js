@@ -1,5 +1,6 @@
 import Endpoint from "./Endpoint";
 import { historyResult, indexesResult, newsResult } from "./mockData";
+import singleNewsMock from "./singleNewsMock";
 
 function getNews(ticker) {
   return new Endpoint({
@@ -12,37 +13,7 @@ function getNews(ticker) {
 function getSingleNews(uuid) {
   return new Endpoint({
     path: "news/single",
-    responseFormat: {
-      data: {
-        contents: [
-          {
-            content: {
-              id: "c8d618b8-0179-3e0d-afe5-bffb2bf753f2",
-              canonicalUrl: {
-                url: "https://finance.yahoo.com/news/bitcoin-retreats-musk-tweets-broken-084403780.html",
-              },
-              title: "Bitcoin Retreats As Musk Tweets Broken-Heart Emoji",
-              provider: { displayName: "FX Empire" },
-              pubDate: "2021-06-04T08:44:03Z",
-              summary:
-                "Bitcoin failed to get above $40,000 and moved below the $37,000 level.",
-              finance: { stockTickers: [{ symbol: "TSLA" }] },
-              read: true,
-              body: {
-                data: {
-                  cover: {
-                    image: {
-                      originalUrl:
-                        "https://s.yimg.com/uu/api/res/1.2/uAXneyu5UnarczFcIVrHuQ--~B/aD00MTA7dz02MTU7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/en/fx_empire_176/a3d19e486d8cd1a85ee615c70a5c8f13",
-                    },
-                  },
-                },
-              },
-            },
-          },
-        ],
-      },
-    },
+    responseFormat: singleNewsMock.singleNewsMock,
     pathParam: { uuid: uuid },
   }).getResponse();
 }
