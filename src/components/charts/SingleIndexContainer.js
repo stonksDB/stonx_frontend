@@ -24,17 +24,13 @@ const SingleIndexContainer = (props) => {
     chartData: [],
   });
 
-  useEffect(() => {   //TODO: WTF does landpage/indexes return????
+  useEffect(() => {
     let isActive = true;
     setState({ isLoading: true, lastData: null, chartData: null});
 
-    getHistory(props.index.ticker, "1d")
-      .then((points) => {
-        getTickerPrice(props.index.ticker)
-          .then((lastData) => {
-            const chartData = {...props.index, points};
-            isActive && setState({ isLoading: false, lastData: lastData, chartData: [chartData]});
-        });
+      getTickerPrice(props.index.ticker)
+        .then((lastData) => {
+          isActive && setState({ isLoading: false, lastData: lastData, chartData: [props.index]});
       });
 
     return () => {
@@ -51,7 +47,7 @@ const SingleIndexContainer = (props) => {
         <Grid item lg={5} xs>
           <Grid container direction="column" alignItems="center" justify="center">
             <Grid item style={{ textAlign: "center" }}>
-              <Typography variant="button">{props.lastData.ticker}</Typography>
+              <Typography variant="button">{props.chartData[0].ticker}</Typography>
             </Grid>
             <Grid item>
               <Typography

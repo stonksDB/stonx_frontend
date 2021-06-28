@@ -140,7 +140,7 @@ function getIndexes() {
   return new Endpoint({
     path: "landpage/indexes",
     method: "get",
-    responseFormat: indexesResult,  //TODO: Double check if this is really what gets returned from server
+    responseFormat: indexesResult,
   }).getResponse();
 }
 
