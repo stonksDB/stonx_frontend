@@ -1,7 +1,7 @@
 const getPlottableData = (tickers, colors) => {
   if (tickers.length===1) {
     return [{
-      id: getTickerName(tickers[0]),
+      id: getTickerName(tickers[0].ticker),
       color: colors[0],
       data: roundDigits(prettifyHistory(tickers[0].points)),
     }]
@@ -15,6 +15,7 @@ const getPlottableData = (tickers, colors) => {
 };
 
 const getTickerName = (ticker) => {
+  console.log(ticker);
   if (ticker.ticker !== undefined)
     return ticker.ticker;
   else
