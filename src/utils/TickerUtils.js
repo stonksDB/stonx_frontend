@@ -1,17 +1,24 @@
 const getPlottableData = (tickers, colors) => {
   if (tickers.length===1) {
     return [{
-      id: tickers[0].ticker,
+      id: getTickerName(tickers[0]),
       color: colors[0],
       data: roundDigits(prettifyHistory(tickers[0].points)),
     }]
   } else {
     return tickers.map((ticker, index) => ({
-      id: ticker.ticker,
+      id: getTickerName(ticker),
       color: colors[index],
       data: calculateStandardizedValues(prettifyHistory(ticker.points)),
     }));
   }
+};
+
+const getTickerName = (ticker) => {
+  if (ticker.ticker !== undefined)
+    return ticker.ticker;
+  else
+    return ticker;
 };
 
 const prettifyHistory = (history) => {
@@ -51,7 +58,7 @@ const prettifyDate = (date) => {
 
 const getTicks = (dataPoints, isMobile) => {
   let ticksArr = [];
-  let validIndex = (isMobile) ? 20 : 5;
+  let validIndex = (isMobile) ? 30 : 15;
   dataPoints[0].data.forEach((entry, index) => {
     if (index % validIndex === 0) {
       ticksArr.push(entry.x);

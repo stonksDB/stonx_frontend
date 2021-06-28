@@ -73,7 +73,7 @@ const SingleTicker = (props) => {
     }
 
     getData().then((data) => {
-      const chartData = { ticker: data[0].ticker, points: data[1] };
+      const chartData = { ticker: data[0], points: data[1] };
       isActive &&
         setState({
           isLoading: false,
@@ -115,25 +115,25 @@ const SingleTicker = (props) => {
                   variant={"h6"}
                   style={{ display: "inline-block", paddingRight: 20 }}
                 >
-                  {props.chartData.ticker.currency}
+
                 </Typography>
 
                 {roundedRatio > 0 ? (
                   <>
                     <Typography variant={"h6"} className={classes.positive}>
-                      ▲{roundedRatio}%
+                      ▲ {roundedRatio}%
                     </Typography>
                   </>
                 ) : (
                   <>
                     <Typography variant={"h6"} className={classes.negative}>
-                      ▼{roundedRatio}%
+                      ▼ {roundedRatio}%
                     </Typography>
                   </>
                 )}
 
                 <Typography variant={"body2"} style={{ display: "block" }}>
-                  updated{" "}
+                  {props.chartData[0].ticker.currency}{", "} updated{" "}
                   {dayjs(props.currentPrice.price_last_update).format(
                     "MMMM DD YYYY HH:MM"
                   )}

@@ -80,7 +80,6 @@ const SingleNews = (props) => {
   }, [setState, id]);
 
   const InnerComponent = withLoading((props) => {
-    console.log(props.news);
     let news = props.news.data.contents[0].content;
     return (
       <Grid container direction="column" spacing={3} className={classes.externalGrid}>

@@ -20,7 +20,6 @@ const StockSummary = (props) => {
   const classes = useStyles();
 
   const stockSummary = props.data;
-  console.log(stockSummary);
 
   return (
     <Grid container spacing={8}>

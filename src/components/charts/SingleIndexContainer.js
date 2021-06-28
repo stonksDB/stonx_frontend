@@ -2,7 +2,7 @@ import { Box, Grid, Typography } from "@material-ui/core";
 import MarketChart from "./MarketChart";
 import React, { useEffect, useState } from "react";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { getTickerPrice } from "../../api/API";
+import { getIndexPrice } from "../../api/API";
 import withLoading from "../../api/withLoading";
 
 const useStyles = makeStyles((theme) =>
@@ -28,7 +28,7 @@ const SingleIndexContainer = (props) => {
     let isActive = true;
     setState({ isLoading: true, lastData: null, chartData: null});
 
-      getTickerPrice(props.index.ticker)
+      getIndexPrice(props.index.ticker)
         .then((lastData) => {
           isActive && setState({ isLoading: false, lastData: lastData, chartData: [props.index]});
       });

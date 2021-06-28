@@ -42,7 +42,7 @@ function getCompanyInfo(ticker) {
     responseFormat: {
       city: "Palo Alto",
       industry_id: 47,
-      currenct: "USD",
+      currency: "USD",
       logo_url: "https://logo.clearbit.com/tesla.com",
       name: "TESLA INC",
       phone: "650-681-5000",
@@ -142,6 +142,20 @@ function getIndexes() {
   }).getResponse();
 }
 
+function getIndexPrice(index) {
+  return new Endpoint({
+    path: "landpage/indexes/index_price",
+    method: "get",
+    pathParam: {index: index},
+    responseFormat: {
+      "price_last_update": "unknown",
+      "ratio": 0,
+      "regular_market_price": 14271.732,
+      "ticker": "^IXIC"
+    },
+  }).getResponse();
+}
+
 function getLikedTickers() {
   return new Endpoint({
     path: "landpage/liked_tickers",
@@ -185,4 +199,5 @@ export {
   getIndexes,
   getLikedTickers,
   getTickerPrice,
+  getIndexPrice,
 };
