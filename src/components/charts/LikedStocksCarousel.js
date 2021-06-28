@@ -21,7 +21,7 @@ const LikedStocksCarousel = (props) => {
     async function getData() {
       const likedTickers = userState.likes;
       const history = await Promise
-        .allSettled(likedTickers.map((ticker) => Promise.resolve(getHistory(ticker, "1d"))));
+        .allSettled(likedTickers.map((ticker) => Promise.resolve(getHistory(ticker))));
 
       return likedTickers.map((stock,index) => {
         const points = history[index].value;

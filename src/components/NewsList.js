@@ -57,20 +57,19 @@ const NewsList = (props) => {   //TODO: Adjust number based on height
   useEffect(() => {
     let isActive = true;
     if (location.pathname===getRoute(PAGES.HOME).path || news.length===0) { //Fetch news only when in home, or when cache is empty
-      setState({loading: true, news: []});
+      setState({isLoading: true, news: []});
       getNews("")
         .then((res) => {
-          isActive && setState({loading: false, news: res});
-          setNews(state.news);
+          isActive && setState({isLoading: false, news: res}) && setNews(res);
         });
     } else {
-      isActive && setState({loading: false, news: news});
+      isActive && setState({isLoading: false, news: news});
     }
 
     return () => {
       isActive = false;
     };
-  }, [location.pathname, setState]);
+  }, [location.pathname, news, setNews]);
 
   const InnerComponent = withLoading((props) => {
     return (

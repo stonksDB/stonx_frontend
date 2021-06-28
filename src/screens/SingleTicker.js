@@ -64,23 +64,23 @@ const SingleTicker = (props) => {
   useEffect(() => {
     let isActive = true;
 
-    getCompanyInfo(id)
-      .then((companyData) => {
-        getTickerPrice(id)
-          .then((price) => {
-            mockTicker.summary.sector = companyData.sector; //TODO: Remove when StockSummary is finalized
-            getHistory(id, "1d")
-              .then((points) => {    //TODO: Eyes hurt in seeing this
-                const chartData = {...companyData, points};
-                isActive && setState({ isLoading: false, ticker: companyData, history: [chartData], currentPrice: price });
-              });
-          });
-      });
+    async function getData() {
+      const chartData = await getHistory(id);
+      const companyData = await getCompanyInfo(id);
+      const price = await getTickerPrice(id);
 
-    return () => {
-      isActive = false;
-    };
-  }, [setState, id]);
+      return [companyData, chartData, price];
+    }
+
+    getData().then((data) => {
+      const chartData = {ticker: data[0].ticker, points: data[1]};
+      isActive && setState({ isLoading: false, ticker: data[0], history: [chartData], currentPrice: data[2] });
+
+      return () => {
+        isActive = false;
+      };
+    });
+  }, [id]);
 
   const InnerComponent = withLoading((props) => {
     const roundedRatio = Math.abs(props.currentPrice.ratio).toFixed(2);

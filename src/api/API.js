@@ -13,7 +13,7 @@ function getNews(ticker) {
 function getSingleNews(uuid) {
   return new Endpoint({
     path: "news/single",
-    responseFormat: singleNewsMock.singleNewsMock,
+    responseFormat: singleNewsMock,
     pathParam: { uuid: uuid },
   }).getResponse();
 }
@@ -119,14 +119,11 @@ function getMostPerforming() {
     method: "get",
     responseFormat: [
       { ticker: "AAPL", name: "APPLE INC" },
-      { ticker: "CDNA", name: "CAREDX INC" },
-      { ticker: "BYND", name: "BEYOND MEAT INC" },
-      { ticker: "MSFT", name: "MICROSOFT CORP" },
     ],
   }).getResponse();
 }
 
-function getHistory(ticker, range) {
+function getHistory(ticker, range="5d") {
   return new Endpoint({
     path: "stocks/history",
     method: "get",
