@@ -112,7 +112,7 @@ const SingleNews = (props) => {
             </Link>
           </Paper>
         </Grid>
-        <Grid item style={{flexGrow: 1}}/> {/*TODO: Make this work (need to set parent height)*/}
+        <Grid item style={{flexGrow: 1}}/>
         <Grid item>
           <Typography variant="h6">Related News</Typography>
         </Grid>

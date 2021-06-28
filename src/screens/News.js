@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) =>
 const NewsCard = (props) => {
   const classes = useStyles();
   const textColor = (props.news.read) ? "textSecondary" : "textPrimary";
-
+  
   return (
     <Paper elevation={1} className={classes.card} style={{paddingTop: 10}}>
       <Grid container direction="column" justify="center" alignItems="flex-start">
@@ -42,7 +42,7 @@ const NewsCard = (props) => {
           <Grid item>
             <Grid container direction="column" justify="center" alignItems="flex-end">
               <Grid item>
-                <TickerChip disabled={props.news.read}/>  {/*TODO: Display the appropriate ticker symbol*/}
+                <TickerChip disabled={props.news.read} />  {/*TODO: Display the appropriate ticker symbol*/}
               </Grid>
               <Grid item>
                 <Typography variant="body2" color={textColor}>By {props.news.provider} • {dayjs(props.news.published_at).format("DD MMM YYYY")}</Typography>

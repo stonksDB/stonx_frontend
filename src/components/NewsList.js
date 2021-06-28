@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import generateColor from "../utils/ColorGenerator";
 import { getRoute, PAGES } from "../routes";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import withLoading from "../api/withLoading";
 import { getNews } from "../api/API";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
@@ -28,59 +28,67 @@ const useStyles = makeStyles((theme) =>
 const NewsHeader = (props) => {
   const classes = useStyles();
   const avatarColor = generateColor(props.news.title);
+  const history = useHistory();
+
+  const openNews = (newsUuid) => {
+    history.push(getRoute(PAGES.SINGLE_NEWS).path.slice(0,-4) + "/" + newsUuid);
+  }
 
   return (
-    <Grid
-      container
-      alignItems="center"
-      justify="center"
-      direction="row"
-      spacing={1}
+    <ButtonBase
+      onClick={() => openNews(props.news.uuid)}
+      style={{textAlign: "left"}}
     >
-      <Grid item xs={4}>
-        <Avatar
-          variant="rounded"
-          src={props.news.img.url}
-          alt={props.news.title}
-          style={{ backgroundColor: avatarColor }}
-          className={classes.largeImg}
-        />
-      </Grid>
-      <Grid item xs={8}>
-        <Grid container direction="column" justify="center" wrap="nowrap">
-          <Grid item>
-            <Link
-              variant="overline"
-              color="textPrimary"
-              component={RouterLink}
-              to={`${getRoute(PAGES.SINGLE_NEWS).path.slice(0, -4)}/${
-                props.news.uuid
-              }`}
-            >
-              {props.news.provider}
-            </Link>
-          </Grid>
-          <Grid item>
-            {/* <Typography variant="body1">{props.news.title}</Typography> */}
-            <Link
-              variant="body1"
-              color="textPrimary"
-              component={RouterLink}
-              to={`${getRoute(PAGES.SINGLE_NEWS).path.slice(0, -4)}/${
-                props.news.uuid
-              }`}
-            >
-              {props.news.title}
-            </Link>
+      <Grid
+        container
+        alignItems="center"
+        justify="center"
+        direction="row"
+        spacing={1}
+      >
+        <Grid item xs={4}>
+          <Avatar
+            variant="rounded"
+            src={props.news.img.url}
+            alt={props.news.title}
+            style={{ backgroundColor: avatarColor }}
+            className={classes.largeImg}
+          />
+        </Grid>
+        <Grid item xs={8}>
+          <Grid container direction="column" justify="center" wrap="nowrap">
+            <Grid item>
+              <Link
+                variant="overline"
+                color="textPrimary"
+                component={RouterLink}
+                to={`${getRoute(PAGES.SINGLE_NEWS).path.slice(0, -4)}/${
+                  props.news.uuid
+                }`}
+              >
+                {props.news.provider}
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link
+                variant="body1"
+                color="textPrimary"
+                component={RouterLink}
+                to={`${getRoute(PAGES.SINGLE_NEWS).path.slice(0, -4)}/${
+                  props.news.uuid
+                }`}
+              >
+                {props.news.title}
+              </Link>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </ButtonBase>
   );
 };
 
 const NewsList = (props) => {
-  //TODO: Adjust number based on height
   const location = useLocation();
   const { news, setNews } = useContext(UserStateContext);
 
