@@ -20,6 +20,7 @@ const StockSummary = (props) => {
   const classes = useStyles();
 
   const stockSummary = props.data;
+  console.log(stockSummary);
 
   return (
     <Grid container spacing={8}>
@@ -37,12 +38,12 @@ const StockSummary = (props) => {
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6" className={classes.label}>
-              Industry
+              Website
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6" className={classes.data}>
-              {stockSummary.industry}
+              {stockSummary.website}
             </Typography>
           </Grid>
         </Grid>
@@ -52,52 +53,22 @@ const StockSummary = (props) => {
         <Grid container>
           <Grid item xs={6}>
             <Typography variant="h6" className={classes.label}>
-              Market Cap
+              Location
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6" className={classes.data}>
-              {stockSummary.marketCap}
+              {stockSummary.city} ({stockSummary.state})
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6" className={classes.label}>
-              Net Debt & Pref
+              Phone
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6" className={classes.data}>
-              {stockSummary.netDebtPref}
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6" className={classes.label}>
-              Entprs. Value
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6" className={classes.data}>
-              {stockSummary.entValue}
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6" className={classes.label}>
-              Beta
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6" className={classes.data}>
-              {stockSummary.beta}
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6" className={classes.label}>
-              Borrow Cost
-            </Typography>
-          </Grid>
-          <Grid item xs={6}>
-            <Typography variant="h6" className={classes.data}>
-              {stockSummary.borrowCost}
+              {stockSummary.phone}
             </Typography>
           </Grid>
         </Grid>

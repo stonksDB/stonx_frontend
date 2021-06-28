@@ -73,9 +73,14 @@ const SingleTicker = (props) => {
     }
 
     getData().then((data) => {
-      const chartData = {ticker: data[0].ticker, points: data[1]};
-      isActive && setState({ isLoading: false, ticker: data[0], history: [chartData], currentPrice: data[2] });
-
+      const chartData = { ticker: data[0].ticker, points: data[1] };
+      isActive &&
+        setState({
+          isLoading: false,
+          ticker: data[0],
+          history: [chartData],
+          currentPrice: data[2],
+        });
       return () => {
         isActive = false;
       };
@@ -117,7 +122,6 @@ const SingleTicker = (props) => {
                   <>
                     <Typography variant={"h6"} className={classes.positive}>
                       ▲{roundedRatio}%
-                      {/* TODO: find out meaning of currentPrice.ratio and compute percentage */}
                     </Typography>
                   </>
                 ) : (
@@ -129,7 +133,10 @@ const SingleTicker = (props) => {
                 )}
 
                 <Typography variant={"body2"} style={{ display: "block" }}>
-                  {mockTicker.market.name}, updated {dayjs(props.currentPrice.price_last_update).format("MMMM DD YYYY HH:MM")}
+                  {mockTicker.market.name}, updated{" "}
+                  {dayjs(props.currentPrice.price_last_update).format(
+                    "MMMM DD YYYY HH:MM"
+                  )}
                 </Typography>
               </Grid>
             </Grid>
@@ -150,8 +157,7 @@ const SingleTicker = (props) => {
               </Grid>
               <Grid item xs={12}>
                 <Paper elevation={1} className={classes.paddedCard}>
-                  <StockSummary data={mockTicker.summary} />
-                  {/* TODO: ask wether a full summary can be retrieved from db */}
+                  <StockSummary data={state.ticker} />
                 </Paper>
               </Grid>
             </Grid>
@@ -166,7 +172,14 @@ const SingleTicker = (props) => {
     );
   });
 
-  return <InnerComponent isLoading={state.isLoading} ticker={state.ticker} currentPrice={state.currentPrice} chartData={state.history} />;
+  return (
+    <InnerComponent
+      isLoading={state.isLoading}
+      ticker={state.ticker}
+      currentPrice={state.currentPrice}
+      chartData={state.history}
+    />
+  );
 };
 
 export default SingleTicker;
