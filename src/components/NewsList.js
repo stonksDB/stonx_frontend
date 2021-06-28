@@ -1,12 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Button, Grid, Link, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  ButtonBase,
+  Grid,
+  Link,
+  Typography,
+} from "@material-ui/core";
 import generateColor from "../utils/ColorGenerator";
 import { getRoute, PAGES } from "../routes";
 import { Link as RouterLink } from "react-router-dom";
 import withLoading from "../api/withLoading";
 import { getNews } from "../api/API";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { UserStateContext } from "../context/UserStateContext";
 
 const useStyles = makeStyles((theme) =>
@@ -23,21 +30,48 @@ const NewsHeader = (props) => {
   const avatarColor = generateColor(props.news.title);
 
   return (
-    <Grid container alignItems="center" justify="center" direction="row" spacing={1}>
+    <Grid
+      container
+      alignItems="center"
+      justify="center"
+      direction="row"
+      spacing={1}
+    >
       <Grid item xs={4}>
-        <Avatar variant="rounded" src={props.news.img.url} alt={props.news.title} style={{backgroundColor: avatarColor}} className={classes.largeImg}/>
+        <Avatar
+          variant="rounded"
+          src={props.news.img.url}
+          alt={props.news.title}
+          style={{ backgroundColor: avatarColor }}
+          className={classes.largeImg}
+        />
       </Grid>
       <Grid item xs={8}>
         <Grid container direction="column" justify="center" wrap="nowrap">
           <Grid item>
-            <Link variant="overline" color="textPrimary" component={RouterLink} to={`${getRoute(PAGES.SINGLE_NEWS).path.slice(0,-4)}/${props.news.uuid}`}>
+            <Link
+              variant="overline"
+              color="textPrimary"
+              component={RouterLink}
+              to={`${getRoute(PAGES.SINGLE_NEWS).path.slice(0, -4)}/${
+                props.news.uuid
+              }`}
+            >
               {props.news.provider}
             </Link>
           </Grid>
           <Grid item>
-            <Typography variant="body1">
+            {/* <Typography variant="body1">{props.news.title}</Typography> */}
+            <Link
+              variant="body1"
+              color="textPrimary"
+              component={RouterLink}
+              to={`${getRoute(PAGES.SINGLE_NEWS).path.slice(0, -4)}/${
+                props.news.uuid
+              }`}
+            >
               {props.news.title}
-            </Typography>
+            </Link>
           </Grid>
         </Grid>
       </Grid>
@@ -45,9 +79,10 @@ const NewsHeader = (props) => {
   );
 };
 
-const NewsList = (props) => {   //TODO: Adjust number based on height
+const NewsList = (props) => {
+  //TODO: Adjust number based on height
   const location = useLocation();
-  const {news, setNews} = useContext(UserStateContext);
+  const { news, setNews } = useContext(UserStateContext);
 
   const [state, setState] = useState({
     loading: false,
@@ -56,14 +91,14 @@ const NewsList = (props) => {   //TODO: Adjust number based on height
 
   useEffect(() => {
     let isActive = true;
-    if (location.pathname===getRoute(PAGES.HOME).path || news.length===0) { //Fetch news only when in home, or when cache is empty
-      setState({isLoading: true, news: []});
-      getNews("")
-        .then((res) => {
-          isActive && setState({isLoading: false, news: res}) && setNews(res);
-        });
+    if (location.pathname === getRoute(PAGES.HOME).path || news.length === 0) {
+      //Fetch news only when in home, or when cache is empty
+      setState({ isLoading: true, news: [] });
+      getNews("").then((res) => {
+        isActive && setState({ isLoading: false, news: res }) && setNews(res);
+      });
     } else {
-      isActive && setState({isLoading: false, news: news});
+      isActive && setState({ isLoading: false, news: news });
     }
 
     return () => {
@@ -73,28 +108,33 @@ const NewsList = (props) => {   //TODO: Adjust number based on height
 
   const InnerComponent = withLoading((props) => {
     return (
-      <Grid container direction="column" spacing={2} style={{minHeight: "100%"}}>
-        {props.news.map(item => (
+      <Grid
+        container
+        direction="column"
+        spacing={2}
+        style={{ minHeight: "100%" }}
+      >
+        {props.news.map((item) => (
           <Grid item key={item.uuid}>
-            <NewsHeader news={item}/>
+            <NewsHeader news={item} />
           </Grid>
         ))}
-        <Grid item style={{flexGrow: 1, padding: 0}}/>
-        <Grid item style={{alignSelf: "center"}}>
-          <Button role="link"
-                  color="primary"
-                  component={RouterLink}
-                  to={getRoute(PAGES.NEWS).path}>
+        <Grid item style={{ flexGrow: 1, padding: 0 }} />
+        <Grid item style={{ alignSelf: "center" }}>
+          <Button
+            role="link"
+            color="primary"
+            component={RouterLink}
+            to={getRoute(PAGES.NEWS).path}
+          >
             See more
           </Button>
         </Grid>
       </Grid>
-    )
+    );
   });
 
-  return (
-    <InnerComponent isLoading={state.loading} news={state.news}/>
-  );
+  return <InnerComponent isLoading={state.loading} news={state.news} />;
 };
 
 export default NewsList;
