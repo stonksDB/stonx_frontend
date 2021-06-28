@@ -1,6 +1,6 @@
 import { ResponsiveLine } from "@nivo/line";
 import { linearGradientDef } from "@nivo/core";
-import { Typography, useTheme } from "@material-ui/core";
+import { Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import { getPlottableData } from "../../utils/TickerUtils";
 
 const colors = ["#2360FB", "#FAC032", "#8dfb23", "#a123fb", "#af8518", "#FB2360"];
@@ -27,7 +27,8 @@ const MarketChart = (props) => {
     },
   };
 
-  let dataPoints = getPlottableData(props.points, colors);
+  const dataPoints = getPlottableData(props.points, colors);
+  const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
     props.points.length===0 ? (
@@ -71,7 +72,7 @@ const MarketChart = (props) => {
             props.enableAxisX
               ? {
                 format: "%e/%m %H:%M",
-                tickValues: `every ${props.isMobile ? "24" : "12"} hours`,
+                tickValues: `every ${isMobile ? "30" : "60"} minutes`,  //Depends on getHistory period
               }:
               null
           }
@@ -142,7 +143,6 @@ MarketChart.defaultProps = {
   enableAxisY: true,
   enableGridX: false,
   enableGridY: true,
-  isMobile: false,
 };
 
 export default MarketChart;
