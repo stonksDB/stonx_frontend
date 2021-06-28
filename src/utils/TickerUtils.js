@@ -3,7 +3,7 @@ const getPlottableData = (tickers, colors) => {
     return [{
       id: tickers[0].ticker,
       color: colors[0],
-      data: prettifyHistory(tickers[0].points),
+      data: roundDigits(prettifyHistory(tickers[0].points)),
     }]
   } else {
     return tickers.map((ticker, index) => ({
@@ -18,6 +18,13 @@ const prettifyHistory = (history) => {
   return history.map((point) => ({
     x: point.datetime.substring(0, point.datetime.length-6),
     y: point.Close,
+  }));
+};
+
+const roundDigits = (history) => {
+  return history.map((point) => ({
+    x: point.x,
+    y: point.y.toFixed(2),
   }));
 };
 

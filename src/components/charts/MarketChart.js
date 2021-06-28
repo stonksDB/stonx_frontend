@@ -19,6 +19,12 @@ const MarketChart = (props) => {
         stroke: "#7ba0fc",
       },
     },
+    tooltip: {
+      container: {
+        background: theme.palette.background.default,
+        color: theme.palette.text.primary,
+      },
+    },
   };
 
   let dataPoints = getPlottableData(props.points, colors);
