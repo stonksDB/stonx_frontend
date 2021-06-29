@@ -59,7 +59,7 @@ const prettifyDate = (date) => {
 
 const getTicks = (dataPoints, isMobile) => {
   let ticksArr = [];
-  let validIndex = (isMobile) ? 15 : 25;
+  let validIndex = (isMobile) ? 30 : 40;
   dataPoints[0].data.forEach((entry, index) => {
     if (index % validIndex === 0) {
       ticksArr.push(entry.x);

@@ -64,15 +64,15 @@ const SingleNews = (props) => {
     setState({isLoading: true, news: {}, relatedNews: []});
 
     async function getData() {
-      const singleNews = await getSingleNews(id);
       const relatedNews = await getNews(id);
+      const singleNews = await getSingleNews(id);
 
       return {singleNews: singleNews, relatedNews: relatedNews};
     }
 
     getData(id)
       .then((data) => {
-        isActive && setState({isLoading: false, news: data.singleNews, relatedNews: data.relatedNews.slice(1,4)});
+        isActive && setState({isLoading: false, news: data.singleNews, relatedNews: data.relatedNews.slice(0,3)});
         return () => {
           isActive = false;
         };
