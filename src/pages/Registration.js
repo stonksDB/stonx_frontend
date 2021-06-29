@@ -96,7 +96,7 @@ const Registration = (props) => {
   const [passwordScore, setPasswordScore] = useState();
 
   ValidatorForm.addValidationRule("isEmail", (value) => {
-    return /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(value);
+    return /^[a-zA-Z0-9\.\-\_]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(value);
   });
   ValidatorForm.addValidationRule("confirmEmail", (confirmEmail) => {
     return confirmEmail === email;
