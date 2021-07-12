@@ -31,7 +31,7 @@
     "react-markdown": "^6.0.2",
     "react-material-ui-carousel": "^2.2.6",
     "react-material-ui-form-validator": "^2.1.4",
-    "react-password-strength-bar": "^0.3.3",
+    "react-password-strength-bar": "^0.3.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3"
   },
