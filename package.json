@@ -22,7 +22,7 @@
     "@nivo/core": "^0.70.1",
     "@nivo/line": "^0.70.1",
     "axios": "^0.21.1",
-    "dayjs": "^1.10.5",
+    "dayjs": "^1.10.6",
     "file-loader": "^6.2.0",
     "gh-pages": "^3.2.0",
     "notistack": "^1.0.9",
